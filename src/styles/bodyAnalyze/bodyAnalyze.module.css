@@ -51,3 +51,24 @@
     
     color: #FFFFFF;
 }
+
+.Input {
+    box-sizing: border-box;
+
+    width: 177px;
+    height: 52px;
+
+    font-family: "NanumSquareRound";
+    font-size: 28px;
+    text-align: center;
+
+    background: #FFFFFF;
+    border: 1px solid #C2C2C2;
+    border-radius: 20px;
+}
+
+Input::-webkit-outer-spin-button,
+Input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

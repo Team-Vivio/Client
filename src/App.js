@@ -1,10 +1,13 @@
-import logo from './logo.svg';
+import { Routes, Route } from 'react-router-dom'
+import Tone from './views/page/ToneAnalyze'
 import './App.css';
 
 function App() {
   return (
     <div>
-      <h1>hello~ it's me</h1>
+      <Routes>
+        <Route path="/Tone" element={<Tone/>}/>
+      </Routes>
     </div>
   );
 }

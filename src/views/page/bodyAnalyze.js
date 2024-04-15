@@ -1,4 +1,5 @@
 import styles from "../../styles/bodyAnalyze/bodyAnalyze.module.css";
+import { useState, useEffect } from "react";
 
 //이미지
 import Gender1 from "../../img/bodyAnalyze/Gender1.png";
@@ -43,6 +44,7 @@ function Input({ left, top }) {
         top: top,
     };
 
+    //view model로 가야하나?
     //글자 조건 키랑 몸무게 같음
     function handleOnChange(event) {
         if (event.target.value.length > 3) {
@@ -114,6 +116,58 @@ function StartBtn({ left, top }) {
             <img src={Coin1} className={styles.Coin}></img>
             <span>-10</span>
         </button>
+    );
+}
+
+function HistoryList({ history }) {
+    return (
+        <div className={styles.HistoryList}>
+            <hr></hr>
+            <img src={history.img} className={styles.HistoryImg}></img>
+            <span className={styles.HistoryText}>{history.info}</span>
+        </div>
+    );
+}
+
+function HistoryBar() {
+    const [historys, setHistorys] = useState([
+        { id: 1, img: Coin1, info: "설명임" },
+        { id: 2, img: Body2, info: "설명2" },
+        { id: 3, img: "", info: "" },
+        { id: 4, img: "", info: "" },
+        { id: 5, img: "", info: "" },
+        { id: 6, img: "", info: "" },
+        { id: 7, img: "", info: "" },
+    ]);
+    const [barPosition, setBarPosition] = useState(510);
+
+    //나중에 수치 조절하기
+    const handleScroll = () => {
+        console.log(window.scrollY);
+        const position =
+            300 < 30 + window.scrollY
+                ? 300
+                : 170 > 30 + window.scrollY
+                ? 170
+                : 30 + window.scrollY;
+        setBarPosition(position);
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    return (
+        <div className={styles.HistoryBar} style={{ top: barPosition }}>
+            <div className={styles.HistoryTitle}>History</div>
+            {historys.map((history, id) => (
+                <HistoryList history={history} key={id} />
+            ))}
+        </div>
     );
 }
 
@@ -193,6 +247,8 @@ function BodyAnalyze() {
                     />
                     <StartBtn left="172px" top="598px" />
                 </div>
+                {/* 맨 왼쪽 기록 바 */}
+                <HistoryBar />
             </div>
         </div>
     );

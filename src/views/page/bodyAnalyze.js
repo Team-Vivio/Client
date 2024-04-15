@@ -130,6 +130,7 @@ function HistoryList({ history }) {
 }
 
 function HistoryBar() {
+    //배열로 생성되는지 확인용 나중에 값 받아서 알맞게 수정할 예정
     const [historys, setHistorys] = useState([
         { id: 1, img: Coin1, info: "설명임" },
         { id: 2, img: Body2, info: "설명2" },
@@ -139,9 +140,9 @@ function HistoryBar() {
         { id: 6, img: "", info: "" },
         { id: 7, img: "", info: "" },
     ]);
-    const [barPosition, setBarPosition] = useState(510);
+    const [barPosition, setBarPosition] = useState(170);
 
-    //나중에 수치 조절하기
+    //애니메이션
     const handleScroll = () => {
         console.log(window.scrollY);
         const position =

@@ -10,16 +10,19 @@ import Body3 from "../../img/bodyAnalyze/Body3.png";
 import DropBox1 from "../../img/bodyAnalyze/DropBox.png";
 import Coin1 from "../../img/bodyAnalyze/Coin.png";
 
-function Btn({ left, top, img, size }) {
+function Btn({ left, top, img, size, id, state, event }) {
     const info = {
         position: "absolute",
         left: left,
         top: top,
+        backgroundColor: id == state ? "#00ff00" : "#ffffff",
         backgroundImage: `url(${img})`,
         backgroundSize: size,
     };
 
-    return <button style={info} className={styles.ImgBtn}></button>;
+    return (
+        <button style={info} className={styles.ImgBtn} onClick={event}></button>
+    );
 }
 
 function Text({ left, top, size, text }) {
@@ -144,7 +147,6 @@ function HistoryBar() {
 
     //애니메이션
     const handleScroll = () => {
-        console.log(window.scrollY);
         const position =
             300 < 30 + window.scrollY
                 ? 300
@@ -173,6 +175,8 @@ function HistoryBar() {
 }
 
 function BodyAnalyze() {
+    const [gender, setGender] = useState("");
+    const [bodyType, setBodyType] = useState("");
     return (
         <div className={styles.Background}>
             <div className={styles.Blur}>
@@ -189,8 +193,24 @@ function BodyAnalyze() {
                     size="28px"
                     text="Q1. 성별을 선택해주세요"
                 />
-                <Btn left="134px" top="322px" img={Gender1} size="45px" />
-                <Btn left="304px" top="322px" img={Gender2} size="45px" />
+                <Btn
+                    left="134px"
+                    top="322px"
+                    img={Gender1}
+                    size="45px"
+                    id="male"
+                    state={gender}
+                    event={() => setGender("male")}
+                />
+                <Btn
+                    left="304px"
+                    top="322px"
+                    img={Gender2}
+                    size="45px"
+                    id="female"
+                    state={gender}
+                    event={() => setGender("female")}
+                />
                 {/* Q2 키 입력 */}
                 <Text
                     left="96px"
@@ -216,9 +236,33 @@ function BodyAnalyze() {
                     size="28px"
                     text="Q4. 체형을 선택해주세요"
                 />
-                <Btn left="580px" top="322px" img={Body1} size="25px" />
-                <Btn left="698px" top="322px" img={Body2} size="25px" />
-                <Btn left="816px" top="322px" img={Body3} size="30px" />
+                <Btn
+                    left="580px"
+                    top="322px"
+                    img={Body1}
+                    size="25px"
+                    id="body1"
+                    state={bodyType}
+                    event={() => setBodyType("body1")}
+                />
+                <Btn
+                    left="698px"
+                    top="322px"
+                    img={Body2}
+                    size="25px"
+                    id="body2"
+                    state={bodyType}
+                    event={() => setBodyType("body2")}
+                />
+                <Btn
+                    left="816px"
+                    top="322px"
+                    img={Body3}
+                    size="30px"
+                    id="body3"
+                    state={bodyType}
+                    event={() => setBodyType("body3")}
+                />
                 {/* Q5 전신 사진 */}
                 <Text
                     left="534px"

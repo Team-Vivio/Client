@@ -15,7 +15,7 @@ function Btn({ left, top, img, size, id, state, event }) {
         position: "absolute",
         left: left,
         top: top,
-        backgroundColor: id == state ? "#00ff00" : "#ffffff",
+        backgroundColor: id === state ? "#00ff00" : "#ffffff",
         backgroundImage: `url(${img})`,
         backgroundSize: size,
     };
@@ -87,22 +87,77 @@ function Input({ left, top }) {
 }
 
 function DropBox() {
+    const [isActive, setActive] = useState(false);
+    const handleDragStart = () => setActive(true);
+    const handleDragEnd = () => setActive(false);
+    const [uploadedInfo, setUploadedInfo] = useState(null);
+
+    const FileInfo = ({ uploadedInfo }) => (
+        <img src={uploadedInfo.imageUrl} className={styles.InfoImg}></img>
+    );
+
+    const setFileInfo = (file) => {
+        const { name, type } = file;
+        const isImage = type.includes("image");
+        const size = (file.size / (1024 * 1024)).toFixed(2) + "mb";
+
+        if (!isImage) {
+            setUploadedInfo({ name, size, type });
+            return;
+        }
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            setUploadedInfo({
+                name,
+                size,
+                type,
+                imageUrl: String(reader.result),
+            });
+        };
+    };
+
+    const handleDrop = (event) => {
+        event.preventDefault();
+        setActive(false);
+        const file = event.dataTransfer.files[0];
+        setFileInfo(file);
+    };
+
+    const handleDragOver = (event) => {
+        event.preventDefault();
+    };
+
+    const handleUpload = ({ target }) => {
+        const file = target.files[0];
+        setFileInfo(file);
+    };
+
     return (
         <div className={styles.DropBox}>
-            <img className={styles.DropImg} src={DropBox1}></img>
-            <p
-                style={{
-                    position: "absolute",
-                    top: "179px",
-                    left: "50px",
-                    fontFamily: "NanumSquareRound",
-                    fontWeight: "700",
-                    fontSize: "20px",
-                    lineHeight: "140%",
-                }}
+            <label
+                className={styles.DropLabel}
+                onDragEnter={handleDragStart}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragEnd}
+                onDrop={handleDrop}
             >
-                클릭 혹은 파일을 이곳에 드롭 하세요
-            </p>
+                <input
+                    type="file"
+                    className={styles.DropInput}
+                    onChange={handleUpload}
+                />
+                {uploadedInfo !== null ? (
+                    <FileInfo uploadedInfo={uploadedInfo} />
+                ) : (
+                    <>
+                        <img className={styles.DropImg} src={DropBox1}></img>
+                        <p className={styles.DropText}>
+                            클릭 혹은 파일을 이곳에 드롭 하세요
+                        </p>
+                    </>
+                )}
+            </label>
         </div>
     );
 }

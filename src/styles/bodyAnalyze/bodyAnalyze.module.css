@@ -87,10 +87,45 @@ Input::-webkit-inner-spin-button {
     border-radius: 30px;
 }
 
+.DropLabel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.DropLabel:hover {
+    background-color: #00000033;
+}
+
+.DropInput {
+    display: none;
+}
+
 .DropImg {
     position: absolute;
     top: 51px;
     left: 156px;
+}
+
+.DropText {
+    position: absolute;
+    top: 179px;
+    left: 50px;
+    font-family: "NanumSquareRound";
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+}
+
+.InfoImg {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    object-fit: scale-down;
 }
 
 .ClosetImg {

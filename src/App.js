@@ -1,11 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Main1 from "./views/page/Slider";
+
 
 function App() {
   return (
-    <div>
-      <h1>hello~ it's me</h1>
-    </div>
+      <Routes>
+        <Route exact path="/" element={<Main1 />}/>
+      </Routes>
   );
 }
 

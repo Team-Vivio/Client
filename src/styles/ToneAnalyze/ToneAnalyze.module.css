@@ -4,6 +4,18 @@
     src: url("../../fonts/NanumSquareRoundR.ttf") format("truetype");
 }
 
+@font-face {
+    font-family: "AnekTamilRegular";
+    font-weight: 50;
+    src: url("../../fonts/AnekTamil-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "AnekTamilBold";
+    font-weight: 50;
+    src: url("../../fonts/AnekTamil-Bold.ttf") format("truetype");
+}
+
 .Background {
     position: relative;
     width: 1920px;
@@ -17,11 +29,9 @@
 }
 
 .Blur {
-    position: relative;
+    position: absolute;
     width: 1920px;
     height: 975px;
-    left: 0px;
-    top: 0px;
 
     background: rgba(217, 217, 217, 0.1);
     backdrop-filter: blur(50px);
@@ -57,10 +67,154 @@
 .ImgBox {
     box-sizing: border-box;
 
-    border: 1px solid #D9D9D9;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 30px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+/*외쳐 시현갓*/
+.DropBox {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 403px;
+    height: 253px;
+    left: 1251px;
+    top: 376px;
+
+    background: #ffffff;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+}
+
+.DropLabel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.DropLabel:hover {
+    background-color: #00000033;
+}
+
+.DropInput {
+    display: none;
+}
+
+.DropImg {
+    position: absolute;
+    top: 51px;
+    left: 156px;
+}
+
+.DropText {
+    position: absolute;
+    top: 179px;
+    left: 50px;
+    font-family: "NanumSquareRound";
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+}
+
+.StartBtn {
+    box-sizing: border-box;
+    width: 266px;
+    height: 81px;
+
+    background: #ffffff;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 69px;
+
+    font-family: "AnekTamilBold";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 140%;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    display: flex;
+    justify-content: center;
+
+    white-space: pre-wrap;
+}
+
+.Coin {
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+
+    display: inline;
+}
+
+/*외쳐 시현갓222*/
+.HistoryBar {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 166px;
+    height: 629px;
+    left: 1737px;
+    transform: translateY(0%);
+    transition: top 0.7s ease-out;
+
+    background: #fcfcfc;
+    border: 1px solid #d0d0d0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+
+    padding-top: 42px;
+    padding-left: 18px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.HistoryTitle {
+    position: absolute;
+    width: 68px;
+    height: 28px;
+    left: 48px;
+    top: 14px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.HistoryList {
+    height: 82px;
+    width: 130px;
+}
+
+.HistoryImg {
+    max-width: 50px;
+    max-height: 62px;
+    padding-left: 10px;
+}
+
+.HistoryText {
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
 }

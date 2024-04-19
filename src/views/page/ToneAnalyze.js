@@ -7,9 +7,12 @@ import Body2 from "../../img/ToneAnalyze/Body2.png"
 import Body3 from "../../img/ToneAnalyze/Body3.png"
 import img_true from "../../img/ToneAnalyze/img_ex1.png"
 import img_false from "../../img/ToneAnalyze/img_ex2.png"
+import mark_O from "../../img/ToneAnalyze/mark_O.png"
+import mark_X from "../../img/ToneAnalyze/mark_X.png"
 import img_file from "../../img/ToneAnalyze/img_file.png"
 import DropBox1 from "../../img/ToneAnalyze/DropBox.png"
 import Coin1 from "../../img/ToneAnalyze/Coin.png"
+import img_load from "../../img/ToneAnalyze/loading.png"
 import { useEffect, useState } from "react"
 
 function ImgBtn({ left, top, img, id, state, onClick }) {
@@ -56,51 +59,12 @@ function ImgBox({ left, top, width, height, img, radius }) {
     )
 }
 
-// onClick 구현 필요
-// function FileDrop({ left, top, isBig, onClick }) {
-//     const bg = {
-//         position: 'absolute',
-//         left: left,
-//         top: top,
-//         width: isBig ? '403px' : '200px',
-//         height: isBig ? '253px' : '125px',
-
-//         background: '#FFFFFF',
-//         border: '1px solid #DBDBDB',
-//         boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-//         borderRadius: '30px'
-//     }
-//     return (
-//         <div style={bg}>
-//             <ImgBox
-//                 left={isBig ? '156px' : '77px'}
-//                 top={isBig ? '51px' : '25px'}
-//                 width={isBig ? '91px' : '45px'}
-//                 height={isBig ? '97px' : '48px'}
-//                 img={img_file}
-//                 radius='0px'>
-//             </ImgBox>
-//             <div className={styles.BlackText}>
-//                 <Text
-//                     left={isBig ? '48px' : '35px'}
-//                     top={isBig ? '179px' : '89px'}
-//                     size={isBig ? '20px' : '9px'}
-//                     text="클릭 혹은 파일을 이곳에 드롭 하세요"
-//                     color='#000000'
-//                 />
-//             </div>
-//         </div >
-//     )
-// }
-
-function DropBox() {
-    const [isActive, setActive] = useState(false);
-    const handleDragStart = () => setActive(true);
-    const handleDragEnd = () => setActive(false);
+// revised ver
+function DropBox({ setActive, isActive }) { // receive setActive and isActive as props
     const [uploadedInfo, setUploadedInfo] = useState(null);
 
     const FileInfo = ({ uploadedInfo }) => (
-        <img src={uploadedInfo.imageUrl} className={styles.InfoImg}></img>
+        <img src={uploadedInfo.imageUrl} className={styles.InfoImg} alt="Uploaded file"></img>
     );
 
     const setFileInfo = (file) => {
@@ -126,10 +90,13 @@ function DropBox() {
 
     const handleDrop = (event) => {
         event.preventDefault();
-        setActive(false);
+        setActive(true); // Set isActive to true when a file is dropped
         const file = event.dataTransfer.files[0];
         setFileInfo(file);
     };
+
+    const handleDragStart = () => setActive(true); // Update isActive state when drag starts
+    const handleDragEnd = () => setActive(false); // Update isActive state when drag ends
 
     const handleDragOver = (event) => {
         event.preventDefault();
@@ -137,6 +104,7 @@ function DropBox() {
 
     const handleUpload = ({ target }) => {
         const file = target.files[0];
+        setActive(true); // Set isActive to true when a file is uploaded directly
         setFileInfo(file);
     };
 
@@ -158,7 +126,7 @@ function DropBox() {
                     <FileInfo uploadedInfo={uploadedInfo} />
                 ) : (
                     <>
-                        <img className={styles.DropImg} src={DropBox1}></img>
+                        <img className={styles.DropImg} src={DropBox1} alt="DropBox icon"></img>
                         <p className={styles.DropText}>
                             클릭 혹은 파일을 이곳에 드롭 하세요
                         </p>
@@ -169,7 +137,7 @@ function DropBox() {
     );
 }
 
-function StartBtn({ left, top }) {
+function StartBtn({ left, top, onClick }) {
     const pos = {
         position: "absolute",
         left: left,
@@ -177,9 +145,9 @@ function StartBtn({ left, top }) {
     };
 
     return (
-        <button style={pos} className={styles.StartBtn}>
+        <button style={pos} className={styles.StartBtn} onClick={onClick}>
             <span>시작 </span>
-            <img src={Coin1} className={styles.Coin}></img>
+            <img src={Coin1} alt="단추" className={styles.Coin}></img>
             <span>-5</span>
         </button>
     );
@@ -189,7 +157,7 @@ function HistoryList({ history }) {
     return (
         <div className={styles.HistoryList}>
             <hr></hr>
-            <img src={history.img} className={styles.HistoryImg}></img>
+            <img src={history.img} alt="클릭 혹은 파일을 이곳에 드롭 하세요" className={styles.HistoryImg}></img>
             <span className={styles.HistoryText}>{history.info}</span>
         </div>
     );
@@ -214,8 +182,8 @@ function HistoryBar() {
             300 < 30 + window.scrollY
                 ? 300
                 : 170 > 30 + window.scrollY
-                ? 170
-                : 30 + window.scrollY;
+                    ? 170
+                    : 30 + window.scrollY;
         setBarPosition(position);
     };
 
@@ -239,67 +207,104 @@ function HistoryBar() {
 
 function ToneAnalyze() {
     const [gender, setGender] = useState("");
+    const [isActive, setIsActive] = useState(false);
+    // isLoading 값에 따라 검색창 or loading창 출력
+    const [isLoading, setIsLoading] = useState(false);
+    const [data, setData] = useState(null);
 
-    // const onClickBtn = (event) => {
-        // event.target.id === 'male'
-        //     ? (IsMale
-        //         ? setIsMale(false)
-        //         : () => { setIsMale(true); setIsFemale(false); }
-        //     )
-        //     : (IsFemale
-        //         ? setIsFemale(false)
-        //         : () => { setIsMale(false); setIsFemale(true); }
-        //     )
+    const getResult = async () => {
+        if (isActive && gender !== "") {
+            setIsLoading(true);
+            try {
+                const response = await (
+                    await fetch('https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year', {
+                        method: 'POST',
+                        headers: {},
+                        body: JSON.stringify({
+                            // 보낼 데이터
+                        }),
+                    })
+                ).json();
+                setData(response);
+                setIsLoading(false);
 
-        // if (event.target.id === 'male') {
-        //     if (IsMale) {
-        //         setIsMale(false);
-        //         console.log("set male 'false'");
-        //     }
-        //     else {
-        //         setIsMale(true);
-        //         setIsFemale(false);
-        //         console.log("set male 'true', female false");
-        //     }
-        // }
-        // else {
-        //     if (IsFemale) {
-        //         setIsFemale(false);
-        //         console.log("set female 'false'");
-        //     }
-        //     else {
-        //         setIsMale(false);
-        //         setIsFemale(true);
-        //         console.log("set male 'false', female 'true'");
-        //     }
-        // }
-        // console.log(event.target, IsMale, IsFemale);
-    // }
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                // test response
+                console.log(response);
+
+            } catch (error) {
+                setIsLoading(false);
+                console.error('Error calling API:', error);
+            }
+        }
+    };
 
     return (
         <div className={styles.Background}>
             <div className={styles.Blur}>
                 <Text left='41px' top='121px' size='35px' text="쿨톤 & 웜톤 찾기" />
+                {/*isLoading, data === null 여부 따라 박스 체인지*/}
                 <div>
-                    <ImgBox left='40px' top='183px' width='610px' height='717px' img={img_box} radius='60px'></ImgBox>
-                    <Text left='123px' top='220px' size='60px' text='쿨톤' color='#00A3FF' />
-                    <Text left='252px' top='220px' size='60px' text='&' />
-                    <Text left='308px' top='220px' size='60px' text='웜톤' color='#F8AAAA' />
-                    <Text left='441px' top='220px' size='60px' text='찾기' />
-                    <Text left='118px' top='354px' size='35px' text={"내 얼굴이 쿨톤이 어울리는지\n웜톤이 어울리는지 궁금하신가요?\n걱정 마세요.\nViViO에서\n당신의 궁금증을 해결해드릴께요"} />
-                    <StartBtn left="204px" top="740px"/>
+                    {data ? (
+                        <div>
+                            {/* 분석 결과 */}
+                            {/* <div className={styles.AnalyzeBox}>
+                                <img src={img_load} alt="Loading..." className={styles.imgLoad}></img>
+                                <Text left='186px' top='376px' size='30px' text='지식인에 물어보는중..' color='#000000' />
+                                <Text left='261px' top='501px' size='30px' text='*주의!' color='#000000' />
+                                <Text left='85px' top='568px' size='24px' text='새로고침' color='#FF0000' />
+                                <Text left='176px' top='568px' size='24px' text='을 하면  작업이' color='#000000' />
+                                <Text left='333px' top='568px' size='24px' text='취소' color='#FF0000' />
+                                <Text left='385px' top='568px' size='24px' text='될 수 있어요!' color='#000000' />
+                            </div> */}
+                        </div>
+                    ) : (
+                        <>
+                            {isLoading ? (
+                                // 채울 예정
+                                <>
+                                    <div className={styles.AnalyzeBox}>
+                                        <img src={img_load} alt="Loading..." className={styles.imgLoad}></img>
+                                        <Text left='186px' top='376px' size='30px' text='지식인에 물어보는중..' color='#000000' />
+                                        <Text left='261px' top='501px' size='30px' text='*주의!' color='#000000' />
+                                        <Text left='85px' top='568px' size='24px' text='새로고침' color='#FF0000' />
+                                        <Text left='176px' top='568px' size='24px' text='을 하면  작업이' color='#000000' />
+                                        <Text left='333px' top='568px' size='24px' text='취소' color='#FF0000' />
+                                        <Text left='385px' top='568px' size='24px' text='될 수 있어요!' color='#000000' />
+                                    </div>
+                                </>
+                            ) : (
+                                <div>
+                                    <ImgBox left='40px' top='183px' width='610px' height='717px' img={img_box} radius='60px'></ImgBox>
+                                    <Text left='123px' top='220px' size='60px' text='쿨톤' color='#00A3FF' />
+                                    <Text left='252px' top='220px' size='60px' text='&' />
+                                    <Text left='308px' top='220px' size='60px' text='웜톤' color='#F8AAAA' />
+                                    <Text left='441px' top='220px' size='60px' text='찾기' />
+                                    <Text left='118px' top='354px' size='35px' text={"내 얼굴이 쿨톤이 어울리는지\n웜톤이 어울리는지 궁금하신가요?\n걱정 마세요.\nViViO에서\n당신의 궁금증을 해결해드릴께요"} />
+                                    <StartBtn left="204px" top="740px" onClick={getResult} />
+                                </div>
+                            )}
+                        </>
+                    )}
                 </div>
                 <div>
                     <Text left='786px' top='183px' size='28px' text="Q. 성별을 선택해주세요" />
                     <ImgBtn left='1119px' top='155px' img={gender_male} id='male' state={gender} onClick={() => setGender("male")} />
                     <ImgBtn left='1289px' top='155px' img={gender_female} id='female' state={gender} onClick={() => setGender("female")} />
+                    <ImgBtn left='1589px' top='155px' img={gender_female} id='female' state={gender} onClick={() => console.log({ isActive })} />
                 </div>
                 <div>
                     <Text left='786px' top='295px' size='28px' text="Q. 얼굴 사진을 업로드 해주세요" />
                     <Text left='791px' top='337px' size='18px' text="*예시" color='#BCBCBC' />
                     <ImgBox left='800px' top='376px' width='159px' height='239px' img={img_true} radius='20px'></ImgBox>
                     <ImgBox left='1001px' top='376px' width='159px' height='239px' img={img_false} radius='20px'></ImgBox>
-                    <DropBox />
+                    <img src={mark_O} alt="O" style={{ position: "absolute", left: "851px", top: "590px" }}></img>
+                    <img src={mark_X} alt="X" style={{ position: "absolute", left: "1050px", top: "590px" }}></img>
+                    {/*isActive 체크용 버튼*/}
+                    <DropBox isActive={isActive} setActive={setIsActive} />
                 </div>
                 <div>
                     <Text left='1030px' top='680px' size='26px' text="*주의사항" />

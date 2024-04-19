@@ -192,6 +192,158 @@ Input::-webkit-inner-spin-button {
     white-space: pre-wrap;
 }
 
+.ResultBox {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 610px;
+    height: 717px;
+    left: 1055px;
+    top: 155px;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 60px;
+}
+
+.ResultTitle {
+    position: absolute;
+    width: 500px;
+    height: 42px;
+    left: 42px;
+    top: 45px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 140%;
+    /* identical to box height, or 42px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.ResultInnerBoxPosition {
+    box-sizing: border-box;
+    position: absolute;
+    padding-top: 120px;
+    padding-bottom: 100px;
+    width: 100%;
+    height: 100%;
+}
+
+.ResultInnerBox {
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-rows: 81px 0.8fr 1.2fr 190px;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: left;
+
+    width: 474px;
+    height: 483px;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 60px;
+}
+
+.ResultImg {
+    max-width: 175px;
+    max-height: 175px;
+    justify-self: right;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
+
+.ResultColor {
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    /* identical to box height, or 28px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    padding-bottom: 11px;
+
+    color: #000000;
+
+    align-self: end;
+}
+
+.ResultType {
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    /* identical to box height, or 28px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+
+    align-self: start;
+}
+
+.ResultInnerTitle {
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 140%;
+    /* identical to box height, or 56px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+
+    padding-left: 282px;
+
+    align-self: end;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.ResultInfoBox {
+    box-sizing: border-box;
+
+    width: 372px;
+    height: 165px;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 30px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    /* or 28px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    padding: 5%;
+
+    justify-self: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+    color: #000000;
+}
+
 .Coin {
     width: 40px;
     height: 40px;

@@ -1,5 +1,7 @@
 import styles from "../../styles/bodyAnalyze/bodyAnalyze.module.css";
 import { useState, useEffect } from "react";
+import Slider from "react-slick";
+import "../../styles/bodyAnalyze/slick.css";
 
 //이미지
 import Gender1 from "../../img/bodyAnalyze/Gender1.png";
@@ -162,18 +164,101 @@ function DropBox() {
     );
 }
 
-function StartBtn({ left, top }) {
+function StartBtn({ left, top, event }) {
     const pos = {
         position: "absolute",
         left: left,
         top: top,
     };
     return (
-        <button style={pos} className={styles.StartBtn}>
+        <button style={pos} className={styles.StartBtn} onClick={event}>
             <span>시작 </span>
             <img src={Coin1} className={styles.Coin}></img>
             <span>-10</span>
         </button>
+    );
+}
+
+function StartBox({ event }) {
+    return (
+        <>
+            <div className={styles.ClosetImg}></div>
+            <div className={styles.ClosetBox}>
+                <span className={styles.ClosetTitle}>나만의 </span>
+                <span
+                    className={styles.ClosetTitle}
+                    style={{ color: "#FFD439" }}
+                >
+                    패션
+                </span>
+                <span className={styles.ClosetTitle}> 찾기</span>
+                <Text
+                    left="54px"
+                    top="222px"
+                    size="28px"
+                    text={
+                        "나는 무슨 패션이 잘 어울릴까요?\n스트릿? 캐쥬얼?\n ViViO에서\n 당신의 고민을 해결해드릴께요!"
+                    }
+                />
+                <StartBtn left="172px" top="598px" event={event} />
+            </div>
+        </>
+    );
+}
+
+function ResultInnerBox({ value }) {
+    return (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+            <div className={styles.ResultInnerBox}>
+                <img src={value.img} className={styles.ResultImg}></img>
+                <div className={styles.ResultInnerTitle}>{value.title}</div>
+                <div className={styles.ResultColor}>
+                    {"색상: " + value.color}
+                </div>
+                <div className={styles.ResultType}>{"종류: " + value.type}</div>
+                <div className={styles.ResultInfoBox}>
+                    {'"' + value.info + '"'}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function ResultBox({
+    name = "OO",
+    infoList = [
+        {
+            id: 0,
+            img: Coin1,
+            title: "상의",
+            color: "남색, 검은색",
+            type: "후드티, 맨투맨",
+            info: "어두운 색의 후드티나 맨투맨은 체형을 잘 감춰주고 슬림한 느낌을 줄 수 있습니다. *디폴트값*",
+        },
+    ],
+}) {
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerMode: true,
+        centerPadding: "0px",
+    };
+    return (
+        <div className={styles.ResultBox}>
+            <div className={styles.ResultTitle}>
+                {name + "님에게 추천하는 패션이에요!"}
+            </div>
+            <div className={styles.ResultInnerBoxPosition}>
+                <Slider {...settings}>
+                    {infoList.map((value) => (
+                        <ResultInnerBox value={value} key={value.id} />
+                    ))}
+                </Slider>
+            </div>
+        </div>
     );
 }
 
@@ -232,6 +317,25 @@ function HistoryBar() {
 function BodyAnalyze() {
     const [gender, setGender] = useState("");
     const [bodyType, setBodyType] = useState("");
+    const [start, setStart] = useState(false);
+    const [resultList, setResultList] = useState([
+        {
+            id: 0,
+            img: Coin1,
+            title: "상의",
+            color: "남색, 검은색",
+            type: "후드티, 맨투맨",
+            info: "어두운 색의 후드티나 맨투맨은 체형을 잘 감춰주고 슬림한 느낌을 줄 수 있습니다.",
+        },
+        {
+            id: 1,
+            img: Body1,
+            title: "하의",
+            color: "남색, 검은색",
+            type: "청바지",
+            info: "어두운 색의 후드티나 맨투맨은 체형을 잘 감춰주고 슬림한 느낌을 줄 수 있습니다.",
+        },
+    ]);
     return (
         <div className={styles.Background}>
             <div className={styles.Blur}>
@@ -327,26 +431,11 @@ function BodyAnalyze() {
                 />
                 <DropBox />
                 {/* 나만의 패션 찾기 */}
-                <div className={styles.ClosetImg}></div>
-                <div className={styles.ClosetBox}>
-                    <span className={styles.ClosetTitle}>나만의 </span>
-                    <span
-                        className={styles.ClosetTitle}
-                        style={{ color: "#FFD439" }}
-                    >
-                        패션
-                    </span>
-                    <span className={styles.ClosetTitle}> 찾기</span>
-                    <Text
-                        left="54px"
-                        top="222px"
-                        size="28px"
-                        text={
-                            "나는 무슨 패션이 잘 어울릴까요?\n스트릿? 캐쥬얼?\n ViViO에서\n 당신의 고민을 해결해드릴께요!"
-                        }
-                    />
-                    <StartBtn left="172px" top="598px" />
-                </div>
+                {start ? (
+                    <ResultBox name="이름" infoList={resultList} />
+                ) : (
+                    <StartBox event={() => setStart(true)} /> //버튼 누르면 검사
+                )}
                 {/* 맨 왼쪽 기록 바 */}
                 <HistoryBar />
             </div>

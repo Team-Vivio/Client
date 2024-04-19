@@ -4,20 +4,18 @@ import Slider from "react-slick";
 import "../../styles/bodyAnalyze/slick.css";
 
 //이미지
-import Gender1 from "../../img/bodyAnalyze/Gender1.png";
-import Gender2 from "../../img/bodyAnalyze/Gender2.png";
 import Body1 from "../../img/bodyAnalyze/Body1.png";
 import Body2 from "../../img/bodyAnalyze/Body2.png";
 import Body3 from "../../img/bodyAnalyze/Body3.png";
 import DropBox1 from "../../img/bodyAnalyze/DropBox.png";
 import Coin1 from "../../img/bodyAnalyze/Coin.png";
 
-function Btn({ left, top, img, size, id, state, event }) {
+function Btn({ left, top, img, size, active, event }) {
     const info = {
         position: "absolute",
         left: left,
         top: top,
-        backgroundColor: id === state ? "#00ff00" : "#ffffff",
+        backgroundColor: active ? "#00ff00" : "#ffffff",
         backgroundImage: `url(${img})`,
         backgroundSize: size,
     };
@@ -314,8 +312,8 @@ function HistoryBar() {
     );
 }
 
-function BodyAnalyze() {
-    const [gender, setGender] = useState("");
+function BodyAnalyze(props) {
+    const [renderFlag, setRenderFlag] = useState(false);
     const [bodyType, setBodyType] = useState("");
     const [start, setStart] = useState(false);
     const [resultList, setResultList] = useState([
@@ -336,72 +334,42 @@ function BodyAnalyze() {
             info: "어두운 색의 후드티나 맨투맨은 체형을 잘 감춰주고 슬림한 느낌을 줄 수 있습니다.",
         },
     ]);
+
+    function setGender(value) {
+        props.viewModel.setGender(value);
+        setRenderFlag(!renderFlag);
+    }
     return (
         <div className={styles.Background}>
             <div className={styles.Blur}>
-                <Text
-                    left="41px"
-                    top="121px"
-                    size="35px"
-                    text="나만의 패션 찾기"
-                />
-                {/* Q1 성별 선택 */}
-                <Text
-                    left="96px"
-                    top="260px"
-                    size="28px"
-                    text="Q1. 성별을 선택해주세요"
-                />
-                <Btn
-                    left="134px"
-                    top="322px"
-                    img={Gender1}
-                    size="45px"
-                    id="male"
-                    state={gender}
-                    event={() => setGender("male")}
-                />
-                <Btn
-                    left="304px"
-                    top="322px"
-                    img={Gender2}
-                    size="45px"
-                    id="female"
-                    state={gender}
-                    event={() => setGender("female")}
-                />
-                {/* Q2 키 입력 */}
-                <Text
-                    left="96px"
-                    top="447px"
-                    size="28px"
-                    text="Q2. 키를 입력해주세요"
-                />
+                {props.viewModel.textList.map((value, index) => (
+                    <Text
+                        key={index}
+                        left={value.left}
+                        top={value.top}
+                        size={value.size}
+                        text={value.text}
+                    />
+                ))}
+                {props.viewModel.GenderBtns.map((value) => (
+                    <Btn
+                        key={value.id}
+                        left={value.left}
+                        top={value.top}
+                        img={value.img}
+                        size={value.size}
+                        active={value.active}
+                        event={() => setGender(value.id)}
+                    />
+                ))}
                 <Input left="134px" top="507px" />
-                <Text left="330px" top="512px" size="30px" text="CM" />
-                {/* Q3 몸무게 입력 */}
-                <Text
-                    left="96px"
-                    top="593px"
-                    size="28px"
-                    text="Q3. 몸무게를 입력해주세요"
-                />
                 <Input left="134px" top="655px" />
-                <Text left="330px" top="662px" size="30px" text="Kg" />
-                {/* Q4 체형 선택 */}
-                <Text
-                    left="534px"
-                    top="260px"
-                    size="28px"
-                    text="Q4. 체형을 선택해주세요"
-                />
                 <Btn
                     left="580px"
                     top="322px"
                     img={Body1}
                     size="25px"
-                    id="body1"
-                    state={bodyType}
+                    active={bodyType}
                     event={() => setBodyType("body1")}
                 />
                 <Btn
@@ -409,8 +377,7 @@ function BodyAnalyze() {
                     top="322px"
                     img={Body2}
                     size="25px"
-                    id="body2"
-                    state={bodyType}
+                    active={bodyType}
                     event={() => setBodyType("body2")}
                 />
                 <Btn
@@ -418,16 +385,8 @@ function BodyAnalyze() {
                     top="322px"
                     img={Body3}
                     size="30px"
-                    id="body3"
-                    state={bodyType}
+                    active={bodyType}
                     event={() => setBodyType("body3")}
-                />
-                {/* Q5 전신 사진 */}
-                <Text
-                    left="534px"
-                    top="447px"
-                    size="28px"
-                    text={"Q5. 정확도를 위해\n\t전신 사진을 올려주세요(선택)"}
                 />
                 <DropBox />
                 {/* 나만의 패션 찾기 */}

@@ -2,6 +2,9 @@ import { useState } from "react";
 
 import Gender1 from "../../img/bodyAnalyze/Gender1.png";
 import Gender2 from "../../img/bodyAnalyze/Gender2.png";
+import Body1 from "../../img/bodyAnalyze/Body1.png";
+import Body2 from "../../img/bodyAnalyze/Body2.png";
+import Body3 from "../../img/bodyAnalyze/Body3.png";
 
 class BodyAnalyzeViewModel {
     constructor(model) {
@@ -74,6 +77,32 @@ class BodyAnalyzeViewModel {
                 active: false,
             },
         ];
+        this.BodyTypeBtns = [
+            {
+                left: "580px",
+                top: "322px",
+                img: Body1,
+                size: "25px",
+                id: 1,
+                active: false,
+            },
+            {
+                left: "698px",
+                top: "322px",
+                img: Body2,
+                size: "25px",
+                id: 2,
+                active: false,
+            },
+            {
+                left: "816px",
+                top: "322px",
+                img: Body3,
+                size: "30px",
+                id: 3,
+                active: false,
+            },
+        ];
     }
     setGender(value) {
         this.model.setGender(value);
@@ -88,7 +117,49 @@ class BodyAnalyzeViewModel {
         });
     }
     setBodyType(value) {
-        this.model.bodyType = value;
+        this.model.setBodyType(value);
+        this.BodyTypeBtns.forEach((element) => {
+            if (element.id === value) {
+                console.log(element.id + "Actived");
+                element.active = true;
+            } else {
+                console.log(element.id + "Disactived");
+                element.active = false;
+            }
+        });
+    }
+    getAllResultList() {
+        return this.model.getAllResultList();
+    }
+    handleInputValue(event) {
+        if (event.target.value.length > 3) {
+            //3글자가 넘어가면
+            if (event.target.value.indexOf(".") !== -1) {
+                //소수점이 있다면 5자리 컷
+                event.target.value = event.target.value.substr(
+                    0,
+                    event.target.value.length > 5
+                        ? 5
+                        : event.target.value.length
+                );
+            } else {
+                //소수점 없으면 3자리 컷
+                event.target.value = event.target.value.substr(0, 3);
+            }
+        }
+    }
+    handleInputBlur(event) {
+        if (event.target.value.indexOf(".") !== -1) {
+            //소수점이 있다면 반올림
+            event.target.value = Math.round(event.target.value);
+        }
+        event.target.value = event.target.value.substr(0, 3);
+    }
+    setHeight(value) {
+        this.model.setHeight(value);
+    }
+    getAllHistoryList() {
+        return this.model.getAllHistoryList();
     }
 }
 

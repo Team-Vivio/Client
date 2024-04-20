@@ -161,6 +161,15 @@ class BodyAnalyzeViewModel {
     getAllHistoryList() {
         return this.model.getAllHistoryList();
     }
+    setUploadedImg(file) {
+        this.model.setUploadedImg(file);
+    }
+    setState(value) {
+        this.model.setState(value);
+    }
+    getState() {
+        return this.model.getState();
+    }
 }
 
 export default BodyAnalyzeViewModel;

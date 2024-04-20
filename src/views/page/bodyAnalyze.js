@@ -56,15 +56,11 @@ function Input({ left, top, changeEvent, blurEvent }) {
     );
 }
 
-function DropBox() {
+function DropBox({ imgUpload }) {
+    const [uploadedInfo, setUploadedInfo] = useState(null);
     const [isActive, setActive] = useState(false);
     const handleDragStart = () => setActive(true);
     const handleDragEnd = () => setActive(false);
-    const [uploadedInfo, setUploadedInfo] = useState(null);
-
-    const FileInfo = ({ uploadedInfo }) => (
-        <img src={uploadedInfo.imageUrl} className={styles.InfoImg}></img>
-    );
 
     const setFileInfo = (file) => {
         const { name, type } = file;
@@ -76,15 +72,17 @@ function DropBox() {
             return;
         }
         const reader = new FileReader();
-        reader.readAsDataURL(file);
         reader.onload = () => {
-            setUploadedInfo({
+            const img = {
                 name,
                 size,
                 type,
                 imageUrl: String(reader.result),
-            });
+            };
+            setUploadedInfo(img);
+            imgUpload(img);
         };
+        reader.readAsDataURL(file);
     };
 
     const handleDrop = (event) => {
@@ -118,7 +116,10 @@ function DropBox() {
                     onChange={handleUpload}
                 />
                 {uploadedInfo !== null ? (
-                    <FileInfo uploadedInfo={uploadedInfo} />
+                    <img
+                        src={uploadedInfo.imageUrl}
+                        className={styles.InfoImg}
+                    ></img>
                 ) : (
                     <>
                         <img className={styles.DropImg} src={DropBox1}></img>
@@ -260,6 +261,10 @@ function HistoryBar({ list }) {
     );
 }
 
+function LoadingBox() {
+    return <div></div>;
+}
+
 function BodyAnalyze(props) {
     const [renderFlag, setRenderFlag] = useState(false);
     const [start, setStart] = useState(false);
@@ -276,8 +281,17 @@ function BodyAnalyze(props) {
         props.viewModel.handleInputBlur(event);
         props.viewModel.setHeight(event.target.value);
     }
-    const resultList = props.viewModel.getAllResultList();
-    const historyList = props.viewModel.getAllHistoryList();
+    function setUploadedImg(file) {
+        props.viewModel.setUploadedImg(file);
+        setRenderFlag(!renderFlag);
+    }
+    function setState(value) {
+        props.viewModel.setState(value);
+        setRenderFlag(!renderFlag);
+    }
+    let resultList = props.viewModel.getAllResultList();
+    let historyList = props.viewModel.getAllHistoryList();
+    let state = props.viewModel.getState();
     return (
         <div className={styles.Background}>
             <div className={styles.Blur}>
@@ -324,13 +338,15 @@ function BodyAnalyze(props) {
                     changeEvent={props.viewModel.handleInputValue}
                     blurEvent={setHeight}
                 />
-                <DropBox />
+                <DropBox imgUpload={setUploadedImg} />
                 {/* 나만의 패션 찾기 */}
-                {start ? (
-                    <ResultBox name="이름" infoList={resultList} />
-                ) : (
-                    <StartBox event={() => setStart(true)} /> //버튼 누르면 검사
-                )}
+                {(state === "main" && (
+                    <StartBox event={() => setState("loading")} />
+                )) ||
+                    (state === "loading" && <LoadingBox />) ||
+                    (state === "result" && (
+                        <ResultBox name="이름" infoList={resultList} />
+                    ))}
                 {/* 맨 왼쪽 기록 바 */}
                 <HistoryBar list={historyList} />
             </div>

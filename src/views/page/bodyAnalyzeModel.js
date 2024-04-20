@@ -35,6 +35,8 @@ class BodyAnalyzeModel {
             { id: 6, img: "", info: "" },
             { id: 7, img: "", info: "" },
         ];
+        this.uploadedImg = null;
+        this.state = "main"; //main, loading, result
     }
     setGender(value) {
         this.gender = value;
@@ -63,6 +65,15 @@ class BodyAnalyzeModel {
     }
     getAllHistoryList() {
         return this.historyList;
+    }
+    setUploadedImg(value) {
+        this.uploadedImg = value;
+    }
+    setState(value) {
+        this.state = value;
+    }
+    getState() {
+        return this.state;
     }
 }
 export default BodyAnalyzeModel;

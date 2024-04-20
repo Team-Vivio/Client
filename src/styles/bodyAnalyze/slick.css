@@ -226,6 +226,11 @@
     margin: 0 5px;
     padding: 0;
 
+    background-image: url("../../img/bodyAnalyze/dot1.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
     cursor: pointer;
 }
 .slick-dots li button {
@@ -265,7 +270,7 @@
     width: 20px;
     height: 20px;
 
-    content: "•";
+    content: "";
     text-align: center;
 
     opacity: 0.25;
@@ -275,6 +280,11 @@
     -moz-osx-font-smoothing: grayscale;
 }
 .slick-dots li.slick-active button:before {
+    background-image: url("../../img/bodyAnalyze/dot2.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
     opacity: 0.75;
     color: black;
 }

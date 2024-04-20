@@ -28,7 +28,7 @@ class BodyAnalyzeModel {
         this.name = "이름";
         this.historyList = [
             { id: 1, img: Coin1, info: "설명임" },
-            { id: 2, img: Coin1, info: "설명2" },
+            { id: 2, img: Body1, info: "설명2" },
             { id: 3, img: "", info: "" },
             { id: 4, img: "", info: "" },
             { id: 5, img: "", info: "" },

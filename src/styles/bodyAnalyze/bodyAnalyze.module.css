@@ -256,7 +256,7 @@ Input::-webkit-inner-spin-button {
 .ResultImg {
     max-width: 175px;
     max-height: 175px;
-    justify-self: right;
+    justify-self: center;
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 2;
@@ -395,12 +395,26 @@ Input::-webkit-inner-spin-button {
 .HistoryList {
     height: 82px;
     width: 130px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: 0.25fr 0.75fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+.Historyline {
+    border-top: 1px solid #d9d9d9;
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
 }
 
 .HistoryImg {
+    box-sizing: border-box;
     max-width: 50px;
-    max-height: 62px;
-    padding-left: 10px;
+    max-height: 50px;
 }
 
 .HistoryText {

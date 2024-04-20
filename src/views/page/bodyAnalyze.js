@@ -221,9 +221,9 @@ function ResultBox({ name = "OO", infoList }) {
 function HistoryItem({ history }) {
     return (
         <div className={styles.HistoryList}>
-            <hr></hr>
+            <div className={styles.Historyline}></div>
             <img src={history.img} className={styles.HistoryImg}></img>
-            <span className={styles.HistoryText}>{history.info}</span>
+            <div className={styles.HistoryText}>{history.info}</div>
         </div>
     );
 }

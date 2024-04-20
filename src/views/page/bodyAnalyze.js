@@ -262,12 +262,35 @@ function HistoryBar({ list }) {
 }
 
 function LoadingBox() {
-    return <div></div>;
+    return (
+        <div className={styles.ResultBox}>
+            <div className={styles.Spinner}></div>
+            <div className={styles.LoadingText}>패션 잡지 보는중...</div>
+            <div className={styles.LoadingWarning}>*주의!</div>
+            <div className={styles.LoadingWarningTextPosition}>
+                <span
+                    className={styles.LoadingWarningText}
+                    style={{ color: "red" }}
+                >
+                    새로고침
+                </span>
+                <span className={styles.LoadingWarningText}>
+                    을 하면 작업이
+                </span>
+                <span
+                    className={styles.LoadingWarningText}
+                    style={{ color: "red" }}
+                >
+                    취소
+                </span>
+                <span className={styles.LoadingWarningText}>될 수 있어요!</span>
+            </div>
+        </div>
+    );
 }
 
 function BodyAnalyze(props) {
     const [renderFlag, setRenderFlag] = useState(false);
-    const [start, setStart] = useState(false);
 
     function setGender(value) {
         props.viewModel.setGender(value);

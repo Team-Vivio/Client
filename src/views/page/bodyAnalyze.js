@@ -1,5 +1,5 @@
 import styles from "../../styles/bodyAnalyze/bodyAnalyze.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Slider from "react-slick";
 import "../../styles/bodyAnalyze/slick.css";
 
@@ -292,6 +292,17 @@ function LoadingBox({ event }) {
                     취소
                 </span>
                 <span className={styles.LoadingWarningText}>될 수 있어요!</span>
+            </div>
+        </div>
+    );
+}
+
+function Modal() {
+    return (
+        <div className={styles.ModalBackground}>
+            <div className={styles.Modal}>
+                <button className={styles.ModalClose}></button>
+                <button className={styles.ModalEnter}>버튼</button>
             </div>
         </div>
     );

@@ -193,7 +193,7 @@ function ResultInnerBox({ value }) {
     );
 }
 
-function ResultBox({ name = "OO", infoList }) {
+function ResultBox({ name = "OO", infoList, event }) {
     const settings = {
         dots: true,
         infinite: true,
@@ -215,6 +215,11 @@ function ResultBox({ name = "OO", infoList }) {
                     ))}
                 </Slider>
             </div>
+            <button className={styles.RestartBtn} onClick={event}>
+                <span>시작 </span>
+                <img src={Coin1} className={styles.Coin}></img>
+                <span>-10</span>
+            </button>
         </div>
     );
 }
@@ -261,7 +266,10 @@ function HistoryBar({ list }) {
     );
 }
 
-function LoadingBox() {
+function LoadingBox({ event }) {
+    setTimeout(() => {
+        event("result");
+    }, 5000); //5초 후에 결과 보여줌
     return (
         <div className={styles.ResultBox}>
             <div className={styles.Spinner}></div>
@@ -366,9 +374,13 @@ function BodyAnalyze(props) {
                 {(state === "main" && (
                     <StartBox event={() => setState("loading")} />
                 )) ||
-                    (state === "loading" && <LoadingBox />) ||
+                    (state === "loading" && <LoadingBox event={setState} />) ||
                     (state === "result" && (
-                        <ResultBox name="이름" infoList={resultList} />
+                        <ResultBox
+                            name="이름"
+                            infoList={resultList}
+                            event={() => setState("loading")}
+                        />
                     ))}
                 {/* 맨 왼쪽 기록 바 */}
                 <HistoryBar list={historyList} />

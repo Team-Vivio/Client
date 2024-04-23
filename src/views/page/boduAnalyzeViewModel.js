@@ -103,6 +103,8 @@ class BodyAnalyzeViewModel {
                 active: false,
             },
         ];
+        this.modalActive = false;
+        this.modalIndex = -1;
     }
     setGender(value) {
         this.model.setGender(value);
@@ -131,6 +133,9 @@ class BodyAnalyzeViewModel {
     getAllResultList() {
         return this.model.getAllResultList();
     }
+    getModalList() {
+        return this.modalList;
+    }
     handleInputValue(event) {
         if (event.target.value.length > 3) {
             //3글자가 넘어가면
@@ -158,6 +163,9 @@ class BodyAnalyzeViewModel {
     setHeight(value) {
         this.model.setHeight(value);
     }
+    setWeight(value) {
+        this.model.setWeight(value);
+    }
     getAllHistoryList() {
         return this.model.getAllHistoryList();
     }
@@ -169,6 +177,21 @@ class BodyAnalyzeViewModel {
     }
     getState() {
         return this.model.getState();
+    }
+    dataCheck() {
+        return this.model.dataCheck();
+    }
+    getModalActive() {
+        return this.modalActive;
+    }
+    setModalActive(value) {
+        this.modalActive = value;
+    }
+    getModalIndex() {
+        return this.modalIndex;
+    }
+    setModalIndex(value) {
+        this.modalIndex = value;
     }
 }
 

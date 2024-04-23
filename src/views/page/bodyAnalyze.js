@@ -297,14 +297,48 @@ function LoadingBox({ event }) {
     );
 }
 
-function Modal() {
+function Modal({ active, msgIndex, closeEvent, enterEvent }) {
+    const ModalMessage = [
+        {
+            message: "이동하시겠어요?\n작업한 내용이 삭제 되요",
+            btn: "이동하기",
+        },
+        {
+            message: "제대로 입력했는지 확인해주세요\n기존 작업물은 저장됩니다",
+            btn: "시작하기",
+        },
+        {
+            message: "성별, 키, 몸무게, 체형은\n필수로 입력해주세요",
+            btn: "입력하기",
+        },
+    ];
     return (
-        <div className={styles.ModalBackground}>
-            <div className={styles.Modal}>
-                <button className={styles.ModalClose}></button>
-                <button className={styles.ModalEnter}>버튼</button>
-            </div>
-        </div>
+        <>
+            {active ? (
+                <div className={styles.ModalBackground}>
+                    <div className={styles.Modal}>
+                        <button
+                            className={styles.ModalClose}
+                            onClick={closeEvent}
+                        ></button>
+                        <div className={styles.ModalContent}>
+                            <div className={styles.ModalItem1}>*주의!</div>
+                            <div className={styles.ModalItem2}>
+                                {ModalMessage[msgIndex].message}
+                            </div>
+                            <button
+                                className={styles.ModalEnter}
+                                onClick={enterEvent}
+                            >
+                                {ModalMessage[msgIndex].btn}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                <></>
+            )}
+        </>
     );
 }
 
@@ -323,6 +357,10 @@ function BodyAnalyze(props) {
         props.viewModel.handleInputBlur(event);
         props.viewModel.setHeight(event.target.value);
     }
+    function setWeight(event) {
+        props.viewModel.handleInputBlur(event);
+        props.viewModel.setWeight(event.target.value);
+    }
     function setUploadedImg(file) {
         props.viewModel.setUploadedImg(file);
         setRenderFlag(!renderFlag);
@@ -331,12 +369,46 @@ function BodyAnalyze(props) {
         props.viewModel.setState(value);
         setRenderFlag(!renderFlag);
     }
+    function setModal(type) {
+        switch (type) {
+            case 0: //뒤로가기 모달
+                props.viewModel.setModalIndex(0);
+                break;
+            case 1: //시작버튼을 누른 경우 데이터 체크
+                props.viewModel.dataCheck() //필수 데이터가 있는지
+                    ? props.viewModel.setModalIndex(1)
+                    : props.viewModel.setModalIndex(2);
+                break;
+            default:
+                break;
+        }
+        props.viewModel.setModalActive(true);
+        setRenderFlag(!renderFlag);
+    }
+    function modalClose() {
+        props.viewModel.setModalActive(false);
+        setRenderFlag(!renderFlag);
+    }
+    function modalEvent() {
+        modalClose();
+        if (modalIndex) {
+            setState("loading");
+        }
+    }
     let resultList = props.viewModel.getAllResultList();
     let historyList = props.viewModel.getAllHistoryList();
     let state = props.viewModel.getState();
+    let modalActive = props.viewModel.getModalActive(); //모달 켜짐 유무
+    let modalIndex = props.viewModel.getModalIndex(); //모달 메세지 유형 인덱스
     return (
         <div className={styles.Background}>
             <div className={styles.Blur}>
+                <Modal
+                    active={modalActive}
+                    msgIndex={modalIndex}
+                    closeEvent={modalClose}
+                    enterEvent={modalEvent}
+                />
                 {props.viewModel.textList.map((value, index) => (
                     <Text
                         key={index}
@@ -378,19 +450,17 @@ function BodyAnalyze(props) {
                     left="134px"
                     top="655px"
                     changeEvent={props.viewModel.handleInputValue}
-                    blurEvent={setHeight}
+                    blurEvent={setWeight}
                 />
                 <DropBox imgUpload={setUploadedImg} />
                 {/* 나만의 패션 찾기 */}
-                {(state === "main" && (
-                    <StartBox event={() => setState("loading")} />
-                )) ||
+                {(state === "main" && <StartBox event={() => setModal(1)} />) ||
                     (state === "loading" && <LoadingBox event={setState} />) ||
                     (state === "result" && (
                         <ResultBox
                             name="이름"
                             infoList={resultList}
-                            event={() => setState("loading")}
+                            event={() => setModal(1)}
                         />
                     ))}
                 {/* 맨 왼쪽 기록 바 */}

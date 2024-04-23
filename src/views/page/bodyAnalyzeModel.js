@@ -3,8 +3,8 @@ import Body1 from "../../img/bodyAnalyze/Body1.png";
 
 class BodyAnalyzeModel {
     constructor() {
-        this.gender = ""; //"male", "female"
-        this.bodyType = 0; //1, 2, 3
+        this.gender = null; //"male", "female"
+        this.bodyType = null; //1, 2, 3
         this.height = 0; //키
         this.weight = 0; //몸무게
         this.resultList = [
@@ -74,6 +74,27 @@ class BodyAnalyzeModel {
     }
     getState() {
         return this.state;
+    }
+    dataCheck() {
+        console.log(
+            this.gender +
+                "-" +
+                this.bodyType +
+                "-" +
+                this.height +
+                "-" +
+                this.weight
+        );
+        if (
+            this.gender !== null &&
+            this.bodyType !== null &&
+            this.height &&
+            this.weight
+        ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 export default BodyAnalyzeModel;

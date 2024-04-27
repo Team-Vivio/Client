@@ -56,7 +56,7 @@ function Input({ left, top, changeEvent, blurEvent }) {
     );
 }
 
-function DropBox({ imgUpload }) {
+function DropBox({ imgUpload, setformData }) {
     const [uploadedInfo, setUploadedInfo] = useState(null);
     const [isActive, setActive] = useState(false);
     const handleDragStart = () => setActive(true);
@@ -89,6 +89,7 @@ function DropBox({ imgUpload }) {
         event.preventDefault();
         setActive(false);
         const file = event.dataTransfer.files[0];
+        setformData(file);
         setFileInfo(file);
     };
 
@@ -98,6 +99,7 @@ function DropBox({ imgUpload }) {
 
     const handleUpload = ({ target }) => {
         const file = target.files[0];
+        setformData(file);
         setFileInfo(file);
     };
 
@@ -179,14 +181,14 @@ function ResultInnerBox({ value }) {
     return (
         <div style={{ display: "flex", justifyContent: "center" }}>
             <div className={styles.ResultInnerBox}>
-                <img src={value.img} className={styles.ResultImg}></img>
+                <img src={value.image} className={styles.ResultImg}></img>
                 <div className={styles.ResultInnerTitle}>{value.title}</div>
                 <div className={styles.ResultColor}>
                     {"색상: " + value.color}
                 </div>
                 <div className={styles.ResultType}>{"종류: " + value.type}</div>
                 <div className={styles.ResultInfoBox}>
-                    {'"' + value.info + '"'}
+                    {'"' + value.content + '"'}
                 </div>
             </div>
         </div>
@@ -210,8 +212,8 @@ function ResultBox({ name = "OO", infoList, event }) {
             </div>
             <div className={styles.ResultInnerBoxPosition}>
                 <Slider {...settings}>
-                    {infoList.map((value) => (
-                        <ResultInnerBox value={value} key={value.id} />
+                    {infoList.map((value, id) => (
+                        <ResultInnerBox value={value} key={id} />
                     ))}
                 </Slider>
             </div>
@@ -267,9 +269,6 @@ function HistoryBar({ list }) {
 }
 
 function LoadingBox({ event }) {
-    setTimeout(() => {
-        event("result");
-    }, 5000); //5초 후에 결과 보여줌
     return (
         <div className={styles.ResultBox}>
             <div className={styles.Spinner}></div>
@@ -389,17 +388,22 @@ function BodyAnalyze(props) {
         props.viewModel.setModalActive(false);
         setRenderFlag(!renderFlag);
     }
-    function modalEvent() {
+    async function modalEvent() {
         modalClose();
-        if (modalIndex) {
-            setState("loading");
+        if (modalIndex === 1) {
+            setBoxState("loading");
+            await props.viewModel.postFashion();
+            setBoxState("result");
         }
     }
-    let resultList = props.viewModel.getAllResultList();
+    function setFormData(img) {
+        props.viewModel.setFormData(img);
+    }
     let historyList = props.viewModel.getAllHistoryList();
-    let state = props.viewModel.getState();
     let modalActive = props.viewModel.getModalActive(); //모달 켜짐 유무
     let modalIndex = props.viewModel.getModalIndex(); //모달 메세지 유형 인덱스
+    const [boxState, setBoxState] = useState("main");
+
     return (
         <div className={styles.Background}>
             <div className={styles.Blur}>
@@ -452,14 +456,18 @@ function BodyAnalyze(props) {
                     changeEvent={props.viewModel.handleInputValue}
                     blurEvent={setWeight}
                 />
-                <DropBox imgUpload={setUploadedImg} />
+                <DropBox imgUpload={setUploadedImg} setformData={setFormData} />
                 {/* 나만의 패션 찾기 */}
-                {(state === "main" && <StartBox event={() => setModal(1)} />) ||
-                    (state === "loading" && <LoadingBox event={setState} />) ||
-                    (state === "result" && (
+                {(boxState === "main" && (
+                    <StartBox event={() => setModal(1)} />
+                )) ||
+                    (boxState === "loading" && (
+                        <LoadingBox event={setState} />
+                    )) ||
+                    (boxState === "result" && (
                         <ResultBox
                             name="이름"
-                            infoList={resultList}
+                            infoList={props.viewModel.getAllResultList()}
                             event={() => setModal(1)}
                         />
                     ))}

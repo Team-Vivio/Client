@@ -65,7 +65,7 @@ class BodyAnalyzeViewModel {
                 top: "322px",
                 img: Gender1,
                 size: "45px",
-                id: "male",
+                id: 1,
                 active: false,
             },
             {
@@ -73,7 +73,7 @@ class BodyAnalyzeViewModel {
                 top: "322px",
                 img: Gender2,
                 size: "45px",
-                id: "female",
+                id: 2,
                 active: false,
             },
         ];
@@ -193,6 +193,12 @@ class BodyAnalyzeViewModel {
     setModalIndex(value) {
         this.modalIndex = value;
     }
+    setFormData(img) {
+        this.model.setFormData(img);
+    }
+    postFashion = async () => {
+        await this.model.postFashion();
+    };
 }
 
 export default BodyAnalyzeViewModel;

@@ -1,30 +1,16 @@
 import Coin1 from "../../img/bodyAnalyze/Coin.png";
 import Body1 from "../../img/bodyAnalyze/Body1.png";
+import axios from "axios";
+import { Component } from "react";
 
-class BodyAnalyzeModel {
-    constructor() {
-        this.gender = null; //"male", "female"
+class BodyAnalyzeModel extends Component {
+    constructor(props) {
+        super(props);
+        this.gender = null; //1, 2
         this.bodyType = null; //1, 2, 3
         this.height = 0; //키
         this.weight = 0; //몸무게
-        this.resultList = [
-            {
-                id: 0,
-                img: Coin1,
-                title: "상의",
-                color: "남색, 검은색",
-                type: "후드티, 맨투맨",
-                info: "어두운 색의 후드티나 맨투맨은 체형을 잘 감춰주고 슬림한 느낌을 줄 수 있습니다.",
-            },
-            {
-                id: 1,
-                img: Body1,
-                title: "하의",
-                color: "남색, 검은색",
-                type: "청바지",
-                info: "어두운 색의 후드티나 맨투맨은 체형을 잘 감춰주고 슬림한 느낌을 줄 수 있습니다.",
-            },
-        ];
+        this.resultList = null;
         this.name = "이름";
         this.historyList = [
             { id: 1, img: Coin1, info: "설명임" },
@@ -37,6 +23,7 @@ class BodyAnalyzeModel {
         ];
         this.uploadedImg = null;
         this.state = "main"; //main, loading, result
+        this.formData = new FormData();
     }
     setGender(value) {
         this.gender = value;
@@ -55,7 +42,9 @@ class BodyAnalyzeModel {
         console.log("Weight setted: " + this.weight);
     }
     getAllResultList() {
-        return this.resultList;
+        return this.resultList === null
+            ? null
+            : this.resultList.data.result.fashionBottomDTOS;
     }
     getName() {
         return this.name;
@@ -96,5 +85,37 @@ class BodyAnalyzeModel {
             return false;
         }
     }
+    setFormData(img) {
+        this.formData.append("image", img);
+    }
+
+    postFashion = async () => {
+        if (this.uploadedImg === null) {
+            //이미지 없다는 뜻
+            this.formData.append("image", new File([""], "filename"));
+        }
+        const value = {
+            gender: this.gender,
+            height: this.height,
+            weight: this.weight,
+            type: this.bodyType,
+        };
+        this.formData.append("request", JSON.stringify(value));
+        try {
+            this.resultList = await axios({
+                method: "POST",
+                url: `http://backend.vivi-o.site/fashions/`,
+                mode: "cors",
+                headers: {
+                    "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
+                },
+                data: this.formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
+            });
+            console.log(this.resultList);
+        } catch (error) {
+            console.log(this.resultList);
+            console.log(error);
+        }
+    };
 }
 export default BodyAnalyzeModel;

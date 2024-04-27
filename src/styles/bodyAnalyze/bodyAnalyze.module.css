@@ -588,6 +588,8 @@ Input::-webkit-inner-spin-button {
 .ModalEnter {
     box-sizing: border-box;
 
+    cursor: pointer;
+
     width: 277px;
     height: 57px;
 

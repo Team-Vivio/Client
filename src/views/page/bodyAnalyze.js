@@ -235,8 +235,8 @@ function HistoryItem({ history }) {
     return (
         <div className={styles.HistoryList}>
             <div className={styles.Historyline}></div>
-            <img src={history.img} className={styles.HistoryImg}></img>
-            <div className={styles.HistoryText}>{history.info}</div>
+            <img src={history.image} className={styles.HistoryImg}></img>
+            <div className={styles.HistoryText}>{history.type}</div>
         </div>
     );
 }
@@ -266,9 +266,11 @@ function HistoryBar({ list }) {
     return (
         <div className={styles.HistoryBar} style={{ top: barPosition }}>
             <div className={styles.HistoryTitle}>History</div>
-            {list.map((history, id) => (
-                <HistoryItem history={history} key={id} />
-            ))}
+            {list !== null
+                ? list.map((history, id) => (
+                      <HistoryItem history={history} key={id} />
+                  ))
+                : null}
         </div>
     );
 }
@@ -355,11 +357,11 @@ function BodyAnalyze(props) {
 
     function setGender(value) {
         props.viewModel.setGender(value);
-        setRenderFlag(!renderFlag);
+        setRenderFlag((renderFlag) => !renderFlag);
     }
     function setBodyType(value) {
         props.viewModel.setBodyType(value);
-        setRenderFlag(!renderFlag);
+        setRenderFlag((renderFlag) => !renderFlag);
     }
     function setHeight(event) {
         props.viewModel.handleInputBlur(event);
@@ -371,11 +373,11 @@ function BodyAnalyze(props) {
     }
     function setUploadedImg(file) {
         props.viewModel.setUploadedImg(file);
-        setRenderFlag(!renderFlag);
+        setRenderFlag((renderFlag) => !renderFlag);
     }
     function setState(value) {
         props.viewModel.setState(value);
-        setRenderFlag(!renderFlag);
+        setRenderFlag((renderFlag) => !renderFlag);
     }
     function setModal(type) {
         switch (type) {
@@ -393,31 +395,41 @@ function BodyAnalyze(props) {
                 break;
         }
         props.viewModel.setModalActive(true);
-        setRenderFlag(!renderFlag);
+        setRenderFlag((renderFlag) => !renderFlag);
     }
     function modalClose() {
         props.viewModel.setModalActive(false);
-        setRenderFlag(!renderFlag);
+        setRenderFlag((renderFlag) => !renderFlag);
     }
     async function modalEvent() {
         modalClose();
         if (modalIndex === 1) {
             setBoxState("loading");
             await props.viewModel.postFashion();
-            console.log(props.viewModel.getAllResultList());
             if (props.viewModel.getAllResultList() === null) {
                 setModal(2); //결과를 못받으면
                 props.viewModel.setModalActive(true);
                 setBoxState("main");
-            } else setBoxState("result");
+            } else {
+                getHistory();
+                setBoxState("result");
+            }
         }
     }
     function setFormData(img) {
         props.viewModel.setFormData(img);
     }
-    let historyList = props.viewModel.getAllHistoryList();
+    async function getHistory() {
+        await props.viewModel.getHistory();
+        setHistory(props.viewModel.getAllHistoryList());
+    }
     let modalIndex = props.viewModel.getModalIndex(); //모달 메세지 유형 인덱스
     const [boxState, setBoxState] = useState("main");
+    const [history, setHistory] = useState(props.viewModel.getAllHistoryList());
+
+    useEffect(() => {
+        getHistory();
+    }, []);
 
     return (
         <div className={styles.Background}>
@@ -487,7 +499,7 @@ function BodyAnalyze(props) {
                         />
                     ))}
                 {/* 맨 왼쪽 기록 바 */}
-                <HistoryBar list={historyList} />
+                <HistoryBar list={history} />
             </div>
         </div>
     );

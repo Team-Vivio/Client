@@ -199,6 +199,9 @@ class BodyAnalyzeViewModel {
     postFashion = async () => {
         await this.model.postFashion();
     };
+    getHistory = async () => {
+        await this.model.getHistory();
+    };
 }
 
 export default BodyAnalyzeViewModel;

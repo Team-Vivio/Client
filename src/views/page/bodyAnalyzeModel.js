@@ -3,24 +3,15 @@ import Body1 from "../../img/bodyAnalyze/Body1.png";
 import axios from "axios";
 import { Component } from "react";
 
-class BodyAnalyzeModel extends Component {
-    constructor(props) {
-        super(props);
+class BodyAnalyzeModel {
+    constructor() {
         this.gender = null; //1, 2
         this.bodyType = null; //1, 2, 3
         this.height = 0; //키
         this.weight = 0; //몸무게
         this.resultList = null;
         this.name = "이름";
-        this.historyList = [
-            { id: 1, img: Coin1, info: "설명임" },
-            { id: 2, img: Body1, info: "설명2" },
-            { id: 3, img: "", info: "" },
-            { id: 4, img: "", info: "" },
-            { id: 5, img: "", info: "" },
-            { id: 6, img: "", info: "" },
-            { id: 7, img: "", info: "" },
-        ];
+        this.historyList = null;
         this.uploadedImg = null;
         this.state = "main"; //main, loading, result
         this.formData = new FormData();
@@ -51,7 +42,18 @@ class BodyAnalyzeModel extends Component {
         this.name = value;
     }
     getAllHistoryList() {
-        return this.historyList;
+        if (this.historyList === null) {
+            console.log("return null");
+            return null;
+        } else {
+            let list = this.historyList.data.result.viewListResultDTOS;
+            if (list.length < 7)
+                for (let i = list.length; i < 7; i++) {
+                    list.push({ image: "", type: "" });
+                }
+            else list = list.slice(0, 7);
+            return list;
+        }
     }
     setUploadedImg(value) {
         this.uploadedImg = value;
@@ -137,6 +139,24 @@ class BodyAnalyzeModel extends Component {
             } catch (error) {
                 console.log(error);
             }
+            this.getHistory(); //저장하고 기록 다시 가져오기
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    getHistory = async () => {
+        const accessToken =
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDM2MDk4NSwiZXhwIjoxNzE0MzgyNTg1LCJpZCI6MiwiZW1haWwiOiJqeTU4NDlAbmF2ZXIuY29tIn0.VQYHm-GvZx1OP8zWCNzQ82gu_znavUvmWXdV4ECHlgc";
+        try {
+            this.historyList = await axios({
+                method: "GET",
+                url: `/fashions/fashionRecommand`,
+                mode: "cors",
+                headers: {
+                    Authorization: `${accessToken}`,
+                },
+            });
+            console.log(this.historyList);
         } catch (error) {
             console.log(error);
         }

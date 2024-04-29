@@ -358,6 +358,8 @@ Input::-webkit-inner-spin-button {
 .RestartBtn {
     box-sizing: border-box;
 
+    cursor: pointer;
+
     position: absolute;
     width: 266px;
     height: 40px;
@@ -518,6 +520,7 @@ Input::-webkit-inner-spin-button {
 }
 
 .HistoryList {
+    cursor: pointer;
     height: 82px;
     width: 130px;
     display: grid;

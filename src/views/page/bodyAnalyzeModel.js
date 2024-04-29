@@ -13,7 +13,6 @@ class BodyAnalyzeModel {
         this.name = "이름";
         this.historyList = null;
         this.uploadedImg = null;
-        this.state = "main"; //main, loading, result
         this.formData = new FormData();
     }
     setGender(value) {
@@ -33,7 +32,7 @@ class BodyAnalyzeModel {
         console.log("Weight setted: " + this.weight);
     }
     getAllResultList() {
-        return this.resultList === null ? null : this.resultList.data.result;
+        return this.resultList === null ? null : this.resultList;
     }
     getName() {
         return this.name;
@@ -57,12 +56,6 @@ class BodyAnalyzeModel {
     }
     setUploadedImg(value) {
         this.uploadedImg = value;
-    }
-    setState(value) {
-        this.state = value;
-    }
-    getState() {
-        return this.state;
     }
     dataCheck() {
         console.log(
@@ -88,7 +81,7 @@ class BodyAnalyzeModel {
     setFormData(img) {
         this.formData.append("image", img);
     }
-
+    //패션 추천받고 저장하기
     postFashion = async () => {
         this.resultList = null; //초기화
         if (this.uploadedImg === null) {
@@ -103,7 +96,7 @@ class BodyAnalyzeModel {
         };
         this.formData.append("request", JSON.stringify(value));
         try {
-            this.resultList = await axios({
+            const result = await axios({
                 method: "POST",
                 url: `/fashions/`,
                 mode: "cors",
@@ -112,6 +105,15 @@ class BodyAnalyzeModel {
                 },
                 data: this.formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
             });
+            result.data.result.fashionTopDTOS.forEach((element) => {
+                element.title = "상의";
+            });
+            result.data.result.fashionBottomDTOS.forEach((element) => {
+                element.title = "하의";
+            });
+            this.resultList = result.data.result.fashionTopDTOS.concat(
+                ...result.data.result.fashionBottomDTOS
+            );
             console.log(this.resultList);
             //저장
             const accessToken =
@@ -121,8 +123,8 @@ class BodyAnalyzeModel {
                 height: this.height,
                 weight: this.weight,
                 type: this.bodyType,
-                fashionTops: this.resultList.data.result.fashionTopDTOS,
-                fashionBottoms: this.resultList.data.result.fashionBottomDTOS,
+                fashionTops: result.data.result.fashionTopDTOS,
+                fashionBottoms: result.data.result.fashionBottomDTOS,
             };
             console.log(save);
             try {
@@ -144,6 +146,34 @@ class BodyAnalyzeModel {
             console.log(error);
         }
     };
+    //추천 받았던 패션정보 불러오기
+    getFashion = async (fashionID) => {
+        this.resultList = null;
+        const accessToken =
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDM2MDk4NSwiZXhwIjoxNzE0MzgyNTg1LCJpZCI6MiwiZW1haWwiOiJqeTU4NDlAbmF2ZXIuY29tIn0.VQYHm-GvZx1OP8zWCNzQ82gu_znavUvmWXdV4ECHlgc";
+        try {
+            const result = await axios({
+                method: "GET",
+                url: `/fashions/fashionRecommand/${fashionID}`,
+                mode: "cors",
+                headers: {
+                    Authorization: `${accessToken}`,
+                },
+            });
+            result.data.result.fashionTops.forEach((element) => {
+                element.title = "상의";
+            });
+            result.data.result.fashionBottoms.forEach((element) => {
+                element.title = "하의";
+            });
+            this.resultList = result.data.result.fashionTops.concat(
+                ...result.data.result.fashionBottoms
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    //히스토리 가져오기
     getHistory = async () => {
         const accessToken =
             "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDM2MDk4NSwiZXhwIjoxNzE0MzgyNTg1LCJpZCI6MiwiZW1haWwiOiJqeTU4NDlAbmF2ZXIuY29tIn0.VQYHm-GvZx1OP8zWCNzQ82gu_znavUvmWXdV4ECHlgc";

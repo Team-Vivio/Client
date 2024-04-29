@@ -4,7 +4,6 @@ import Slider from "react-slick";
 import "../../styles/bodyAnalyze/slick.css";
 
 //이미지
-
 import DropBox1 from "../../img/bodyAnalyze/DropBox.png";
 import Coin1 from "../../img/bodyAnalyze/Coin.png";
 
@@ -214,10 +213,7 @@ function ResultBox({ name = "OO", infoList, event }) {
             </div>
             <div className={styles.ResultInnerBoxPosition}>
                 <Slider {...settings}>
-                    {infoList.fashionTopDTOS.map((value, id) => (
-                        <ResultInnerBox value={value} key={id} />
-                    ))}
-                    {infoList.fashionBottomDTOS.map((value, id) => (
+                    {infoList.map((value, id) => (
                         <ResultInnerBox value={value} key={id} />
                     ))}
                 </Slider>
@@ -231,9 +227,10 @@ function ResultBox({ name = "OO", infoList, event }) {
     );
 }
 
-function HistoryItem({ history }) {
+function HistoryItem({ history, event }) {
+    const ID = history.fasRecId;
     return (
-        <div className={styles.HistoryList}>
+        <div className={styles.HistoryList} onClick={() => event(ID)}>
             <div className={styles.Historyline}></div>
             <img src={history.image} className={styles.HistoryImg}></img>
             <div className={styles.HistoryText}>{history.type}</div>
@@ -241,7 +238,7 @@ function HistoryItem({ history }) {
     );
 }
 
-function HistoryBar({ list }) {
+function HistoryBar({ list, event }) {
     const [barPosition, setBarPosition] = useState(170);
 
     //애니메이션
@@ -268,7 +265,7 @@ function HistoryBar({ list }) {
             <div className={styles.HistoryTitle}>History</div>
             {list !== null
                 ? list.map((history, id) => (
-                      <HistoryItem history={history} key={id} />
+                      <HistoryItem history={history} key={id} event={event} />
                   ))
                 : null}
         </div>
@@ -354,6 +351,8 @@ function Modal({ active, msgIndex, closeEvent, enterEvent }) {
 
 function BodyAnalyze(props) {
     const [renderFlag, setRenderFlag] = useState(false);
+    const [boxState, setBoxState] = useState("main");
+    const [history, setHistory] = useState(props.viewModel.getAllHistoryList());
 
     function setGender(value) {
         props.viewModel.setGender(value);
@@ -373,10 +372,6 @@ function BodyAnalyze(props) {
     }
     function setUploadedImg(file) {
         props.viewModel.setUploadedImg(file);
-        setRenderFlag((renderFlag) => !renderFlag);
-    }
-    function setState(value) {
-        props.viewModel.setState(value);
         setRenderFlag((renderFlag) => !renderFlag);
     }
     function setModal(type) {
@@ -423,9 +418,19 @@ function BodyAnalyze(props) {
         await props.viewModel.getHistory();
         setHistory(props.viewModel.getAllHistoryList());
     }
+    async function getFashion(fashionID) {
+        await props.viewModel.getFashion(fashionID);
+        console.log(props.viewModel.getAllResultList());
+        if (props.viewModel.getAllResultList() === null) {
+            setModal(2); //결과를 못받으면
+            props.viewModel.setModalActive(true);
+            setBoxState("main");
+        } else {
+            setBoxState("result");
+            setRenderFlag((renderFlag) => !renderFlag);
+        }
+    }
     let modalIndex = props.viewModel.getModalIndex(); //모달 메세지 유형 인덱스
-    const [boxState, setBoxState] = useState("main");
-    const [history, setHistory] = useState(props.viewModel.getAllHistoryList());
 
     useEffect(() => {
         getHistory();
@@ -488,9 +493,7 @@ function BodyAnalyze(props) {
                 {(boxState === "main" && (
                     <StartBox event={() => setModal(1)} />
                 )) ||
-                    (boxState === "loading" && (
-                        <LoadingBox event={setState} />
-                    )) ||
+                    (boxState === "loading" && <LoadingBox />) ||
                     (boxState === "result" && (
                         <ResultBox
                             name="이름"
@@ -499,7 +502,7 @@ function BodyAnalyze(props) {
                         />
                     ))}
                 {/* 맨 왼쪽 기록 바 */}
-                <HistoryBar list={history} />
+                <HistoryBar list={history} event={getFashion} />
             </div>
         </div>
     );

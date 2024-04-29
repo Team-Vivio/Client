@@ -172,12 +172,6 @@ class BodyAnalyzeViewModel {
     setUploadedImg(file) {
         this.model.setUploadedImg(file);
     }
-    setState(value) {
-        this.model.setState(value);
-    }
-    getState() {
-        return this.model.getState();
-    }
     dataCheck() {
         return this.model.dataCheck();
     }
@@ -201,6 +195,9 @@ class BodyAnalyzeViewModel {
     };
     getHistory = async () => {
         await this.model.getHistory();
+    };
+    getFashion = async (fashionID) => {
+        await this.model.getFashion(fashionID);
     };
 }
 

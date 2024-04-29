@@ -408,7 +408,7 @@ function BodyAnalyze(props) {
             if (props.viewModel.getAllResultList() === null) {
                 setModal(2); //결과를 못받으면
                 props.viewModel.setModalActive(true);
-                setRenderFlag(!renderFlag);
+                setBoxState("main");
             } else setBoxState("result");
         }
     }
@@ -416,7 +416,6 @@ function BodyAnalyze(props) {
         props.viewModel.setFormData(img);
     }
     let historyList = props.viewModel.getAllHistoryList();
-    let modalActive = props.viewModel.getModalActive(); //모달 켜짐 유무
     let modalIndex = props.viewModel.getModalIndex(); //모달 메세지 유형 인덱스
     const [boxState, setBoxState] = useState("main");
 
@@ -424,7 +423,7 @@ function BodyAnalyze(props) {
         <div className={styles.Background}>
             <div className={styles.Blur}>
                 <Modal
-                    active={modalActive}
+                    active={props.viewModel.getModalActive()}
                     msgIndex={modalIndex}
                     closeEvent={modalClose}
                     enterEvent={modalEvent}

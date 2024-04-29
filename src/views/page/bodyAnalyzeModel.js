@@ -42,9 +42,7 @@ class BodyAnalyzeModel extends Component {
         console.log("Weight setted: " + this.weight);
     }
     getAllResultList() {
-        return this.resultList === null
-            ? null
-            : this.resultList.data.result.fashionBottomDTOS;
+        return this.resultList === null ? null : this.resultList.data.result;
     }
     getName() {
         return this.name;
@@ -90,6 +88,7 @@ class BodyAnalyzeModel extends Component {
     }
 
     postFashion = async () => {
+        this.resultList = null; //초기화
         if (this.uploadedImg === null) {
             //이미지 없다는 뜻
             this.formData.append("image", new File([""], "filename"));

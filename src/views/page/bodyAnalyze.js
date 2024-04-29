@@ -48,7 +48,9 @@ function Input({ left, top, changeEvent, blurEvent }) {
     return (
         <input
             type="number"
-            onChange={changeEvent}
+            onChange={(e) => {
+                changeEvent(e);
+            }}
             onBlur={blurEvent}
             style={pos}
             className={styles.Input}
@@ -212,7 +214,10 @@ function ResultBox({ name = "OO", infoList, event }) {
             </div>
             <div className={styles.ResultInnerBoxPosition}>
                 <Slider {...settings}>
-                    {infoList.map((value, id) => (
+                    {infoList.fashionTopDTOS.map((value, id) => (
+                        <ResultInnerBox value={value} key={id} />
+                    ))}
+                    {infoList.fashionBottomDTOS.map((value, id) => (
                         <ResultInnerBox value={value} key={id} />
                     ))}
                 </Slider>
@@ -310,6 +315,10 @@ function Modal({ active, msgIndex, closeEvent, enterEvent }) {
             message: "성별, 키, 몸무게, 체형은\n필수로 입력해주세요",
             btn: "입력하기",
         },
+        {
+            message: "추천에 실패했어요\n정보를 다시 입력하고 다시 해주세요",
+            btn: "입력하기",
+        },
     ];
     return (
         <>
@@ -378,6 +387,8 @@ function BodyAnalyze(props) {
                     ? props.viewModel.setModalIndex(1)
                     : props.viewModel.setModalIndex(2);
                 break;
+            case 2: //검사 실패
+                props.viewModel.setModalIndex(3);
             default:
                 break;
         }
@@ -393,7 +404,9 @@ function BodyAnalyze(props) {
         if (modalIndex === 1) {
             setBoxState("loading");
             await props.viewModel.postFashion();
-            setBoxState("result");
+            props.viewModel.getAllResultList() === null
+                ? setModal(2) //결과를 못받으면
+                : setBoxState("result");
         }
     }
     function setFormData(img) {

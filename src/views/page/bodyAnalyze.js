@@ -6,6 +6,7 @@ import "../../styles/bodyAnalyze/slick.css";
 //이미지
 import DropBox1 from "../../img/bodyAnalyze/DropBox.png";
 import Coin1 from "../../img/bodyAnalyze/Coin.png";
+import { Link } from "react-router-dom";
 
 function Btn({ left, top, img, size, active, event }) {
     const info = {
@@ -182,7 +183,14 @@ function ResultInnerBox({ value }) {
     return (
         <div style={{ display: "flex", justifyContent: "center" }}>
             <div className={styles.ResultInnerBox}>
-                <img src={value.image} className={styles.ResultImg}></img>
+                <a
+                    href={value.link}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className={styles.ResultLink}
+                >
+                    <img src={value.image} className={styles.ResultImg}></img>
+                </a>
                 <div className={styles.ResultInnerTitle}>{value.title}</div>
                 <div className={styles.ResultColor}>
                     {"색상: " + value.color}

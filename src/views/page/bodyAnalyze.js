@@ -404,9 +404,12 @@ function BodyAnalyze(props) {
         if (modalIndex === 1) {
             setBoxState("loading");
             await props.viewModel.postFashion();
-            props.viewModel.getAllResultList() === null
-                ? setModal(2) //결과를 못받으면
-                : setBoxState("result");
+            console.log(props.viewModel.getAllResultList());
+            if (props.viewModel.getAllResultList() === null) {
+                setModal(2); //결과를 못받으면
+                props.viewModel.setModalActive(true);
+                setRenderFlag(!renderFlag);
+            } else setBoxState("result");
         }
     }
     function setFormData(img) {

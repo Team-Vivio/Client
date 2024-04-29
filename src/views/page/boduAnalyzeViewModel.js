@@ -153,7 +153,15 @@ class BodyAnalyzeViewModel {
             }
         }
     }
-    handleInputBlur(event) {
+    handleInputBlur(event, min, max) {
+        if (event.target.value < min) {
+            alert(min + "이하의 값을 입력해 주세요");
+            event.target.value = min;
+        }
+        if (event.target.value > max) {
+            alert(max + "이상의 값을 입력해 주세요");
+            event.target.value = max;
+        }
         if (event.target.value.indexOf(".") !== -1) {
             //소수점이 있다면 반올림
             event.target.value = Math.round(event.target.value);

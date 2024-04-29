@@ -38,7 +38,7 @@ function Text({ left, top, size, text }) {
     );
 }
 
-function Input({ left, top, changeEvent, blurEvent }) {
+function Input({ left, top, changeEvent, blurEvent, min, max }) {
     const pos = {
         position: "absolute",
         left: left,
@@ -54,6 +54,7 @@ function Input({ left, top, changeEvent, blurEvent }) {
             onBlur={blurEvent}
             style={pos}
             className={styles.Input}
+            onWheel={(e) => e.target.blur()}
         ></input>
     );
 }
@@ -375,11 +376,11 @@ function BodyAnalyze(props) {
         setRenderFlag((renderFlag) => !renderFlag);
     }
     function setHeight(event) {
-        props.viewModel.handleInputBlur(event);
+        props.viewModel.handleInputBlur(event, 90, 290);
         props.viewModel.setHeight(event.target.value);
     }
     function setWeight(event) {
-        props.viewModel.handleInputBlur(event);
+        props.viewModel.handleInputBlur(event, 20, 200);
         props.viewModel.setWeight(event.target.value);
     }
     function setUploadedImg(file) {
@@ -493,12 +494,16 @@ function BodyAnalyze(props) {
                     top="507px"
                     changeEvent={props.viewModel.handleInputValue}
                     blurEvent={setHeight}
+                    min={20}
+                    max={200}
                 />
                 <Input
                     left="134px"
                     top="655px"
                     changeEvent={props.viewModel.handleInputValue}
                     blurEvent={setWeight}
+                    min={90}
+                    max={290}
                 />
                 <DropBox imgUpload={setUploadedImg} setformData={setFormData} />
                 {/* 나만의 패션 찾기 */}

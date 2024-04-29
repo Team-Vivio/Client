@@ -1,12 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CoordiFinder from "./views/page/CoordiFinderView";
 
 function App() {
-  return (
-    <div>
-      <h1>hello~ it's me</h1>
-    </div>
-  );
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/CoordiFinder" element={<CoordiFinder />}></Route>
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;

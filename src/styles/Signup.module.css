@@ -1,0 +1,307 @@
+@font-face {
+    font-family: "NanumSquareRoundOTF";
+    src: url(/public/fonts/NanumSquareRoundR.ttf) format("truetype");
+}
+
+.page {
+    margin-top: 40px;
+    display: flex;
+    flex-direction : column;
+    align-items: center;
+}
+
+.title {
+    font-family: "NanumSquareRoundOTF";
+    margin-top: 39px;
+    font-size: 25px;
+    color: #626262;
+    font-weight:bold;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 29px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border : none;
+    border-radius: 60px;
+    width: 639px;
+    height: 627px;
+    background-color: #F5F5F5;
+}
+
+::placeholder{
+    color : #BBBBBB;
+}
+
+.inputTitle1 {
+    margin-top: 35px;
+    gap: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.input1{
+    padding-left: 10px;
+    border : 1px solid #C2C2C2;
+    font-family: "NanumSquareRoundOTF";
+    font-weight: bold;
+    font-size: 15px;
+    width: 359px;
+    height: 41px;
+    border-radius: 20px;
+}
+
+.inputTitle2 {
+    margin-top: 16px;
+    padding-right: 30px;
+    gap: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.input2{
+    padding-left: 10px;
+    border : 1px solid #C2C2C2;
+    font-family: "NanumSquareRoundOTF";
+    font-weight: bold;
+    font-size: 15px;
+    width: 359px;
+    height: 41px;
+    border-radius: 20px;
+}
+
+.inputTitle3 {
+    padding-right: 30px;
+    margin-top: 16px;
+    gap: 9px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "NanumSquareRoundOTF";
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.input3_1{
+    margin-left: 16px;
+    text-align: center;
+    border : 1px solid #C2C2C2;
+    font-family: "NanumSquareRoundOTF";
+    font-weight: bold;
+    font-size: 15px;
+    width: 118px;
+    height: 41px;
+    border-radius: 20px;
+}
+
+.input3_2{
+    text-align: center;
+    border : 1px solid #C2C2C2;
+    font-family: "NanumSquareRoundOTF";
+    font-weight: bold;
+    font-size: 15px;
+    width: 111px;
+    height: 41px;
+    border-radius: 20px;
+}
+
+.inputTitle4 {
+    padding-left: 10px;
+    margin-top: 16px;
+    gap: 9px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "NanumSquareRoundOTF";
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.input4_1{
+    margin-left: 17px;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "NanumSquareRoundOTF";
+    font-weight: bold;
+    font-size: 15px;
+    width: 180px;
+    height: 41px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.input4_2{
+    margin-right: 10px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "NanumSquareRoundOTF";
+    font-weight: bold;
+    font-size: 15px;
+    width: 180px;
+    height: 41px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.inputTitle5 {
+    margin-top: 16px;
+    padding-right: 15px;
+    gap: 14px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "NanumSquareRoundOTF";
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.input5{
+    margin-left: 11px;
+    padding-left: 10px;
+    border : 1px solid #C2C2C2;
+    font-family: "NanumSquareRoundOTF";
+    font-weight: bold;
+    font-size: 15px;
+    width: 262px;
+    height: 41px;
+    border-radius: 20px;
+}
+
+.smallBtn1 {
+    width: 83px;
+    height: 31px;
+    background-color: #FFD439;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    border: none;
+    border-radius: 20px;
+    font-family: "NanumSquareRoundOTF";
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.inputTitle6 {
+    margin-top: 16px;
+    padding-right: 30px;
+    gap: 14px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "NanumSquareRoundOTF";
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.input6{
+    margin-left: 11px;
+    padding-left: 10px;
+    border : 1px solid #C2C2C2;
+    font-family: "NanumSquareRoundOTF";
+    font-weight: bold;
+    font-size: 15px;
+    width: 262px;
+    height: 41px;
+    border-radius: 20px;
+}
+
+.smallBtn2 {
+    width: 83px;
+    height: 31px;
+    background-color: #FFD439;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    border: none;
+    border-radius: 20px;
+    font-family: "NanumSquareRoundOTF";
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.inputTitle7 {
+    margin-top: 16px;
+    padding-right: 30px;
+    gap: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "NanumSquareRoundOTF";
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.input7 {
+    padding-left: 10px;
+    border : 1px solid #C2C2C2;
+    font-family: "NanumSquareRoundOTF";
+    font-weight: bold;
+    font-size: 15px;
+    width: 359px;
+    height: 41px;
+    border-radius: 20px;
+}
+
+.pwdText {
+    padding-right: 75px;
+    margin-top: 3px;
+    color: #BBBBBB;
+    font-size: 12px;
+    font-family: "NanumSquareRoundOTF";
+
+}
+
+.inputTitle8 {
+    margin-top: 11px;
+    padding-right: 64px;
+    gap: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "NanumSquareRoundOTF";
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.input8{
+    padding-left: 10px;
+    border : 1px solid #C2C2C2;
+    font-family: "NanumSquareRoundOTF";
+    font-weight: bold;
+    font-size: 15px;
+    width: 359px;
+    height: 41px;
+    border-radius: 20px;
+}
+
+.signBtn {
+    margin-top: 33px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    border: none;
+    width: 403px;
+    height: 49px;
+    border-radius: 20px;
+    font-family: "NanumSquareRoundOTF";
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #FFD439;
+    cursor: pointer;
+}

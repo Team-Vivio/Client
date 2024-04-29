@@ -1,0 +1,168 @@
+@font-face {
+    font-family: "NanumSquareRoundOTF";
+    src: url(/public/fonts/NanumSquareRoundR.ttf) format("truetype");
+}
+
+.page {
+    margin-top: 141px;
+    display: flex;
+    flex-direction : column;
+    align-items: center;
+}
+
+.titleWrap {
+    margin-top: 38px;
+    color : #626262;
+    font-family: 'NanumSquareRoundOTF';
+    font-size: 25px;
+    justify-content: center;
+    font-weight: 800;
+    margin-bottom: 40px;
+}
+
+.margin1{
+    margin-bottom: 20px;
+}
+
+.margin2{
+    margin-bottom: 23px;
+}
+
+.btnGoogle {
+    gap : 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border : none;
+    background-color: #FFFFFF;
+    width: 380px;
+    height: 50px;
+    border-radius: 20px;
+    font-family: 'NanumSquareRoundOTF';
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btnKakao {
+    gap : 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border : none;
+    width: 380px;
+    background-color: #FEE500;
+    height: 50px;
+    border-radius: 20px;
+    font-family: 'NanumSquareRoundOTF';
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+::placeholder{
+    color : #BBBBBB;
+}
+
+.inputWrap {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 17px;
+}
+
+.inputTitle {
+    gap: 8px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'NanumSquareRoundOTF';
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.textEP1 {
+    padding-left: 10px;
+    font-weight: bold;
+    font-family: 'NanumSquareRoundOTF';
+    font-size: 15px;
+    border : 1px solid #B2B2B2;
+    width: 370px;
+    height: 41px;
+    margin-right: 55px;
+    border-radius: 20px;
+}
+
+.textEP2 {
+    padding-left: 10px;
+    font-family: 'NanumSquareRoundOTF';
+    font-weight: bold;
+    font-size: 15px;
+    border : 1px solid #B2B2B2;
+    width: 370px;
+    height: 41px;
+    margin-right: 70px;
+    border-radius: 20px;
+}
+
+.btnLogin {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;    border : none;
+    border : none;
+    width: 380px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: #FFD439;
+    margin-bottom: 5%;
+    font-family: 'NanumSquareRoundOTF';
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.bottomText1 {
+    gap: 10px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    font-family: 'NanumSquareRoundOTF';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 160%;
+    /* or 19px */
+    
+    color: #BBBBBB;
+}
+
+.bottomText2 {
+    margin-top: 3px;
+    gap: 10px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+
+    font-family: 'NanumSquareRoundOTF';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 160%;
+    /* or 19px */
+    
+    color: #BBBBBB;
+    padding-right: 40px;
+}
+
+.bottomfont {
+    font-family: 'NanumSquareRoundOTF';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 13px;
+    line-height: 160%;
+    cursor: default;
+    /* or 21px */
+    
+    color: #000000;
+    cursor: pointer;
+}

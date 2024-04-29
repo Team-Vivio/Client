@@ -1,10 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {Route, Routes} from 'react-router-dom';
 
+import Login from './views/page/LoginPage/LoginPage';
+import Signup from './views/page/SignUpPage/SignUpPage';
 function App() {
   return (
     <div>
-      <h1>hello~ it's me</h1>
+      <Routes>
+        <Route exact path = "/Login" element={<Login/>}/>
+        <Route exact path = "/Signup" element={<Signup/>}/>
+      </Routes>
     </div>
   );
 }

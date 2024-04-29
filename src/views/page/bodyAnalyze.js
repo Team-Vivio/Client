@@ -184,7 +184,11 @@ function ResultInnerBox({ value }) {
         <div style={{ display: "flex", justifyContent: "center" }}>
             <div className={styles.ResultInnerBox}>
                 <a
-                    href={value.link}
+                    href={
+                        "https://search.shopping.naver.com/search/all?query=" +
+                        value.color +
+                        value.type
+                    }
                     target="_blank"
                     rel="noreferrer noopener"
                     className={styles.ResultLink}

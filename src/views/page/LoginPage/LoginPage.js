@@ -7,6 +7,9 @@ import google from '../../../img/google.png'
 import kakao from '../../../img/kakao.png'
 
 function Home() {
+    function handleSignupClick(){
+        window.location.href="/Signup";
+    }
     return (
         <div styles={{width: window.screen.width, height: window.screen.height}} className={styles.page}>
             <div className={styles.logo}>
@@ -52,7 +55,7 @@ function Home() {
             </div>
             <div className={styles.bottomText2}>
                 아직 회원이 아니신가요?
-                <div className={styles.bottomfont}>회원가입</div>
+                <div onClick={handleSignupClick} className={styles.bottomfont}>회원가입</div>
             </div>
         </div>
     )

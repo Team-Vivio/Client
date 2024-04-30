@@ -1,0 +1,120 @@
+@font-face {
+    font-family: "NanumSquareRound";
+    font-weight: 50;
+    src: url("../../fonts/NanumSquareRoundR.ttf") format("truetype");
+}
+
+.background {
+    width: 1920px;
+    height: 975px;
+
+    background-image: url("../../img/CoordiFinder/background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.backgroundBlur {
+    background: rgba(217, 217, 217, 0.1);
+    backdrop-filter: blur(30px);
+    width: 100%;
+    height: 100%;
+}
+
+.viewContainer {
+    display: grid;
+    grid-template-columns: 50% 40% 1fr;
+    grid-template-rows: 100%;
+}
+
+.titleItem {
+    display: flex;
+    align-items: center;
+
+    padding-top: 38px;
+    padding-bottom: 38px;
+}
+
+.font {
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+}
+
+.whiteBig {
+    padding-left: 41px;
+    padding-right: 66px;
+
+    font-size: 35px;
+
+    color: #ffffff;
+}
+
+.whiteSmall {
+    font-size: 28px;
+
+    padding-left: 72px;
+
+    color: #ffffff;
+}
+
+.blackSmall {
+    font-size: 9px;
+
+    color: #000000;
+}
+
+.q1Item {
+    display: flex;
+    align-items: center;
+}
+
+.q2Item {
+    display: flex;
+    align-items: top;
+
+    padding-top: 67px;
+}
+
+.button {
+    box-sizing: border-box;
+
+    width: 97px;
+    height: 85px;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+}
+
+.imageBox {
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    display: block;
+    width: 200px;
+    height: 125px;
+
+    margin: 4px;
+
+    background: #ffffff;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+
+    background-image: url("../../img/CoordiFinder/uploadBox.png");
+    background-repeat: no-repeat;
+    background-position: 77px 25px;
+    background-size: 45px;
+}
+
+.imageBoxText {
+    position: relative;
+    left: 24px;
+    top: 91px;
+}

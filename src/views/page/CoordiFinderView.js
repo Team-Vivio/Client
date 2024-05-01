@@ -89,7 +89,7 @@ function InputView({ ViewModel }) {
 }
 
 //결과 뷰
-function ResultView() {
+function ResultView({ viewModel }) {
     const [state, setState] = useState("result"); //"main", "loading", "result"
     const settings = {
         dots: true,
@@ -227,7 +227,7 @@ function ResultView() {
 }
 
 //히스토리 뷰
-function HistoryView() {
+function HistoryView({ viewModel }) {
     const [barPosition, setBarPosition] = useState(170);
 
     //애니메이션

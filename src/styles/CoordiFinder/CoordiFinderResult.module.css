@@ -1,0 +1,249 @@
+.boxImage {
+    z-index: -10;
+    box-sizing: border-box;
+
+    position: absolute;
+
+    width: 610px;
+    height: 717px;
+    margin-left: 95px;
+    margin-top: 72px;
+
+    background-image: url("../../img/CoordiFinder/resultBackground.png");
+    border: 1px solid #d9d9d9;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 60px;
+
+    opacity: 0.5;
+}
+
+.box {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 610px;
+    height: 717px;
+    margin-left: 95px;
+    margin-top: 72px;
+    padding: 45px;
+}
+
+.title {
+    width: 406px;
+    height: 84px;
+
+    font-size: 60px;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.boxContent {
+    font-size: 35px;
+
+    white-space: pre-wrap;
+
+    margin-top: 100px;
+}
+
+.button {
+    box-sizing: border-box;
+
+    width: 266px;
+    height: 81px;
+
+    font-size: 33px;
+    text-align: left;
+
+    margin-top: 166px;
+
+    padding-left: 60px;
+    padding-top: 5px;
+
+    background: #ffffff;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 69px;
+
+    background-image: url("../../img/CoordiFinder/coin.png");
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: 133px center;
+
+    white-space: pre;
+}
+
+.whiteBox {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 610px;
+    height: 717px;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 60px;
+
+    margin-left: 95px;
+    margin-top: 72px;
+}
+
+@keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    animation: rotate 3s infinite;
+
+    width: 80px;
+    height: 80px;
+
+    background-image: url("../../img/CoordiFinder/loading.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    margin-top: 263px;
+    margin-bottom: 33px;
+}
+
+.loadingContent {
+    font-size: 30px;
+
+    color: #000000;
+}
+
+.loadingWarning {
+    margin-top: 23px;
+    font-size: 24px;
+    color: #120000;
+}
+
+.red {
+    color: #ff0000e0;
+}
+
+.resultTitle {
+    font-size: 30px;
+    margin-top: 24px;
+    align-self: flex-start;
+    margin-left: 55px;
+}
+
+.resultBox {
+    width: 100%;
+    height: 500px;
+    padding-top: 34px;
+    padding-bottom: 54px;
+}
+
+.resultPos {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.resultItem {
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-rows: 15% 42.5% 42.5%;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+
+    width: 474px;
+    height: 483px;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 60px;
+}
+
+.resultType {
+    font-size: 40px;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.resultImages {
+    width: 100%;
+    height: 100%;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.resultImage {
+    max-width: 130px;
+    min-width: 120px;
+    max-height: 180px;
+    min-height: 130px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.resultContentBox {
+    box-sizing: border-box;
+
+    width: 372px;
+    height: 165px;
+
+    overflow-y: auto;
+    font-size: 20px;
+    padding: 37px;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 30px;
+
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+.restartButton {
+    box-sizing: border-box;
+
+    width: 266px;
+    height: 40px;
+
+    font-size: 20px;
+    text-align: left;
+    padding-left: 90px;
+    padding-top: 9px;
+
+    background: #ffffff;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 69px;
+
+    background-image: url("../../img/CoordiFinder/coin.png");
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: 133px center;
+
+    white-space: pre;
+}

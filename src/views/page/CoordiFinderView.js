@@ -1,7 +1,8 @@
 import inputStyles from "../../styles/CoordiFinder/CoordiFinderInput.module.css";
 import resultStyles from "../../styles/CoordiFinder/CoordiFinderResult.module.css";
+import historyStyles from "../../styles/CoordiFinder/CoordiFinderHistory.module.css";
 import "../../styles/CoordiFinder/Toggle.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Slider from "react-slick"; // react-slick 사용을 위해 import
 import "../../styles/CoordiFinder/slick.css";
 
@@ -227,7 +228,67 @@ function ResultView() {
 
 //히스토리 뷰
 function HistoryView() {
-    return <div></div>;
+    const [barPosition, setBarPosition] = useState(170);
+
+    //애니메이션
+    const handleScroll = () => {
+        const position =
+            217 < window.scrollY - 53
+                ? 217
+                : 87 > window.scrollY - 53
+                ? 87
+                : window.scrollY - 53;
+        setBarPosition(position);
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    return (
+        <div className={historyStyles.bar} style={{ top: barPosition }}>
+            <div className={historyStyles.title}>History</div>
+            <div className={historyStyles.item}>
+                <div className={historyStyles.line}></div>
+                <img className={historyStyles.image}></img>
+                <div className={historyStyles.text}></div>
+            </div>
+            <div className={historyStyles.item}>
+                <div className={historyStyles.line}></div>
+                <img src={sample1} className={historyStyles.image}></img>
+                <div className={historyStyles.text}>타입입니다</div>
+            </div>
+            <div className={historyStyles.item}>
+                <div className={historyStyles.line}></div>
+                <img className={historyStyles.image}></img>
+                <div className={historyStyles.text}></div>
+            </div>
+            <div className={historyStyles.item}>
+                <div className={historyStyles.line}></div>
+                <img className={historyStyles.image}></img>
+                <div className={historyStyles.text}></div>
+            </div>
+            <div className={historyStyles.item}>
+                <div className={historyStyles.line}></div>
+                <img className={historyStyles.image}></img>
+                <div className={historyStyles.text}></div>
+            </div>
+            <div className={historyStyles.item}>
+                <div className={historyStyles.line}></div>
+                <img className={historyStyles.image}></img>
+                <div className={historyStyles.text}></div>
+            </div>
+            <div className={historyStyles.item}>
+                <div className={historyStyles.line}></div>
+                <img className={historyStyles.image}></img>
+                <div className={historyStyles.text}></div>
+            </div>
+        </div>
+    );
 }
 
 function CoordiFinderView({ viewModel }) {

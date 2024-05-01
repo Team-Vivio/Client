@@ -8,6 +8,13 @@
     width: 1920px;
     height: 975px;
 
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
     background-image: url("../../img/CoordiFinder/background.png");
     background-position: center;
     background-repeat: no-repeat;
@@ -35,14 +42,14 @@
     padding-bottom: 38px;
 }
 
-.font {
+/* .font {
     font-family: "NanumSquareRound";
     font-style: normal;
     font-weight: 700;
     line-height: 140%;
     letter-spacing: 0.02em;
     text-transform: capitalize;
-}
+} */
 
 .whiteBig {
     padding-left: 41px;

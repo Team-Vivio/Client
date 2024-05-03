@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import HorizonLine from "./HorizontalLine";
 import styles from "../../../styles/LoginPage.module.css";
 import mainLogo from "../../../img/VivioLogo.png";
@@ -14,6 +14,7 @@ function Home() {
 	const [token, setToken] = useState("");
 	const [showModalE, setShowModalE] = useState(false);
 	const [showModalP, setShowModalP] = useState(false);
+	const outsideRef = useRef();
 
 	// 이메일 찾기 모달 핸들러
 	const showEmailModalHandler = () => {
@@ -139,8 +140,17 @@ function Home() {
 					회원가입
 				</div>
 			</div>
-			<FindEmailModal show={showModalE} closed={closeEmailModalHandler} />
-			<FindPasswordModal show={showModalP} closed={closePasswordModalHandler} />
+			{showModalE && (
+				<div
+					ref={outsideRef}
+					onClick={(e) => {
+						if (e.target == outsideRef.current) setShowModalE(false);
+					}}
+				>
+					<FindEmailModal onClose={setShowModalE} />
+				</div>
+			)}
+			{showModalP && <FindPasswordModal closed={closePasswordModalHandler} />}
 		</div>
 	);
 }

@@ -1,67 +1,25 @@
 .passwordModal {
-	.Modal {
-		display: flex;
-		width: 153px;
-		height: 19px;
-		margin: auto;
-		margin-top: -560px;
-		padding: 15px 20px;
-		flex-direction: row;
-		align-items: center;
-		border-radius: 30px;
-		border: 1px solid #fff, 75%;
-		background: #fff, 40%;
-		box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.1);
-		backdrop-filter: blur(5px);
-		justify-content: space-between;
-		color: #fff;
-		/* font-family: "YDIYGO340"; */
-		font-size: 15px;
-		font-style: normal;
-		font-weight: 400;
-		line-height: 130%; /* 19.5px */
-	}
-	.Modal > img {
-		margin-right: 8px;
-	}
+	display: flex;
+	width: 700px;
+	height: 374px;
+	/* margin: auto; */
+	margin-top: -560px;
+	padding: 15px 20px;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 20px;
+	border: 1px solid #fff;
+	background: #fff;
+	box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.1);
+	justify-content: space-between;
+	color: black;
+	/* font-family: "YDIYGO340"; */
+	font-size: 15px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 130%; /* 19.5px */
 
-	.ModalOpen {
-		animation: toastIn 0.5s cubic-bezier(0.15, 1, 0.5, 1) forwards;
-	}
-
-	.ModalClosed {
-		animation: toastOut 0.5s cubic-bezier(0.75, 0, 0.25, 1) forwards;
-	}
-	.fade-slide-enter-active {
-		animation: openModal 0.5s ease-out forwards;
-	}
-
-	.fade-slide-exit-active {
-		animation: closeModal 0.5s ease-out forwards;
-	}
-
-	/* @keyframes openModal {
-		0% {
-			opacity: 0;
-			transform: translateY(-100%);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0%);
-		}
-	}
-
-	@keyframes closeModal {
-		0% {
-			opacity: 1;
-			transform: translateY(0%);
-		}
-		100% {
-			opacity: 0;
-			transform: translateY(-100%);
-		}
-	}
-	@font-face {
+	/* @font-face {
 		font-family: "YDIYGO340";
 		font-style: normal;
 		font-weight: 100;
@@ -69,75 +27,36 @@
 			url("../../../../../../../public/fonts/YDIYGO340.ttf") format("truetype");
 	} */
 }
+/*  1. 모달 내부 스타일링을 바꾼다(현재 클로버대로 스타일링 되있는 상태)
+2. 모달을 닫는 버튼을 만든다(혹은 바깥영역 클릭하면 닫히게(setModalOpen(false)이걸 실행하는 함수를 만들어서  onCLick같은거로
+연결하면 되지 않을까 */
 
 .emailModal {
-	.Modal {
-		display: flex;
-		width: 153px;
-		height: 19px;
-		margin: auto;
-		margin-top: -560px;
-		padding: 15px 20px;
-		flex-direction: row;
-		align-items: center;
-		border-radius: 30px;
-		border: 1px solid #fff, 75%;
-		background: #fff, 40%;
-		box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.1);
-		backdrop-filter: blur(5px);
-		justify-content: space-between;
-		color: #fff;
-		/* font-family: "YDIYGO340"; */
-		font-size: 15px;
-		font-style: normal;
-		font-weight: 400;
-		line-height: 130%; /* 19.5px */
-	}
-	.Modal > img {
-		margin-right: 8px;
-	}
+	display: flex;
+	width: 700px;
+	height: 374px;
+	margin: auto;
+	margin-top: -560px;
+	padding: 15px 20px;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 30px;
+	border: 1px solid #fff;
+	background: #fff;
+	box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.1);
+	justify-content: space-between;
+	color: black;
+	/* font-family: "YDIYGO340"; */
+	font-size: 15px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 130%; /* 19.5px */
 
-	.ModalOpen {
-		animation: toastIn 0.5s cubic-bezier(0.15, 1, 0.5, 1) forwards;
-	}
-
-	.ModalClosed {
-		animation: toastOut 0.5s cubic-bezier(0.75, 0, 0.25, 1) forwards;
-	}
-	.fade-slide-enter-active {
-		animation: openModal 0.5s ease-out forwards;
-	}
-
-	.fade-slide-exit-active {
-		animation: closeModal 0.5s ease-out forwards;
-	}
-
-	/* @keyframes openModal {
-		0% {
-			opacity: 0;
-			transform: translateY(-100%);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0%);
-		}
-	} */
-
-	/* @keyframes closeModal {
-		0% {
-			opacity: 1;
-			transform: translateY(0%);
-		}
-		100% {
-			opacity: 0;
-			transform: translateY(-100%);
-		}
-	}
-	@font-face {
+	/* @font-face {
 		font-family: "YDIYGO340";
 		font-style: normal;
 		font-weight: 100;
 		src: url("../../../../../../../public/fonts/YDIYGO340.woff") format("woff"),
 			url("../../../../../../../public/fonts/YDIYGO340.ttf") format("truetype");
-	} */
+	}  */
 }

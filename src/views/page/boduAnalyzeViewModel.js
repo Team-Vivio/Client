@@ -54,9 +54,15 @@ class BodyAnalyzeViewModel {
             },
             {
                 left: "534px",
-                top: "447px",
+                top: "418px",
                 size: "28px",
-                text: "Q5. 정확도를 위해\n\t전신 사진을 올려주세요(선택)",
+                text: "Q5. 좋아하는 컬러가 있으시면\n선택해주세요(선택)",
+            },
+            {
+                left: "534px",
+                top: "555px",
+                size: "28px",
+                text: "Q6. 정확도를 위해\n\t전신 사진을 올려주세요(선택)",
             },
         ];
         this.GenderBtns = [
@@ -197,6 +203,9 @@ class BodyAnalyzeViewModel {
     }
     setFormData(img) {
         this.model.setFormData(img);
+    }
+    setColor(value) {
+        this.model.setColor(value);
     }
     postFashion = async () => {
         await this.model.postFashion();

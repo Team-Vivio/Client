@@ -74,6 +74,75 @@ Input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.ColorButton {
+    box-sizing: border-box;
+
+    color: #000000;
+
+    text-align: center;
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 140%;
+    /* identical to box height, or 34px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    position: absolute;
+    width: 284px;
+    height: 34px;
+    left: 592px;
+    top: 507px;
+
+    background-color: #ffd439;
+    border: 1px solid #ffd439;
+    border-radius: 20px;
+}
+
+.ColorBackground {
+    z-index: 1;
+    position: absolute;
+    width: 1920px;
+    height: 975px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.ColorBox {
+    position: absolute;
+    width: 397px;
+    height: 471px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+}
+
+.ColorClose {
+    all: unset;
+
+    cursor: pointer;
+
+    background-image: url("../../img/bodyAnalyze/CloseBtn.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    margin: 20px;
+
+    width: 22px;
+    height: 22px;
+    align-self: flex-end;
+}
+
 .DropBox {
     box-sizing: border-box;
 
@@ -81,7 +150,7 @@ Input::-webkit-inner-spin-button {
     width: 403px;
     height: 253px;
     left: 542px;
-    top: 551px;
+    top: 659px;
 
     background: #ffffff;
     border: 1px solid #dbdbdb;

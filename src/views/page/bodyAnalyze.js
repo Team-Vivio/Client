@@ -2,6 +2,7 @@ import styles from "../../styles/bodyAnalyze/bodyAnalyze.module.css";
 import { useState, useEffect, useRef } from "react";
 import Slider from "react-slick";
 import "../../styles/bodyAnalyze/slick.css";
+import { SketchPicker } from "react-color";
 
 //이미지
 import DropBox1 from "../../img/bodyAnalyze/DropBox.png";
@@ -362,6 +363,42 @@ function Modal({ active, msgIndex, closeEvent, enterEvent }) {
     );
 }
 
+function Color({ event }) {
+    const [active, setActive] = useState(false);
+    const [color, setColor] = useState("#000");
+
+    const handleChangeComplete = (color) => {
+        setColor(color.hex);
+        event(color.hex);
+    };
+    return (
+        <div>
+            <button
+                className={styles.ColorButton}
+                onClick={() => setActive(true)}
+            >
+                컬러 선택
+            </button>
+            {active ? (
+                <div className={styles.ColorBackground}>
+                    <div className={styles.ColorBox}>
+                        <button
+                            className={styles.ColorClose}
+                            onClick={() => setActive(false)}
+                        ></button>
+                        <SketchPicker
+                            disableAlpha={true}
+                            width="300px"
+                            color={color}
+                            onChangeComplete={handleChangeComplete}
+                        />
+                    </div>
+                </div>
+            ) : null}
+        </div>
+    );
+}
+
 function BodyAnalyze(props) {
     const [renderFlag, setRenderFlag] = useState(false);
     const [boxState, setBoxState] = useState("main");
@@ -505,6 +542,7 @@ function BodyAnalyze(props) {
                     min={90}
                     max={290}
                 />
+                <Color event={(value) => props.viewModel.setColor(value)} />
                 <DropBox imgUpload={setUploadedImg} setformData={setFormData} />
                 {/* 나만의 패션 찾기 */}
                 {(boxState === "main" && (

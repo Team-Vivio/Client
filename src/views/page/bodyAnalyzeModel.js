@@ -14,6 +14,7 @@ class BodyAnalyzeModel {
         this.historyList = null;
         this.uploadedImg = null;
         this.formData = new FormData();
+        this.color = null;
     }
     setGender(value) {
         this.gender = value;
@@ -57,6 +58,10 @@ class BodyAnalyzeModel {
     setUploadedImg(value) {
         this.uploadedImg = value;
     }
+    setColor(value) {
+        this.color = value;
+        console.log("Color: " + value);
+    }
     dataCheck() {
         console.log(
             this.gender +
@@ -65,7 +70,9 @@ class BodyAnalyzeModel {
                 "-" +
                 this.height +
                 "-" +
-                this.weight
+                this.weight +
+                "-" +
+                this.color
         );
         if (
             this.gender !== null &&
@@ -93,6 +100,7 @@ class BodyAnalyzeModel {
             height: this.height,
             weight: this.weight,
             type: this.bodyType,
+            color: this.color,
         };
         this.formData.append("request", JSON.stringify(value));
         try {
@@ -117,7 +125,7 @@ class BodyAnalyzeModel {
             console.log(this.resultList);
             //저장
             const accessToken =
-                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDM2MDk4NSwiZXhwIjoxNzE0MzgyNTg1LCJpZCI6MiwiZW1haWwiOiJqeTU4NDlAbmF2ZXIuY29tIn0.VQYHm-GvZx1OP8zWCNzQ82gu_znavUvmWXdV4ECHlgc";
+                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
             const save = {
                 gender: this.gender,
                 height: this.height,
@@ -150,7 +158,7 @@ class BodyAnalyzeModel {
     getFashion = async (fashionID) => {
         this.resultList = null;
         const accessToken =
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDM2MDk4NSwiZXhwIjoxNzE0MzgyNTg1LCJpZCI6MiwiZW1haWwiOiJqeTU4NDlAbmF2ZXIuY29tIn0.VQYHm-GvZx1OP8zWCNzQ82gu_znavUvmWXdV4ECHlgc";
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
         try {
             const result = await axios({
                 method: "GET",
@@ -176,7 +184,7 @@ class BodyAnalyzeModel {
     //히스토리 가져오기
     getHistory = async () => {
         const accessToken =
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDM2MDk4NSwiZXhwIjoxNzE0MzgyNTg1LCJpZCI6MiwiZW1haWwiOiJqeTU4NDlAbmF2ZXIuY29tIn0.VQYHm-GvZx1OP8zWCNzQ82gu_znavUvmWXdV4ECHlgc";
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
         try {
             this.historyList = await axios({
                 method: "GET",

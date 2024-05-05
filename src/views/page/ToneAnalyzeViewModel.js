@@ -2,11 +2,6 @@ import Gender1 from "../../img/ToneAnalyze/gender_male.png";
 import Gender2 from "../../img/ToneAnalyze/gender_female.png";
 import img_true from "../../img/ToneAnalyze/img_ex1.png";
 import img_false from "../../img/ToneAnalyze/img_ex2.png";
-import mark_O from "../../img/ToneAnalyze/mark_O.png";
-import mark_X from "../../img/ToneAnalyze/mark_X.png";
-import img_file from "../../img/ToneAnalyze/img_file.png";
-import DropBox1 from "../../img/ToneAnalyze/DropBox.png";
-import Coin1 from "../../img/ToneAnalyze/Coin.png";
 
 class ToneAnalyzeViewModel {
     constructor(model) {

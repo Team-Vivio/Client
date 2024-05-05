@@ -11,7 +11,6 @@
 	border: 1px solid #fff;
 	background: #fff;
 	box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.1);
-	justify-content: space-between;
 	color: black;
 	/* font-family: "YDIYGO340"; */
 	font-size: 15px;
@@ -31,6 +30,10 @@
 2. 모달을 닫는 버튼을 만든다(혹은 바깥영역 클릭하면 닫히게(setModalOpen(false)이걸 실행하는 함수를 만들어서  onCLick같은거로
 연결하면 되지 않을까 */
 
+::placeholder {
+	color: #bbbbbb;
+}
+
 .emailModal {
 	display: flex;
 	width: 700px;
@@ -44,7 +47,7 @@
 	border: 1px solid #fff;
 	background: #fff;
 	box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.1);
-	justify-content: space-between;
+
 	color: black;
 	/* font-family: "YDIYGO340"; */
 	font-size: 15px;
@@ -59,4 +62,103 @@
 		src: url("../../../../../../../public/fonts/YDIYGO340.woff") format("woff"),
 			url("../../../../../../../public/fonts/YDIYGO340.ttf") format("truetype");
 	}  */
+}
+
+.modalXBtn {
+	cursor: pointer;
+	border: none;
+	background-color: #fff;
+	margin-left: 660px;
+}
+
+.header {
+	padding-bottom: 45px;
+	font-weight: 800;
+	font-size: 25px;
+}
+
+.nameDiv {
+	margin-left: 35px;
+	margin-bottom: 30px;
+	font-weight: 600;
+	font-size: 18px;
+}
+
+.nameInput {
+	margin-left: 20px;
+	width: 200px;
+	height: 34px;
+	padding-left: 10px;
+	border-radius: 20px;
+	border: 1px solid #b2b2b2;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.birthDiv {
+	margin-bottom: 30px;
+	font-weight: 600;
+	font-size: 18px;
+}
+
+.yearInput {
+	margin-left: 20px;
+	width: 80px;
+	height: 34px;
+	border-radius: 20px;
+	border: 1px solid #b2b2b2;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.monthInput {
+	margin-left: 8px;
+	width: 50px;
+	height: 34px;
+	border-radius: 20px;
+	border: 1px solid #b2b2b2;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.dayInput {
+	margin-left: 8px;
+	width: 50px;
+	height: 34px;
+	border-radius: 20px;
+	border: 1px solid #b2b2b2;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.phoneDiv {
+	margin-bottom: 50px;
+	font-weight: 600;
+	font-size: 18px;
+}
+
+.phoneInput {
+	margin-left: 20px;
+	padding-left: 10px;
+	width: 200px;
+	height: 34px;
+	border-radius: 20px;
+	border: 1px solid #b2b2b2;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.checkBtn {
+	width: 200px;
+	height: 40px;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	background-color: #ffd439;
+	border: none;
+	border-radius: 20px;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
 }

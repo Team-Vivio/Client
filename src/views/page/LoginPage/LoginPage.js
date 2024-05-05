@@ -20,15 +20,10 @@ function Home() {
 	const showEmailModalHandler = () => {
 		setShowModalE(true);
 	};
-	const closeEmailModalHandler = () => {
-		setShowModalE(false);
-	};
+
 	// 비밀번호 찾기 모달 핸들러
 	const showPasswordModalHandler = () => {
 		setShowModalP(true);
-	};
-	const closePasswordModalHandler = () => {
-		setShowModalP(false);
 	};
 
 	// 이메일 값
@@ -41,10 +36,6 @@ function Home() {
 		setPassword(e.target.value);
 	}
 
-	// 이메일 찾기 눌렀을 시, 모달
-
-	// 비밀번호 찾기 눌렀을 시, 모달
-
 	// 회원가입 눌렀을 시, 페이지 이동
 	function handleSignupClick() {
 		window.location.href = "/Signup";
@@ -54,7 +45,7 @@ function Home() {
 	function onClickLogin() {
 		if (!(email === "" && password === "")) {
 			axios
-				.post("/users/siginin", {
+				.post("/users/signin", {
 					email: email,
 					password: password,
 				})
@@ -144,13 +135,22 @@ function Home() {
 				<div
 					ref={outsideRef}
 					onClick={(e) => {
-						if (e.target == outsideRef.current) setShowModalE(false);
+						if (e.target === outsideRef.current) setShowModalE(false);
 					}}
 				>
 					<FindEmailModal onClose={setShowModalE} />
 				</div>
 			)}
-			{showModalP && <FindPasswordModal closed={closePasswordModalHandler} />}
+			{showModalP && (
+				<div
+					ref={outsideRef}
+					onClick={(e) => {
+						if (e.target === outsideRef.current) setShowModalP(false);
+					}}
+				>
+					<FindPasswordModal onClose={setShowModalP} />
+				</div>
+			)}
 		</div>
 	);
 }

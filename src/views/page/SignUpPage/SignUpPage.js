@@ -80,6 +80,7 @@ function Signup() {
 	//이메일 인증번호 발급과 인증번호 저장
 	function onEmailCheck() {
 		if (emailCheck(email)) {
+			alert("이메일로 인증번호를 보내드렸어요");
 			// api 호출
 			axios
 				.post("/users/sendEmail", {
@@ -91,11 +92,11 @@ function Signup() {
 					}
 				});
 		} else {
-			alert("올바른 이메일을 입력해주세요.");
+			alert("올바른 이메일을 입력해주세요");
 		}
 	}
 
-	//이메일 인증 버튼 눌렀을 시
+	//이메일 인증 확인 버튼 눌렀을 시
 	function onEmailCodeBtnCheck(e) {
 		setCode(e.target.value);
 		if (code === emailCodeResponse) {
@@ -158,7 +159,7 @@ function Signup() {
 	function onSubmit() {
 		let date = new Date(`${year}-${month}-${day}`);
 		axios
-			.post("/users/siginup", {
+			.post("/users/signup", {
 				name: name,
 				gender: gender,
 				email: email,

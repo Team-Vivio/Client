@@ -77,23 +77,33 @@ function Signup() {
 		setDay(e.target.value);
 	}
 
-	//이메일 인증번호 발급과 인증번호 저장
+	//이메일 인증번호 발급과 인증번호 저장 && "인증"버튼
 	function onEmailCheck() {
-		if (emailCheck(email)) {
-			alert("이메일로 인증번호를 보내드렸어요");
-			// api 호출
-			axios
-				.post("/users/sendEmail", {
-					email: email,
-				})
-				.then((res) => {
-					if (res.data.isSuccess) {
-						setEmailCodeResponse(res.data.result.message);
+		axios
+			.post("/users/emailcheck", {
+				email: email,
+			})
+			.then((res) => {
+				if (res.data.result.message === "true") {
+					if (emailCheck(email)) {
+						alert("이메일로 인증번호를 보내드렸어요");
+						// api 호출
+						axios
+							.post("/users/sendEmail", {
+								email: email,
+							})
+							.then((res) => {
+								if (res.data.isSuccess) {
+									setEmailCodeResponse(res.data.result.message);
+								}
+							});
+					} else {
+						alert("올바른 이메일을 입력해주세요");
 					}
-				});
-		} else {
-			alert("올바른 이메일을 입력해주세요");
-		}
+				} else {
+					alert("중복된 이메일입니다");
+				}
+			});
 	}
 
 	//이메일 인증 확인 버튼 눌렀을 시

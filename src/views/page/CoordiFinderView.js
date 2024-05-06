@@ -13,7 +13,7 @@ import sample3 from "../../img/CoordiFinder/sample3.png";
 import gender1 from "../../img/CoordiFinder/gender1.png";
 import gender2 from "../../img/CoordiFinder/gender2.png";
 
-function ImageShow() {
+function ImageShow({ list }) {
     const scrollRef = useRef(null);
     const [isDrag, setIsDrag] = useState(false);
     const [startX, setStartX] = useState();
@@ -42,42 +42,14 @@ function ImageShow() {
             onMouseLeave={onDragEnd}
             ref={scrollRef}
         >
-            <div
-                className={inputStyles.imageShowItem}
-                style={{ backgroundImage: "url(" + sample1 + ")" }}
-            >
-                <button className={inputStyles.close}></button>
-            </div>
-            <div
-                className={inputStyles.imageShowItem}
-                style={{ backgroundImage: "url(" + sample1 + ")" }}
-            >
-                <button className={inputStyles.close}></button>
-            </div>
-            <div
-                className={inputStyles.imageShowItem}
-                style={{ backgroundImage: "url(" + sample1 + ")" }}
-            >
-                <button className={inputStyles.close}></button>
-            </div>
-            <div
-                className={inputStyles.imageShowItem}
-                style={{ backgroundImage: "url(" + sample1 + ")" }}
-            >
-                <button className={inputStyles.close}></button>
-            </div>
-            <div
-                className={inputStyles.imageShowItem}
-                style={{ backgroundImage: "url(" + sample1 + ")" }}
-            >
-                <button className={inputStyles.close}></button>
-            </div>
-            <div
-                className={inputStyles.imageShowItem}
-                style={{ backgroundImage: "url(" + sample1 + ")" }}
-            >
-                <button className={inputStyles.close}></button>
-            </div>
+            {list.length <= 0 ? null : (
+                <div
+                    className={inputStyles.imageShowItem}
+                    style={{ backgroundImage: "url(" + sample1 + ")" }}
+                >
+                    <button className={inputStyles.close}></button>
+                </div>
+            )}
         </div>
     );
 }
@@ -87,15 +59,42 @@ function InputView({ viewModel }) {
     const [flag, setFlag] = useState(false);
     let gender = viewModel.getGender();
 
+    //이미지
+    const [isActive, setActive] = useState(false);
+    const handleDragStart = () => setActive(true);
+    const handleDragEnd = () => setActive(false);
+
+    const setFileInfo = (file) => {
+        const { name, size: byteSize, type } = file;
+        const size = (byteSize / (1024 * 1024)).toFixed(2) + "mb";
+    };
+
+    const handleDragOver = (event) => {
+        event.preventDefault(); // 필수 1
+    };
+
+    const handleDrop = (event) => {
+        event.preventDefault();
+        setActive(false);
+
+        const file = event.dataTransfer.files[0];
+        setFileInfo(file); // 코드 추가
+    };
+
+    const handleUpload = ({ target }) => {
+        const file = target.files[0];
+        setFileInfo(file); // 코드 추가
+    };
+
     return (
         <div>
             <div className={inputStyles.titleItem}>
                 <span className={`${inputStyles.whiteBig}`}>
                     코디해드립니다
                 </span>
-                <label class="switch">
+                <label className="switch">
                     <input type="checkbox"></input>
-                    <span class="slider round"></span>
+                    <span className="slider round"></span>
                 </label>
             </div>
             <div className={inputStyles.q1Item}>
@@ -134,53 +133,75 @@ function InputView({ viewModel }) {
             <div className={inputStyles.q2Item}>
                 <div className={`${inputStyles.whiteSmall}`}>
                     Q. 상의를 두 종류 이상 업로드해주세요
-                    <ImageShow />
+                    <ImageShow list={[]} />
                 </div>
-                <label
+                <div
                     className={inputStyles.imageBox}
                     style={{ marginLeft: "100px" }}
                 >
-                    <input type="file" style={{ display: "none" }} />
-                    <div
-                        className={` ${inputStyles.blackSmall} ${inputStyles.imageBoxText}`}
+                    <label
+                        className={inputStyles.imagelabel}
+                        onDragEnter={handleDragStart}
+                        onDragOver={handleDragOver}
+                        onDragLeave={handleDragEnd}
+                        onDrop={handleDrop}
                     >
-                        클릭 혹은 파일을 이곳에 드롭 하세요
-                    </div>
-                </label>
+                        <input type="file" style={{ display: "none" }} />
+                        <div
+                            className={` ${inputStyles.blackSmall} ${inputStyles.imageBoxText}`}
+                        >
+                            클릭 혹은 파일을 이곳에 드롭 하세요
+                        </div>
+                    </label>
+                </div>
             </div>
             <div className={inputStyles.q2Item}>
                 <div className={`${inputStyles.whiteSmall} `}>
                     Q. 하의를 두 종류 이상 업로드해주세요
-                    <ImageShow />
                 </div>
-                <label
+                <div
                     className={inputStyles.imageBox}
                     style={{ marginLeft: "100px" }}
                 >
-                    <input type="file" style={{ display: "none" }} />
-                    <div
-                        className={` ${inputStyles.blackSmall} ${inputStyles.imageBoxText}`}
+                    <label
+                        className={inputStyles.imagelabel}
+                        onDragEnter={handleDragStart}
+                        onDragOver={handleDragOver}
+                        onDragLeave={handleDragEnd}
+                        onDrop={handleDrop}
                     >
-                        클릭 혹은 파일을 이곳에 드롭 하세요
-                    </div>
-                </label>
+                        <input type="file" style={{ display: "none" }} />
+                        <div
+                            className={` ${inputStyles.blackSmall} ${inputStyles.imageBoxText}`}
+                        >
+                            클릭 혹은 파일을 이곳에 드롭 하세요
+                        </div>
+                    </label>
+                </div>
             </div>
             <div className={inputStyles.q2Item}>
                 <div className={`${inputStyles.whiteSmall} `}>
                     Q. 아우터를 하나 이상 업로드해주세요(선택)
-                    <ImageShow />
                 </div>
-                <label
+                <div
                     className={inputStyles.imageBox}
                     style={{ marginLeft: "35px" }}
                 >
-                    <input type="file" style={{ display: "none" }} />
-                    <div
-                        className={`${inputStyles.blackSmall} ${inputStyles.imageBoxText}`}
+                    <label
+                        className={inputStyles.imagelabel}
+                        onDragEnter={handleDragStart}
+                        onDragOver={handleDragOver}
+                        onDragLeave={handleDragEnd}
+                        onDrop={handleDrop}
                     >
-                        클릭 혹은 파일을 이곳에 드롭 하세요
-                    </div>
-                </label>
+                        <input type="file" style={{ display: "none" }} />
+                        <div
+                            className={` ${inputStyles.blackSmall} ${inputStyles.imageBoxText}`}
+                        >
+                            클릭 혹은 파일을 이곳에 드롭 하세요
+                        </div>
+                    </label>
+                </div>
             </div>
         </div>
     );

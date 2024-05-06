@@ -30,6 +30,10 @@ function FindPasswordModal(props) {
 							alert("소셜 로그인 계정입니다");
 						}
 					}
+				})
+				.catch((error) => {
+					console.log("error called");
+					console.log(error);
 				});
 		} else {
 			alert("올바른 이메일을 입력해주세요");
@@ -46,17 +50,18 @@ function FindPasswordModal(props) {
 					<img src={Xbtn} alt="xbtn" />
 				</button>
 			</div>
-			<div>비밀번호 찾기</div>
-			<div>
+			<div className={modalStyles.header}>비밀번호 찾기</div>
+			<div className={modalStyles.passwordDiv}>
 				이메일
 				<input
+					className={modalStyles.passwordInput}
 					onChange={(e) => {
 						setEmail(e.target.value);
 					}}
 					placeholder="abce@email.com"
 				/>
 			</div>
-			<button onClick={onCheckBtn} className={modalStyles.checkBtn}>
+			<button onClick={onCheckBtn} className={modalStyles.passwordBtn}>
 				확인
 			</button>
 		</div>

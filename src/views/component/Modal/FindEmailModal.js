@@ -10,6 +10,7 @@ function FindEmailModal(props) {
 	const [month, setMonth] = useState("");
 	const [day, setDay] = useState("");
 	const [email, setEmail] = useState("");
+	const [isFindEmail, setIsFindEmail] = useState(true);
 
 	//전화번호 자동 하이픈
 	const [values, setValues] = useState({
@@ -94,7 +95,7 @@ function FindEmailModal(props) {
 	}
 
 	//입력 값 확인 후 서버에 전송
-	function onSubmit() {
+	async function onSubmit() {
 		let date = new Date(`${year}-${month}-${day}`);
 		axios
 			.post("/users/findEmail", {
@@ -102,10 +103,14 @@ function FindEmailModal(props) {
 				phoneNum: phone,
 				birthDate: date,
 			})
-			.then((res) => {
+			.then(async (res) => {
 				if (res.data.isSuccess) {
-					setEmail(res.data.result.email);
-					alert(email);
+					if (res.data.result !== null) {
+						setEmail(res.data.result.email);
+						setIsFindEmail(false);
+					} else {
+						alert("입력 정보가 잘못되었거나 계정이 없습니다");
+					}
 				} else {
 					alert("입력 정보가 잘못되었거나 계정이 없습니다");
 				}
@@ -123,64 +128,70 @@ function FindEmailModal(props) {
 				</button>
 			</div>
 			<div className={modalStyles.header}>이메일 찾기</div>
-			<div className={modalStyles.nameDiv}>
-				이름
-				<input
-					onChange={(e) => {
-						onChangeName(e);
-					}}
-					className={modalStyles.nameInput}
-					placeholder="아무개"
-				></input>
-			</div>
-			<div className={modalStyles.birthDiv}>
-				생년월일
-				<input
-					type="text"
-					maxLength={4}
-					pattern="\d*"
-					onChange={(e) => {
-						onChangeYear(e);
-					}}
-					className={modalStyles.yearInput}
-					placeholder="YYYY"
-				></input>
-				<input
-					type="text"
-					maxLength={2}
-					pattern="\d*"
-					onChange={(e) => {
-						onChangeMonth(e);
-					}}
-					className={modalStyles.monthInput}
-					placeholder="MM"
-				></input>
-				<input
-					type="text"
-					maxLength={2}
-					pattern="\d*"
-					onChange={(e) => {
-						onChangeDay(e);
-					}}
-					className={modalStyles.dayInput}
-					placeholder="DD"
-				></input>
-			</div>
-			<div className={modalStyles.phoneDiv}>
-				전화번호
-				<input
-					type="text"
-					name="numberValue"
-					maxLength={13}
-					value={numberValue || ""}
-					onChange={handleNumber}
-					className={modalStyles.phoneInput}
-					placeholder="010-XXXX-XXXX"
-				></input>
-			</div>
-			<button onClick={checkBeforeBtn} className={modalStyles.checkBtn}>
-				확인
-			</button>
+			{isFindEmail && (
+				<>
+					<div className={modalStyles.nameDiv}>
+						이름
+						<input
+							onChange={(e) => {
+								onChangeName(e);
+							}}
+							className={modalStyles.nameInput}
+							placeholder="아무개"
+						></input>
+					</div>
+
+					<div className={modalStyles.birthDiv}>
+						생년월일
+						<input
+							type="text"
+							maxLength={4}
+							pattern="\d*"
+							onChange={(e) => {
+								onChangeYear(e);
+							}}
+							className={modalStyles.yearInput}
+							placeholder="YYYY"
+						></input>
+						<input
+							type="text"
+							maxLength={2}
+							pattern="\d*"
+							onChange={(e) => {
+								onChangeMonth(e);
+							}}
+							className={modalStyles.monthInput}
+							placeholder="MM"
+						></input>
+						<input
+							type="text"
+							maxLength={2}
+							pattern="\d*"
+							onChange={(e) => {
+								onChangeDay(e);
+							}}
+							className={modalStyles.dayInput}
+							placeholder="DD"
+						></input>
+					</div>
+					<div className={modalStyles.phoneDiv}>
+						전화번호
+						<input
+							type="text"
+							name="numberValue"
+							maxLength={13}
+							value={numberValue || ""}
+							onChange={handleNumber}
+							className={modalStyles.phoneInput}
+							placeholder="010-XXXX-XXXX"
+						></input>
+					</div>
+					<button onClick={checkBeforeBtn} className={modalStyles.checkBtn}>
+						확인
+					</button>
+				</>
+			)}
+			{!isFindEmail && <div className={modalStyles.emailResult}>{email}</div>}
 		</div>
 	);
 }

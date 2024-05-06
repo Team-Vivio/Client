@@ -2,7 +2,7 @@ import inputStyles from "../../styles/CoordiFinder/CoordiFinderInput.module.css"
 import resultStyles from "../../styles/CoordiFinder/CoordiFinderResult.module.css";
 import historyStyles from "../../styles/CoordiFinder/CoordiFinderHistory.module.css";
 import "../../styles/CoordiFinder/Toggle.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Slider from "react-slick"; // react-slick 사용을 위해 import
 import "../../styles/CoordiFinder/slick.css";
 
@@ -10,9 +10,83 @@ import "../../styles/CoordiFinder/slick.css";
 import sample1 from "../../img/CoordiFinder/sample1.png";
 import sample2 from "../../img/CoordiFinder/sample2.png";
 import sample3 from "../../img/CoordiFinder/sample3.png";
+import gender1 from "../../img/CoordiFinder/gender1.png";
+import gender2 from "../../img/CoordiFinder/gender2.png";
+
+function ImageShow() {
+    const scrollRef = useRef(null);
+    const [isDrag, setIsDrag] = useState(false);
+    const [startX, setStartX] = useState();
+
+    const onDragStart = (e) => {
+        e.preventDefault();
+        setIsDrag(true);
+        setStartX(e.pageX + scrollRef.current.scrollLeft);
+    };
+
+    const onDragEnd = () => {
+        setIsDrag(false);
+    };
+
+    const onDragMove = (e) => {
+        if (isDrag) {
+            scrollRef.current.scrollLeft = startX - e.pageX;
+        }
+    };
+    return (
+        <div
+            className={inputStyles.imageShow}
+            onMouseDown={onDragStart}
+            onMouseMove={onDragMove}
+            onMouseUp={onDragEnd}
+            onMouseLeave={onDragEnd}
+            ref={scrollRef}
+        >
+            <div
+                className={inputStyles.imageShowItem}
+                style={{ backgroundImage: "url(" + sample1 + ")" }}
+            >
+                <button className={inputStyles.close}></button>
+            </div>
+            <div
+                className={inputStyles.imageShowItem}
+                style={{ backgroundImage: "url(" + sample1 + ")" }}
+            >
+                <button className={inputStyles.close}></button>
+            </div>
+            <div
+                className={inputStyles.imageShowItem}
+                style={{ backgroundImage: "url(" + sample1 + ")" }}
+            >
+                <button className={inputStyles.close}></button>
+            </div>
+            <div
+                className={inputStyles.imageShowItem}
+                style={{ backgroundImage: "url(" + sample1 + ")" }}
+            >
+                <button className={inputStyles.close}></button>
+            </div>
+            <div
+                className={inputStyles.imageShowItem}
+                style={{ backgroundImage: "url(" + sample1 + ")" }}
+            >
+                <button className={inputStyles.close}></button>
+            </div>
+            <div
+                className={inputStyles.imageShowItem}
+                style={{ backgroundImage: "url(" + sample1 + ")" }}
+            >
+                <button className={inputStyles.close}></button>
+            </div>
+        </div>
+    );
+}
 
 //정보 입력 뷰
-function InputView({ ViewModel }) {
+function InputView({ viewModel }) {
+    const [flag, setFlag] = useState(false);
+    let gender = viewModel.getGender();
+
     return (
         <div>
             <div className={inputStyles.titleItem}>
@@ -29,16 +103,38 @@ function InputView({ ViewModel }) {
                     Q. 성별을 선택해주세요
                 </span>
                 <button
-                    className={inputStyles.button}
-                    style={{ marginLeft: "257px", marginRight: "73px" }}
-                >
-                    버튼 1
-                </button>
-                <button className={inputStyles.button}>버튼 2</button>
+                    className={
+                        gender === 1
+                            ? `${inputStyles.button} ${inputStyles.active}`
+                            : `${inputStyles.button}`
+                    }
+                    style={{
+                        marginLeft: "257px",
+                        marginRight: "73px",
+                        backgroundImage: "url(" + gender1 + ")",
+                    }}
+                    onClick={() => {
+                        viewModel.setGender(1);
+                        setFlag(!flag);
+                    }}
+                ></button>
+                <button
+                    className={
+                        gender === 2
+                            ? `${inputStyles.button} ${inputStyles.active}`
+                            : `${inputStyles.button}`
+                    }
+                    style={{ backgroundImage: "url(" + gender2 + ")" }}
+                    onClick={() => {
+                        viewModel.setGender(2);
+                        setFlag(!flag);
+                    }}
+                ></button>
             </div>
             <div className={inputStyles.q2Item}>
                 <div className={`${inputStyles.whiteSmall}`}>
                     Q. 상의를 두 종류 이상 업로드해주세요
+                    <ImageShow />
                 </div>
                 <label
                     className={inputStyles.imageBox}
@@ -55,6 +151,7 @@ function InputView({ ViewModel }) {
             <div className={inputStyles.q2Item}>
                 <div className={`${inputStyles.whiteSmall} `}>
                     Q. 하의를 두 종류 이상 업로드해주세요
+                    <ImageShow />
                 </div>
                 <label
                     className={inputStyles.imageBox}
@@ -71,6 +168,7 @@ function InputView({ ViewModel }) {
             <div className={inputStyles.q2Item}>
                 <div className={`${inputStyles.whiteSmall} `}>
                     Q. 아우터를 하나 이상 업로드해주세요(선택)
+                    <ImageShow />
                 </div>
                 <label
                     className={inputStyles.imageBox}
@@ -298,9 +396,9 @@ function CoordiFinderView({ viewModel }) {
                 {/* 임시헤더 */}
                 <div style={{ width: "100%", height: "83px" }}></div>{" "}
                 <div className={inputStyles.viewContainer}>
-                    <InputView />
-                    <ResultView />
-                    <HistoryView />
+                    <InputView viewModel={viewModel} />
+                    <ResultView viewModel={viewModel} />
+                    <HistoryView viewModel={viewModel} />
                 </div>
             </div>
         </div>

@@ -24,6 +24,9 @@ class CoordiFinderModel {
     setOuterList(list) {
         this.outerList = list;
     }
+    getGender() {
+        return this.gender;
+    }
     getHistoryList() {
         return this.historyList;
     }

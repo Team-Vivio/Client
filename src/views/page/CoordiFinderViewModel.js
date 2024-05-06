@@ -17,6 +17,9 @@ class CoordiFinderViewModel {
     setOuterList(list) {
         this.model.setOuterList(list);
     }
+    getGender() {
+        return this.model.getGender();
+    }
     getHistoryList() {
         return this.model.getHistoryList();
     }

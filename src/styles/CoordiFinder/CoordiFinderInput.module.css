@@ -83,11 +83,69 @@
     display: flex;
     align-items: top;
 
-    padding-top: 67px;
+    padding-top: 60px;
+}
+
+.imageShow {
+    box-sizing: border-box;
+    width: 450px;
+    height: 120px;
+
+    display: flex;
+
+    overflow-x: auto;
+    flex-wrap: nowrap;
+
+    padding-top: 3%;
+}
+
+.imageShow::-webkit-scrollbar {
+    display: none;
+    width: 0px;
+}
+
+.imageShowItem {
+    box-sizing: border-box;
+
+    flex: 0 0 auto;
+
+    width: 82px;
+    height: 95px;
+
+    margin-left: 10px;
+    margin-right: 10px;
+
+    background-color: #ffffff;
+    border: 1px solid #efefef;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 20px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.close {
+    width: 21px;
+    height: 21px;
+
+    cursor: pointer;
+
+    border: none;
+
+    position: relative;
+    left: 65px;
+    top: -5px;
+
+    background: url("../../img/CoordiFinder/close.png");
+    background-size: cover;
+    background-position: center;
 }
 
 .button {
     box-sizing: border-box;
+
+    cursor: pointer;
 
     width: 97px;
     height: 85px;
@@ -96,6 +154,14 @@
     border: 1px solid #d9d9d9;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 45px;
+}
+
+.active {
+    background-color: aqua;
 }
 
 .imageBox {

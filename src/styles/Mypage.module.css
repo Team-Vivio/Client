@@ -1,0 +1,269 @@
+@font-face {
+	font-family: "NanumSquareRoundOTF";
+	src: url(/public/fonts/NanumSquareRoundR.ttf) format("truetype");
+}
+
+.mainDiv {
+	display: flex;
+	flex-direction: row;
+	font-family: "NanumSquareRoundOTF";
+	font-weight: bold;
+}
+
+.closetDiv {
+	margin-left: 85px;
+	margin-top: 178px;
+	margin-right: 70px;
+	width: 729px;
+	height: 1540px;
+	background: rgba(245, 245, 245, 0.5);
+	border-radius: 60px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.closetMiddleTitle {
+	margin-left: 34px;
+	margin-top: 30px;
+	margin-bottom: 47px;
+	font-size: 45px;
+	color: #f6f6f6;
+	text-shadow: 2px 2px 10px black;
+}
+
+.closetRowLine {
+	position: relative;
+	left: 34px;
+	width: 647px;
+	border-top: 1px solid #ffffff; /* 가로선 스타일 설정 */
+	margin: 0px 0;
+}
+
+.outerDiv {
+	height: 447px;
+	padding-left: 34px;
+	padding-top: 22px;
+}
+
+.outerTitle {
+	font-size: 30px;
+	font-weight: bold;
+	color: #f6f6f6;
+}
+
+.scrollRow {
+	overflow-x: auto; /* 가로 스크롤바를 활성화합니다. */
+	white-space: nowrap; /* 요소 내의 텍스트 줄 바꿈을 방지하여 가로 스크롤바를 사용합니다. */
+	width: 300px; /* 가로 스크롤이 보이도록 div의 너비를 설정합니다. */
+}
+
+.topDiv {
+	height: 447px;
+	padding-left: 34px;
+	padding-top: 22px;
+}
+
+.topTitle {
+	font-size: 30px;
+	font-weight: bold;
+	color: #f6f6f6;
+}
+
+.bottomsDiv {
+	height: 447px;
+	padding-left: 34px;
+	padding-top: 22px;
+}
+
+.bottomsTitle {
+	font-size: 30px;
+	font-weight: bold;
+	color: #f6f6f6;
+}
+
+.columnLine {
+	margin-top: 118px;
+	margin-right: 70px;
+	border-left: 1px solid #ffffff;
+	height: 821px;
+}
+
+.informationDiv {
+	height: 940px;
+	width: 640px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.middleTitle {
+	margin-top: 21px;
+	margin-bottom: 42px;
+	font-size: 25px;
+	font-family: "NanumSquareRoundOTF";
+	color: #f6f6f6;
+}
+
+.infoDiv {
+	display: flex;
+	flex-direction: column;
+	width: 639px;
+	height: 595px;
+	background: rgba(245, 245, 245, 0.5);
+	border-radius: 60px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.nameDiv {
+	padding-left: 194px;
+	margin-top: 90px;
+	margin-bottom: 40px;
+	gap: 26px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.nameTitle {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.nameResult {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.phoneDiv {
+	padding-left: 140px;
+	margin-bottom: 40px;
+	gap: 26px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.phoneTitle {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.phoneResult {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.birthDiv {
+	padding-left: 140px;
+	margin-bottom: 40px;
+	gap: 26px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.birthTitle {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.birthResult {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.genderDiv {
+	padding-left: 194px;
+	margin-bottom: 40px;
+	gap: 26px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.genderTitle {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.genderResult {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.emailDiv {
+	padding-left: 166px;
+	margin-bottom: 40px;
+	gap: 26px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.emailTitle {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.emailResult {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.passwordDiv {
+	padding-left: 140px;
+	gap: 26px;
+	display: flex;
+	flex-direction: row;
+}
+
+.passwordTitle {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.passwordChangeBtn {
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	background-color: #ffd439;
+	border: none;
+	cursor: pointer;
+	width: 126px;
+	height: 38px;
+	border-radius: 20px;
+	font-size: 20px;
+	font-weight: 800;
+	font-family: "NanumSquareRoundOTF";
+}

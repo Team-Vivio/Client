@@ -17,12 +17,15 @@ class CoordiFinderModel {
     }
     setTopList(list) {
         this.topList = list;
+        // console.log(this.topList);
     }
     setBottomList(list) {
         this.bottomList = list;
+        // console.log(this.bottomList);
     }
     setOuterList(list) {
         this.outerList = list;
+        // console.log(this.bottomList);
     }
     getGender() {
         return this.gender;

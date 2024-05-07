@@ -13,7 +13,7 @@ import sample3 from "../../img/CoordiFinder/sample3.png";
 import gender1 from "../../img/CoordiFinder/gender1.png";
 import gender2 from "../../img/CoordiFinder/gender2.png";
 
-function ImageShow({ list }) {
+function ImageShow({ list, remove }) {
     const scrollRef = useRef(null);
     const [isDrag, setIsDrag] = useState(false);
     const [startX, setStartX] = useState();
@@ -33,6 +33,7 @@ function ImageShow({ list }) {
             scrollRef.current.scrollLeft = startX - e.pageX;
         }
     };
+
     return (
         <div
             className={inputStyles.imageShow}
@@ -42,14 +43,20 @@ function ImageShow({ list }) {
             onMouseLeave={onDragEnd}
             ref={scrollRef}
         >
-            {list.length <= 0 ? null : (
-                <div
-                    className={inputStyles.imageShowItem}
-                    style={{ backgroundImage: "url(" + sample1 + ")" }}
-                >
-                    <button className={inputStyles.close}></button>
-                </div>
-            )}
+            {list.length <= 0
+                ? null
+                : list.map((value, index) => (
+                      <div className={inputStyles.imageShowItem} key={index}>
+                          <img
+                              className={inputStyles.image}
+                              src={value.img}
+                          ></img>
+                          <button
+                              className={inputStyles.close}
+                              onClick={() => remove(value.id)}
+                          ></button>
+                      </div>
+                  ))}
         </div>
     );
 }
@@ -60,30 +67,79 @@ function InputView({ viewModel }) {
     let gender = viewModel.getGender();
 
     //이미지
-    const [isActive, setActive] = useState(false);
-    const handleDragStart = () => setActive(true);
-    const handleDragEnd = () => setActive(false);
+    const [top, setTop] = useState([]);
+    const [bottom, setBottom] = useState([]);
+    const [outer, setOuter] = useState([]);
 
-    const setFileInfo = (file) => {
-        const { name, size: byteSize, type } = file;
-        const size = (byteSize / (1024 * 1024)).toFixed(2) + "mb";
+    //그냥 다 같이 업뎃해줌
+    useEffect(() => {
+        viewModel.setTopList(top);
+        viewModel.setBottomList(bottom);
+        viewModel.setOuterList(outer);
+    }, [top, bottom, outer]);
+
+    const setImage = (file, type) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            switch (type) {
+                case "top":
+                    top.push({
+                        id: top.length,
+                        img: String(reader.result),
+                    });
+                    setTop([...top]);
+                    break;
+                case "bottom":
+                    bottom.push({
+                        id: bottom.length,
+                        img: String(reader.result),
+                    });
+                    setBottom([...bottom]);
+                    break;
+                case "outer":
+                    outer.push({
+                        id: outer.length,
+                        img: String(reader.result),
+                    });
+                    setOuter([...outer]);
+                    break;
+                default:
+                    break;
+            }
+        };
+        reader.readAsDataURL(file);
     };
 
     const handleDragOver = (event) => {
-        event.preventDefault(); // 필수 1
+        event.preventDefault();
     };
 
-    const handleDrop = (event) => {
+    const handleDrop = (event, type) => {
         event.preventDefault();
-        setActive(false);
 
         const file = event.dataTransfer.files[0];
-        setFileInfo(file); // 코드 추가
+        if (file.type.includes("image")) {
+            setImage(file, type);
+        }
     };
 
-    const handleUpload = ({ target }) => {
+    const handleUpload = ({ target }, type) => {
         const file = target.files[0];
-        setFileInfo(file); // 코드 추가
+        if (file.type.includes("image")) {
+            setImage(file, type);
+        }
+    };
+
+    const removeTop = (id) => {
+        setTop(top.filter((item) => item.id !== id));
+    };
+
+    const removeBotton = (id) => {
+        setBottom(bottom.filter((item) => item.id !== id));
+    };
+
+    const removeOuter = (id) => {
+        setOuter(outer.filter((item) => item.id !== id));
     };
 
     return (
@@ -133,7 +189,7 @@ function InputView({ viewModel }) {
             <div className={inputStyles.q2Item}>
                 <div className={`${inputStyles.whiteSmall}`}>
                     Q. 상의를 두 종류 이상 업로드해주세요
-                    <ImageShow list={[]} />
+                    <ImageShow list={top} remove={removeTop} />
                 </div>
                 <div
                     className={inputStyles.imageBox}
@@ -141,12 +197,14 @@ function InputView({ viewModel }) {
                 >
                     <label
                         className={inputStyles.imagelabel}
-                        onDragEnter={handleDragStart}
                         onDragOver={handleDragOver}
-                        onDragLeave={handleDragEnd}
-                        onDrop={handleDrop}
+                        onDrop={(e) => handleDrop(e, "top")}
                     >
-                        <input type="file" style={{ display: "none" }} />
+                        <input
+                            type="file"
+                            style={{ display: "none" }}
+                            onChange={(e) => handleUpload(e, "top")}
+                        />
                         <div
                             className={` ${inputStyles.blackSmall} ${inputStyles.imageBoxText}`}
                         >
@@ -158,6 +216,7 @@ function InputView({ viewModel }) {
             <div className={inputStyles.q2Item}>
                 <div className={`${inputStyles.whiteSmall} `}>
                     Q. 하의를 두 종류 이상 업로드해주세요
+                    <ImageShow list={bottom} remove={removeBotton} />
                 </div>
                 <div
                     className={inputStyles.imageBox}
@@ -165,12 +224,14 @@ function InputView({ viewModel }) {
                 >
                     <label
                         className={inputStyles.imagelabel}
-                        onDragEnter={handleDragStart}
                         onDragOver={handleDragOver}
-                        onDragLeave={handleDragEnd}
-                        onDrop={handleDrop}
+                        onDrop={(e) => handleDrop(e, "bottom")}
                     >
-                        <input type="file" style={{ display: "none" }} />
+                        <input
+                            type="file"
+                            style={{ display: "none" }}
+                            onChange={(e) => handleUpload(e, "bottom")}
+                        />
                         <div
                             className={` ${inputStyles.blackSmall} ${inputStyles.imageBoxText}`}
                         >
@@ -182,6 +243,7 @@ function InputView({ viewModel }) {
             <div className={inputStyles.q2Item}>
                 <div className={`${inputStyles.whiteSmall} `}>
                     Q. 아우터를 하나 이상 업로드해주세요(선택)
+                    <ImageShow list={outer} remove={removeOuter} />
                 </div>
                 <div
                     className={inputStyles.imageBox}
@@ -189,12 +251,14 @@ function InputView({ viewModel }) {
                 >
                     <label
                         className={inputStyles.imagelabel}
-                        onDragEnter={handleDragStart}
                         onDragOver={handleDragOver}
-                        onDragLeave={handleDragEnd}
-                        onDrop={handleDrop}
+                        onDrop={(e) => handleDrop(e, "outer")}
                     >
-                        <input type="file" style={{ display: "none" }} />
+                        <input
+                            type="file"
+                            style={{ display: "none" }}
+                            onChange={(e) => handleUpload(e, "outer")}
+                        />
                         <div
                             className={` ${inputStyles.blackSmall} ${inputStyles.imageBoxText}`}
                         >

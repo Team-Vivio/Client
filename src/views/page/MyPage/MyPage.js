@@ -58,29 +58,42 @@ function MyPage() {
 				alt=""
 				src={background}
 				style={{
-					position: "absolute",
+					position: "fixed",
 					width: window.innerWidth,
 					height: window.innerHeight,
 					objectFit: "cover",
 					zIndex: -1,
 				}}
 			/>
-			<div className={styles.closetDiv}>
-				<div className={styles.closetMiddleTitle}>나만의 옷장</div>
-				<hr className={styles.closetRowLine} />
-				<div className={styles.outerDiv}>
-					<div className={styles.outerTitle}>아우터</div>
-					<div className={styles.scrollRow}>하기 존나 싫다</div>
-				</div>
-				<hr className={styles.closetRowLine} />
-				<div className={styles.topDiv}>
-					<div className={styles.topTitle}>상의</div>
-					<div className={styles.scrollRow}></div>
-				</div>
-				<hr className={styles.closetRowLine} />
-				<div className={styles.bottomsDiv}>
-					<div className={styles.bottomsTitle}>하의</div>
-					<div className={styles.scrollRow}></div>
+			<div
+				className={styles.scrollbar_Y}
+				style={{
+					width: 729,
+					height: window.innerHeight - 178,
+					paddingRight: 30,
+					overflowX: "hidden",
+					marginTop: 178,
+					marginLeft: 85,
+					marginRight: 70,
+				}}
+			>
+				<div className={styles.closetDiv} style={{ height: "auto" }}>
+					<div className={styles.closetMiddleTitle}>나만의 옷장</div>
+					<hr className={styles.closetRowLine} />
+					<div className={styles.outerDiv}>
+						<div className={styles.outerTitle}>아우터</div>
+						<div className={styles.scrollbar_X}>하기 존나 싫다zzzz</div>
+					</div>
+					<hr className={styles.closetRowLine} />
+					<div className={styles.topDiv}>
+						<div className={styles.topTitle}>상의</div>
+						<div className={styles.scrollRow}></div>
+					</div>
+					<hr className={styles.closetRowLine} />
+					<div className={styles.bottomsDiv}>
+						<div className={styles.bottomsTitle}>하의</div>
+						<div className={styles.scrollRow}></div>
+					</div>
 				</div>
 			</div>
 			<div className={styles.columnLine}></div>

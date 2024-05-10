@@ -49,7 +49,10 @@
 }
 
 .button {
+    all: unset;
     box-sizing: border-box;
+
+    cursor: pointer;
 
     width: 266px;
     height: 81px;
@@ -222,6 +225,11 @@
     grid-column-end: 4;
     grid-row-start: 3;
     grid-row-end: 4;
+}
+
+.resultContentBox::-webkit-scrollbar {
+    display: none;
+    width: 0px;
 }
 
 .restartButton {

@@ -71,7 +71,7 @@ function InputView({ viewModel }) {
     const [bottom, setBottom] = useState([]);
     const [outer, setOuter] = useState([]);
 
-    //그냥 다 같이 업뎃해줌
+    //그냥 다 같이 업뎃해줌 점점 MVVM은 없어져가는 중..
     useEffect(() => {
         viewModel.setTopList(top);
         viewModel.setBottomList(bottom);
@@ -272,8 +272,7 @@ function InputView({ viewModel }) {
 }
 
 //결과 뷰
-function ResultView({ viewModel }) {
-    const [state, setState] = useState("result"); //"main", "loading", "result"
+function ResultView({ viewModel, state, result }) {
     const settings = {
         dots: true,
         infinite: true,
@@ -304,7 +303,10 @@ function ResultView({ viewModel }) {
                             "옷장 속에 있는 옷들이나\n쇼핑몰에 있는 옷 사진\n어떻게 입어야할지 모르겠으면\nViViO에서 해결해드릴께요!"
                         }
                     </div>
-                    <button className={`${resultStyles.button}`}>
+                    <button
+                        className={`${resultStyles.button}`}
+                        onClick={() => viewModel.postFashion()}
+                    >
                         {"시작      -10"}
                     </button>
                 </div>
@@ -334,70 +336,55 @@ function ResultView({ viewModel }) {
                     </div>
                     <div className={resultStyles.resultBox}>
                         <Slider {...settings}>
-                            <div className={resultStyles.resultPos}>
-                                <div className={resultStyles.resultItem}>
-                                    <div className={resultStyles.resultType}>
-                                        스트릿 패션
-                                    </div>
-                                    <div className={resultStyles.resultImages}>
-                                        <img
-                                            src={sample1}
-                                            className={resultStyles.resultImage}
-                                        ></img>
-                                        <img
-                                            src={sample2}
-                                            className={resultStyles.resultImage}
-                                        ></img>
-                                        <img
-                                            src={sample3}
-                                            className={resultStyles.resultImage}
-                                        ></img>
-                                    </div>
-                                    <div
-                                        className={
-                                            resultStyles.resultContentBox
-                                        }
-                                    >
-                                        <div>
-                                            {'"' +
-                                                "캐쥬얼 하고 편한느낌을 줄거에요" +
-                                                '"'}
+                            {result.map((value, id) => (
+                                <div
+                                    className={resultStyles.resultPos}
+                                    key={id}
+                                >
+                                    <div className={resultStyles.resultItem}>
+                                        <div
+                                            className={resultStyles.resultType}
+                                        >
+                                            {value.fashionName + " fashion"}
+                                        </div>
+                                        <div
+                                            className={
+                                                resultStyles.resultImages
+                                            }
+                                        >
+                                            <img
+                                                src={value.top}
+                                                className={
+                                                    resultStyles.resultImage
+                                                }
+                                            ></img>
+                                            <img
+                                                src={value.bottom}
+                                                className={
+                                                    resultStyles.resultImage
+                                                }
+                                            ></img>
+                                            {value.outer ? (
+                                                <img
+                                                    src={value.outer}
+                                                    className={
+                                                        resultStyles.resultImage
+                                                    }
+                                                ></img>
+                                            ) : null}
+                                        </div>
+                                        <div
+                                            className={
+                                                resultStyles.resultContentBox
+                                            }
+                                        >
+                                            <div>
+                                                {'"' + value.description + '"'}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className={resultStyles.resultPos}>
-                                <div className={resultStyles.resultItem}>
-                                    <div className={resultStyles.resultType}>
-                                        스트릿 패션
-                                    </div>
-                                    <div className={resultStyles.resultImages}>
-                                        <img
-                                            src={sample1}
-                                            className={resultStyles.resultImage}
-                                        ></img>
-                                        <img
-                                            src={sample2}
-                                            className={resultStyles.resultImage}
-                                        ></img>
-                                        <img
-                                            src={sample3}
-                                            className={resultStyles.resultImage}
-                                        ></img>
-                                    </div>
-                                    <div
-                                        className={
-                                            resultStyles.resultContentBox
-                                        }
-                                    >
-                                        <div>
-                                            {'"' +
-                                                "캐쥬얼 하고 편한느낌을 줄거에요" +
-                                                '"'}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            ))}
                         </Slider>
                     </div>
                     <div className={resultStyles.restartButton}>
@@ -410,8 +397,18 @@ function ResultView({ viewModel }) {
 }
 
 //히스토리 뷰
-function HistoryView({ viewModel }) {
+function HistoryView({ viewModel, event }) {
     const [barPosition, setBarPosition] = useState(170);
+    const [history, setHistory] = useState(viewModel.getHistoryList());
+
+    async function getHistory() {
+        await viewModel.getHistory();
+        setHistory([...viewModel.getHistoryList()]);
+    }
+
+    useEffect(() => {
+        getHistory();
+    }, []);
 
     //애니메이션
     const handleScroll = () => {
@@ -435,46 +432,41 @@ function HistoryView({ viewModel }) {
     return (
         <div className={historyStyles.bar} style={{ top: barPosition }}>
             <div className={historyStyles.title}>History</div>
-            <div className={historyStyles.item}>
-                <div className={historyStyles.line}></div>
-                <img className={historyStyles.image}></img>
-                <div className={historyStyles.text}></div>
-            </div>
-            <div className={historyStyles.item}>
-                <div className={historyStyles.line}></div>
-                <img src={sample1} className={historyStyles.image}></img>
-                <div className={historyStyles.text}>타입입니다</div>
-            </div>
-            <div className={historyStyles.item}>
-                <div className={historyStyles.line}></div>
-                <img className={historyStyles.image}></img>
-                <div className={historyStyles.text}></div>
-            </div>
-            <div className={historyStyles.item}>
-                <div className={historyStyles.line}></div>
-                <img className={historyStyles.image}></img>
-                <div className={historyStyles.text}></div>
-            </div>
-            <div className={historyStyles.item}>
-                <div className={historyStyles.line}></div>
-                <img className={historyStyles.image}></img>
-                <div className={historyStyles.text}></div>
-            </div>
-            <div className={historyStyles.item}>
-                <div className={historyStyles.line}></div>
-                <img className={historyStyles.image}></img>
-                <div className={historyStyles.text}></div>
-            </div>
-            <div className={historyStyles.item}>
-                <div className={historyStyles.line}></div>
-                <img className={historyStyles.image}></img>
-                <div className={historyStyles.text}></div>
-            </div>
+            {history !== null
+                ? history.map((value, index) => (
+                      <div
+                          className={historyStyles.item}
+                          key={index}
+                          onClick={() => event(value.id)}
+                      >
+                          <div className={historyStyles.line}></div>
+                          <img
+                              className={historyStyles.image}
+                              src={value.image}
+                          ></img>
+                          <div className={historyStyles.text}>
+                              {value.style}
+                          </div>
+                      </div>
+                  ))
+                : null}
         </div>
     );
 }
 
 function CoordiFinderView({ viewModel }) {
+    const [state, setState] = useState("main"); //"main", "loading", "result"
+    const [result, setResult] = useState(viewModel.getResultList());
+    async function getCoordi(fashionID) {
+        await viewModel.getCoordi(fashionID);
+        if (viewModel.getResultList() === null) {
+            //결과를 못받으면
+            setState("main");
+        } else {
+            setResult(viewModel.getResultList());
+            setState("result");
+        }
+    }
     return (
         <div className={inputStyles.background}>
             <div className={inputStyles.backgroundBlur}>
@@ -482,8 +474,12 @@ function CoordiFinderView({ viewModel }) {
                 <div style={{ width: "100%", height: "83px" }}></div>{" "}
                 <div className={inputStyles.viewContainer}>
                     <InputView viewModel={viewModel} />
-                    <ResultView viewModel={viewModel} />
-                    <HistoryView viewModel={viewModel} />
+                    <ResultView
+                        viewModel={viewModel}
+                        state={state}
+                        result={result}
+                    />
+                    <HistoryView viewModel={viewModel} event={getCoordi} />
                 </div>
             </div>
         </div>

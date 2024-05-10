@@ -128,15 +128,46 @@ function LoadingBox({ event }) {
     );
 }
 
-function ResultBox({ name = "OO", img, infoList, event }) {
+function ResultBox({ viewModel, event }) {
+    const name = viewModel.getName();
+    let img = viewModel.getUploadedImg();
+    let infoList = viewModel.getAllResultList();
+
+    const season =
+        infoList.session === "SPRING"
+            ? "봄 "
+            : infoList.session === "SUMMER"
+            ? "여름 "
+            : infoList.session === "AUTUMN"
+            ? "가을 "
+            : infoList.session === "WINTER"
+            ? "겨울 "
+            : "?";
+    const tone =
+        infoList.tone === "WARM"
+            ? "웜톤 "
+            : infoList.tone === "COOL"
+            ? "쿨톤 "
+            : "?";
+
     return (
         <div className={styles.ResultBox}>
             <div className={styles.ResultImg}>
-                <img src={img} />
+                <img
+                    src={img}
+                    alt=""
+                    className={styles.ResultImg}
+                    onClick={() => console.log(img)} // img test용
+                />
             </div>
             {/* 멘트 추가 필요 */}
             <div className={styles.ResultTitle}>
-                {name + "님의 얼굴은 여름 쿨톤이시네요."}
+                {name +
+                    "님의 얼굴은 " +
+                    season +
+                    " " +
+                    tone +
+                    "이시네요.\n어떤 스타일이 잘 어울릴까요?"}
             </div>
             <button className={styles.RestartBtn} onClick={event}>
                 <span>다시 하기</span>
@@ -147,7 +178,8 @@ function ResultBox({ name = "OO", img, infoList, event }) {
     );
 }
 
-function ResultDetailed({ infoList }) {
+function ResultDetailed({ viewModel }) {
+    const infoList = viewModel.getAllResultList();
     const gender =
         infoList.gender === "male"
             ? "남자 "
@@ -175,16 +207,16 @@ function ResultDetailed({ infoList }) {
     return (
         <div className={styles.ResultDetailed}>
             <div className={styles.ResultInfoTitle}>{info + "헤어"}</div>
-            {infoList.hair.colors.map((element) => (
-                <ColorBox color={"#" + element.code} />
+            {infoList.hair.colors.map((element, key) => (
+                <ColorBox color={"#" + element.code} key={key} />
             ))}
             <div className={styles.ResultInfoContent}>
                 {infoList.hair.description}
             </div>
 
             <div className={styles.ResultInfoTitle}>{info + "퍼스널 컬러"}</div>
-            {infoList.personalColor.colors.map((element) => (
-                <ColorBox color={"#" + element.code} />
+            {infoList.personalColor.colors.map((element, key) => (
+                <ColorBox color={"#" + element.code} key={key} />
             ))}
             <div className={styles.ResultInfoContent}>
                 {infoList.personalColor.description}
@@ -330,7 +362,7 @@ function HistoryBar({ list }) {
             <div className={styles.HistoryTitle}>History</div>
             {list !== null
                 ? list.map((history, id) => (
-                      <HistoryItem history={history} key={id} />
+                      <HistoryItem history={history} key={id} /> // add onClick
                   ))
                 : null}
         </div>
@@ -459,18 +491,78 @@ function ToneAnalyze(props) {
 
     return (
         <div className={styles.Background}>
-            <div className={styles.Blur}>
-                <Modal
-                    active={props.viewModel.getModalActive()}
-                    msgIndex={modalIndex}
-                    closeEvent={modalClose}
-                    enterEvent={modalEvent}
-                />
+            <Modal
+                active={props.viewModel.getModalActive()}
+                msgIndex={modalIndex}
+                closeEvent={modalClose}
+                enterEvent={modalEvent}
+            />
 
-                {/* 나만의 패션 찾기 */}
-                {(boxState === "main" && (
+            {/* 나만의 패션 찾기 */}
+            {(boxState === "main" && (
+                <>
+                    <StartBox event={() => setModal(1)} />
+
+                    {props.viewModel.textList.map((value, index) => (
+                        <Text
+                            key={index}
+                            left={value.left}
+                            top={value.top}
+                            size={value.size}
+                            text={value.text}
+                        />
+                    ))}
+                    {props.viewModel.GenderBtns.map((value) => (
+                        <Btn
+                            key={value.id}
+                            left={value.left}
+                            top={value.top}
+                            img={value.img}
+                            size={value.size}
+                            active={value.active}
+                            event={() => setGender(value.id)}
+                        />
+                    ))}
+                    {props.viewModel.ImgBoxList.map((value, index) => (
+                        <ImgBox
+                            key={index}
+                            left={value.left}
+                            top={value.top}
+                            width={value.width}
+                            height={value.height}
+                            img={value.img}
+                            borderRadius={value.radius}
+                        />
+                    ))}
                     <>
-                        <StartBox event={() => setModal(1)} />
+                        <img
+                            src={mark_O}
+                            alt="O"
+                            style={{
+                                position: "absolute",
+                                left: "851px",
+                                top: "590px",
+                            }}
+                        ></img>
+                        <img
+                            src={mark_X}
+                            alt="X"
+                            style={{
+                                position: "absolute",
+                                left: "1050px",
+                                top: "590px",
+                            }}
+                        ></img>
+                    </>
+                    <DropBox
+                        imgUpload={setUploadedImg}
+                        setformData={setFormData}
+                    />
+                </>
+            )) ||
+                (boxState === "loading" && (
+                    <>
+                        <LoadingBox event={setState} />
 
                         {props.viewModel.textList.map((value, index) => (
                             <Text
@@ -529,86 +621,20 @@ function ToneAnalyze(props) {
                         />
                     </>
                 )) ||
-                    (boxState === "loading" && (
-                        <>
-                            <LoadingBox event={setState} />
-
-                            {props.viewModel.textList.map((value, index) => (
-                                <Text
-                                    key={index}
-                                    left={value.left}
-                                    top={value.top}
-                                    size={value.size}
-                                    text={value.text}
-                                />
-                            ))}
-                            {props.viewModel.GenderBtns.map((value) => (
-                                <Btn
-                                    key={value.id}
-                                    left={value.left}
-                                    top={value.top}
-                                    img={value.img}
-                                    size={value.size}
-                                    active={value.active}
-                                    event={() => setGender(value.id)}
-                                />
-                            ))}
-                            {props.viewModel.ImgBoxList.map((value, index) => (
-                                <ImgBox
-                                    key={index}
-                                    left={value.left}
-                                    top={value.top}
-                                    width={value.width}
-                                    height={value.height}
-                                    img={value.img}
-                                    borderRadius={value.radius}
-                                />
-                            ))}
-                            <>
-                                <img
-                                    src={mark_O}
-                                    alt="O"
-                                    style={{
-                                        position: "absolute",
-                                        left: "851px",
-                                        top: "590px",
-                                    }}
-                                ></img>
-                                <img
-                                    src={mark_X}
-                                    alt="X"
-                                    style={{
-                                        position: "absolute",
-                                        left: "1050px",
-                                        top: "590px",
-                                    }}
-                                ></img>
-                            </>
-                            <DropBox
-                                imgUpload={setUploadedImg}
-                                setformData={setFormData}
-                            />
-                        </>
-                    )) ||
-                    (boxState === "result" && (
-                        <>
-                            <ResultBox
-                                name="이름"
-                                img={props.viewModel.getUploadedImg}
-                                infoList={props.viewModel.getAllResultList()}
-                                event={() => {
-                                    setModal(0);
-                                }}
-                            />
-                            <div className={styles.middleLine} />
-                            <ResultDetailed
-                                infoList={props.viewModel.getAllResultList()}
-                            />
-                        </>
-                    ))}
-                {/* 맨 왼쪽 기록 바 */}
-                <HistoryBar list={history} />
-            </div>
+                (boxState === "result" && (
+                    <>
+                        <ResultBox
+                            viewModel={props.viewModel}
+                            event={() => {
+                                setModal(0);
+                            }}
+                        />
+                        <div className={styles.middleLine} />
+                        <ResultDetailed viewModel={props.viewModel} />
+                    </>
+                ))}
+            {/* 맨 왼쪽 기록 바 */}
+            <HistoryBar list={history} />
         </div>
     );
 }

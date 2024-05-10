@@ -23,24 +23,19 @@
 }
 
 .Background {
-    position: relative;
-    width: 1920px;
-    height: 975px;
-    left: 0px;
-    top: 0px;
+    position: fixed;
+    /* width: 1920px;
+    height: 975px; */
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+
     background: url("../../img/ToneAnalyze/img_bg.png");
-    background-position: center;
+    /* background-position: center; */
 
-    color: #ffffff;
-}
+    background-size: cover;
 
-.Blur {
-    position: absolute;
-    width: 1920px;
-    height: 975px;
-
-    background: rgba(217, 217, 217, 0.1);
-    backdrop-filter: blur(50px);
+    /* color: #ffffff; */
 }
 
 .Text {
@@ -214,7 +209,8 @@
     position: absolute;
     width: 610px;
     height: 717px;
-    left: 41px;
+    /* left: 41px; */
+    left: 81px;
     top: 183px;
 
     background: #ffffff;
@@ -227,15 +223,19 @@
     position: absolute;
     width: 455px;
     height: 385px;
-    left: 118px;
-    top: 233px;
+    left: 31px;
+    top: 30px;
+    border-radius: 20px;
 
-    /* background-image: url("../../img/ToneAnalyze/Loading.png"); */
+    /* background-image: url("../../img/ToneAnalyze/loading.png"); */
+
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .ResultTitle {
     position: absolute;
-    width: 495px;
+    width: 450px;
     height: 126px;
     left: 62px;
     top: 483px;

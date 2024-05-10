@@ -30,7 +30,6 @@ class ToneAnalyzeViewModel {
                 top: "337px",
                 size: "18px",
                 text: "*예시",
-                // color='#BCBCBC'
             },
             {
                 left: "1030px",
@@ -114,13 +113,16 @@ class ToneAnalyzeViewModel {
         this.model.setGender(value);
         this.GenderBtns.forEach((element) => {
             if (element.id === value) {
-                console.log(element.id + "Actived");
+                // console.log(element.id + "Actived");
                 element.active = true;
             } else {
-                console.log(element.id + "Disactived");
+                // console.log(element.id + "Disactived");
                 element.active = false;
             }
         });
+    }
+    getName() {
+        return this.model.getName();
     }
     getAllResultList() {
         return this.model.getAllResultList();

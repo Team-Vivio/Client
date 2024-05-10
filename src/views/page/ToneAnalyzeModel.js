@@ -47,12 +47,16 @@ class ToneAnalyzeModel {
                 },
             },
         };
-        this.name = "이름";
+        this.name = "OO";
         this.historyList = null;
-        this.uploadedImg = null;
+
+        // this.uploadedImg = null;
+        this.uploadedImg =
+            "https://elasticbeanstalk-ap-northeast-2-975050140700.s3.ap-northeast-2.amazonaws.com/img11_jpg.rf.7a9abce86fc3d3855d03759db85550f4.jpg";
+
         this.state = "main"; //main, loading, result
-        this.formData = new FormData();
-        this.formData2 = new FormData();
+        this.formData = new FormData(); // /colors/
+        this.formData2 = new FormData(); // /colors/personalColor
     }
     setGender(value) {
         this.gender = value;
@@ -94,12 +98,12 @@ class ToneAnalyzeModel {
             //근데 이러면 최초의 7개만 보여주는거 아닌감? 나중에 수정해야징
         }
     }
-    getUploadedImg(value) {
+    getUploadedImg() {
         return this.uploadedImg;
     }
     setUploadedImg(value) {
         this.uploadedImg = value;
-        console.log("Img uploaded!!!");
+        console.log("setUploadedImg func success");
         console.log(this.uploadedImg);
     }
     dataCheck() {
@@ -118,26 +122,29 @@ class ToneAnalyzeModel {
         return this.state;
     }
     setFormData(img) {
+        this.formData = new FormData();
         this.formData.append("image", img);
+        for (const keyValue of this.formData) console.log(keyValue);
     }
 
     //퍼스널 컬러 추천받고 저장하기
     postPerCol = async () => {
         this.resultList = null; //초기화
         // uploadedImg 있을시만 호출이라 아마 필요 없을 듯
-        if (this.uploadedImg === null) {
-            //이미지 없다는 뜻
-            this.formData.append("image", new File([""], "filename"));
-        }
+
+        // if (this.uploadedImg === null) {
+        //     //이미지 없다는 뜻
+        //     this.formData.append("image", new File([""], "filename"));
+        // }
         const value = {
             gender: this.gender,
         };
         this.formData.append("request", JSON.stringify(value));
         // 이때 image, request 모두 담아 /colors/에 Post
 
-        console.log("--------");
-        console.dir(this.formData);
-        console.log("--------");
+        console.log("----1----");
+        for (const keyValue of this.formData) console.log(keyValue); // ["img", File] File은 객체
+        console.log("----1----");
 
         try {
             this.resultList = await axios({
@@ -152,44 +159,35 @@ class ToneAnalyzeModel {
             console.log(this.resultList);
             console.log("api 1 post 조회 성공");
 
-            // result.data.result.fashionTopDTOS.forEach((element) => {
-            //     element.title = "상의";
-            // });
-            // result.data.result.fashionBottomDTOS.forEach((element) => {
-            //     element.title = "하의";
-            // });
-            // this.resultList = result.data.result.fashionTopDTOS.concat(
-            //     ...result.data.result.fashionBottomDTOS
-            // );
-            // console.log(this.resultList);
-
-            // 일단은 resultList로 변환말고 통으로 쓸까?
-            // this.resultList = result.data.result.hair.concat(
-            //     ...result.data.result.personalColor // ... 붙여야되나?
-            // );
-            // this.resultList = this.resultList.concat(
-            //     ...result.data.result.beauty
-            // );
-            // console.log(this.resultList);
-
             //저장
 
             const accessToken =
                 "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
+
+            const session =
+                this.resultList.session === "SPRING"
+                    ? 1
+                    : this.resultList.session === "SUMMER"
+                    ? 2
+                    : this.resultList.session === "AUTUMN"
+                    ? 3
+                    : this.resultList.session === "WINTER"
+                    ? 4
+                    : "?";
             const save = {
-                gender: 1,
+                gender: this.gender,
                 // personalColor: this.resultList.data.result.session, // SPRING -> 1로 바꿔야됨!!!!!
-                personalColor: 1, // SPRING -> 1로 바꿔야됨!!!!!
+                personalColor: session, // SPRING -> 1로 바꿔야됨!!!!!
+                // TODO:
             };
 
-            this.formData2.append("image", new File([""], "filename"));
-
+            // 이 부분 테스트 필요
+            // this.formData2.append("image", new File([""], "filename"));
+            this.formData2.append("image", this.getUploadedImg());
             this.formData2.append("request", JSON.stringify(save));
-            // console.log("--------");
-            // console.log(this.formData);
-            // console.log("--------");
-
-            // console.log(save);
+            console.log("----2----");
+            for (const keyValue of this.formData2) console.log(keyValue); // ["img", File] File은 객체
+            console.log("----2----");
             try {
                 const saveResult = await axios({
                     method: "POST",

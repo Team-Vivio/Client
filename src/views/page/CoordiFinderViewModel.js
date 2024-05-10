@@ -26,6 +26,15 @@ class CoordiFinderViewModel {
     getResultList() {
         return this.model.getResultList();
     }
+    postFashion = async () => {
+        await this.model.postFashion();
+    };
+    getHistory = async () => {
+        await this.model.getHistory();
+    };
+    getCoordi = async (coordiID) => {
+        await this.model.getCoordi(coordiID);
+    };
 }
 
 export default CoordiFinderViewModel;

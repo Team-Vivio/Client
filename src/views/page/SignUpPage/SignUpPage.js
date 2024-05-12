@@ -330,7 +330,7 @@ function Signup() {
 					/>
 				</div>
 				<div className={styles.pwdText}>
-					*5-13자 사이로 입력　*영문, 숫자 혼합 필수
+					*8-20자 사이로 입력　*영문, 숫자 혼합 필수
 				</div>
 				<div className={styles.inputTitle8}>
 					비밀번호 확인

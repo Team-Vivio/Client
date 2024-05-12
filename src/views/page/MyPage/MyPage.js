@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "../../../styles/Mypage.module.css";
 import background from "../../../img/background.png";
 import mainLogo from "../../../img/whiteLogo.png";
 import axios from "axios";
+import ChangePasswordModal from "../../component/Modal/ChangePasswordModal";
 
 function MyPage() {
 	const [name, setName] = useState("");
@@ -11,8 +12,15 @@ function MyPage() {
 	const [gender, setGender] = useState("");
 	const [birthDate, setBirthDate] = useState("");
 	const formattedPhoneNumber = formatPhoneNumber(phone);
+	const [showModalP, setShowModalP] = useState(false);
+	const outsideRef = useRef();
 	let token =
 		"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
+
+	// 비밀번호 변경 모달 핸들러
+	const showPasswordChangeModalHandler = () => {
+		setShowModalP(true);
+	};
 
 	// 마이페이지 불러올 때, 토큰 값 넘겨 정보 받아오기
 	useEffect(() => {
@@ -125,9 +133,24 @@ function MyPage() {
 					</div>
 					<div className={styles.passwordDiv}>
 						<div className={styles.passwordTitle}>비밀번호</div>
-						<button className={styles.passwordChangeBtn}>변경</button>
+						<button
+							onClick={showPasswordChangeModalHandler}
+							className={styles.passwordChangeBtn}
+						>
+							변경
+						</button>
 					</div>
 				</div>
+				{showModalP && (
+					<div
+						ref={outsideRef}
+						onClick={(e) => {
+							if (e.target === outsideRef.current) setShowModalP(false);
+						}}
+					>
+						<ChangePasswordModal onClose={setShowModalP} />
+					</div>
+				)}
 			</div>
 		</div>
 	);

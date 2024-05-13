@@ -1,5 +1,11 @@
-
-
+@font-face {
+	font-family: "NanumSquareRoundOTF";
+	src: url(/public/fonts/NanumSquareRoundR.ttf) format("truetype");
+}
+/* @font-face {
+  font-family: "NanumSquareRoundOTF";
+  src: url(/public/fonts/NanumSquareRoundOTFR.otf) format("opentype");
+} */
 * {
     margin: 0;
     padding: 0;

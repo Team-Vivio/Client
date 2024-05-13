@@ -6,7 +6,7 @@ import useDetectClose from "../hooks/useDetectClose";
 import { GrUser } from "react-icons/gr";
 
 import vivio from '../../VIVIOmain.png';
-import userToken from '../../headertoken.png';
+// import userToken from '../../headertoken.png';
 
 
 
@@ -22,7 +22,7 @@ function Header() {
 	}
 
 	function handleLoginClick() {
-		window.location.href = "/LoginPage";
+		window.location.href = "/Login";
 	}
     function handleMypageClick(){
         window.location.href = "/MyPage"
@@ -41,8 +41,6 @@ function Header() {
 	}
 
     const [Isuser, setIsuser] = useState(true);
-    const [token, settoken] = useState(400)
-
 	return (
 		<div
 			style={{
@@ -103,17 +101,8 @@ function Header() {
                         </Li>
                     </Ul>
                 </Menu>
-                <img src={userToken} alt="token" style={{width:"1.75vw", height:"1.75vw"}}/>
-                <p className={styles.token}>{token}</p>
                 </div>
                 )}
-                {/* {Isuser  &&(
-                <div>
-                    <img src={userToken}/>
-                    <p className={styles.token}>{token}</p>
-                    
-                </div>
-                )} */}
                 {!Isuser &&(
                     <div onClick={handleLoginClick}>
                     <p>Login / Signin</p>

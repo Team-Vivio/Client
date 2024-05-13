@@ -13,6 +13,13 @@ class CoordiFinderModel {
         this.resultList = null;
         this.formData = new FormData();
     }
+    dataCheck() {
+        return (
+            this.gender !== null &&
+            this.topList.length > 0 &&
+            this.bottomList.length > 0
+        );
+    }
     setGender(value) {
         this.gender = value;
     }
@@ -53,32 +60,42 @@ class CoordiFinderModel {
             : this.resultList.data.result.items;
     }
     postFashion = async () => {
+        this.formData = new FormData(); //초기화
         //상의 id 뺀 리스트 만들어야함
         let top = [];
         this.topList.map((value) => {
-            top.push(value.img);
+            top.push(value.file);
         });
-        this.formData.append("top", top);
+        console.log(top);
+        top.forEach((file) => {
+            this.formData.append("top", file);
+        });
+
         //하의
         let bottom = [];
         this.bottomList.map((value) => {
-            bottom.push(value.img);
+            bottom.push(value.file);
         });
-        this.formData.append("bottom", bottom);
+        bottom.forEach((file) => {
+            this.formData.append("bottom", file);
+        });
+
         //아우터
-        if (this.bottomList.length !== 0) {
+        if (this.outerList.length !== 0) {
             let outer = [];
             this.outerList.map((value) => {
-                outer.push(value.img);
+                outer.push(value.file);
             });
-            this.formData.append("outer", outer);
+            outer.forEach((file) => {
+                this.formData.append("outer", file);
+            });
         }
         const value = {
             gender: this.gender,
         };
         this.formData.append("request", JSON.stringify(value));
         try {
-            const result = await axios({
+            this.resultList = await axios({
                 method: "POST",
                 url: `/closets`,
                 mode: "cors",
@@ -86,6 +103,27 @@ class CoordiFinderModel {
                     "Content-Type": "multipart/form-data",
                 },
                 data: this.formData,
+            });
+            //저장
+            const accessToken =
+                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
+            let saveData = { items: [] };
+            this.resultList.data.result.items.map((value) => {
+                saveData.items.push({
+                    outer: value.outer,
+                    top: value.top,
+                    bottom: value.bottom,
+                    fashionName: value.fashionName,
+                });
+            });
+            const result = await axios({
+                method: "POST",
+                url: `/closets/closet`,
+                mode: "cors",
+                headers: {
+                    Authorization: `${accessToken}`,
+                },
+                data: saveData,
             });
             console.log(result);
         } catch (error) {

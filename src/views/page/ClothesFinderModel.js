@@ -20,7 +20,7 @@ class ClothesFinderModel {
     setGender(value) {
         this.gender = value;
     }
-    getUploadedImg(value) {
+    getUploadedImg() {
         return this.uploadedImg;
     }
     setUploadedImg(value) {

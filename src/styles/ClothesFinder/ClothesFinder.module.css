@@ -12,7 +12,7 @@
 }
 
 .background {
-    width: 1920px;
+    /* width: 1920px;
     height: 975px;
 
     font-family: "NanumSquareRound";
@@ -25,14 +25,16 @@
     background-image: url("../../img/ClothesFinder/background.png");
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
-}
+    background-size: contain; */
 
-.backgroundBlur {
-    background: rgba(217, 217, 217, 0.1);
-    backdrop-filter: blur(30px);
+    position: fixed;
+    overflow: auto;
     width: 100%;
     height: 100%;
+
+    background-image: url("../../img/ClothesFinder/img_bg.png");
+
+    background-size: cover;
 }
 
 .title {
@@ -114,6 +116,8 @@
 .btn {
     box-sizing: border-box;
 
+    cursor: pointer;
+
     position: absolute;
 
     background: #ffffff;
@@ -170,4 +174,197 @@
     font-weight: 700;
     font-size: 20px;
     line-height: 140%;
+}
+
+@keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.Spinner {
+    animation: rotate 3s infinite;
+
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 265px;
+    top: 263px;
+
+    background-image: url("../../img/ClothesFinder/loading.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.LoadingText {
+    position: absolute;
+    width: 2735x;
+    height: 42px;
+    transform: translateX(-50%);
+    left: 50%;
+    top: 55%;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 140%;
+    /* identical to box height, or 42px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.LoadingWarning {
+    position: absolute;
+    width: 80px;
+    height: 42px;
+    left: 265px;
+    top: 500px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 140%;
+    /* identical to box height, or 42px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: rgba(18, 0, 0, 0.88);
+}
+
+.LoadingWarningTextPosition {
+    position: absolute;
+    left: 89px;
+    top: 566px;
+}
+
+.LoadingWarningText {
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 140%;
+    /* identical to box height, or 34px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: rgba(18, 0, 0, 0.88);
+}
+
+.ResultBox {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 610px;
+    height: 717px;
+    /* left: 41px; */
+    left: 1159px;
+    top: 161px;
+    padding-top: 42px;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 60px;
+}
+
+.ResultTitle {
+    width: 240px;
+    height: 49px;
+    margin-left: 57px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 140%;
+    /* identical to box height, or 49px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.ResultCategory {
+    width: 69px;
+    height: 42px;
+    margin-left: 57px;
+    margin-top: 16px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 140%;
+    /* or 21px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.ResultImg {
+    position: absolute;
+    width: 211px;
+    height: 187px;
+    left: 340px;
+    top: 42px;
+
+    background: url(../../img/ClothesFinder/background.png);
+}
+
+.RestartBtn {
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    /* position: absolute; */
+    width: 206px;
+    height: 45px;
+    /* left: 172px;
+    top: 635px; */
+    margin-top: 27px;
+    margin-left: 57px;
+    margin-bottom: 50px;
+
+    background: #ffd439;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 69px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    /* or 28px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.ResultLine {
+    border-top: 1px solid #d9d9d9;
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
 }

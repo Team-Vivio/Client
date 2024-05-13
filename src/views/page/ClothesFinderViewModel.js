@@ -1,4 +1,4 @@
-class ClothesFinderModel {
+class ClothesFinderViewModel {
     constructor(model) {
         this.model = model;
     }
@@ -7,27 +7,27 @@ class ClothesFinderModel {
     // model에선 logic 건드리지 않는 식으로
 
     setGender(value) {
-        this.gender = value;
+        this.model.gender = value;
     }
     getUploadedImg(value) {
-        return this.uploadedImg;
+        return this.model.uploadedImg;
     }
     setUploadedImg(value) {
-        this.model.uploadedImg(value);
-        console.log(this.uploadedImg);
+        this.model.setUploadedImg(value);
+        // console.log(this.uploadedImg);
     }
     getResultList() {
-        return this.resultList;
+        return this.model.resultList;
     }
     dataCheck() {
         return (
             this.model.gender !== 0 &&
             this.model.clo_type !== 0 &&
-            this.uploadedImg !== null
+            this.model.uploadedImg !== null
         );
     }
     // setFormData(img) {
-    //     this.formData.append("image", img);
+    //     this.model.formData.append("image", img);
     // }
 }
-export default ClothesFinderModel;
+export default ClothesFinderViewModel;

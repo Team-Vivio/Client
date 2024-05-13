@@ -71,11 +71,16 @@ function DropBox({ viewModel }) {
                 {uploadedInfo !== null ? (
                     <img
                         src={uploadedInfo.imageUrl}
+                        alt="DropBox"
                         className={styles.InfoImg}
                     ></img>
                 ) : (
                     <>
-                        <img className={styles.DropImg} src={dropBox}></img>
+                        <img
+                            className={styles.DropImg}
+                            src={dropBox}
+                            alt="DropBox"
+                        ></img>
                         <p className={styles.DropText}>
                             클릭 혹은 파일을 이곳에 드롭 하세요
                         </p>
@@ -146,11 +151,150 @@ function InputSetting(viewModel) {
     );
 }
 
+function ResultBox(viewModel, state) {
+    console.log(state);
+    // console.log(viewModel.getResultList());
+    return (
+        /* <div>
+            {(state === "main" && (
+                <div className={styles.ResultBox}>
+                    <div className={styles.Spinner} />
+                    <div className={styles.LoadingText}>
+                        지식인에 물어보는 중...
+                    </div>
+                    <div className={styles.LoadingWarning}>*주의!</div>
+                    <div className={styles.LoadingWarningTextPosition}>
+                        <span
+                            className={styles.LoadingWarningText}
+                            style={{ color: "red" }}
+                        >
+                            새로고침
+                        </span>
+                        <span className={styles.LoadingWarningText}>
+                            을 하면 작업이
+                        </span>
+                        <span
+                            className={styles.LoadingWarningText}
+                            style={{ color: "red" }}
+                        >
+                            {" "}
+                            취소{" "}
+                        </span>
+                        <span className={styles.LoadingWarningText}>
+                            될 수 있어요!
+                        </span>
+                    </div>
+                </div>
+            )) ||
+                (state === "loading" && (
+                    <div className={styles.ResultBox}>
+                        <div className={styles.Spinner} />
+                        <div className={styles.LoadingText}>
+                            지식인에 물어보는 중...
+                        </div>
+                        <div className={styles.LoadingWarning}>*주의!</div>
+                        <div className={styles.LoadingWarningTextPosition}>
+                            <span
+                                className={styles.LoadingWarningText}
+                                style={{ color: "red" }}
+                            >
+                                새로고침
+                            </span>
+                            <span className={styles.LoadingWarningText}>
+                                을 하면 작업이
+                            </span>
+                            <span
+                                className={styles.LoadingWarningText}
+                                style={{ color: "red" }}
+                            >
+                                {" "}
+                                취소{" "}
+                            </span>
+                            <span className={styles.LoadingWarningText}>
+                                될 수 있어요!
+                            </span>
+                        </div>
+                    </div>
+                )) ||
+                (state === "result" && (
+                    <div className={styles.ResultBox}>
+                        <div className={styles.Spinner} />
+                        <div className={styles.LoadingText}>
+                            지식인에 물어보는 중...
+                        </div>
+                        <div className={styles.LoadingWarning}>*주의!</div>
+                        <div className={styles.LoadingWarningTextPosition}>
+                            <span
+                                className={styles.LoadingWarningText}
+                                style={{ color: "red" }}
+                            >
+                                새로고침
+                            </span>
+                            <span className={styles.LoadingWarningText}>
+                                을 하면 작업이
+                            </span>
+                            <span
+                                className={styles.LoadingWarningText}
+                                style={{ color: "red" }}
+                            >
+                                {" "}
+                                취소{" "}
+                            </span>
+                            <span className={styles.LoadingWarningText}>
+                                될 수 있어요!
+                            </span>
+                        </div>
+                    </div>
+                ))}
+            </div> */
+        <div className={styles.ResultBox}>
+            <span className={styles.ResultTitle}>검색 결과입니다</span>
+            <div className={styles.ResultCategory}>
+                <span>성별: </span>
+                <span>여성</span>
+                <span>종류: </span>
+                <span>상의 </span>
+            </div>
+            <button className={styles.RestartBtn}>다시 검색하기</button>
+            <div className={styles.ResultImg}></div>
+
+            {/* map()으로 요소 나열 */}
+
+            <div>
+                <div className={styles.ResultLine}></div>
+                <div className={styles.ResultCategory}>
+                    <span>성별: </span>
+                    <span>여성</span>
+                    <span>종류: </span>
+                    <span>상의 </span>
+                </div>
+                <div className={styles.ResultLine}></div>
+                <div className={styles.ResultCategory}>
+                    <span>성별: </span>
+                    <span>여성</span>
+                    <span>종류: </span>
+                    <span>상의 </span>
+                </div>
+                <div className={styles.ResultLine}></div>
+                <div className={styles.ResultCategory}>
+                    <span>성별: </span>
+                    <span>여성</span>
+                    <span>종류: </span>
+                    <span>상의 </span>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 function ClothesFinder(viewModel) {
+    const [state, setState] = useState(1); //"main", "loading", "result"
+    console.log(state);
     return (
         <div className={styles.background}>
-            <div className={styles.backgroundBlur}></div>
             <InputSetting viewModel={viewModel} />
+            {/* result  굳이 따로 넘겨줘야 되나?*/}
+            <ResultBox viewModel={viewModel} state={state} />
         </div>
     );
 }

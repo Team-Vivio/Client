@@ -75,6 +75,7 @@ function DropBox({ imgUpload, setformData }) {
             setUploadedInfo({ name, size, type });
             return;
         }
+        imgUpload(file);
         const reader = new FileReader();
         reader.onload = () => {
             const img = {
@@ -84,7 +85,6 @@ function DropBox({ imgUpload, setformData }) {
                 imageUrl: String(reader.result),
             };
             setUploadedInfo(img);
-            imgUpload(img);
         };
         reader.readAsDataURL(file);
     };

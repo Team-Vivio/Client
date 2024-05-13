@@ -1,6 +1,7 @@
 import inputStyles from "../../styles/CoordiFinder/CoordiFinderInput.module.css";
 import resultStyles from "../../styles/CoordiFinder/CoordiFinderResult.module.css";
 import historyStyles from "../../styles/CoordiFinder/CoordiFinderHistory.module.css";
+import modalStyles from "../../styles/CoordiFinder/CoordiFinderModal.module.css";
 import "../../styles/CoordiFinder/Toggle.css";
 import { useState, useEffect, useRef } from "react";
 import Slider from "react-slick"; // react-slick 사용을 위해 import
@@ -86,6 +87,7 @@ function InputView({ viewModel }) {
                     top.push({
                         id: top.length,
                         img: String(reader.result),
+                        file: file,
                     });
                     setTop([...top]);
                     break;
@@ -93,6 +95,7 @@ function InputView({ viewModel }) {
                     bottom.push({
                         id: bottom.length,
                         img: String(reader.result),
+                        file: file,
                     });
                     setBottom([...bottom]);
                     break;
@@ -100,6 +103,7 @@ function InputView({ viewModel }) {
                     outer.push({
                         id: outer.length,
                         img: String(reader.result),
+                        file: file,
                     });
                     setOuter([...outer]);
                     break;
@@ -272,7 +276,7 @@ function InputView({ viewModel }) {
 }
 
 //결과 뷰
-function ResultView({ viewModel, state, result }) {
+function ResultView({ viewModel, state, result, event }) {
     const settings = {
         dots: true,
         infinite: true,
@@ -305,7 +309,7 @@ function ResultView({ viewModel, state, result }) {
                     </div>
                     <button
                         className={`${resultStyles.button}`}
-                        onClick={() => viewModel.postFashion()}
+                        onClick={event}
                     >
                         {"시작      -10"}
                     </button>
@@ -336,6 +340,7 @@ function ResultView({ viewModel, state, result }) {
                     </div>
                     <div className={resultStyles.resultBox}>
                         <Slider {...settings}>
+                            {console.log(result)}
                             {result.map((value, id) => (
                                 <div
                                     className={resultStyles.resultPos}
@@ -397,18 +402,8 @@ function ResultView({ viewModel, state, result }) {
 }
 
 //히스토리 뷰
-function HistoryView({ viewModel, event }) {
+function HistoryView({ viewModel, event, history }) {
     const [barPosition, setBarPosition] = useState(170);
-    const [history, setHistory] = useState(viewModel.getHistoryList());
-
-    async function getHistory() {
-        await viewModel.getHistory();
-        setHistory([...viewModel.getHistoryList()]);
-    }
-
-    useEffect(() => {
-        getHistory();
-    }, []);
 
     //애니메이션
     const handleScroll = () => {
@@ -454,9 +449,65 @@ function HistoryView({ viewModel, event }) {
     );
 }
 
+function Modal({ viewModel, state, type, event, close }) {
+    return (
+        <div>
+            {state ? (
+                <div className={modalStyles.background}>
+                    <div className={modalStyles.modal}>
+                        <button
+                            className={modalStyles.close}
+                            onClick={close}
+                        ></button>
+                        <div className={modalStyles.content}>
+                            <div className={modalStyles.item1}>*주의!</div>
+                            <div className={modalStyles.item2}>
+                                {viewModel.getModalMessage()[type].message}
+                            </div>
+                            <button
+                                className={modalStyles.enter}
+                                onClick={event}
+                            >
+                                {viewModel.getModalMessage()[type].btn}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            ) : null}
+        </div>
+    );
+}
+
 function CoordiFinderView({ viewModel }) {
     const [state, setState] = useState("main"); //"main", "loading", "result"
     const [result, setResult] = useState(viewModel.getResultList());
+    const [modal, setModal] = useState(false);
+    const [modalType, setModalType] = useState(0);
+    const [history, setHistory] = useState(viewModel.getHistoryList());
+
+    async function getHistory() {
+        await viewModel.getHistory();
+        setHistory([...viewModel.getHistoryList()]);
+    }
+
+    useEffect(() => {
+        getHistory();
+    }, []);
+
+    async function postCoordi() {
+        setState("loading");
+        await viewModel.postFashion();
+        console.log(viewModel.getResultList());
+        if (viewModel.getResultList() !== null) {
+            getHistory();
+            setState("result"); //성공
+            setResult(viewModel.getResultList());
+        } else {
+            setState("main");
+            setModal(true);
+            setModalType(3);
+        }
+    }
     async function getCoordi(fashionID) {
         await viewModel.getCoordi(fashionID);
         if (viewModel.getResultList() === null) {
@@ -467,19 +518,52 @@ function CoordiFinderView({ viewModel }) {
             setState("result");
         }
     }
+    function start() {
+        setModal(true);
+        if (viewModel.dataCheck()) {
+            setModalType(1);
+        } else {
+            setModalType(2);
+        }
+    }
+    function modalEvent() {
+        setModal(false);
+        switch (modalType) {
+            case 0: //이동하기
+                break;
+            case 1: //시작하기
+                postCoordi();
+                break;
+            case 2: //닫기
+            case 3:
+                break;
+        }
+    }
     return (
         <div className={inputStyles.background}>
             <div className={inputStyles.backgroundBlur}>
+                <Modal
+                    viewModel={viewModel}
+                    state={modal}
+                    type={modalType}
+                    event={modalEvent}
+                    close={() => setModal(false)}
+                />
                 {/* 임시헤더 */}
-                <div style={{ width: "100%", height: "83px" }}></div>{" "}
+                <div style={{ width: "100%", height: "83px" }}></div>
                 <div className={inputStyles.viewContainer}>
                     <InputView viewModel={viewModel} />
                     <ResultView
                         viewModel={viewModel}
                         state={state}
                         result={result}
+                        event={start}
                     />
-                    <HistoryView viewModel={viewModel} event={getCoordi} />
+                    <HistoryView
+                        viewModel={viewModel}
+                        event={getCoordi}
+                        history={history}
+                    />
                 </div>
             </div>
         </div>

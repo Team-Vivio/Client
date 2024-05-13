@@ -192,7 +192,7 @@
     border-radius: 30px;
     cursor: pointer;
     position: relative;
-    bottom: 2px;
+    bottom: 6px;
 }
 
 .imagelabel:hover {

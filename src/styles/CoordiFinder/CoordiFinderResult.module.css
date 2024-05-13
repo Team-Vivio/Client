@@ -156,6 +156,7 @@
 }
 
 .resultPos {
+    margin-bottom: 50px;
     display: flex !important;
     justify-content: center !important;
 }
@@ -234,6 +235,8 @@
 
 .restartButton {
     box-sizing: border-box;
+
+    cursor: pointer;
 
     width: 266px;
     height: 40px;

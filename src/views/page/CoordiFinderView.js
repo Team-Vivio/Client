@@ -340,7 +340,6 @@ function ResultView({ viewModel, state, result, event }) {
                     </div>
                     <div className={resultStyles.resultBox}>
                         <Slider {...settings}>
-                            {console.log(result)}
                             {result.map((value, id) => (
                                 <div
                                     className={resultStyles.resultPos}
@@ -392,7 +391,7 @@ function ResultView({ viewModel, state, result, event }) {
                             ))}
                         </Slider>
                     </div>
-                    <div className={resultStyles.restartButton}>
+                    <div className={resultStyles.restartButton} onClick={event}>
                         {"시작      -10"}
                     </div>
                 </div>

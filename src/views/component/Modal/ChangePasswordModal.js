@@ -26,18 +26,12 @@ function ChangePasswordModal(props) {
 			// 형식에 맞지 않을 경우 아래 콘솔 출력
 			alert("비밀번호 형식을 확인해주세요");
 		} else {
-			console.log(curPassword);
-			console.log(newPassword);
 			onSubmit();
 		}
 	}
 
 	// 새로운 비밀번호가 형식에 맞고 새로운 비밀번호를 제출
 	function onSubmit() {
-		console.log("onSubmit called");
-		console.log(curPassword);
-		console.log(newPassword);
-
 		axios
 			.post(
 				"/users/changePassword",

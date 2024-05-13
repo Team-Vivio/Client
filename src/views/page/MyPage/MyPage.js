@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import styles from "../../../styles/Mypage.module.css";
 import background from "../../../img/background.png";
 import mainLogo from "../../../img/whiteLogo.png";
+import imageDragDrop from "../../../img/ImageDrag&Drop.png";
+import imageXBtn from "../../../img/clothXBtn.png";
 import axios from "axios";
 import ChangePasswordModal from "../../component/Modal/ChangePasswordModal";
 
@@ -14,12 +16,106 @@ function MyPage() {
 	const formattedPhoneNumber = formatPhoneNumber(phone);
 	const [showModalP, setShowModalP] = useState(false);
 	const outsideRef = useRef();
+
+	//이미지
+	const [top, setTop] = useState([]);
+	const type1 = "outer";
+	const [bottom, setBottom] = useState([]);
+	const type2 = "top";
+	const [outer, setOuter] = useState([]);
+	const type3 = "bottom";
 	let token =
 		"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
 
 	// 비밀번호 변경 모달 핸들러
 	const showPasswordChangeModalHandler = () => {
 		setShowModalP(true);
+	};
+
+	// 아우터 이미지 불러오기
+	function OuterImg() {
+		return outer.map((OuterImg, idx) => (
+			<div className={styles.ClothDiv} key={idx}>
+				<img className={styles.ClothImage} alt="outer" src={OuterImg.image} />
+				<img
+					className={styles.Deletebtn}
+					alt="Xbtn"
+					src={imageXBtn}
+					onClick={() => {
+						handleDeleteOuterImage(OuterImg.id);
+					}}
+				/>
+			</div>
+		));
+	}
+
+	// 아우터 이미지 삭제하기
+	const handleDeleteOuterImage = (id) => {
+		axios.delete(`/users/closet/${type1}/${id}`, {
+			headers: {
+				Authorization: token,
+			},
+			data: {},
+		});
+		window.location.reload();
+	};
+
+	// 아우터 이미지 등록하기
+
+	// 상의 이미지 불러오기
+	function TopImg() {
+		return top.map((TopImg, idx) => (
+			<div className={styles.ClothDiv} key={idx}>
+				<img className={styles.ClothImage} alt="top" src={TopImg.image} />
+				<img
+					className={styles.Deletebtn}
+					alt="Xbtn"
+					src={imageXBtn}
+					onClick={() => {
+						handleDeleteTopImage(TopImg.id);
+					}}
+				/>
+			</div>
+		));
+	}
+
+	// 상의 이미지 삭제하기
+	const handleDeleteTopImage = (id) => {
+		axios.delete(`/users/closet/${type2}/${id}`, {
+			headers: {
+				Authorization: token,
+			},
+			data: {},
+		});
+		window.location.reload();
+	};
+
+	// 하의 이미지 불러오기
+	function BottomImg() {
+		return bottom.map((BottomImg, idx) => (
+			<div className={styles.ClothDiv} key={idx}>
+				<img className={styles.ClothImage} alt="bottom" src={BottomImg.image} />
+				<img
+					className={styles.Deletebtn}
+					alt="Xbtn"
+					src={imageXBtn}
+					onClick={() => {
+						handleDeleteBottomImage(BottomImg.id);
+					}}
+				/>
+			</div>
+		));
+	}
+
+	// 하의 이미지 삭제하기
+	const handleDeleteBottomImage = (id) => {
+		axios.delete(`/users/closet/${type3}/${id}`, {
+			headers: {
+				Authorization: token,
+			},
+			data: {},
+		});
+		window.location.reload();
 	};
 
 	// 마이페이지 불러올 때, 토큰 값 넘겨 정보 받아오기
@@ -60,10 +156,113 @@ function MyPage() {
 		return phone;
 	}
 
+	// 나만의 옷장 아우터 불러오기
+	useEffect(() => {
+		axios
+			.get(`/users/closet/${type1}`, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((res) => {
+				console.log(res.data.result.images);
+				if (res.data.isSuccess) {
+					setOuter(res.data.result.images);
+				} else {
+					alert("등록된 옷이 없습니다");
+				}
+			});
+	}, [token, type1]);
+
+	// 나만의 옷장 상의 불러오기
+	useEffect(() => {
+		axios
+			.get(`/users/closet/${type2}`, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((res) => {
+				console.log(res.data.result.images);
+				if (res.data.isSuccess) {
+					setTop(res.data.result.images);
+				} else {
+					alert("등록된 옷이 없습니다");
+				}
+			});
+	}, [token, type2]);
+
+	// 나만의 옷장 하의 불러오기
+	useEffect(() => {
+		axios
+			.get(`/users/closet/${type3}`, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((res) => {
+				console.log(res.data.result.images);
+				if (res.data.isSuccess) {
+					setBottom(res.data.result.images);
+				} else {
+					alert("등록된 옷이 없습니다");
+				}
+			});
+	}, [token, type3]);
+
+	// 이미지 세팅
+	const setImage = (file, type) => {
+		handleUploadImage(file, type);
+	};
+
+	// 아우터, 상의, 하의 이미지 등록
+	function handleUploadImage(data, type) {
+		const temp = {
+			type: type,
+		};
+		let formData = new FormData();
+		formData.append("request", JSON.stringify(temp));
+		formData.append("image", data);
+
+		axios
+			.post("/users/closet", formData, {
+				headers: {
+					Authorization: token,
+				},
+			})
+			.then((res) => {
+				if (res.data.isSuccess) {
+					window.location.reload();
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}
+
+	// 이미지 드래그&드롭 이벤트 처리
+	const handleDragOver = (event) => {
+		event.preventDefault();
+	};
+	const handleDrop = (event, type) => {
+		event.preventDefault();
+
+		const file = event.dataTransfer.files[0];
+		if (file.type.includes("image")) {
+			setImage(file, type);
+		}
+	};
+	const handleUpload = ({ target }, type) => {
+		const file = target.files[0];
+		if (file.type.includes("image")) {
+			setImage(file, type);
+		}
+	};
+
 	return (
 		<div className={styles.mainDiv}>
 			<img
-				alt=""
+				alt="backgroundimage"
 				src={background}
 				style={{
 					position: "fixed",
@@ -90,17 +289,71 @@ function MyPage() {
 					<hr className={styles.closetRowLine} />
 					<div className={styles.outerDiv}>
 						<div className={styles.outerTitle}>아우터</div>
-						<div className={styles.scrollbar_X}>하기 존나 싫다zzzz</div>
+						<div className={`${styles.scrollbar_X} ${styles.outerInnerDiv}`}>
+							<label
+								className={styles.DragAndDropLabel}
+								onDragOver={handleDragOver}
+								onDrop={(e) => handleDrop(e, "outer")}
+							>
+								<input
+									type="file"
+									className={styles.DragAndDropInput}
+									onChange={(e) => handleUpload(e, "outer")}
+								/>
+								<img
+									className={styles.DragAndDropImage}
+									alt="OuterDragAndDrop"
+									src={imageDragDrop}
+								/>
+							</label>
+							<OuterImg />
+						</div>
 					</div>
 					<hr className={styles.closetRowLine} />
 					<div className={styles.topDiv}>
 						<div className={styles.topTitle}>상의</div>
-						<div className={styles.scrollRow}></div>
+						<div className={`${styles.scrollbar_X} ${styles.topInnerDiv}`}>
+							<label
+								className={styles.DragAndDropLabel}
+								onDragOver={handleDragOver}
+								onDrop={(e) => handleDrop(e, "top")}
+							>
+								<input
+									type="file"
+									className={styles.DragAndDropInput}
+									onChange={(e) => handleUpload(e, "top")}
+								/>
+								<img
+									className={styles.DragAndDropImage}
+									alt="TopDragAndDrop"
+									src={imageDragDrop}
+								/>
+							</label>
+							<TopImg />
+						</div>
 					</div>
 					<hr className={styles.closetRowLine} />
 					<div className={styles.bottomsDiv}>
 						<div className={styles.bottomsTitle}>하의</div>
-						<div className={styles.scrollRow}></div>
+						<div className={`${styles.scrollbar_X} ${styles.bottomsInnerDiv}`}>
+							<label
+								className={styles.DragAndDropLabel}
+								onDragOver={handleDragOver}
+								onDrop={(e) => handleDrop(e, "bottom")}
+							>
+								<input
+									type="file"
+									className={styles.DragAndDropInput}
+									onChange={(e) => handleUpload(e, "bottom")}
+								/>
+								<img
+									className={styles.DragAndDropImage}
+									alt="BottomDragAndDrop"
+									src={imageDragDrop}
+								/>
+							</label>
+							<BottomImg />
+						</div>
 					</div>
 				</div>
 			</div>

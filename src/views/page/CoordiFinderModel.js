@@ -12,6 +12,14 @@ class CoordiFinderModel {
         this.historyList = null;
         this.resultList = null;
         this.formData = new FormData();
+        this.token = null;
+    }
+    setToken(token) {
+        if (token === null || token === undefined)
+            token =
+                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
+        else console.log("토큰 있습니당");
+        this.token = token;
     }
     dataCheck() {
         return (

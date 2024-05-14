@@ -6,6 +6,7 @@ import "../../styles/CoordiFinder/Toggle.css";
 import { useState, useEffect, useRef } from "react";
 import Slider from "react-slick"; // react-slick 사용을 위해 import
 import "../../styles/CoordiFinder/slick.css";
+import { useCookies } from "react-cookie";
 
 //이미지
 import sample1 from "../../img/CoordiFinder/sample1.png";
@@ -482,12 +483,16 @@ function CoordiFinderView({ viewModel }) {
     const [modalType, setModalType] = useState(0);
     const [history, setHistory] = useState(viewModel.getHistoryList());
 
+    const [cookies] = useCookies(["token"]);
+    const token = cookies.token;
+
     async function getHistory() {
         await viewModel.getHistory();
         setHistory([...viewModel.getHistoryList()]);
     }
 
     useEffect(() => {
+        viewModel.setToken(token);
         getHistory();
     }, []);
 

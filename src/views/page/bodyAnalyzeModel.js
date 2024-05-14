@@ -15,6 +15,14 @@ class BodyAnalyzeModel {
         this.uploadedImg = null;
         this.formData = new FormData();
         this.color = null;
+        this.token = null;
+    }
+    setToken(token) {
+        if (token === null || token === undefined)
+            token =
+                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
+        else console.log("토큰 있습니당");
+        this.token = token;
     }
     setGender(value) {
         this.gender = value;
@@ -43,7 +51,6 @@ class BodyAnalyzeModel {
     }
     getAllHistoryList() {
         if (this.historyList === null) {
-            console.log("return null");
             return null;
         } else {
             let list = this.historyList.data.result.viewListResultDTOS;

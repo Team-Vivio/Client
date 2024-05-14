@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Slider from "react-slick";
 import "../../styles/bodyAnalyze/slick.css";
 import { SketchPicker } from "react-color";
+import { useCookies } from "react-cookie";
 
 //이미지
 import DropBox1 from "../../img/bodyAnalyze/DropBox.png";
@@ -410,6 +411,9 @@ function BodyAnalyze(props) {
     const [boxState, setBoxState] = useState("main");
     const [history, setHistory] = useState(props.viewModel.getAllHistoryList());
 
+    const [cookies] = useCookies(["token"]);
+    const token = cookies.token;
+
     function setGender(value) {
         props.viewModel.setGender(value);
         setRenderFlag((renderFlag) => !renderFlag);
@@ -489,6 +493,7 @@ function BodyAnalyze(props) {
     let modalIndex = props.viewModel.getModalIndex(); //모달 메세지 유형 인덱스
 
     useEffect(() => {
+        props.viewModel.setToken(token);
         getHistory();
     }, []);
 

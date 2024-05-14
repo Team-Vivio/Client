@@ -22,6 +22,9 @@ class CoordiFinderViewModel {
             },
         ];
     }
+    setToken(token) {
+        this.model.setToken(token);
+    }
     dataCheck() {
         return this.model.dataCheck();
     }

@@ -1,0 +1,639 @@
+@font-face {
+    font-family: "NanumSquareRound";
+    font-weight: 50;
+    src: url("../../fonts/NanumSquareRoundR.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "NanumSquareRoundOTF";
+    font-weight: 50;
+    src: url("../../fonts/NanumSquareRoundOTFR.otf") format("truetype");
+}
+
+@font-face {
+    font-family: "AnekTamilRegular";
+    font-weight: 50;
+    src: url("../../fonts/AnekTamil-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "AnekTamilBold";
+    font-weight: 50;
+    src: url("../../fonts/AnekTamil-Bold.ttf") format("truetype");
+}
+
+.Background {
+    position: fixed;
+    /* width: 1920px;
+    height: 975px; */
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+
+    background: url("../../img/ToneAnalyze/img_bg.png");
+    /* background-position: center; */
+
+    background-size: cover;
+}
+
+.Text {
+    position: absolute;
+
+    width: max-content;
+
+    font-family: "NanumSquareRound";
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+    white-space: pre-line;
+}
+
+.ImgBtn {
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    width: 97px;
+    height: 85px;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    background-size: 45px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.ImgBox {
+    box-sizing: border-box;
+    object-fit: cover;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border-radius: 20px;
+
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.ClosetImg {
+    position: absolute;
+    width: 610px;
+    height: 717px;
+    top: 183px;
+    left: 40px;
+
+    background-image: url("../../img/ToneAnalyze/Closet.png");
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 60px;
+
+    opacity: 0.5;
+}
+
+.ClosetBox {
+    position: absolute;
+    width: 610px;
+    height: 717px;
+    top: 183px;
+    left: 40px;
+
+    /* 쓰나? 싶어서 잠깐 잠가둠*/
+    padding-top: 63px;
+    padding-left: 46px;
+}
+
+.ClosetTitle {
+    font-family: "NanumSquareRound";
+    font-size: 60px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 140%;
+
+    color: #ffffff;
+
+    text-transform: capitalize;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.Spinner {
+    animation: rotate 3s infinite;
+
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 265px;
+    top: 263px;
+
+    background-image: url("../../img/ToneAnalyze/loading.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.LoadingText {
+    position: absolute;
+    width: 2735x;
+    height: 42px;
+    transform: translateX(-50%);
+    left: 50%;
+    top: 55%;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 140%;
+    /* identical to box height, or 42px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.LoadingWarning {
+    position: absolute;
+    width: 80px;
+    height: 42px;
+    left: 265px;
+    top: 500px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 140%;
+    /* identical to box height, or 42px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: rgba(18, 0, 0, 0.88);
+}
+
+.LoadingWarningTextPosition {
+    position: absolute;
+    left: 89px;
+    top: 566px;
+}
+
+.LoadingWarningText {
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 140%;
+    /* identical to box height, or 34px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: rgba(18, 0, 0, 0.88);
+}
+
+.ResultBox {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 610px;
+    height: 717px;
+    /* left: 41px; */
+    left: 81px;
+    top: 183px;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 60px;
+}
+
+.ResultImg {
+    position: absolute;
+    width: 455px;
+    height: 385px;
+    left: 31px;
+    top: 30px;
+    border-radius: 20px;
+
+    /* background-image: url("../../img/ToneAnalyze/loading.png"); */
+
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.ResultTitle {
+    position: absolute;
+    width: 450px;
+    height: 126px;
+    left: 62px;
+    top: 483px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 140%;
+    /* identical to box height, or 42px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.RestartBtn {
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    position: absolute;
+    width: 266px;
+    height: 40px;
+    left: 172px;
+    top: 635px;
+
+    background: #ffd439;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 69px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    /* or 28px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.ResultDetailed {
+    box-sizing: border-box;
+
+    overflow-y: auto;
+
+    position: absolute;
+    width: 663px;
+    height: 717px;
+    left: 917px;
+    top: 183px;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 60px;
+    padding-left: 43px;
+    padding-right: 43px;
+    padding-bottom: 43px;
+
+    color: #000000;
+}
+
+.ResultInfoTitle {
+    margin-top: 43px;
+    margin-bottom: 20px;
+
+    font-family: "NanumSquareRoundOTF";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.ResultInfoContent {
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    /* or 28px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+}
+
+.ResultDetailed::-webkit-scrollbar {
+    display: none;
+    width: 0px;
+}
+
+.middleLine {
+    position: absolute;
+    width: 0px;
+    height: 720px;
+    left: 784px;
+    top: 183px;
+
+    border: 1px solid #dbdbdb;
+}
+
+/*외쳐 시현갓*/
+.DropBox {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 403px;
+    height: 253px;
+    left: 1251px;
+    top: 376px;
+
+    background: #ffffff;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+}
+
+.DropLabel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.DropLabel:hover {
+    background-color: #00000033;
+}
+
+.DropInput {
+    display: none;
+}
+
+.DropImg {
+    position: absolute;
+    top: 51px;
+    left: 156px;
+}
+
+.DropText {
+    position: absolute;
+    top: 179px;
+    left: 50px;
+    font-family: "NanumSquareRound";
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+}
+
+.InfoImg {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    object-fit: scale-down;
+}
+
+.StartBtn {
+    box-sizing: border-box;
+    width: 266px;
+    height: 81px;
+
+    background: #ffffff;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 69px;
+
+    font-family: "AnekTamilBold";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 140%;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    display: flex;
+    justify-content: center;
+
+    white-space: pre-wrap;
+}
+
+.Coin {
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+
+    display: inline;
+}
+
+/*외쳐 시현갓222*/
+.HistoryBar {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 166px;
+    height: 629px;
+    left: 1737px;
+    transform: translateY(0%);
+    transition: top 0.7s ease-out;
+
+    background: #fcfcfc;
+    border: 1px solid #d0d0d0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+
+    padding-top: 42px;
+    padding-left: 18px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.HistoryTitle {
+    position: absolute;
+    width: 68px;
+    height: 28px;
+    left: 48px;
+    top: 14px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.HistoryList {
+    cursor: pointer;
+    height: 82px;
+    width: 130px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: 0.25fr 0.75fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+.Historyline {
+    border-top: 1px solid #d9d9d9;
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.HistoryImg {
+    box-sizing: border-box;
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.HistoryText {
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+/*외쳐 시현갓333*/
+.ModalBackground {
+    position: absolute;
+    width: 1920px;
+    height: 975px;
+
+    z-index: 2;
+
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.Modal {
+    position: absolute;
+    width: 700px;
+    height: 373.62px;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+}
+
+.ModalClose {
+    all: unset;
+
+    cursor: pointer;
+
+    background-image: url("../../img/ToneAnalyze/CloseBtn.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 640px;
+    top: 21px;
+}
+
+.ModalEnter {
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    width: 277px;
+    height: 57px;
+
+    background: #ffd439;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 69px;
+
+    text-align: center;
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #ffffff;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.ModalContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+}
+
+.ModalItem1 {
+    width: 100%;
+    height: 30%;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 140%;
+    /* or 35px */
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: rgba(18, 0, 0, 0.88);
+}
+
+.ModalItem2 {
+    width: 100%;
+    height: 30%;
+
+    white-space: pre-wrap;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 140%;
+    /* or 35px */
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    display: flex;
+    justify-content: center;
+
+    color: #000000;
+}

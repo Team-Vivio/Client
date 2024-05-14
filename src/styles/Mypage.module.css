@@ -1,0 +1,402 @@
+@font-face {
+	font-family: "NanumSquareRoundOTF";
+	src: url(/public/fonts/NanumSquareRoundR.ttf) format("truetype");
+}
+
+.mainDiv {
+	display: flex;
+	overflow: hidden;
+	flex-direction: row;
+	font-family: "NanumSquareRoundOTF";
+	font-weight: bold;
+}
+
+.closetDiv {
+	overflow-y: hidden;
+	display: flex;
+	flex-direction: column;
+	width: 729px;
+	height: 540px;
+	background: rgba(245, 245, 245, 0.5);
+	border-radius: 60px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.scrollbar_Y {
+	width: 729px;
+	overflow-y: scroll;
+}
+
+.scrollbar_X {
+	width: 100%;
+	overflow-x: scroll;
+}
+
+/* 스크롤바의 폭 너비 */
+.scrollbar_Y::-webkit-scrollbar {
+	width: 10px;
+}
+
+.scrollbar_Y::-webkit-scrollbar-thumb {
+	background: #d9d9d9d9; /* 스크롤바 색상 */
+	border-radius: 10px; /* 스크롤바 둥근 테두리 */
+}
+
+.scrollbar_Y::-webkit-scrollbar-track {
+	background: rgba(220, 20, 60, 0); /*스크롤바 뒷 배경 색상*/
+}
+
+.scrollbar_X::-webkit-scrollbar {
+	height: 10px;
+}
+
+.scrollbar_X::-webkit-scrollbar-thumb {
+	background: #d9d9d9d9; /* 스크롤바 색상 */
+	border-radius: 10px; /* 스크롤바 둥근 테두리 */
+}
+
+.scrollbar_X::-webkit-scrollbar-track {
+	background: rgba(220, 20, 60, 0); /*스크롤바 뒷 배경 색상*/
+}
+
+.closetMiddleTitle {
+	margin-left: 34px;
+	margin-top: 30px;
+	margin-bottom: 47px;
+	width: 695px;
+	font-size: 45px;
+	color: #f6f6f6;
+	text-shadow: 2px 2px 10px black;
+}
+
+.closetRowLine {
+	position: relative;
+	align-self: center;
+	width: 647px;
+	border-top: 1px solid #ffffff; /* 가로선 스타일 설정 */
+	margin: 0px 0;
+}
+
+.outerDiv {
+	width: 695px;
+	height: 447px;
+	padding-left: 34px;
+	padding-top: 22px;
+	white-space: nowrap;
+}
+
+.outerTitle {
+	margin-bottom: 60px;
+	text-shadow: 2px 2px 10px black;
+	font-size: 30px;
+	font-weight: bold;
+	color: #f6f6f6;
+}
+
+/* 나만의 옷장 이미지 */
+.ClothImage {
+	position: relative;
+	width: 188px;
+	height: 226.64px;
+	border-radius: 20px;
+	object-fit: cover;
+	z-index: 1;
+}
+
+.ClothDiv {
+	display: flex;
+	margin-top: 25px;
+	width: 188px;
+	height: 226.64px;
+	border-radius: 20px;
+	position: relative;
+	overflow: visible;
+}
+
+.Deletebtn {
+	background-image: url("../img/clothXBtn.png");
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	right: -25px;
+	top: -25px;
+	z-index: 2;
+}
+
+/* 옷 장 안 이미지 */
+.DragAndDropImage {
+	width: 188px;
+	height: 226.64px;
+	cursor: pointer;
+}
+
+/* 옷 업로드 이미지 인풋 */
+.DragAndDropInput {
+	display: none;
+}
+
+.outerInnerDiv {
+	gap: 36px;
+	display: flex;
+	flex-direction: row;
+	width: 695px;
+	height: 275px;
+}
+
+.outerInnerDiv img:last-child {
+	margin-right: 0; /* 마지막 이미지에는 간격을 적용하지 않도록 설정 */
+}
+
+.topInnerDiv {
+	gap: 36px;
+	display: flex;
+	flex-direction: row;
+	width: 695px;
+	height: 275px;
+}
+
+.topInnerDiv img:last-child {
+	margin-right: 0; /* 마지막 이미지에는 간격을 적용하지 않도록 설정 */
+}
+
+.DragAndDropLabel {
+	display: flex;
+	margin-top: 25px;
+	position: relative;
+	width: 188px;
+	height: 226.64px;
+	bottom: 0px;
+}
+
+.bottomsInnerDiv {
+	gap: 36px;
+	display: flex;
+	flex-direction: row;
+	width: 695px;
+	height: 275px;
+}
+
+.bottomsInnerDiv img:last-child {
+	margin-right: 0; /* 마지막 이미지에는 간격을 적용하지 않도록 설정 */
+}
+
+.topDiv {
+	width: 695px;
+	height: 447px;
+	padding-left: 34px;
+	padding-top: 22px;
+	white-space: nowrap;
+}
+
+.topTitle {
+	margin-bottom: 60px;
+	text-shadow: 2px 2px 10px black;
+	font-size: 30px;
+	font-weight: bold;
+	color: #f6f6f6;
+}
+
+.bottomsDiv {
+	width: 695px;
+	height: 447px;
+	padding-left: 34px;
+	padding-top: 22px;
+	white-space: nowrap;
+}
+
+.bottomsTitle {
+	margin-bottom: 60px;
+	text-shadow: 2px 2px 10px black;
+	font-size: 30px;
+	font-weight: bold;
+	color: #f6f6f6;
+}
+
+.columnLine {
+	margin-top: 118px;
+	margin-right: 70px;
+	border-left: 1px solid #ffffff;
+	height: 721px;
+}
+
+.informationDiv {
+	margin-top: 100px;
+	height: 800px;
+	width: 640px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.middleTitle {
+	margin-top: 21px;
+	margin-bottom: 42px;
+	font-size: 25px;
+	font-family: "NanumSquareRoundOTF";
+	color: #f6f6f6;
+}
+
+.infoDiv {
+	display: flex;
+	flex-direction: column;
+	width: 639px;
+	height: 595px;
+	background: rgba(245, 245, 245, 0.5);
+	border-radius: 60px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.nameDiv {
+	padding-left: 194px;
+	margin-top: 90px;
+	margin-bottom: 40px;
+	gap: 26px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.nameTitle {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.nameResult {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.phoneDiv {
+	padding-left: 140px;
+	margin-bottom: 40px;
+	gap: 26px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.phoneTitle {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.phoneResult {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.birthDiv {
+	padding-left: 140px;
+	margin-bottom: 40px;
+	gap: 26px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.birthTitle {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.birthResult {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.genderDiv {
+	padding-left: 194px;
+	margin-bottom: 40px;
+	gap: 26px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.genderTitle {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.genderResult {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.emailDiv {
+	padding-left: 166px;
+	margin-bottom: 40px;
+	gap: 26px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.emailTitle {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.emailResult {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.passwordDiv {
+	padding-left: 140px;
+	gap: 26px;
+	display: flex;
+	flex-direction: row;
+}
+
+.passwordTitle {
+	font-family: "NanumSquareRoundOTF";
+	color: #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 2px 2px 10px black;
+}
+
+.passwordChangeBtn {
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	background-color: #ffd439;
+	border: none;
+	cursor: pointer;
+	width: 126px;
+	height: 38px;
+	border-radius: 20px;
+	font-size: 20px;
+	font-weight: 800;
+	font-family: "NanumSquareRoundOTF";
+}

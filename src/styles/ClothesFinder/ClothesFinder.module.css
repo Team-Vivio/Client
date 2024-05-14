@@ -113,14 +113,34 @@
     color: #ffffff;
 }
 
-.btn {
+.BtnInActive {
     box-sizing: border-box;
 
     cursor: pointer;
 
     position: absolute;
+    width: 97px;
+    height: 85px;
 
     background: #ffffff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.BtnActive {
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    position: absolute;
+    width: 97px;
+    height: 85px;
+
+    background: #00ff00;
     border: 1px solid #d9d9d9;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
@@ -174,6 +194,105 @@
     font-weight: 700;
     font-size: 20px;
     line-height: 140%;
+}
+
+.InfoImg {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    object-fit: scale-down;
+}
+
+.MainBox {
+    box-sizing: border-box;
+
+    overflow-y: auto;
+
+    position: absolute;
+    width: 610px;
+    height: 717px;
+    /* left: 41px; */
+    left: 1159px;
+    top: 161px;
+    padding-top: 42px;
+
+    background-image: url("../../img/ClothesFinder/img_main.png");
+    /* border: 1px solid #d9d9d9; */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 60px;
+}
+
+.MainTitle {
+    height: 84px;
+    /* left: 1297px;
+    top: 210px; */
+    text-align: center;
+
+    font-family: "NanumSquareRoundOTF";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 140%;
+    /* identical to box height, or 84px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.MainContent {
+    width: 419px;
+    height: 147px;
+    /* left: 1297px;
+    top: 436px; */
+    margin-top: 142px;
+    margin-left: 102px;
+
+    font-family: "NanumSquareRoundOTF";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 35px;
+    line-height: 140%;
+    /* or 49px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #ffffff;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.StartBtn {
+    box-sizing: border-box;
+    width: 266px;
+    height: 81px;
+    margin-top: 178px;
+    margin-left: 179px;
+
+    cursor: pointer;
+
+    background: #ffffff;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 69px;
+
+    font-family: "NanumSquareRoundOTF";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    display: flex;
+    justify-content: center;
+
+    white-space: pre-wrap;
 }
 
 @keyframes rotate {
@@ -266,6 +385,8 @@
 .ResultBox {
     box-sizing: border-box;
 
+    overflow-y: auto;
+
     position: absolute;
     width: 610px;
     height: 717px;
@@ -278,6 +399,11 @@
     border: 1px solid #d9d9d9;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 60px;
+}
+
+.ResultBox::-webkit-scrollbar {
+    display: none;
+    width: 0px;
 }
 
 .ResultTitle {
@@ -301,7 +427,7 @@
     width: 69px;
     height: 42px;
     margin-left: 57px;
-    margin-top: 16px;
+    margin-top: 26px;
 
     font-family: "NanumSquareRound";
     font-style: normal;
@@ -322,7 +448,7 @@
     left: 340px;
     top: 42px;
 
-    background: url(../../img/ClothesFinder/background.png);
+    /* background: url(../../img/ClothesFinder/background.png); */
 }
 
 .RestartBtn {
@@ -335,9 +461,9 @@
     height: 45px;
     /* left: 172px;
     top: 635px; */
-    margin-top: 27px;
+    margin-top: 17px;
     margin-left: 57px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 
     background: #ffd439;
     border: 1px solid #c5c5c5;
@@ -367,4 +493,218 @@
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
+}
+
+.ResultPos {
+    width: auto;
+    height: 189px;
+
+    padding: 24px;
+}
+
+.ResultItemImg {
+    position: absolute;
+    width: 197px;
+    height: 161px;
+    /* margin-left: 24px; */
+    margin-top: 37px;
+
+    object-fit: fill;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.ResultItemText {
+    position: absolute;
+
+    white-space: pre-wrap;
+
+    width: 280px;
+    height: 21px;
+
+    margin-left: 247px;
+    margin-top: 45px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 140%;
+    /* identical to box height, or 21px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.ResultItemPrice {
+    position: absolute;
+
+    width: 280px;
+    height: 21px;
+
+    margin-left: 247px;
+    margin-top: 80px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 140%;
+    /* identical to box height, or 21px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.ResultLinkBtn {
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    position: absolute;
+    width: 166px;
+    height: 43px;
+
+    margin-top: 150px;
+    margin-left: 237px;
+
+    background: #ffd439;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 69px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    /* or 28px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.ModalBackground {
+    position: absolute;
+    width: 1920px;
+    height: 975px;
+
+    z-index: 2;
+
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.Modal {
+    position: absolute;
+    width: 700px;
+    height: 373.62px;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+}
+
+.ModalClose {
+    all: unset;
+
+    cursor: pointer;
+
+    background-image: url("../../img/ClothesFinder/CloseBtn.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 640px;
+    top: 21px;
+}
+
+.ModalEnter {
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    width: 277px;
+    height: 57px;
+
+    background: #ffd439;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 69px;
+
+    text-align: center;
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #ffffff;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.ModalContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+}
+
+.ModalItem1 {
+    width: 100%;
+    height: 30%;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 140%;
+    /* or 35px */
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: rgba(18, 0, 0, 0.88);
+}
+
+.ModalItem2 {
+    width: 100%;
+    height: 30%;
+
+    white-space: pre-wrap;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 140%;
+    /* or 35px */
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    display: flex;
+    justify-content: center;
+
+    color: #000000;
 }

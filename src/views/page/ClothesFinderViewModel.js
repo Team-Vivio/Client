@@ -1,33 +1,49 @@
 class ClothesFinderViewModel {
     constructor(model) {
         this.model = model;
+        this.type = this.model.getType();
+        this.uploadedImg = this.model.getUploadedImg();
+        this.uploadedImgLink = this.model.getUploadedImgLink();
     }
 
-    // getter setter 재정립 예정
-    // model에선 logic 건드리지 않는 식으로
-
-    setGender(value) {
-        this.model.gender = value;
+    getUploadedImgLink() {
+        return this.model.getUploadedImgLink();
+    }
+    setUploadedImgLink(value) {
+        this.uploadedImgLink = value;
+    }
+    getType() {
+        return this.model.getType();
+    }
+    setType(value) {
+        this.type = value;
     }
     getUploadedImg(value) {
-        return this.model.uploadedImg;
+        return this.model.getUploadedImg();
     }
     setUploadedImg(value) {
-        this.model.setUploadedImg(value);
-        // console.log(this.uploadedImg);
+        this.uploadedImg = value;
+    }
+    update() {
+        this.model.setType(this.type);
+        this.model.setUploadedImg(this.uploadedImg);
+        this.model.setUploadedImgLink(this.uploadedImgLink);
     }
     getResultList() {
         return this.model.resultList;
     }
     dataCheck() {
         return (
-            this.model.gender !== 0 &&
-            this.model.clo_type !== 0 &&
-            this.model.uploadedImg !== null
+            // this.model.clo_type !== 0 && this.model.getUploadedImg() !== null
+            this.type !== 0 && this.uploadedImg !== null
         );
     }
-    // setFormData(img) {
-    //     this.model.formData.append("image", img);
-    // }
+    // revise
+    postClothes = async () => {
+        await this.model.postClothes();
+    };
+    getClothes = async (clothesID) => {
+        await this.model.getClothes(clothesID);
+    };
 }
 export default ClothesFinderViewModel;

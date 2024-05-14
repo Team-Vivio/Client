@@ -1,0 +1,748 @@
+@font-face {
+    font-family: "NanumSquareRound";
+    font-weight: 50;
+    src: url("../../fonts/NanumSquareRoundR.ttf") format("truetype");
+}
+
+.ImgBtn {
+    box-sizing: border-box;
+
+    width: 97px;
+    height: 85px;
+
+    cursor: pointer;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.Background {
+    position: absolute;
+    width: 1920px;
+    height: 975px;
+    left: 0px;
+    top: 0px;
+    background: url("../../img/bodyAnalyze/Background.png");
+    background-position: center;
+}
+
+.Blur {
+    position: absolute;
+    width: 1920px;
+    height: 975px;
+
+    background: rgba(217, 217, 217, 0.1);
+    backdrop-filter: blur(50px);
+}
+
+.Text {
+    position: absolute;
+
+    font-family: "NanumSquareRound";
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    white-space: pre-wrap;
+
+    color: #ffffff;
+}
+
+.Input {
+    box-sizing: border-box;
+
+    width: 177px;
+    height: 52px;
+
+    font-family: "NanumSquareRound";
+    font-size: 28px;
+    text-align: center;
+
+    background: #ffffff;
+    border: 1px solid #c2c2c2;
+    border-radius: 20px;
+}
+
+Input::-webkit-outer-spin-button,
+Input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.ColorButton {
+    box-sizing: border-box;
+
+    color: #000000;
+
+    text-align: center;
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 140%;
+    /* identical to box height, or 34px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    position: absolute;
+    width: 284px;
+    height: 34px;
+    left: 592px;
+    top: 507px;
+
+    background-color: #ffd439;
+    border: 1px solid #ffd439;
+    border-radius: 20px;
+}
+
+.ColorBackground {
+    z-index: 1;
+    position: absolute;
+    width: 1920px;
+    height: 975px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.ColorBox {
+    position: absolute;
+    width: 397px;
+    height: 471px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+}
+
+.ColorClose {
+    all: unset;
+
+    cursor: pointer;
+
+    background-image: url("../../img/bodyAnalyze/CloseBtn.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    margin: 20px;
+
+    width: 22px;
+    height: 22px;
+    align-self: flex-end;
+}
+
+.DropBox {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 403px;
+    height: 253px;
+    left: 542px;
+    top: 659px;
+
+    background: #ffffff;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+}
+
+.DropLabel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.DropLabel:hover {
+    background-color: #00000033;
+}
+
+.DropInput {
+    display: none;
+}
+
+.DropImg {
+    position: absolute;
+    top: 51px;
+    left: 156px;
+}
+
+.DropText {
+    position: absolute;
+    top: 179px;
+    left: 50px;
+    font-family: "NanumSquareRound";
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+}
+
+.InfoImg {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    object-fit: scale-down;
+}
+
+.ClosetImg {
+    position: absolute;
+    width: 610px;
+    height: 717px;
+    top: 155px;
+    left: 1055px;
+
+    background-image: url("../../img/bodyAnalyze/Closet.png");
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 60px;
+
+    opacity: 0.5;
+}
+
+.ClosetBox {
+    position: absolute;
+    width: 610px;
+    height: 717px;
+    top: 155px;
+    left: 1055px;
+
+    padding-top: 63px;
+    padding-left: 46px;
+}
+
+.ClosetTitle {
+    font-family: "NanumSquareRound";
+    font-size: 60px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 140%;
+
+    color: #ffffff;
+
+    text-transform: capitalize;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.StartBtn {
+    box-sizing: border-box;
+    width: 266px;
+    height: 81px;
+
+    cursor: pointer;
+
+    background: #ffffff;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 69px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 140%;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    display: flex;
+    justify-content: center;
+
+    white-space: pre-wrap;
+}
+
+.ResultBox {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 610px;
+    height: 717px;
+    left: 1055px;
+    top: 155px;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 60px;
+}
+
+.ResultTitle {
+    position: absolute;
+    width: 500px;
+    height: 42px;
+    left: 42px;
+    top: 45px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 140%;
+    /* identical to box height, or 42px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.ResultInnerBoxPosition {
+    box-sizing: border-box;
+    position: absolute;
+    padding-top: 120px;
+    padding-bottom: 100px;
+    width: 100%;
+    height: 100%;
+}
+
+.ResultInnerBox {
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-rows: 81px 0.8fr 1.2fr 190px;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: left;
+
+    width: 474px;
+    height: 483px;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 60px;
+}
+
+.ResultLink {
+    justify-self: center;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
+
+.ResultImg {
+    max-width: 175px;
+    max-height: 175px;
+}
+
+.ResultColor {
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    /* identical to box height, or 28px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    padding-bottom: 11px;
+
+    color: #000000;
+
+    align-self: end;
+}
+
+.ResultType {
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    /* identical to box height, or 28px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+
+    align-self: start;
+}
+
+.ResultInnerTitle {
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 140%;
+    /* identical to box height, or 56px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+
+    padding-left: 282px;
+
+    align-self: end;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.ResultInfoBox {
+    box-sizing: border-box;
+
+    overflow-y: auto;
+
+    width: 372px;
+    height: 165px;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 30px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    /* or 28px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    padding: 5%;
+
+    justify-self: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+    color: #000000;
+}
+
+.ResultInfoBox::-webkit-scrollbar {
+    display: none; /*안보이게*/
+    width: 0px;
+}
+
+.RestartBtn {
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    position: absolute;
+    width: 266px;
+    height: 40px;
+    left: 181px;
+    top: 658px;
+
+    background: #ffffff;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 69px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    /* or 28px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+@keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.Spinner {
+    animation: rotate 3s infinite;
+
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 265px;
+    top: 263px;
+
+    background-image: url("../../img/bodyAnalyze/Loading.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.LoadingText {
+    position: absolute;
+    width: 236px;
+    height: 42px;
+    transform: translateX(-50%);
+    left: 50%;
+    top: 55%;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 140%;
+    /* identical to box height, or 42px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.LoadingWarning {
+    position: absolute;
+    width: 80px;
+    height: 42px;
+    left: 265px;
+    top: 500px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 140%;
+    /* identical to box height, or 42px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: rgba(18, 0, 0, 0.88);
+}
+
+.LoadingWarningTextPosition {
+    position: absolute;
+    left: 89px;
+    top: 566px;
+}
+
+.LoadingWarningText {
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 140%;
+    /* identical to box height, or 34px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+}
+
+.Coin {
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+
+    display: inline;
+}
+
+.HistoryBar {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 166px;
+    height: 629px;
+    left: 1737px;
+    transform: translateY(0%);
+    transition: top 0.7s ease-out;
+
+    background: #fcfcfc;
+    border: 1px solid #d0d0d0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+
+    padding-top: 42px;
+    padding-left: 18px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.HistoryTitle {
+    position: absolute;
+    width: 68px;
+    height: 28px;
+    left: 48px;
+    top: 14px;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.HistoryList {
+    cursor: pointer;
+    height: 82px;
+    width: 130px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: 0.25fr 0.75fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+.Historyline {
+    border-top: 1px solid #d9d9d9;
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.HistoryImg {
+    box-sizing: border-box;
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.HistoryText {
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.ModalBackground {
+    position: absolute;
+    width: 1920px;
+    height: 975px;
+
+    z-index: 2;
+
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.Modal {
+    position: absolute;
+    width: 700px;
+    height: 373.62px;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+}
+
+.ModalClose {
+    all: unset;
+
+    cursor: pointer;
+
+    background-image: url("../../img/bodyAnalyze/CloseBtn.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 640px;
+    top: 21px;
+}
+
+.ModalEnter {
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    width: 277px;
+    height: 57px;
+
+    background: #ffd439;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 69px;
+
+    text-align: center;
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #ffffff;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.ModalContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+}
+
+.ModalItem1 {
+    width: 100%;
+    height: 30%;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 140%;
+    /* or 35px */
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: rgba(18, 0, 0, 0.88);
+}
+
+.ModalItem2 {
+    width: 100%;
+    height: 30%;
+
+    white-space: pre-wrap;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 140%;
+    /* or 35px */
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    display: flex;
+    justify-content: center;
+
+    color: #000000;
+}

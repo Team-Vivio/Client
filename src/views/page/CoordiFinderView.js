@@ -457,32 +457,22 @@ function HistoryView({ viewModel, event, history }) {
 }
 
 function Modal({ viewModel, state, type, event, close }) {
-    return (
-        <div>
-            {state ? (
-                <div className={modalStyles.background}>
-                    <div className={modalStyles.modal}>
-                        <button
-                            className={modalStyles.close}
-                            onClick={close}
-                        ></button>
-                        <div className={modalStyles.content}>
-                            <div className={modalStyles.item1}>*주의!</div>
-                            <div className={modalStyles.item2}>
-                                {viewModel.getModalMessage()[type].message}
-                            </div>
-                            <button
-                                className={modalStyles.enter}
-                                onClick={event}
-                            >
-                                {viewModel.getModalMessage()[type].btn}
-                            </button>
-                        </div>
+    return state ? (
+        <div className={modalStyles.background}>
+            <div className={modalStyles.modal}>
+                <button className={modalStyles.close} onClick={close}></button>
+                <div className={modalStyles.content}>
+                    <div className={modalStyles.item1}>*주의!</div>
+                    <div className={modalStyles.item2}>
+                        {viewModel.getModalMessage()[type].message}
                     </div>
+                    <button className={modalStyles.enter} onClick={event}>
+                        {viewModel.getModalMessage()[type].btn}
+                    </button>
                 </div>
-            ) : null}
+            </div>
         </div>
-    );
+    ) : null;
 }
 
 function CoordiFinderView({ viewModel }) {
@@ -548,14 +538,14 @@ function CoordiFinderView({ viewModel }) {
     }
     return (
         <div className={inputStyles.background}>
+            <Modal
+                viewModel={viewModel}
+                state={modal}
+                type={modalType}
+                event={modalEvent}
+                close={() => setModal(false)}
+            />
             <div className={inputStyles.backgroundBlur}>
-                <Modal
-                    viewModel={viewModel}
-                    state={modal}
-                    type={modalType}
-                    event={modalEvent}
-                    close={() => setModal(false)}
-                />
                 {/* 헤더 공간 뺴기 */}
                 <div style={{ width: "100%", height: "83px" }}></div>
                 <div className={inputStyles.viewContainer}>

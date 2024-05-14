@@ -1,6 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
+import Login from "./views/page/LoginPage/LoginPage";
+import Signup from "./views/page/SignUpPage/SignUpPage";
+import Mypage from "./views/page/MyPage/MyPage";
 import Main from "./views/page/main";
 import Function1 from "./views/page/bodyAnalyze";
 import Function1_ViewModel from "./views/page/boduAnalyzeViewModel";
@@ -27,6 +30,9 @@ function App() {
                     path="/CoordiFinder"
                     element={<Function4 viewModel={viewModel_4} />}
                 />
+                <Route exact path="/Login" element={<Login />} />
+				<Route exact path="/Signup" element={<Signup />} />
+				<Route exact path="Mypage" element={<Mypage />} />
                 <Route
                     exact
                     path="/FashionRecommend"

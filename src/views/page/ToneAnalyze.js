@@ -1,5 +1,6 @@
 import styles from "../../styles/ToneAnalyze/ToneAnalyze.module.css";
 import { useEffect, useState } from "react";
+
 import DropBox1 from "../../img/ToneAnalyze/DropBox.png";
 import Coin1 from "../../img/ToneAnalyze/Coin.png";
 import mark_O from "../../img/ToneAnalyze/mark_O.png";
@@ -130,23 +131,23 @@ function LoadingBox({ event }) {
 
 function ResultBox({ viewModel, event }) {
     const name = viewModel.getName();
-    let img = viewModel.getUploadedImg();
     let infoList = viewModel.getAllResultList();
+    console.log(viewModel.getUploadedImg());
 
     const season =
-        infoList.session === "SPRING"
+        infoList.session === "spring"
             ? "봄 "
-            : infoList.session === "SUMMER"
+            : infoList.session === "summer"
             ? "여름 "
-            : infoList.session === "AUTUMN"
+            : infoList.session === "fall"
             ? "가을 "
-            : infoList.session === "WINTER"
+            : infoList.session === "winter"
             ? "겨울 "
             : "?";
     const tone =
-        infoList.tone === "WARM"
+        infoList.tone === "warm"
             ? "웜톤 "
-            : infoList.tone === "COOL"
+            : infoList.tone === "cool"
             ? "쿨톤 "
             : "?";
 
@@ -154,10 +155,9 @@ function ResultBox({ viewModel, event }) {
         <div className={styles.ResultBox}>
             <div className={styles.ResultImg}>
                 <img
-                    src={img}
+                    src={viewModel.getUploadedImg()}
                     alt=""
                     className={styles.ResultImg}
-                    onClick={() => console.log(img)} // img test용
                 />
             </div>
             {/* 멘트 추가 필요 */}
@@ -187,19 +187,19 @@ function ResultDetailed({ viewModel }) {
             ? "여자 "
             : "?";
     const season =
-        infoList.session === "SPRING"
+        infoList.session === "spring"
             ? "봄 "
-            : infoList.session === "SUMMER"
+            : infoList.session === "summer"
             ? "여름 "
-            : infoList.session === "AUTUMN"
+            : infoList.session === "fall"
             ? "가을 "
-            : infoList.session === "WINTER"
+            : infoList.session === "winter"
             ? "겨울 "
             : "?";
     const tone =
-        infoList.tone === "WARM"
+        infoList.tone === "warm"
             ? "웜톤 "
-            : infoList.tone === "COOL"
+            : infoList.tone === "cool"
             ? "쿨톤 "
             : "?";
     const info = gender + season + tone;
@@ -245,7 +245,7 @@ function ColorBox({ color }) {
     );
 }
 
-function DropBox({ imgUpload, setformData }) {
+function DropBox({ viewModel, imgUpload, setformData }) {
     const [uploadedInfo, setUploadedInfo] = useState(null);
     const [isActive, setIsActive] = useState(false);
     const handleDragStart = () => setIsActive(true);
@@ -269,8 +269,7 @@ function DropBox({ imgUpload, setformData }) {
                 imageUrl: String(reader.result),
             };
             setUploadedInfo(img);
-            imgUpload(img);
-            console.log("file successfully uploaded");
+            imgUpload(img.imageUrl);
         };
         reader.readAsDataURL(file);
     };
@@ -310,11 +309,16 @@ function DropBox({ imgUpload, setformData }) {
                 {uploadedInfo !== null ? (
                     <img
                         src={uploadedInfo.imageUrl}
+                        alt=""
                         className={styles.InfoImg}
                     ></img>
                 ) : (
                     <>
-                        <img className={styles.DropImg} src={DropBox1}></img>
+                        <img
+                            className={styles.DropImg}
+                            src={DropBox1}
+                            alt=""
+                        ></img>
                         <p className={styles.DropText}>
                             클릭 혹은 파일을 이곳에 드롭 하세요
                         </p>
@@ -325,17 +329,22 @@ function DropBox({ imgUpload, setformData }) {
     );
 }
 
-function HistoryItem({ history }) {
+function HistoryItem({ history, event }) {
+    const ID = history.perColId;
     return (
-        <div className={styles.HistoryList}>
+        <div className={styles.HistoryList} onClick={() => event(ID)}>
             <div className={styles.Historyline}></div>
-            <img src={history.image} className={styles.HistoryImg}></img>
+            <img
+                src={history.image}
+                className={styles.HistoryImg}
+                alt="h_i"
+            ></img>
             <div className={styles.HistoryText}>{history.tone}</div>
         </div>
     );
 }
 
-function HistoryBar({ list }) {
+function HistoryBar({ list, event }) {
     const [barPosition, setBarPosition] = useState(170);
 
     //애니메이션
@@ -362,7 +371,7 @@ function HistoryBar({ list }) {
             <div className={styles.HistoryTitle}>History</div>
             {list !== null
                 ? list.map((history, id) => (
-                      <HistoryItem history={history} key={id} /> // add onClick
+                      <HistoryItem history={history} key={id} event={event} /> // add onClick
                   ))
                 : null}
         </div>
@@ -470,6 +479,7 @@ function ToneAnalyze(props) {
                 setBoxState("result");
             }
         } else if (modalIndex === 0) {
+            // different
             setBoxState("main");
         }
     }
@@ -480,6 +490,19 @@ function ToneAnalyze(props) {
         await props.viewModel.getHistory();
         setHistory(props.viewModel.getAllHistoryList());
     }
+    async function getPerCol(fashionID) {
+        await props.viewModel.getPerCol(fashionID);
+        console.log(props.viewModel.getAllResultList());
+        if (props.viewModel.getAllResultList() === null) {
+            setModal(2); //결과를 못받으면
+            props.viewModel.setModalActive(true);
+            setBoxState("main");
+        } else {
+            setBoxState("result");
+            setRenderFlag((renderFlag) => !renderFlag);
+        }
+    }
+
     let modalIndex = props.viewModel.getModalIndex(); //모달 메세지 유형 인덱스
     // 로딩 끝나면 "main"으로 변경하기@@@
     const [boxState, setBoxState] = useState("main");
@@ -555,6 +578,7 @@ function ToneAnalyze(props) {
                         ></img>
                     </>
                     <DropBox
+                        viewModel={props.viewModel}
                         imgUpload={setUploadedImg}
                         setformData={setFormData}
                     />
@@ -616,6 +640,7 @@ function ToneAnalyze(props) {
                             ></img>
                         </>
                         <DropBox
+                            viewModel={props.viewModel}
                             imgUpload={setUploadedImg}
                             setformData={setFormData}
                         />
@@ -634,7 +659,7 @@ function ToneAnalyze(props) {
                     </>
                 ))}
             {/* 맨 왼쪽 기록 바 */}
-            <HistoryBar list={history} />
+            <HistoryBar list={history} event={getPerCol} />
         </div>
     );
 }

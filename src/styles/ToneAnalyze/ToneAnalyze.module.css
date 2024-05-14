@@ -34,12 +34,12 @@
     /* background-position: center; */
 
     background-size: cover;
-
-    /* color: #ffffff; */
 }
 
 .Text {
     position: absolute;
+
+    width: max-content;
 
     font-family: "NanumSquareRound";
     font-weight: 700;
@@ -51,6 +51,8 @@
 
 .ImgBtn {
     box-sizing: border-box;
+
+    cursor: pointer;
 
     width: 97px;
     height: 85px;

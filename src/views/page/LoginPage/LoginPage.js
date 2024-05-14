@@ -15,7 +15,8 @@ function Home() {
 	const [showModalE, setShowModalE] = useState(false);
 	const [showModalP, setShowModalP] = useState(false);
 	const outsideRef = useRef();
-	const setCookie = useCookies(["token"]);
+	// eslint-disable-next-line no-unused-vars
+	const [_, setCookie] = useCookies(["token"]);
 
 	// 이메일 찾기 모달 핸들러
 	const showEmailModalHandler = () => {

@@ -122,14 +122,22 @@ function InputView({ viewModel }) {
         event.preventDefault();
 
         const file = event.dataTransfer.files[0];
-        if (file.type.includes("image")) {
+        if (
+            file !== null &&
+            file !== undefined &&
+            file.type.includes("image")
+        ) {
             setImage(file, type);
         }
     };
 
     const handleUpload = ({ target }, type) => {
         const file = target.files[0];
-        if (file.type.includes("image")) {
+        if (
+            file !== null &&
+            file !== undefined &&
+            file.type.includes("image")
+        ) {
             setImage(file, type);
         }
     };

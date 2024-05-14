@@ -67,6 +67,12 @@ function DropBox({ imgUpload, setformData }) {
     const handleDragEnd = () => setActive(false);
 
     const setFileInfo = (file) => {
+        //예외처리 -> 파일 넣으려다 닫았을때
+        console.log(file);
+        if (file === null || file === undefined) {
+            setUploadedInfo(null);
+            return;
+        }
         const { name, type } = file;
         const isImage = type.includes("image");
         const size = (file.size / (1024 * 1024)).toFixed(2) + "mb";

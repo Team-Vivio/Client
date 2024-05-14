@@ -410,7 +410,7 @@ function ResultView({ viewModel, state, result, event }) {
 
 //히스토리 뷰
 function HistoryView({ viewModel, event, history }) {
-    const [barPosition, setBarPosition] = useState(170);
+    const [barPosition, setBarPosition] = useState(87);
 
     //애니메이션
     const handleScroll = () => {

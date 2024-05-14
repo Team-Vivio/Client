@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 class CoordiFinderModel {
     constructor() {
@@ -12,6 +13,8 @@ class CoordiFinderModel {
         this.historyList = null;
         this.resultList = null;
         this.formData = new FormData();
+        this.cookies = useCookies(["token"]);
+        this.token = this.cookies.token;
     }
     dataCheck() {
         return (
@@ -105,8 +108,6 @@ class CoordiFinderModel {
                 data: this.formData,
             });
             //저장
-            const accessToken =
-                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
             let saveData = { items: [] };
             this.resultList.data.result.items.map((value) => {
                 saveData.items.push({
@@ -121,7 +122,7 @@ class CoordiFinderModel {
                 url: `/closets/closet`,
                 mode: "cors",
                 headers: {
-                    Authorization: `${accessToken}`,
+                    Authorization: `${this.token}`,
                 },
                 data: saveData,
             });
@@ -131,15 +132,13 @@ class CoordiFinderModel {
         }
     };
     getHistory = async () => {
-        const accessToken =
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
         try {
             this.historyList = await axios({
                 method: "GET",
                 url: `/closets/closet`,
                 mode: "cors",
                 headers: {
-                    Authorization: `${accessToken}`,
+                    Authorization: `${this.token}`,
                 },
             });
             console.log(this.historyList);
@@ -149,15 +148,13 @@ class CoordiFinderModel {
     };
     getCoordi = async (coordiID) => {
         console.log(coordiID);
-        const accessToken =
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
         try {
             this.resultList = await axios({
                 method: "GET",
                 url: `/closets/closet/${coordiID}`,
                 mode: "cors",
                 headers: {
-                    Authorization: `${accessToken}`,
+                    Authorization: `${this.token}`,
                 },
             });
             console.log(this.resultList);

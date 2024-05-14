@@ -2,6 +2,7 @@ import Coin1 from "../../img/bodyAnalyze/Coin.png";
 import Body1 from "../../img/bodyAnalyze/Body1.png";
 import axios from "axios";
 import { Component } from "react";
+import { useCookies } from "react-cookie";
 
 class BodyAnalyzeModel {
     constructor() {
@@ -15,6 +16,8 @@ class BodyAnalyzeModel {
         this.uploadedImg = null;
         this.formData = new FormData();
         this.color = null;
+        this.cookies = useCookies(["token"]);
+        this.token = this.cookies.token;
     }
     setGender(value) {
         this.gender = value;
@@ -124,8 +127,6 @@ class BodyAnalyzeModel {
             );
             console.log(this.resultList);
             //저장
-            const accessToken =
-                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
             const save = {
                 gender: this.gender,
                 height: this.height,
@@ -141,7 +142,7 @@ class BodyAnalyzeModel {
                     url: `/fashions/fashionRecommand`,
                     mode: "cors",
                     headers: {
-                        Authorization: `${accessToken}`,
+                        Authorization: `${this.token}`,
                     },
                     data: save, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
                 });
@@ -157,15 +158,13 @@ class BodyAnalyzeModel {
     //추천 받았던 패션정보 불러오기
     getFashion = async (fashionID) => {
         this.resultList = null;
-        const accessToken =
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
         try {
             const result = await axios({
                 method: "GET",
                 url: `/fashions/fashionRecommand/${fashionID}`,
                 mode: "cors",
                 headers: {
-                    Authorization: `${accessToken}`,
+                    Authorization: `${this.token}`,
                 },
             });
             result.data.result.fashionTops.forEach((element) => {
@@ -183,15 +182,13 @@ class BodyAnalyzeModel {
     };
     //히스토리 가져오기
     getHistory = async () => {
-        const accessToken =
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
         try {
             this.historyList = await axios({
                 method: "GET",
                 url: `/fashions/fashionRecommand`,
                 mode: "cors",
                 headers: {
-                    Authorization: `${accessToken}`,
+                    Authorization: `${this.token}`,
                 },
             });
             console.log(this.historyList);

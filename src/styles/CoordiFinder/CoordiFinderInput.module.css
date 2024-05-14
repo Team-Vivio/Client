@@ -29,9 +29,10 @@
 }
 
 .viewContainer {
+    position: fixed;
     display: grid;
-    width: 100%;
-    height: 100%;
+    width: 1920px;
+    height: auto;
     grid-template-columns: 50% 40% 1fr;
     grid-template-rows: 100%;
 }

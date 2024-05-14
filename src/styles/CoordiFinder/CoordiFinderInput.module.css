@@ -1,0 +1,209 @@
+@font-face {
+    font-family: "NanumSquareRound";
+    font-weight: 50;
+    src: url("../../fonts/NanumSquareRoundR.ttf") format("truetype");
+}
+
+.background {
+    position: fixed;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    background-image: url("../../img/CoordiFinder/background.png");
+    background-size: cover;
+}
+
+.backgroundBlur {
+    background: rgba(217, 217, 217, 0.1);
+    backdrop-filter: blur(30px);
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+}
+
+.viewContainer {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 50% 40% 1fr;
+    grid-template-rows: 100%;
+}
+
+.titleItem {
+    display: flex;
+    align-items: center;
+
+    padding-top: 38px;
+    padding-bottom: 38px;
+}
+
+/* .font {
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+} */
+
+.whiteBig {
+    padding-left: 41px;
+    padding-right: 66px;
+
+    font-size: 35px;
+
+    color: #ffffff;
+}
+
+.whiteSmall {
+    font-size: 28px;
+
+    padding-left: 72px;
+
+    color: #ffffff;
+}
+
+.blackSmall {
+    font-size: 9px;
+
+    color: #000000;
+}
+
+.q1Item {
+    display: flex;
+    align-items: center;
+}
+
+.q2Item {
+    display: flex;
+    align-items: top;
+
+    padding-top: 60px;
+}
+
+.imageShow {
+    box-sizing: border-box;
+    width: 450px;
+    height: 120px;
+
+    display: flex;
+
+    overflow-x: auto;
+    flex-wrap: nowrap;
+
+    padding-top: 3%;
+}
+
+.imageShow::-webkit-scrollbar {
+    display: none;
+    width: 0px;
+}
+
+.imageShowItem {
+    box-sizing: border-box;
+
+    flex: 0 0 auto;
+
+    width: 82px;
+    height: 95px;
+
+    margin-left: 10px;
+    margin-right: 10px;
+
+    background-color: #ffffff;
+    border: 1px solid #efefef;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image {
+    max-width: 70px;
+    max-height: 80px;
+}
+
+.close {
+    width: 21px;
+    height: 21px;
+
+    cursor: pointer;
+
+    border: none;
+
+    position: absolute;
+    left: 65px;
+    top: -5px;
+
+    background: url("../../img/CoordiFinder/close.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.button {
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    width: 97px;
+    height: 85px;
+
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 45px;
+}
+
+.active {
+    background-color: aqua;
+}
+
+.imageBox {
+    box-sizing: border-box;
+    border-radius: 30px;
+    display: block;
+    width: 200px;
+    height: 125px;
+
+    background: #ffffff;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    background-image: url("../../img/CoordiFinder/uploadBox.png");
+    background-repeat: no-repeat;
+    background-position: 77px 25px;
+    background-size: 45px;
+}
+
+.imagelabel {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    cursor: pointer;
+    position: relative;
+    bottom: 6px;
+}
+
+.imagelabel:hover {
+    background: #00000033;
+}
+
+.imageBoxText {
+    position: relative;
+    left: 24px;
+    top: 91px;
+}

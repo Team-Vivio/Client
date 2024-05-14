@@ -1,0 +1,276 @@
+@font-face {
+	font-family: "NanumSquareRoundOTF";
+	src: url(/public/fonts/NanumSquareRoundR.ttf) format("truetype");
+}
+
+.passwordModal {
+	display: flex;
+	width: 700px;
+	height: 374px;
+	margin-top: -560px;
+	padding: 15px 20px;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 20px;
+	border: 1px solid #fff;
+	background: #fff;
+	box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.1);
+	color: black;
+	font-family: "NanumSquareRoundOTF";
+	font-size: 15px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 130%;
+}
+
+.passwordDiv {
+	margin-top: 50px;
+	font-family: "NanumSquareRoundOTF";
+	font-size: 18px;
+	font-weight: 800;
+}
+
+.passwordInput {
+	margin-left: 20px;
+	width: 300px;
+	height: 34px;
+	padding-left: 15px;
+	border-radius: 20px;
+	border: 1px solid #b2b2b2;
+	font-size: 18px;
+	font-weight: bold;
+	font-family: "NanumSquareRoundOTF";
+}
+
+.passwordBtn {
+	margin-top: 130px;
+	width: 200px;
+	height: 40px;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	font-family: "NanumSquareRoundOTF";
+	background-color: #ffd439;
+	border: none;
+	border-radius: 20px;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+}
+/*  1. 모달 내부 스타일링을 바꾼다(현재 클로버대로 스타일링 되있는 상태)
+2. 모달을 닫는 버튼을 만든다(혹은 바깥영역 클릭하면 닫히게(setModalOpen(false)이걸 실행하는 함수를 만들어서  onCLick같은거로
+연결하면 되지 않을까 */
+
+::placeholder {
+	color: #bbbbbb;
+}
+
+.emailModal {
+	display: flex;
+	width: 700px;
+	height: 374px;
+	margin: auto;
+	margin-top: -560px;
+	padding: 15px 20px;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 30px;
+	border: 1px solid #fff;
+	background: #fff;
+	box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.1);
+	color: black;
+	font-family: "NanumSquareRoundOTF";
+	font-size: 15px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 130%;
+}
+
+.modalXBtn {
+	cursor: pointer;
+	border: none;
+	background-color: #fff;
+	margin-left: 660px;
+}
+
+.header {
+	padding-bottom: 45px;
+	font-family: "NanumSquareRoundOTF";
+	font-weight: 800;
+	font-size: 25px;
+}
+
+.nameDiv {
+	margin-left: 35px;
+	font-family: "NanumSquareRoundOTF";
+	margin-bottom: 30px;
+	font-weight: 600;
+	font-size: 18px;
+}
+
+.nameInput {
+	margin-left: 20px;
+	font-family: "NanumSquareRoundOTF";
+	width: 200px;
+	height: 34px;
+	padding-left: 10px;
+	border-radius: 20px;
+	border: 1px solid #b2b2b2;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.birthDiv {
+	margin-bottom: 30px;
+	font-family: "NanumSquareRoundOTF";
+	font-weight: 600;
+	font-size: 18px;
+}
+
+.yearInput {
+	margin-left: 20px;
+	font-family: "NanumSquareRoundOTF";
+	width: 80px;
+	height: 34px;
+	border-radius: 20px;
+	border: 1px solid #b2b2b2;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.monthInput {
+	margin-left: 8px;
+	width: 50px;
+	height: 34px;
+	border-radius: 20px;
+	border: 1px solid #b2b2b2;
+	font-family: "NanumSquareRoundOTF";
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.dayInput {
+	margin-left: 8px;
+	width: 50px;
+	height: 34px;
+	border-radius: 20px;
+	border: 1px solid #b2b2b2;
+	font-family: "NanumSquareRoundOTF";
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.phoneDiv {
+	margin-bottom: 50px;
+	font-weight: 600;
+	font-size: 18px;
+	font-family: "NanumSquareRoundOTF";
+}
+
+.phoneInput {
+	margin-left: 20px;
+	padding-left: 10px;
+	width: 200px;
+	height: 34px;
+	border-radius: 20px;
+	border: 1px solid #b2b2b2;
+	font-family: "NanumSquareRoundOTF";
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.checkBtn {
+	width: 200px;
+	height: 40px;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	background-color: #ffd439;
+	border: none;
+	border-radius: 20px;
+	font-family: "NanumSquareRoundOTF";
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.emailResult {
+	margin-top: 90px;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: "NanumSquareRoundOTF";
+}
+
+.ChangePasswordModal {
+	display: flex;
+	width: 700px;
+	height: 374px;
+	margin-top: -560px;
+	padding: 15px 20px;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 20px;
+	border: 1px solid #fff;
+	background: #fff;
+	box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.1);
+	color: black;
+	font-family: "NanumSquareRoundOTF";
+	font-size: 15px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 130%;
+}
+
+.changePasswordheader {
+	padding-bottom: 60px;
+	font-family: "NanumSquareRoundOTF";
+	font-weight: 800;
+	font-size: 25px;
+}
+
+.curPasswordDiv {
+	margin-bottom: 50px;
+	font-weight: 600;
+	font-size: 18px;
+	font-family: "NanumSquareRoundOTF";
+}
+
+.newPasswordDiv {
+	margin-right: 17px;
+	font-weight: 600;
+	font-size: 18px;
+	font-family: "NanumSquareRoundOTF";
+}
+
+.curPasswordInput {
+	margin-left: 20px;
+	padding-left: 10px;
+	width: 250px;
+	height: 34px;
+	border-radius: 20px;
+	border: 1px solid #b2b2b2;
+	font-family: "NanumSquareRoundOTF";
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.newPasswordInput {
+	margin-left: 20px;
+	padding-left: 10px;
+	width: 250px;
+	height: 34px;
+	border-radius: 20px;
+	border: 1px solid #b2b2b2;
+	font-family: "NanumSquareRoundOTF";
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.newPasswordWarning {
+	margin-left: 90px;
+	margin-bottom: 60px;
+	font-size: 12px;
+	font-weight: bold;
+	font-family: "NanumSquareRoundOTF";
+	color: #bbbbbb;
+}

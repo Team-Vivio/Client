@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
+import { useCookies } from "react-cookie";
 import HorizonLine from "./HorizontalLine";
 import styles from "../../../styles/LoginPage.module.css";
 import mainLogo from "../../../img/VivioLogo.png";
@@ -11,10 +12,10 @@ import FindEmailModal from "../../component/Modal/FindEmailModal";
 function Home() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [token, setToken] = useState("");
 	const [showModalE, setShowModalE] = useState(false);
 	const [showModalP, setShowModalP] = useState(false);
 	const outsideRef = useRef();
+	const setCookie = useCookies(["token"]);
 
 	// 이메일 찾기 모달 핸들러
 	const showEmailModalHandler = () => {
@@ -51,7 +52,7 @@ function Home() {
 				})
 				.then((res) => {
 					if (res.data.isSuccess) {
-						setToken(res.data.result.token);
+						setCookie("token", res.data.result.token);
 						alert("로그인 성공");
 					} else {
 						alert("로그인이 실패. 이메일과 비밀번호를 확인해주세요");

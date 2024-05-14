@@ -5,6 +5,7 @@ import mainLogo from "../../../img/whiteLogo.png";
 import imageDragDrop from "../../../img/ImageDrag&Drop.png";
 import imageXBtn from "../../../img/clothXBtn.png";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 import ChangePasswordModal from "../../component/Modal/ChangePasswordModal";
 
 function MyPage() {
@@ -16,6 +17,8 @@ function MyPage() {
 	const formattedPhoneNumber = formatPhoneNumber(phone);
 	const [showModalP, setShowModalP] = useState(false);
 	const outsideRef = useRef();
+	const [cookies] = useCookies(["token"]);
+	const token = cookies.token;
 
 	//이미지
 	const [top, setTop] = useState([]);
@@ -24,8 +27,6 @@ function MyPage() {
 	const type2 = "top";
 	const [outer, setOuter] = useState([]);
 	const type3 = "bottom";
-	let token =
-		"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
 
 	// 비밀번호 변경 모달 핸들러
 	const showPasswordChangeModalHandler = () => {

@@ -220,6 +220,7 @@
 }
 
 .informationDiv {
+	margin-top: 100px;
 	height: 800px;
 	width: 640px;
 	display: flex;

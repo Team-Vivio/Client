@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import modalStyles from "../../../styles/Modal.module.css";
 import Xbtn from "../../../img/modalXbtn.png";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 function ChangePasswordModal(props) {
 	const passwordRegEx = /^[A-Za-z0-9]{8,20}$/;
 	const [curPassword, setCurPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
-	let token =
-		"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
+	const [cookies] = useCookies(["token"]);
+	const token = cookies.token;
 
 	// 현재 비밀번호 값
 	function onChangeCurPassword(e) {

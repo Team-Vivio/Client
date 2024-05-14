@@ -548,7 +548,7 @@ function CoordiFinderView({ viewModel }) {
                     event={modalEvent}
                     close={() => setModal(false)}
                 />
-                {/* 임시헤더 */}
+                {/* 헤더 공간 뺴기 */}
                 <div style={{ width: "100%", height: "83px" }}></div>
                 <div className={inputStyles.viewContainer}>
                     <InputView viewModel={viewModel} />

@@ -61,7 +61,7 @@ function Home() {
 	function onClickLogin() {
 		if (!(email === "" && password === "")) {
 			axios
-				.post("/users/signin", {
+				.post("https://backend.vivi-o.site/users/signin", {
 					email: email,
 					password: password,
 				})

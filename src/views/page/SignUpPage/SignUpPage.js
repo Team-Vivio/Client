@@ -85,7 +85,7 @@ function Signup() {
 	//이메일 인증번호 발급과 인증번호 저장 && "인증"버튼
 	function onEmailCheck() {
 		axios
-			.post("/users/emailcheck", {
+			.post("https://backend.vivi-o.site/users/emailcheck", {
 				email: email,
 			})
 			.then((res) => {
@@ -94,7 +94,7 @@ function Signup() {
 						alert("이메일로 인증번호를 보내드렸어요");
 						// api 호출
 						axios
-							.post("/users/sendEmail", {
+							.post("https://backend.vivi-o.site/users/sendEmail", {
 								email: email,
 							})
 							.then((res) => {
@@ -174,7 +174,7 @@ function Signup() {
 	function onSubmit() {
 		let date = new Date(`${year}-${month}-${day}`);
 		axios
-			.post("/users/signup", {
+			.post("https://backend.vivi-o.site/users/signup", {
 				name: name,
 				gender: gender,
 				email: email,

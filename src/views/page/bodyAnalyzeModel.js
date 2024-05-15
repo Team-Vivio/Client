@@ -106,7 +106,7 @@ class BodyAnalyzeModel {
         try {
             const result = await axios({
                 method: "POST",
-                url: `/fashions/`,
+                url: `https://backend.vivi-o.site/fashions/`,
                 mode: "cors",
                 headers: {
                     "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
@@ -136,7 +136,7 @@ class BodyAnalyzeModel {
             try {
                 const saveResult = await axios({
                     method: "POST",
-                    url: `/fashions/fashionRecommand`,
+                    url: `https://backend.vivi-o.site/fashions/fashionRecommand`,
                     mode: "cors",
                     headers: {
                         Authorization: `${this.token}`,
@@ -158,7 +158,7 @@ class BodyAnalyzeModel {
         try {
             const result = await axios({
                 method: "GET",
-                url: `/fashions/fashionRecommand/${fashionID}`,
+                url: `https://backend.vivi-o.site/fashions/fashionRecommand/${fashionID}`,
                 mode: "cors",
                 headers: {
                     Authorization: `${this.token}`,
@@ -182,7 +182,7 @@ class BodyAnalyzeModel {
         try {
             this.historyList = await axios({
                 method: "GET",
-                url: `/fashions/fashionRecommand`,
+                url: `https://backend.vivi-o.site/fashions/fashionRecommand`,
                 mode: "cors",
                 headers: {
                     Authorization: `${this.token}`,

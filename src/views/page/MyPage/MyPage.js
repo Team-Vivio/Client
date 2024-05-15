@@ -61,7 +61,7 @@ function MyPage() {
 
 	// 아우터 이미지 삭제하기
 	const handleDeleteOuterImage = (id) => {
-		axios.delete(`/users/closet/${type1}/${id}`, {
+		axios.delete(`https://backend.vivi-o.site/users/closet/${type1}/${id}`, {
 			headers: {
 				Authorization: token,
 			},
@@ -91,7 +91,7 @@ function MyPage() {
 
 	// 상의 이미지 삭제하기
 	const handleDeleteTopImage = (id) => {
-		axios.delete(`/users/closet/${type2}/${id}`, {
+		axios.delete(`https://backend.vivi-o.site/users/closet/${type2}/${id}`, {
 			headers: {
 				Authorization: token,
 			},
@@ -119,7 +119,7 @@ function MyPage() {
 
 	// 하의 이미지 삭제하기
 	const handleDeleteBottomImage = (id) => {
-		axios.delete(`/users/closet/${type3}/${id}`, {
+		axios.delete(`https://backend.vivi-o.site/users/closet/${type3}/${id}`, {
 			headers: {
 				Authorization: token,
 			},
@@ -131,7 +131,7 @@ function MyPage() {
 	// 마이페이지 불러올 때, 토큰 값 넘겨 정보 받아오기
 	useEffect(() => {
 		axios
-			.get("/users/userInfo", {
+			.get("https://backend.vivi-o.site/users/userInfo", {
 				headers: {
 					Authorization: token,
 				},
@@ -169,7 +169,7 @@ function MyPage() {
 	// 나만의 옷장 아우터 불러오기
 	useEffect(() => {
 		axios
-			.get(`/users/closet/${type1}`, {
+			.get(`https://backend.vivi-o.site/users/closet/${type1}`, {
 				headers: {
 					Authorization: token,
 				},
@@ -187,7 +187,7 @@ function MyPage() {
 	// 나만의 옷장 상의 불러오기
 	useEffect(() => {
 		axios
-			.get(`/users/closet/${type2}`, {
+			.get(`https://backend.vivi-o.site/users/closet/${type2}`, {
 				headers: {
 					Authorization: token,
 				},
@@ -205,7 +205,7 @@ function MyPage() {
 	// 나만의 옷장 하의 불러오기
 	useEffect(() => {
 		axios
-			.get(`/users/closet/${type3}`, {
+			.get(`https://backend.vivi-o.site/users/closet/${type3}`, {
 				headers: {
 					Authorization: token,
 				},
@@ -235,7 +235,7 @@ function MyPage() {
 		formData.append("image", data);
 
 		axios
-			.post("/users/closet", formData, {
+			.post("https://backend.vivi-o.site/users/closet", formData, {
 				headers: {
 					Authorization: token,
 				},

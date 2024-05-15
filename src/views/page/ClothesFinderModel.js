@@ -71,7 +71,7 @@ class ClothesFinderModel {
         try {
             const response = await axios({
                 method: "POST",
-                url: `/search/clothes`,
+                url: `https://backend.vivi-o.site/search/clothes`,
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },

@@ -19,7 +19,7 @@ function Header() {
 
 	// 토큰이 있을 시, 헤더 바꾸기
 	useEffect(() => {
-		if (cookies.token === "undefined") {
+		if (!cookies.token || cookies.token === "undefined") {
 			setIsuser(false);
 		} else {
 			setIsuser(true);

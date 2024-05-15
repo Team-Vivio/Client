@@ -95,7 +95,7 @@ class ToneAnalyzeModel {
         try {
             this.resultList = await axios({
                 method: "POST",
-                url: `/colors/`,
+                url: `https://backend.vivi-o.site/colors/`,
                 mode: "cors",
                 headers: {
                     "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
@@ -136,7 +136,7 @@ class ToneAnalyzeModel {
             try {
                 const saveResult = await axios({
                     method: "POST",
-                    url: `/colors/personalColor`,
+                    url: `https://backend.vivi-o.site/colors/personalColor`,
                     mode: "cors",
                     headers: {
                         Authorization: `${accessToken}`,
@@ -164,7 +164,7 @@ class ToneAnalyzeModel {
         try {
             this.resultList = await axios({
                 method: "GET",
-                url: `/colors/personalColor/${personalColorId}`,
+                url: `https://backend.vivi-o.site/colors/personalColor/${personalColorId}`,
                 mode: "cors",
                 headers: {
                     Authorization: `${accessToken}`,
@@ -185,7 +185,7 @@ class ToneAnalyzeModel {
         try {
             this.historyList = await axios({
                 method: "GET",
-                url: `/colors/personalColor`,
+                url: `https://backend.vivi-o.site/colors/personalColor`,
                 mode: "cors",
                 headers: {
                     Authorization: `${accessToken}`,

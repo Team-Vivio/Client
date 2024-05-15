@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../../styles/page/main.module.css';
-
 import nextbutton from '../../nextB.png';
 import prevbutton from '../../prevB.png';
 import vivio from '../../VIVIOmain.png';
 
 function main() {
-
+    
     const activate1 = (e) => {
         const slider = document.querySelector(".slider");
         const items = document.querySelectorAll(`.${styles.item}`);

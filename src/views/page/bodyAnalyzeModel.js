@@ -2,7 +2,6 @@ import Coin1 from "../../img/bodyAnalyze/Coin.png";
 import Body1 from "../../img/bodyAnalyze/Body1.png";
 import axios from "axios";
 import { Component } from "react";
-import { useCookies } from "react-cookie";
 
 class BodyAnalyzeModel {
     constructor() {
@@ -16,8 +15,6 @@ class BodyAnalyzeModel {
         this.uploadedImg = null;
         this.formData = new FormData();
         this.color = null;
-        this.cookies = useCookies(["token"]);
-        this.token = this.cookies.token;
     }
     setGender(value) {
         this.gender = value;

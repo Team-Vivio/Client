@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useCookies } from "react-cookie";
 
 class CoordiFinderModel {
     constructor() {
@@ -13,8 +12,6 @@ class CoordiFinderModel {
         this.historyList = null;
         this.resultList = null;
         this.formData = new FormData();
-        this.cookies = useCookies(["token"]);
-        this.token = this.cookies.token;
     }
     dataCheck() {
         return (

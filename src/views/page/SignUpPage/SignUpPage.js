@@ -126,7 +126,7 @@ function Signup() {
 	const emailCheck = (email) => {
 		return emailRegEx.test(email); //형식에 맞을 경우, true 리턴
 	};
-
+	//테스트용 줏걱
 	//회원정보 입력값 체크
 	function onSubmitCheck() {
 		if (gender === 0) {

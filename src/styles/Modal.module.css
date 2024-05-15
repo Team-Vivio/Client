@@ -4,10 +4,12 @@
 }
 
 .passwordModal {
+	margin-left: 29.5%;
+	margin-top: -29.5%;
+	position: absolute;
 	display: flex;
 	width: 700px;
 	height: 374px;
-	margin-top: -560px;
 	padding: 15px 20px;
 	flex-direction: column;
 	align-items: center;
@@ -21,13 +23,15 @@
 	font-style: normal;
 	font-weight: 400;
 	line-height: 130%;
+	z-index: 100;
 }
 
 .passwordDiv {
-	margin-top: 50px;
+	margin-top: 40px;
 	font-family: "NanumSquareRoundOTF";
 	font-size: 18px;
 	font-weight: 800;
+	margin-bottom: 10px;
 }
 
 .passwordInput {
@@ -42,8 +46,13 @@
 	font-family: "NanumSquareRoundOTF";
 }
 
+.PasswordWarning {
+	font-family: "NanumSquareRoundOTF";
+	font-size: 12px;
+}
+
 .passwordBtn {
-	margin-top: 130px;
+	margin-top: 80px;
 	width: 200px;
 	height: 40px;
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -64,11 +73,13 @@
 }
 
 .emailModal {
+	margin-left: 29.5%;
+	margin-top: -29.5%;
+	position: absolute;
+	z-index: 100;
 	display: flex;
 	width: 700px;
 	height: 374px;
-	margin: auto;
-	margin-top: -560px;
 	padding: 15px 20px;
 	flex-direction: column;
 	align-items: center;
@@ -194,17 +205,62 @@
 }
 
 .emailResult {
-	margin-top: 90px;
+	margin-top: 70px;
 	font-size: 20px;
 	font-weight: bold;
 	font-family: "NanumSquareRoundOTF";
 }
 
+.emailResultBtn {
+	margin-top: 120px;
+	width: 200px;
+	height: 40px;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	background-color: #ffd439;
+	border: none;
+	border-radius: 20px;
+	font-family: "NanumSquareRoundOTF";
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+@keyframes rotate {
+	from {
+		-webkit-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	to {
+		-webkit-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+.Spinner {
+	animation: rotate 3s infinite;
+	margin-top: 60px;
+	width: 80px;
+	height: 80px;
+
+	background-image: url("../img/Passwordloading.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
 .ChangePasswordModal {
+	margin-top: -37.5%;
+	margin-left: 29.5%;
+	/* margin-top: -641px;
+	margin-left: 502px; */
+	position: absolute;
+	z-index: 100px;
 	display: flex;
 	width: 700px;
 	height: 374px;
-	margin-top: -560px;
 	padding: 15px 20px;
 	flex-direction: column;
 	align-items: center;
@@ -229,6 +285,8 @@
 }
 
 .curPasswordDiv {
+	display: flex;
+	align-items: center;
 	margin-bottom: 50px;
 	font-weight: 600;
 	font-size: 18px;
@@ -236,6 +294,8 @@
 }
 
 .newPasswordDiv {
+	display: flex;
+	align-items: center;
 	margin-right: 17px;
 	font-weight: 600;
 	font-size: 18px;

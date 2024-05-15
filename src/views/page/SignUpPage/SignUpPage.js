@@ -21,6 +21,11 @@ function Signup() {
 	const [code, setCode] = useState("");
 	const [emailCodeResponse, setEmailCodeResponse] = useState("");
 
+	// 메인 로고 클릭 시 메인 페이지 이동
+	function handleMainClick() {
+		window.location.href = "/";
+	}
+
 	//전화번호 자동 하이픈
 	const [values, setValues] = useState({
 		numberValue: "",
@@ -182,6 +187,7 @@ function Signup() {
 			.then((res) => {
 				if (res.data.isSuccess) {
 					alert("회원가입이 성공적으로 완료되었습니다");
+					window.location.href = "/Login";
 				} else {
 					alert("오류가 발생하여 나중에 다시 시도해주세요");
 				}
@@ -194,7 +200,12 @@ function Signup() {
 			className={styles.page}
 		>
 			<div>
-				<img src={mainLogo} alt="logo" />
+				<img
+					className={styles.logo}
+					onClick={handleMainClick}
+					src={mainLogo}
+					alt="logo"
+				/>
 			</div>
 			<div className={styles.title}>생생한 패션 생활, ViVio에서 시작하세요</div>
 			<div className={styles.box}>

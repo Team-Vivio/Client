@@ -3,6 +3,16 @@
 	src: url(/public/fonts/NanumSquareRoundR.ttf) format("truetype");
 }
 
+.blurpage {
+	filter: blur(5px);
+	display: flex;
+	overflow: hidden;
+	flex-direction: row;
+	font-family: "NanumSquareRoundOTF";
+	font-weight: bold;
+	z-index: 1;
+}
+
 .mainDiv {
 	display: flex;
 	overflow: hidden;

@@ -16,7 +16,7 @@ function Header() {
 	function handleHomeClick() {
 		window.location.href = "/";
 	}
-
+	//
 	// 토큰이 있을 시, 헤더 바꾸기
 	useEffect(() => {
 		if (!cookies.token || cookies.token === "undefined") {

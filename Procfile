@@ -1,1 +1,1 @@
-web: npm update && npm run preview
+web: npm install && npm run preview

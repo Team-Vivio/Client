@@ -177,9 +177,11 @@ function InputView({ viewModel }) {
                 </span>
                 <button
                     className={
-                        gender === 1
-                            ? `${inputStyles.button} ${inputStyles.active}`
-                            : `${inputStyles.button}`
+                        gender === 0
+                            ? inputStyles.Btn
+                            : gender === 1
+                            ? inputStyles.BtnUp
+                            : inputStyles.BtnDown
                     }
                     style={{
                         marginLeft: "257px",
@@ -193,9 +195,11 @@ function InputView({ viewModel }) {
                 ></button>
                 <button
                     className={
-                        gender === 2
-                            ? `${inputStyles.button} ${inputStyles.active}`
-                            : `${inputStyles.button}`
+                        gender === 0
+                            ? inputStyles.Btn
+                            : gender === 2
+                            ? inputStyles.BtnUp
+                            : inputStyles.BtnDown
                     }
                     style={{ backgroundImage: "url(" + gender2 + ")" }}
                     onClick={() => {

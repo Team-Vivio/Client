@@ -162,7 +162,12 @@ function InputView({ viewModel }) {
                     코디해드립니다
                 </span>
                 <label className="switch">
-                    <input type="checkbox"></input>
+                    <input
+                        type="checkbox"
+                        onClick={(e) => {
+                            viewModel.setClosetActive(e.target.checked);
+                        }}
+                    ></input>
                     <span className="slider round"></span>
                 </label>
             </div>
@@ -172,9 +177,11 @@ function InputView({ viewModel }) {
                 </span>
                 <button
                     className={
-                        gender === 1
-                            ? `${inputStyles.button} ${inputStyles.active}`
-                            : `${inputStyles.button}`
+                        gender === 0
+                            ? inputStyles.Btn
+                            : gender === 1
+                            ? inputStyles.BtnUp
+                            : inputStyles.BtnDown
                     }
                     style={{
                         marginLeft: "257px",
@@ -188,9 +195,11 @@ function InputView({ viewModel }) {
                 ></button>
                 <button
                     className={
-                        gender === 2
-                            ? `${inputStyles.button} ${inputStyles.active}`
-                            : `${inputStyles.button}`
+                        gender === 0
+                            ? inputStyles.Btn
+                            : gender === 2
+                            ? inputStyles.BtnUp
+                            : inputStyles.BtnDown
                     }
                     style={{ backgroundImage: "url(" + gender2 + ")" }}
                     onClick={() => {
@@ -401,7 +410,7 @@ function ResultView({ viewModel, state, result, event }) {
                         </Slider>
                     </div>
                     <div className={resultStyles.restartButton} onClick={event}>
-                        {"시작      -10"}
+                        {"시작"}
                     </div>
                 </div>
             ) : null}

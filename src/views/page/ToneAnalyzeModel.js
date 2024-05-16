@@ -4,7 +4,7 @@ class ToneAnalyzeModel {
     constructor() {
         this.gender = null; //1, 2
         this.resultList = null;
-        this.name = "OO";
+        this.name = "이름";
         this.historyList = null;
         this.uploadedImg = null;
 

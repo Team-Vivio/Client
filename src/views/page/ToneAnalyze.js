@@ -11,13 +11,22 @@ function Btn({ left, top, img, size, active, event }) {
         position: "absolute",
         left: left,
         top: top,
-        backgroundColor: active ? "#00ff00" : "#ffffff",
         backgroundImage: `url(${img})`,
         backgroundSize: size,
     };
 
     return (
-        <button style={info} className={styles.ImgBtn} onClick={event}></button>
+        <button
+            style={info}
+            className={
+                active === 0
+                    ? styles.Btn
+                    : active === 1
+                    ? styles.BtnUp
+                    : styles.BtnDown
+            }
+            onClick={event}
+        ></button>
     );
 }
 

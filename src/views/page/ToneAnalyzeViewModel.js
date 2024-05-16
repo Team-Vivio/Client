@@ -75,7 +75,7 @@ class ToneAnalyzeViewModel {
                 img: Gender1,
                 size: "45px",
                 id: 1,
-                active: false,
+                active: 0,
             },
             {
                 left: "1289px",
@@ -83,7 +83,7 @@ class ToneAnalyzeViewModel {
                 img: Gender2,
                 size: "45px",
                 id: 2,
-                active: false,
+                active: 0,
             },
         ];
         this.ImgBoxList = [
@@ -114,10 +114,10 @@ class ToneAnalyzeViewModel {
         this.GenderBtns.forEach((element) => {
             if (element.id === value) {
                 // console.log(element.id + "Actived");
-                element.active = true;
+                element.active = 1;
             } else {
                 // console.log(element.id + "Disactived");
-                element.active = false;
+                element.active = -1;
             }
         });
     }

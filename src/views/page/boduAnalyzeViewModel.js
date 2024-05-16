@@ -72,7 +72,7 @@ class BodyAnalyzeViewModel {
                 img: Gender1,
                 size: "45px",
                 id: 1,
-                active: false,
+                active: 0, //0이면 누르기전 1이면 활성화(Up) -1이면 비활성화(Down)
             },
             {
                 left: "304px",
@@ -80,7 +80,7 @@ class BodyAnalyzeViewModel {
                 img: Gender2,
                 size: "45px",
                 id: 2,
-                active: false,
+                active: 0,
             },
         ];
         this.BodyTypeBtns = [
@@ -90,7 +90,7 @@ class BodyAnalyzeViewModel {
                 img: Body1,
                 size: "25px",
                 id: 1,
-                active: false,
+                active: 0,
             },
             {
                 left: "698px",
@@ -98,7 +98,7 @@ class BodyAnalyzeViewModel {
                 img: Body2,
                 size: "25px",
                 id: 2,
-                active: false,
+                active: 0,
             },
             {
                 left: "816px",
@@ -106,7 +106,7 @@ class BodyAnalyzeViewModel {
                 img: Body3,
                 size: "30px",
                 id: 3,
-                active: false,
+                active: 0,
             },
         ];
         this.modalActive = false;
@@ -120,10 +120,10 @@ class BodyAnalyzeViewModel {
         this.GenderBtns.forEach((element) => {
             if (element.id === value) {
                 console.log(element.id + "Actived");
-                element.active = true;
+                element.active = 1;
             } else {
                 console.log(element.id + "Disactived");
-                element.active = false;
+                element.active = -1;
             }
         });
     }
@@ -132,10 +132,10 @@ class BodyAnalyzeViewModel {
         this.BodyTypeBtns.forEach((element) => {
             if (element.id === value) {
                 console.log(element.id + "Actived");
-                element.active = true;
+                element.active = 1;
             } else {
                 console.log(element.id + "Disactived");
-                element.active = false;
+                element.active = -1;
             }
         });
     }

@@ -128,6 +128,10 @@
     justify-content: center;
 }
 
+.imageShowItemBlur {
+    opacity: 50%;
+}
+
 .image {
     max-width: 70px;
     max-height: 80px;
@@ -273,4 +277,11 @@
     position: relative;
     left: 24px;
     top: 91px;
+}
+
+.redText {
+    height: 10px;
+    font-size: 10px;
+
+    color: #ff0000;
 }

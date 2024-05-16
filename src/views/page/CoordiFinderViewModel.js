@@ -37,8 +37,14 @@ class CoordiFinderViewModel {
     setClosetActive(value) {
         this.model.setClosetActive(value);
     }
+    getTopListSize() {
+        return this.model.getTopListSize();
+    }
     setTopList(list) {
         this.model.setTopList(list);
+    }
+    getBottomListSize() {
+        return this.model.getBottomListSize();
     }
     setBottomList(list) {
         this.model.setBottomList(list);

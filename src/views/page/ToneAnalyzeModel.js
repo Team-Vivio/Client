@@ -27,7 +27,7 @@ class ToneAnalyzeModel {
     }
     getAllHistoryList() {
         if (this.historyList === null) {
-            console.log("No History");
+            // console.log("No History");
             return null;
         } else {
             let list = this.historyList.data.result.viewListResultDTOS;
@@ -191,7 +191,7 @@ class ToneAnalyzeModel {
                     Authorization: `${accessToken}`,
                 },
             });
-            console.log(this.historyList);
+            // console.log(this.historyList);
         } catch (error) {
             console.log(error);
         }

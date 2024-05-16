@@ -127,53 +127,66 @@ function Modal({ viewModel, state, type, event, close }) {
 }
 
 function InputSetting({ viewModel }) {
-    const [type, setType] = useState(viewModel.getType());
+    const [btn1, setBtn1] = useState(true);
+    const [btn2, setBtn2] = useState(true);
+    const [btnValue, setBtnValue] = useState(0);
+
+    function ClickBtn1() {
+        setBtnValue(1);
+        setBtn1(true);
+        setBtn2(false);
+        viewModel.setType("top");
+    }
+    function ClickBtn2() {
+        setBtnValue(2);
+        setBtn1(false);
+        setBtn2(true);
+        viewModel.setType("bottom");
+    }
     return (
         <div>
             <div className={styles.title}>비슷한 옷 찾기</div>
-            <div className={styles.question_2}>
+            <div className={styles.question_1}>
                 Q. 찾고 싶은 옷의 종류를 선택해주세요
             </div>
-            <div className={styles.question_3}>
+            <div className={styles.question_2}>
                 Q. 찾고 싶은 옷의 사진을 업로드 해주세요
             </div>
             <button
                 className={
-                    type === "top"
-                        ? `${styles.BtnActive}`
-                        : `${styles.BtnInActive}`
+                    !btn1
+                        ? styles.BtnDown
+                        : btn1 && btnValue === 0
+                        ? styles.Btn
+                        : styles.BtnUp
                 }
                 style={{
+                    position: "absolute",
                     width: "97px",
                     height: "85px",
                     left: "606px",
-                    top: "331px",
+                    top: "281px",
                     backgroundImage: "url(" + img_top + ")",
                 }}
-                onClick={() => {
-                    viewModel.setType("top");
-                    setType("top");
-                    console.log("type " + viewModel.getType());
-                }}
+                onClick={ClickBtn1}
             />
             <button
                 className={
-                    type === "bottom"
-                        ? `${styles.BtnActive}`
-                        : `${styles.BtnInActive}`
+                    !btn2
+                        ? styles.BtnDown
+                        : btn2 && btnValue === 0
+                        ? styles.Btn
+                        : styles.BtnUp
                 }
                 style={{
+                    position: "absolute",
                     width: "97px",
                     height: "85px",
                     left: "776px",
-                    top: "331px",
+                    top: "281px",
                     backgroundImage: "url(" + img_bot + ")",
                 }}
-                onClick={() => {
-                    viewModel.setType("bottom");
-                    setType("bottom");
-                    console.log("type " + viewModel.getType());
-                }}
+                onClick={ClickBtn2}
             />
             <DropBox viewModel={viewModel} />
         </div>
@@ -181,7 +194,7 @@ function InputSetting({ viewModel }) {
 }
 
 function ResultBox({ viewModel, state, result, event }) {
-    console.log("result Img : " + viewModel.getUploadedImgLink());
+    // console.log("result Img : " + viewModel.getUploadedImgLink());
     let type =
         viewModel.getType() === "top"
             ? "상의"
@@ -202,7 +215,7 @@ function ResultBox({ viewModel, state, result, event }) {
                         유명인이나 연예인이 입은 옷 한번 쯤 궁금하지 않았나요?
                         ViViO에서 찾아드립니다!
                     </div>
-                    <button className={styles.StartBtn} onClick={event}>
+                    <button className={styles.StartBtn} onClick={event} onMouse>
                         시작
                     </button>
                 </div>

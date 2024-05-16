@@ -132,7 +132,6 @@ function LoadingBox({ event }) {
 function ResultBox({ viewModel, event }) {
     const name = viewModel.getName();
     let infoList = viewModel.getAllResultList();
-    console.log(viewModel.getUploadedImg());
 
     const season =
         infoList.session === "spring"
@@ -492,7 +491,6 @@ function ToneAnalyze(props) {
     }
     async function getPerCol(fashionID) {
         await props.viewModel.getPerCol(fashionID);
-        console.log(props.viewModel.getAllResultList());
         if (props.viewModel.getAllResultList() === null) {
             setModal(2); //결과를 못받으면
             props.viewModel.setModalActive(true);

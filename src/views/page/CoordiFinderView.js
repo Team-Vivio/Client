@@ -401,7 +401,7 @@ function ResultView({ viewModel, state, result, event }) {
                         </Slider>
                     </div>
                     <div className={resultStyles.restartButton} onClick={event}>
-                        {"시작      -10"}
+                        {"시작"}
                     </div>
                 </div>
             ) : null}

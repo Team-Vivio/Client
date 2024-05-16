@@ -154,7 +154,7 @@ function StartBtn({ left, top, event }) {
     };
     return (
         <button style={pos} className={styles.StartBtn} onClick={event}>
-            <span>시작 </span>
+            <span>시작</span>
         </button>
     );
 }
@@ -238,9 +238,7 @@ function ResultBox({ name = "OO", infoList, event }) {
                 </Slider>
             </div>
             <button className={styles.RestartBtn} onClick={event}>
-                <span>시작 </span>
-                <img src={Coin1} className={styles.Coin}></img>
-                <span>-10</span>
+                <span>시작</span>
             </button>
         </div>
     );

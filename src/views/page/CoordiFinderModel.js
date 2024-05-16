@@ -15,10 +15,11 @@ class CoordiFinderModel {
         this.token = null;
     }
     setToken(token) {
-        if (token === null || token === undefined)
-            token =
-                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
-        else console.log("토큰 있습니당");
+        if (token === null || token === undefined) {
+            console.log("토큰 없습니당");
+            // token =
+            //     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
+        } else console.log("토큰 있습니당");
         this.token = token;
     }
     dataCheck() {
@@ -51,7 +52,11 @@ class CoordiFinderModel {
     }
     getHistoryList() {
         if (this.historyList === null) {
-            return null;
+            let list = [];
+            for (let i = 0; i < 7; i++) {
+                list.push({ id: "", image: "", style: "" });
+            }
+            return list;
         } else {
             let list = this.historyList.data.result.items;
             if (list.length < 7)

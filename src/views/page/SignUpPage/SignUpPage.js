@@ -21,6 +21,11 @@ function Signup() {
 	const [code, setCode] = useState("");
 	const [emailCodeResponse, setEmailCodeResponse] = useState("");
 
+	// 메인 로고 클릭 시 메인 페이지 이동
+	function handleMainClick() {
+		window.location.href = "/";
+	}
+
 	//전화번호 자동 하이픈
 	const [values, setValues] = useState({
 		numberValue: "",
@@ -80,7 +85,7 @@ function Signup() {
 	//이메일 인증번호 발급과 인증번호 저장 && "인증"버튼
 	function onEmailCheck() {
 		axios
-			.post("/users/emailcheck", {
+			.post("https://backend.vivi-o.site/users/emailcheck", {
 				email: email,
 			})
 			.then((res) => {
@@ -89,7 +94,7 @@ function Signup() {
 						alert("이메일로 인증번호를 보내드렸어요");
 						// api 호출
 						axios
-							.post("/users/sendEmail", {
+							.post("https://backend.vivi-o.site/users/sendEmail", {
 								email: email,
 							})
 							.then((res) => {
@@ -121,7 +126,7 @@ function Signup() {
 	const emailCheck = (email) => {
 		return emailRegEx.test(email); //형식에 맞을 경우, true 리턴
 	};
-
+	//테스트용 줏걱
 	//회원정보 입력값 체크
 	function onSubmitCheck() {
 		if (gender === 0) {
@@ -169,7 +174,7 @@ function Signup() {
 	function onSubmit() {
 		let date = new Date(`${year}-${month}-${day}`);
 		axios
-			.post("/users/signup", {
+			.post("https://backend.vivi-o.site/users/signup", {
 				name: name,
 				gender: gender,
 				email: email,
@@ -182,6 +187,7 @@ function Signup() {
 			.then((res) => {
 				if (res.data.isSuccess) {
 					alert("회원가입이 성공적으로 완료되었습니다");
+					window.location.href = "/Login";
 				} else {
 					alert("오류가 발생하여 나중에 다시 시도해주세요");
 				}
@@ -194,7 +200,12 @@ function Signup() {
 			className={styles.page}
 		>
 			<div>
-				<img src={mainLogo} alt="logo" />
+				<img
+					className={styles.logo}
+					onClick={handleMainClick}
+					src={mainLogo}
+					alt="logo"
+				/>
 			</div>
 			<div className={styles.title}>생생한 패션 생활, ViVio에서 시작하세요</div>
 			<div className={styles.box}>

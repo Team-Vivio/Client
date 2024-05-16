@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Slider from "react-slick";
 import "../../styles/bodyAnalyze/slick.css";
 import { SketchPicker } from "react-color";
+import { useCookies } from "react-cookie";
 
 //이미지
 import DropBox1 from "../../img/bodyAnalyze/DropBox.png";
@@ -14,13 +15,22 @@ function Btn({ left, top, img, size, active, event }) {
         position: "absolute",
         left: left,
         top: top,
-        backgroundColor: active ? "#00ff00" : "#ffffff",
         backgroundImage: `url(${img})`,
         backgroundSize: size,
     };
 
     return (
-        <button style={info} className={styles.ImgBtn} onClick={event}></button>
+        <button
+            style={info}
+            className={
+                active === 0
+                    ? styles.Btn
+                    : active === 1
+                    ? styles.BtnUp
+                    : styles.BtnDown
+            }
+            onClick={event}
+        ></button>
     );
 }
 
@@ -153,9 +163,7 @@ function StartBtn({ left, top, event }) {
     };
     return (
         <button style={pos} className={styles.StartBtn} onClick={event}>
-            <span>시작 </span>
-            <img src={Coin1} className={styles.Coin}></img>
-            <span>-10</span>
+            <span>시작</span>
         </button>
     );
 }
@@ -239,9 +247,7 @@ function ResultBox({ name = "OO", infoList, event }) {
                 </Slider>
             </div>
             <button className={styles.RestartBtn} onClick={event}>
-                <span>시작 </span>
-                <img src={Coin1} className={styles.Coin}></img>
-                <span>-10</span>
+                <span>시작</span>
             </button>
         </div>
     );
@@ -410,6 +416,9 @@ function BodyAnalyze(props) {
     const [boxState, setBoxState] = useState("main");
     const [history, setHistory] = useState(props.viewModel.getAllHistoryList());
 
+    const [cookies] = useCookies(["token"]);
+    const token = cookies.token;
+
     function setGender(value) {
         props.viewModel.setGender(value);
         setRenderFlag((renderFlag) => !renderFlag);
@@ -489,6 +498,7 @@ function BodyAnalyze(props) {
     let modalIndex = props.viewModel.getModalIndex(); //모달 메세지 유형 인덱스
 
     useEffect(() => {
+        props.viewModel.setToken(token);
         getHistory();
     }, []);
 

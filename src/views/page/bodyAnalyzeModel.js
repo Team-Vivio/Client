@@ -15,6 +15,15 @@ class BodyAnalyzeModel {
         this.uploadedImg = null;
         this.formData = new FormData();
         this.color = null;
+        this.token = null;
+    }
+    setToken(token) {
+        if (token === null || token === undefined) {
+            console.log("토큰 없슴당");
+            // token =
+            //     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
+        } else console.log("토큰 있습니당");
+        this.token = token;
     }
     setGender(value) {
         this.gender = value;
@@ -43,8 +52,11 @@ class BodyAnalyzeModel {
     }
     getAllHistoryList() {
         if (this.historyList === null) {
-            console.log("return null");
-            return null;
+            let list = [];
+            for (let i = 0; i < 7; i++) {
+                list.push({ image: "", type: "" });
+            }
+            return list;
         } else {
             let list = this.historyList.data.result.viewListResultDTOS;
             if (list.length < 7)
@@ -106,7 +118,7 @@ class BodyAnalyzeModel {
         try {
             const result = await axios({
                 method: "POST",
-                url: `/fashions/`,
+                url: `https://backend.vivi-o.site/fashions/`,
                 mode: "cors",
                 headers: {
                     "Content-Type": "multipart/form-data", // Content-Type을 반드시 이렇게 하여야 한다.
@@ -136,7 +148,7 @@ class BodyAnalyzeModel {
             try {
                 const saveResult = await axios({
                     method: "POST",
-                    url: `/fashions/fashionRecommand`,
+                    url: `https://backend.vivi-o.site/fashions/fashionRecommand`,
                     mode: "cors",
                     headers: {
                         Authorization: `${this.token}`,
@@ -158,7 +170,7 @@ class BodyAnalyzeModel {
         try {
             const result = await axios({
                 method: "GET",
-                url: `/fashions/fashionRecommand/${fashionID}`,
+                url: `https://backend.vivi-o.site/fashions/fashionRecommand/${fashionID}`,
                 mode: "cors",
                 headers: {
                     Authorization: `${this.token}`,
@@ -182,7 +194,7 @@ class BodyAnalyzeModel {
         try {
             this.historyList = await axios({
                 method: "GET",
-                url: `/fashions/fashionRecommand`,
+                url: `https://backend.vivi-o.site/fashions/fashionRecommand`,
                 mode: "cors",
                 headers: {
                     Authorization: `${this.token}`,

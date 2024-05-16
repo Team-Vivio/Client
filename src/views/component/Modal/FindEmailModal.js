@@ -191,7 +191,19 @@ function FindEmailModal(props) {
 					</button>
 				</>
 			)}
-			{!isFindEmail && <div className={modalStyles.emailResult}>{email}</div>}
+			{!isFindEmail && (
+				<div>
+					<div className={modalStyles.emailResult}>{email}</div>
+					<div>
+						<button
+							onClick={() => props.onClose(false)}
+							className={modalStyles.emailResultBtn}
+						>
+							확인
+						</button>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

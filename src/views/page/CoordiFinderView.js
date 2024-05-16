@@ -6,6 +6,7 @@ import "../../styles/CoordiFinder/Toggle.css";
 import { useState, useEffect, useRef } from "react";
 import Slider from "react-slick"; // react-slick 사용을 위해 import
 import "../../styles/CoordiFinder/slick.css";
+import { useCookies } from "react-cookie";
 
 //이미지
 import sample1 from "../../img/CoordiFinder/sample1.png";
@@ -14,7 +15,7 @@ import sample3 from "../../img/CoordiFinder/sample3.png";
 import gender1 from "../../img/CoordiFinder/gender1.png";
 import gender2 from "../../img/CoordiFinder/gender2.png";
 
-function ImageShow({ list, remove }) {
+function ImageShow({ list, remove, fail }) {
     const scrollRef = useRef(null);
     const [isDrag, setIsDrag] = useState(false);
     const [startX, setStartX] = useState();
@@ -47,7 +48,14 @@ function ImageShow({ list, remove }) {
             {list.length <= 0
                 ? null
                 : list.map((value, index) => (
-                      <div className={inputStyles.imageShowItem} key={index}>
+                      <div
+                          className={
+                              fail
+                                  ? `${inputStyles.imageShowItem} ${inputStyles.imageShowItemBlur}`
+                                  : `${inputStyles.imageShowItem}`
+                          }
+                          key={index}
+                      >
                           <img
                               className={inputStyles.image}
                               src={value.img}
@@ -72,7 +80,7 @@ function InputView({ viewModel }) {
     const [bottom, setBottom] = useState([]);
     const [outer, setOuter] = useState([]);
 
-    //그냥 다 같이 업뎃해줌 점점 MVVM은 없어져가는 중..
+    //다 같이 업뎃
     useEffect(() => {
         viewModel.setTopList(top);
         viewModel.setBottomList(bottom);
@@ -161,7 +169,12 @@ function InputView({ viewModel }) {
                     코디해드립니다
                 </span>
                 <label className="switch">
-                    <input type="checkbox"></input>
+                    <input
+                        type="checkbox"
+                        onClick={(e) => {
+                            viewModel.setClosetActive(e.target.checked);
+                        }}
+                    ></input>
                     <span className="slider round"></span>
                 </label>
             </div>
@@ -171,9 +184,11 @@ function InputView({ viewModel }) {
                 </span>
                 <button
                     className={
-                        gender === 1
-                            ? `${inputStyles.button} ${inputStyles.active}`
-                            : `${inputStyles.button}`
+                        gender === 0
+                            ? inputStyles.Btn
+                            : gender === 1
+                            ? inputStyles.BtnUp
+                            : inputStyles.BtnDown
                     }
                     style={{
                         marginLeft: "257px",
@@ -187,9 +202,11 @@ function InputView({ viewModel }) {
                 ></button>
                 <button
                     className={
-                        gender === 2
-                            ? `${inputStyles.button} ${inputStyles.active}`
-                            : `${inputStyles.button}`
+                        gender === 0
+                            ? inputStyles.Btn
+                            : gender === 2
+                            ? inputStyles.BtnUp
+                            : inputStyles.BtnDown
                     }
                     style={{ backgroundImage: "url(" + gender2 + ")" }}
                     onClick={() => {
@@ -201,7 +218,18 @@ function InputView({ viewModel }) {
             <div className={inputStyles.q2Item}>
                 <div className={`${inputStyles.whiteSmall}`}>
                     Q. 상의를 두 종류 이상 업로드해주세요
-                    <ImageShow list={top} remove={removeTop} />
+                    {viewModel.getTopListSize() < 2 ? (
+                        <div className={inputStyles.redText}>
+                            *사진을 두장 이상 올려주세요!
+                        </div>
+                    ) : (
+                        <div style={{ height: "10px" }}></div>
+                    )}
+                    <ImageShow
+                        list={top}
+                        remove={removeTop}
+                        fail={viewModel.getTopListSize() < 2}
+                    />
                 </div>
                 <div
                     className={inputStyles.imageBox}
@@ -228,7 +256,18 @@ function InputView({ viewModel }) {
             <div className={inputStyles.q2Item}>
                 <div className={`${inputStyles.whiteSmall} `}>
                     Q. 하의를 두 종류 이상 업로드해주세요
-                    <ImageShow list={bottom} remove={removeBotton} />
+                    {viewModel.getBottomListSize() < 2 ? (
+                        <div className={inputStyles.redText}>
+                            *사진을 두장 이상 올려주세요!
+                        </div>
+                    ) : (
+                        <div style={{ height: "10px" }}></div>
+                    )}
+                    <ImageShow
+                        list={bottom}
+                        remove={removeBotton}
+                        fail={viewModel.getBottomListSize() < 2}
+                    />
                 </div>
                 <div
                     className={inputStyles.imageBox}
@@ -319,7 +358,7 @@ function ResultView({ viewModel, state, result, event }) {
                         className={`${resultStyles.button}`}
                         onClick={event}
                     >
-                        {"시작      -10"}
+                        {"시작"}
                     </button>
                 </div>
             ) : state === "loading" ? (
@@ -400,7 +439,7 @@ function ResultView({ viewModel, state, result, event }) {
                         </Slider>
                     </div>
                     <div className={resultStyles.restartButton} onClick={event}>
-                        {"시작      -10"}
+                        {"시작"}
                     </div>
                 </div>
             ) : null}
@@ -482,12 +521,16 @@ function CoordiFinderView({ viewModel }) {
     const [modalType, setModalType] = useState(0);
     const [history, setHistory] = useState(viewModel.getHistoryList());
 
+    const [cookies] = useCookies(["token"]);
+    const token = cookies.token;
+
     async function getHistory() {
         await viewModel.getHistory();
         setHistory([...viewModel.getHistoryList()]);
     }
 
     useEffect(() => {
+        viewModel.setToken(token);
         getHistory();
     }, []);
 

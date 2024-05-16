@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 import HorizonLine from "./HorizontalLine";
 import styles from "../../../styles/LoginPage.module.css";
@@ -14,19 +14,33 @@ function Home() {
 	const [password, setPassword] = useState("");
 	const [showModalE, setShowModalE] = useState(false);
 	const [showModalP, setShowModalP] = useState(false);
+	const [blur, setBlur] = useState(false);
 	const outsideRef = useRef();
 	// eslint-disable-next-line no-unused-vars
 	const [_, setCookie] = useCookies(["token"]);
 
+	// 메인 로고 클릭 시 메인페이지로
+	function handleMainClick() {
+		window.location.href = "/";
+	}
+
+	useEffect(() => {
+		if (showModalE === false && showModalP === false) {
+			setBlur(false);
+		} else setBlur(true);
+	}, [showModalE, showModalP]);
+
 	// 이메일 찾기 모달 핸들러
-	const showEmailModalHandler = () => {
+	function showEmailModalHandler() {
 		setShowModalE(true);
-	};
+		setBlur(true);
+	}
 
 	// 비밀번호 찾기 모달 핸들러
-	const showPasswordModalHandler = () => {
+	function showPasswordModalHandler() {
 		setShowModalP(true);
-	};
+		setBlur(true);
+	}
 
 	// 이메일 값
 	function onChangeEmail(e) {
@@ -47,14 +61,14 @@ function Home() {
 	function onClickLogin() {
 		if (!(email === "" && password === "")) {
 			axios
-				.post("/users/signin", {
+				.post("https://backend.vivi-o.site/users/signin", {
 					email: email,
 					password: password,
 				})
 				.then((res) => {
 					if (res.data.isSuccess) {
 						setCookie("token", res.data.result.token);
-						alert("로그인 성공");
+						window.location.href = "/";
 					} else {
 						alert("로그인이 실패. 이메일과 비밀번호를 확인해주세요");
 					}
@@ -65,72 +79,79 @@ function Home() {
 	}
 
 	return (
-		<div
-			styles={{ width: window.screen.width, height: window.screen.height }}
-			className={styles.page}
-		>
-			<div className={styles.logo}>
-				<img src={mainLogo} alt="logo" />
-			</div>
-			<div className={styles.titleWrap}>
-				생생한 패션 생활, ViVio에서 시작하세요
-			</div>
-			<div className={styles.margin1}>
-				<button className={styles.btnGoogle}>
-					<img src={google} alt="googleLogo" />
-					구글로 시작하기
-				</button>
-			</div>
-			<div className={styles.margin2}>
-				<button className={styles.btnKakao}>
-					<img src={kakao} alt="kakaoLogo" />
-					카카오로 시작하기
-				</button>
-			</div>
-			<HorizonLine text="OR" />
-			<div className={styles.inputWrap}>
-				<div className={styles.inputTitle}>
-					<div>이메일</div>
-					<input
-						onChange={(e) => {
-							onChangeEmail(e);
-						}}
-						className={styles.textEP1}
-						placeholder="abcd@email.com"
+		<div className={styles.Bigpage}>
+			<div
+				styles={{ width: window.screen.width, height: window.screen.height }}
+				className={blur ? styles.blurpage : styles.page}
+			>
+				<div>
+					<img
+						className={styles.logo}
+						onClick={handleMainClick}
+						src={mainLogo}
+						alt="logo"
 					/>
 				</div>
-			</div>
-			<div className={styles.inputWrap}>
-				<div className={styles.inputTitle}>
-					비밀번호
-					<input
-						onChange={(e) => {
-							onChangePassword(e);
-						}}
-						type="password"
-						className={styles.textEP2}
-						placeholder="비밀번호를 입력해주세요"
-					/>
+				<div className={styles.titleWrap}>
+					생생한 패션 생활, ViVio에서 시작하세요
 				</div>
-			</div>
-			<div>
-				<button onClick={onClickLogin} className={styles.btnLogin}>
-					로그인
-				</button>
-			</div>
-			<div className={styles.bottomText1}>
-				이메일 혹은 비밀번호를 잊으셨나요?
-				<div onClick={showEmailModalHandler} className={styles.bottomfont}>
-					이메일 찾기
+				<div className={styles.margin1}>
+					<button className={styles.btnGoogle}>
+						<img src={google} alt="googleLogo" />
+						구글로 시작하기
+					</button>
 				</div>
-				<div onClick={showPasswordModalHandler} className={styles.bottomfont}>
-					비밀번호 찾기
+				<div className={styles.margin2}>
+					<button className={styles.btnKakao}>
+						<img src={kakao} alt="kakaoLogo" />
+						카카오로 시작하기
+					</button>
 				</div>
-			</div>
-			<div className={styles.bottomText2}>
-				아직 회원이 아니신가요?
-				<div onClick={handleSignupClick} className={styles.bottomfont}>
-					회원가입
+				<HorizonLine text="OR" />
+				<div className={styles.inputWrap}>
+					<div className={styles.inputTitle}>
+						<div>이메일</div>
+						<input
+							onChange={(e) => {
+								onChangeEmail(e);
+							}}
+							className={styles.textEP1}
+							placeholder="abcd@email.com"
+						/>
+					</div>
+				</div>
+				<div className={styles.inputWrap}>
+					<div className={styles.inputTitle}>
+						비밀번호
+						<input
+							onChange={(e) => {
+								onChangePassword(e);
+							}}
+							type="password"
+							className={styles.textEP2}
+							placeholder="비밀번호를 입력해주세요"
+						/>
+					</div>
+				</div>
+				<div>
+					<button onClick={onClickLogin} className={styles.btnLogin}>
+						로그인
+					</button>
+				</div>
+				<div className={styles.bottomText1}>
+					이메일 혹은 비밀번호를 잊으셨나요?
+					<div onClick={showEmailModalHandler} className={styles.bottomfont}>
+						이메일 찾기
+					</div>
+					<div onClick={showPasswordModalHandler} className={styles.bottomfont}>
+						비밀번호 찾기
+					</div>
+				</div>
+				<div className={styles.bottomText2}>
+					아직 회원이 아니신가요?
+					<div onClick={handleSignupClick} className={styles.bottomfont}>
+						회원가입
+					</div>
 				</div>
 			</div>
 			{showModalE && (

@@ -22,6 +22,9 @@ class CoordiFinderViewModel {
             },
         ];
     }
+    setToken(token) {
+        this.model.setToken(token);
+    }
     dataCheck() {
         return this.model.dataCheck();
     }
@@ -34,8 +37,14 @@ class CoordiFinderViewModel {
     setClosetActive(value) {
         this.model.setClosetActive(value);
     }
+    getTopListSize() {
+        return this.model.getTopListSize();
+    }
     setTopList(list) {
         this.model.setTopList(list);
+    }
+    getBottomListSize() {
+        return this.model.getBottomListSize();
     }
     setBottomList(list) {
         this.model.setBottomList(list);

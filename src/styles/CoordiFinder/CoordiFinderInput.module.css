@@ -128,6 +128,10 @@
     justify-content: center;
 }
 
+.imageShowItemBlur {
+    opacity: 50%;
+}
+
 .image {
     max-width: 70px;
     max-height: 80px;
@@ -150,26 +154,92 @@
     background-position: center;
 }
 
-.button {
-    box-sizing: border-box;
-
+.Btn {
     cursor: pointer;
-
+    box-sizing: border-box;
+    border-radius: 35px;
+    border: 3px solid rgba(255, 255, 255, 0.75);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.25);
     width: 97px;
     height: 85px;
+    flex-shrink: 0;
 
-    background: #ffffff;
-    border: 1px solid #d9d9d9;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 30px;
+    color: #fff;
+    font-family: NanumSquareRoundOTF;
+    padding: 30px;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 130%; /* 39px */
 
     background-position: center;
     background-repeat: no-repeat;
     background-size: 45px;
 }
+.BtnDown {
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 35px;
+    border: 3px solid rgba(255, 255, 255, 0.75);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.25);
+    width: 97px;
+    height: 85px;
+    flex-shrink: 0;
+
+    color: #fff;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 45px;
+
+    scale: 0.98;
+    opacity: 0.4;
+    transition: cubic-bezier(0.25, 1, 0.25, 1);
+    transition-duration: 0.3s;
+}
+.Btn:active {
+    /* transition-timing-function:cubic-bezier(0.77, 0, 0.175, 1); */
+    scale: 0.97;
+    transition: cubic-bezier(0.15, 1, 0.5, 1);
+    transition-duration: 0.2s;
+    opacity: 0.4;
+}
+.BtnDown:active {
+    scale: 0.97;
+    transition: cubic-bezier(0.15, 1, 0.5, 1);
+    transition-duration: 0.2s;
+    opacity: 0.4;
+}
+.BtnUp {
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 35px;
+    border: 3px solid rgba(255, 255, 255, 0.75);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(5px);
+    background: #ffd439;
+    width: 97px;
+    height: 85px;
+    flex-shrink: 0;
+
+    color: #fff;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 45px;
+
+    scale: 1.05;
+    opacity: 1;
+    transition: cubic-bezier(0.15, 1, 0.5, 1);
+    transition-duration: 0.5s;
+}
 
 .active {
-    background-color: aqua;
+    background-color: #ffd439;
 }
 
 .imageBox {
@@ -207,4 +277,11 @@
     position: relative;
     left: 24px;
     top: 91px;
+}
+
+.redText {
+    height: 10px;
+    font-size: 10px;
+
+    color: #ff0000;
 }

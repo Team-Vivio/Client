@@ -58,11 +58,9 @@
     height: 81px;
 
     font-size: 33px;
-    text-align: left;
+    text-align: center;
 
     margin-top: 166px;
-
-    padding-left: 60px;
     padding-top: 5px;
 
     background: #ffffff;
@@ -70,10 +68,10 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 69px;
 
-    background-image: url("../../img/CoordiFinder/coin.png");
+    /* background-image: url("../../img/CoordiFinder/coin.png");
     background-repeat: no-repeat;
     background-size: 40px;
-    background-position: 133px center;
+    background-position: 133px center; */
 
     white-space: pre;
 }
@@ -242,8 +240,7 @@
     height: 40px;
 
     font-size: 20px;
-    text-align: left;
-    padding-left: 90px;
+    text-align: center;
     padding-top: 9px;
 
     background: #ffffff;
@@ -251,10 +248,10 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 69px;
 
-    background-image: url("../../img/CoordiFinder/coin.png");
+    /* background-image: url("../../img/CoordiFinder/coin.png");
     background-repeat: no-repeat;
     background-size: 25px;
-    background-position: 133px center;
+    background-position: 133px center; */
 
     white-space: pre;
 }

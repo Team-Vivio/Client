@@ -34,8 +34,13 @@ function App() {
 
     return (
         <div>
-            <Header />
+            
+            {!(
+                    window.location.pathname === "/Login" ||
+                    window.location.pathname === "/Signup"
+                ) && <Header />}
             <Routes>
+                
                 <Route exact path="/" element={<Main />} />
                 <Route exact path="/Login" element={<Login />} />
                 <Route exact path="/Signup" element={<Signup />} />

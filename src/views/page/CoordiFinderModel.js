@@ -105,7 +105,7 @@ class CoordiFinderModel {
         try {
             this.resultList = await axios({
                 method: "POST",
-                url: `/closets`,
+                url: `https://backend.vivi-o.site/closets`,
                 mode: "cors",
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -124,7 +124,7 @@ class CoordiFinderModel {
             });
             const result = await axios({
                 method: "POST",
-                url: `/closets/closet`,
+                url: `https://backend.vivi-o.site/closets/closet`,
                 mode: "cors",
                 headers: {
                     Authorization: `${this.token}`,
@@ -140,7 +140,7 @@ class CoordiFinderModel {
         try {
             this.historyList = await axios({
                 method: "GET",
-                url: `/closets/closet`,
+                url: `https://backend.vivi-o.site/closets/closet`,
                 mode: "cors",
                 headers: {
                     Authorization: `${this.token}`,
@@ -156,7 +156,7 @@ class CoordiFinderModel {
         try {
             this.resultList = await axios({
                 method: "GET",
-                url: `/closets/closet/${coordiID}`,
+                url: `https://backend.vivi-o.site/closets/closet/${coordiID}`,
                 mode: "cors",
                 headers: {
                     Authorization: `${this.token}`,

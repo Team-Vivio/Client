@@ -19,8 +19,16 @@ function MyPage() {
 	const outsideRef = useRef();
 	const [cookies] = useCookies(["token"]);
 	const token = cookies.token;
+	const [blur, setBlur] = useState(false);
 
-	//이미지
+	// 모달 띄우고, 배경 블러
+	useEffect(() => {
+		if (showModalP === false) {
+			setBlur(false);
+		} else setBlur(true);
+	}, [showModalP]);
+
+	// 이미지
 	const [top, setTop] = useState([]);
 	const type1 = "outer";
 	const [bottom, setBottom] = useState([]);
@@ -31,6 +39,7 @@ function MyPage() {
 	// 비밀번호 변경 모달 핸들러
 	const showPasswordChangeModalHandler = () => {
 		setShowModalP(true);
+		setBlur(true);
 	};
 
 	// 아우터 이미지 불러오기
@@ -52,7 +61,7 @@ function MyPage() {
 
 	// 아우터 이미지 삭제하기
 	const handleDeleteOuterImage = (id) => {
-		axios.delete(`/users/closet/${type1}/${id}`, {
+		axios.delete(`https://backend.vivi-o.site/users/closet/${type1}/${id}`, {
 			headers: {
 				Authorization: token,
 			},
@@ -82,7 +91,7 @@ function MyPage() {
 
 	// 상의 이미지 삭제하기
 	const handleDeleteTopImage = (id) => {
-		axios.delete(`/users/closet/${type2}/${id}`, {
+		axios.delete(`https://backend.vivi-o.site/users/closet/${type2}/${id}`, {
 			headers: {
 				Authorization: token,
 			},
@@ -110,7 +119,7 @@ function MyPage() {
 
 	// 하의 이미지 삭제하기
 	const handleDeleteBottomImage = (id) => {
-		axios.delete(`/users/closet/${type3}/${id}`, {
+		axios.delete(`https://backend.vivi-o.site/users/closet/${type3}/${id}`, {
 			headers: {
 				Authorization: token,
 			},
@@ -122,7 +131,7 @@ function MyPage() {
 	// 마이페이지 불러올 때, 토큰 값 넘겨 정보 받아오기
 	useEffect(() => {
 		axios
-			.get("/users/userInfo", {
+			.get("https://backend.vivi-o.site/users/userInfo", {
 				headers: {
 					Authorization: token,
 				},
@@ -160,7 +169,7 @@ function MyPage() {
 	// 나만의 옷장 아우터 불러오기
 	useEffect(() => {
 		axios
-			.get(`/users/closet/${type1}`, {
+			.get(`https://backend.vivi-o.site/users/closet/${type1}`, {
 				headers: {
 					Authorization: token,
 				},
@@ -178,7 +187,7 @@ function MyPage() {
 	// 나만의 옷장 상의 불러오기
 	useEffect(() => {
 		axios
-			.get(`/users/closet/${type2}`, {
+			.get(`https://backend.vivi-o.site/users/closet/${type2}`, {
 				headers: {
 					Authorization: token,
 				},
@@ -196,7 +205,7 @@ function MyPage() {
 	// 나만의 옷장 하의 불러오기
 	useEffect(() => {
 		axios
-			.get(`/users/closet/${type3}`, {
+			.get(`https://backend.vivi-o.site/users/closet/${type3}`, {
 				headers: {
 					Authorization: token,
 				},
@@ -226,7 +235,7 @@ function MyPage() {
 		formData.append("image", data);
 
 		axios
-			.post("/users/closet", formData, {
+			.post("https://backend.vivi-o.site/users/closet", formData, {
 				headers: {
 					Authorization: token,
 				},
@@ -261,151 +270,157 @@ function MyPage() {
 	};
 
 	return (
-		<div className={styles.mainDiv}>
-			<img
-				alt="backgroundimage"
-				src={background}
-				style={{
-					position: "fixed",
-					width: window.innerWidth,
-					height: window.innerHeight,
-					objectFit: "cover",
-					zIndex: -1,
-				}}
-			/>
+		<div>
 			<div
-				className={styles.scrollbar_Y}
-				style={{
-					width: 729,
-					height: window.innerHeight - 178,
-					paddingRight: 30,
-					overflowX: "hidden",
-					marginTop: 178,
-					marginLeft: 85,
-					marginRight: 70,
-				}}
+				className={`${styles.mainDiv} ${blur ? styles.blurpage : styles.page}`}
 			>
-				<div className={styles.closetDiv} style={{ height: "auto" }}>
-					<div className={styles.closetMiddleTitle}>나만의 옷장</div>
-					<hr className={styles.closetRowLine} />
-					<div className={styles.outerDiv}>
-						<div className={styles.outerTitle}>아우터</div>
-						<div className={`${styles.scrollbar_X} ${styles.outerInnerDiv}`}>
-							<label
-								className={styles.DragAndDropLabel}
-								onDragOver={handleDragOver}
-								onDrop={(e) => handleDrop(e, "outer")}
+				<img
+					alt="backgroundimage"
+					src={background}
+					style={{
+						position: "fixed",
+						width: window.innerWidth,
+						height: window.innerHeight,
+						objectFit: "cover",
+						zIndex: -1,
+					}}
+				/>
+				<div
+					className={styles.scrollbar_Y}
+					style={{
+						width: 729,
+						height: window.innerHeight - 178,
+						paddingRight: 30,
+						overflowX: "hidden",
+						marginTop: 178,
+						marginLeft: 85,
+						marginRight: 70,
+					}}
+				>
+					<div className={styles.closetDiv} style={{ height: "auto" }}>
+						<div className={styles.closetMiddleTitle}>나만의 옷장</div>
+						<hr className={styles.closetRowLine} />
+						<div className={styles.outerDiv}>
+							<div className={styles.outerTitle}>아우터</div>
+							<div className={`${styles.scrollbar_X} ${styles.outerInnerDiv}`}>
+								<label
+									className={styles.DragAndDropLabel}
+									onDragOver={handleDragOver}
+									onDrop={(e) => handleDrop(e, "outer")}
+								>
+									<input
+										type="file"
+										className={styles.DragAndDropInput}
+										onChange={(e) => handleUpload(e, "outer")}
+									/>
+									<img
+										className={styles.DragAndDropImage}
+										alt="OuterDragAndDrop"
+										src={imageDragDrop}
+									/>
+								</label>
+								<OuterImg />
+							</div>
+						</div>
+						<hr className={styles.closetRowLine} />
+						<div className={styles.topDiv}>
+							<div className={styles.topTitle}>상의</div>
+							<div className={`${styles.scrollbar_X} ${styles.topInnerDiv}`}>
+								<label
+									className={styles.DragAndDropLabel}
+									onDragOver={handleDragOver}
+									onDrop={(e) => handleDrop(e, "top")}
+								>
+									<input
+										type="file"
+										className={styles.DragAndDropInput}
+										onChange={(e) => handleUpload(e, "top")}
+									/>
+									<img
+										className={styles.DragAndDropImage}
+										alt="TopDragAndDrop"
+										src={imageDragDrop}
+									/>
+								</label>
+								<TopImg />
+							</div>
+						</div>
+						<hr className={styles.closetRowLine} />
+						<div className={styles.bottomsDiv}>
+							<div className={styles.bottomsTitle}>하의</div>
+							<div
+								className={`${styles.scrollbar_X} ${styles.bottomsInnerDiv}`}
 							>
-								<input
-									type="file"
-									className={styles.DragAndDropInput}
-									onChange={(e) => handleUpload(e, "outer")}
-								/>
-								<img
-									className={styles.DragAndDropImage}
-									alt="OuterDragAndDrop"
-									src={imageDragDrop}
-								/>
-							</label>
-							<OuterImg />
+								<label
+									className={styles.DragAndDropLabel}
+									onDragOver={handleDragOver}
+									onDrop={(e) => handleDrop(e, "bottom")}
+								>
+									<input
+										type="file"
+										className={styles.DragAndDropInput}
+										onChange={(e) => handleUpload(e, "bottom")}
+									/>
+									<img
+										className={styles.DragAndDropImage}
+										alt="BottomDragAndDrop"
+										src={imageDragDrop}
+									/>
+								</label>
+								<BottomImg />
+							</div>
 						</div>
 					</div>
-					<hr className={styles.closetRowLine} />
-					<div className={styles.topDiv}>
-						<div className={styles.topTitle}>상의</div>
-						<div className={`${styles.scrollbar_X} ${styles.topInnerDiv}`}>
-							<label
-								className={styles.DragAndDropLabel}
-								onDragOver={handleDragOver}
-								onDrop={(e) => handleDrop(e, "top")}
-							>
-								<input
-									type="file"
-									className={styles.DragAndDropInput}
-									onChange={(e) => handleUpload(e, "top")}
-								/>
-								<img
-									className={styles.DragAndDropImage}
-									alt="TopDragAndDrop"
-									src={imageDragDrop}
-								/>
-							</label>
-							<TopImg />
-						</div>
+				</div>
+				<div className={styles.columnLine}></div>
+				<div className={styles.informationDiv}>
+					<img alt="" src={mainLogo} />
+					<div className={styles.middleTitle}>
+						생생한 패션 생활, ViViO에서 시작하세요
 					</div>
-					<hr className={styles.closetRowLine} />
-					<div className={styles.bottomsDiv}>
-						<div className={styles.bottomsTitle}>하의</div>
-						<div className={`${styles.scrollbar_X} ${styles.bottomsInnerDiv}`}>
-							<label
-								className={styles.DragAndDropLabel}
-								onDragOver={handleDragOver}
-								onDrop={(e) => handleDrop(e, "bottom")}
+					<div className={styles.infoDiv}>
+						<div className={styles.nameDiv}>
+							<div className={styles.nameTitle}>이름</div>
+							<div className={styles.nameResult}>{name}</div>
+						</div>
+						<div className={styles.phoneDiv}>
+							<div className={styles.phoneTitle}>전화번호</div>
+							<div className={styles.phoneResult}>{formattedPhoneNumber}</div>
+						</div>
+						<div className={styles.birthDiv}>
+							<div className={styles.birthTitle}>생년월일</div>
+							<div className={styles.birthResult}>{birthDate}</div>
+						</div>
+						<div className={styles.genderDiv}>
+							<div className={styles.genderTitle}>성별</div>
+							<div className={styles.genderResult}>{gender}</div>
+						</div>
+						<div className={styles.emailDiv}>
+							<div className={styles.emailTitle}>이메일</div>
+							<div className={styles.emailResult}>{email}</div>
+						</div>
+						<div className={styles.passwordDiv}>
+							<div className={styles.passwordTitle}>비밀번호</div>
+							<button
+								onClick={showPasswordChangeModalHandler}
+								className={styles.passwordChangeBtn}
 							>
-								<input
-									type="file"
-									className={styles.DragAndDropInput}
-									onChange={(e) => handleUpload(e, "bottom")}
-								/>
-								<img
-									className={styles.DragAndDropImage}
-									alt="BottomDragAndDrop"
-									src={imageDragDrop}
-								/>
-							</label>
-							<BottomImg />
+								변경
+							</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div className={styles.columnLine}></div>
-			<div className={styles.informationDiv}>
-				<img alt="" src={mainLogo} />
-				<div className={styles.middleTitle}>
-					생생한 패션 생활, ViViO에서 시작하세요
+			{showModalP && (
+				<div
+					ref={outsideRef}
+					onClick={(e) => {
+						if (e.target === outsideRef.current) setShowModalP(false);
+					}}
+				>
+					<ChangePasswordModal onClose={setShowModalP} />
 				</div>
-				<div className={styles.infoDiv}>
-					<div className={styles.nameDiv}>
-						<div className={styles.nameTitle}>이름</div>
-						<div className={styles.nameResult}>{name}</div>
-					</div>
-					<div className={styles.phoneDiv}>
-						<div className={styles.phoneTitle}>전화번호</div>
-						<div className={styles.phoneResult}>{formattedPhoneNumber}</div>
-					</div>
-					<div className={styles.birthDiv}>
-						<div className={styles.birthTitle}>생년월일</div>
-						<div className={styles.birthResult}>{birthDate}</div>
-					</div>
-					<div className={styles.genderDiv}>
-						<div className={styles.genderTitle}>성별</div>
-						<div className={styles.genderResult}>{gender}</div>
-					</div>
-					<div className={styles.emailDiv}>
-						<div className={styles.emailTitle}>이메일</div>
-						<div className={styles.emailResult}>{email}</div>
-					</div>
-					<div className={styles.passwordDiv}>
-						<div className={styles.passwordTitle}>비밀번호</div>
-						<button
-							onClick={showPasswordChangeModalHandler}
-							className={styles.passwordChangeBtn}
-						>
-							변경
-						</button>
-					</div>
-				</div>
-				{showModalP && (
-					<div
-						ref={outsideRef}
-						onClick={(e) => {
-							if (e.target === outsideRef.current) setShowModalP(false);
-						}}
-					>
-						<ChangePasswordModal onClose={setShowModalP} />
-					</div>
-				)}
-			</div>
+			)}
 		</div>
 	);
 }

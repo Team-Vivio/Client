@@ -6,6 +6,7 @@ import "../../styles/CoordiFinder/Toggle.css";
 import { useState, useEffect, useRef } from "react";
 import Slider from "react-slick"; // react-slick 사용을 위해 import
 import "../../styles/CoordiFinder/slick.css";
+import { useCookies } from "react-cookie";
 
 //이미지
 import sample1 from "../../img/CoordiFinder/sample1.png";
@@ -72,7 +73,7 @@ function InputView({ viewModel }) {
     const [bottom, setBottom] = useState([]);
     const [outer, setOuter] = useState([]);
 
-    //그냥 다 같이 업뎃해줌 점점 MVVM은 없어져가는 중..
+    //다 같이 업뎃
     useEffect(() => {
         viewModel.setTopList(top);
         viewModel.setBottomList(bottom);
@@ -319,7 +320,7 @@ function ResultView({ viewModel, state, result, event }) {
                         className={`${resultStyles.button}`}
                         onClick={event}
                     >
-                        {"시작      -10"}
+                        {"시작"}
                     </button>
                 </div>
             ) : state === "loading" ? (
@@ -482,12 +483,16 @@ function CoordiFinderView({ viewModel }) {
     const [modalType, setModalType] = useState(0);
     const [history, setHistory] = useState(viewModel.getHistoryList());
 
+    const [cookies] = useCookies(["token"]);
+    const token = cookies.token;
+
     async function getHistory() {
         await viewModel.getHistory();
         setHistory([...viewModel.getHistoryList()]);
     }
 
     useEffect(() => {
+        viewModel.setToken(token);
         getHistory();
     }, []);
 

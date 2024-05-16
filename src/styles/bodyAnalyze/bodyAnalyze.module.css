@@ -80,6 +80,8 @@ Input::-webkit-inner-spin-button {
 
     color: #000000;
 
+    cursor: pointer;
+
     text-align: center;
     font-family: "NanumSquareRound";
     font-style: normal;

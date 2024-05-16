@@ -162,7 +162,12 @@ function InputView({ viewModel }) {
                     코디해드립니다
                 </span>
                 <label className="switch">
-                    <input type="checkbox"></input>
+                    <input
+                        type="checkbox"
+                        onClick={(e) => {
+                            viewModel.setClosetActive(e.target.checked);
+                        }}
+                    ></input>
                     <span className="slider round"></span>
                 </label>
             </div>

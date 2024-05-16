@@ -35,9 +35,15 @@ class CoordiFinderModel {
     setClosetActive(value) {
         this.closetActive = value;
     }
+    getTopListSize() {
+        return this.topList.length;
+    }
     setTopList(list) {
         this.topList = list;
         // console.log(this.topList);
+    }
+    getBottomListSize() {
+        return this.bottomList.length;
     }
     setBottomList(list) {
         this.bottomList = list;

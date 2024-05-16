@@ -15,7 +15,7 @@ import sample3 from "../../img/CoordiFinder/sample3.png";
 import gender1 from "../../img/CoordiFinder/gender1.png";
 import gender2 from "../../img/CoordiFinder/gender2.png";
 
-function ImageShow({ list, remove }) {
+function ImageShow({ list, remove, fail }) {
     const scrollRef = useRef(null);
     const [isDrag, setIsDrag] = useState(false);
     const [startX, setStartX] = useState();
@@ -48,7 +48,14 @@ function ImageShow({ list, remove }) {
             {list.length <= 0
                 ? null
                 : list.map((value, index) => (
-                      <div className={inputStyles.imageShowItem} key={index}>
+                      <div
+                          className={
+                              fail
+                                  ? `${inputStyles.imageShowItem} ${inputStyles.imageShowItemBlur}`
+                                  : `${inputStyles.imageShowItem}`
+                          }
+                          key={index}
+                      >
                           <img
                               className={inputStyles.image}
                               src={value.img}
@@ -211,7 +218,18 @@ function InputView({ viewModel }) {
             <div className={inputStyles.q2Item}>
                 <div className={`${inputStyles.whiteSmall}`}>
                     Q. 상의를 두 종류 이상 업로드해주세요
-                    <ImageShow list={top} remove={removeTop} />
+                    {viewModel.getTopListSize() < 2 ? (
+                        <div className={inputStyles.redText}>
+                            *사진을 두장 이상 올려주세요!
+                        </div>
+                    ) : (
+                        <div style={{ height: "10px" }}></div>
+                    )}
+                    <ImageShow
+                        list={top}
+                        remove={removeTop}
+                        fail={viewModel.getTopListSize() < 2}
+                    />
                 </div>
                 <div
                     className={inputStyles.imageBox}
@@ -238,7 +256,18 @@ function InputView({ viewModel }) {
             <div className={inputStyles.q2Item}>
                 <div className={`${inputStyles.whiteSmall} `}>
                     Q. 하의를 두 종류 이상 업로드해주세요
-                    <ImageShow list={bottom} remove={removeBotton} />
+                    {viewModel.getBottomListSize() < 2 ? (
+                        <div className={inputStyles.redText}>
+                            *사진을 두장 이상 올려주세요!
+                        </div>
+                    ) : (
+                        <div style={{ height: "10px" }}></div>
+                    )}
+                    <ImageShow
+                        list={bottom}
+                        remove={removeBotton}
+                        fail={viewModel.getBottomListSize() < 2}
+                    />
                 </div>
                 <div
                     className={inputStyles.imageBox}

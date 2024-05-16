@@ -15,7 +15,7 @@ function Btn({ left, top, img, size, active, event }) {
         position: "absolute",
         left: left,
         top: top,
-        backgroundColor: active ? "#00ff00" : "#ffffff",
+        backgroundColor: active ? "#FFD439" : "#ffffff",
         backgroundImage: `url(${img})`,
         backgroundSize: size,
     };
@@ -155,8 +155,6 @@ function StartBtn({ left, top, event }) {
     return (
         <button style={pos} className={styles.StartBtn} onClick={event}>
             <span>시작 </span>
-            <img src={Coin1} className={styles.Coin}></img>
-            <span>-10</span>
         </button>
     );
 }

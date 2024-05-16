@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Gender1 from "../../img/bodyAnalyze/Gender1.png";
+import Gender1 from "../../img/bodyAnalyze/Gender0.png";
 import Gender2 from "../../img/bodyAnalyze/Gender2.png";
 import Body1 from "../../img/bodyAnalyze/Body1.png";
 import Body2 from "../../img/bodyAnalyze/Body2.png";

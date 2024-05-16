@@ -73,7 +73,7 @@ function InputView({ viewModel }) {
     const [bottom, setBottom] = useState([]);
     const [outer, setOuter] = useState([]);
 
-    //그냥 다 같이 업뎃해줌 점점 MVVM은 없어져가는 중..
+    //다 같이 업뎃
     useEffect(() => {
         viewModel.setTopList(top);
         viewModel.setBottomList(bottom);
@@ -320,7 +320,7 @@ function ResultView({ viewModel, state, result, event }) {
                         className={`${resultStyles.button}`}
                         onClick={event}
                     >
-                        {"시작      -10"}
+                        {"시작"}
                     </button>
                 </div>
             ) : state === "loading" ? (

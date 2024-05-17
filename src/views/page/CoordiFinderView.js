@@ -14,6 +14,7 @@ import sample2 from "../../img/CoordiFinder/sample2.png";
 import sample3 from "../../img/CoordiFinder/sample3.png";
 import gender1 from "../../img/CoordiFinder/gender1.png";
 import gender2 from "../../img/CoordiFinder/gender2.png";
+import lock from "../../img/CoordiFinder/lock.png";
 
 function ImageShow({ list, remove, fail }) {
     const scrollRef = useRef(null);
@@ -520,9 +521,20 @@ function CoordiFinderView({ viewModel }) {
     const [modal, setModal] = useState(false);
     const [modalType, setModalType] = useState(0);
     const [history, setHistory] = useState(viewModel.getHistoryList());
+    const [isUser, setUser] = useState(false);
 
     const [cookies] = useCookies(["token"]);
     const token = cookies.token;
+
+    useEffect(() => {
+        if (!cookies.token || cookies.token === "undefined") {
+            //비회원
+            setUser(false);
+        } else {
+            //회원
+            setUser(true);
+        }
+    }, [cookies]);
 
     async function getHistory() {
         await viewModel.getHistory();
@@ -581,6 +593,33 @@ function CoordiFinderView({ viewModel }) {
     }
     return (
         <div className={inputStyles.background}>
+            {/* {비회원 모달} */}
+            {!isUser ? (
+                <div className={modalStyles.background}>
+                    <div className={modalStyles.modal}>
+                        <button
+                            className={modalStyles.close}
+                            onClick={() => {
+                                window.location.href = "/";
+                            }}
+                        ></button>
+                        <div className={modalStyles.content}>
+                            <img className={modalStyles.lock} src={lock} />
+                            <div className={modalStyles.message}>
+                                로그인 시 이용할 수 있어요!
+                            </div>
+                            <button
+                                className={modalStyles.enter}
+                                onClick={() => {
+                                    window.location.href = "/Login";
+                                }}
+                            >
+                                로그인 하러 가기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            ) : null}
             <Modal
                 viewModel={viewModel}
                 state={modal}

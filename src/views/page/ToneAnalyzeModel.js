@@ -11,6 +11,14 @@ class ToneAnalyzeModel {
         this.state = "main"; //main, loading, result
         this.formData = new FormData(); // /colors/
         this.formData2 = new FormData(); // /colors/personalColor
+        this.token = null;
+    }
+
+    setToken(token) {
+        if (token === null || token === undefined) {
+            console.log("토큰 없음");
+        } else console.log("토큰 있음");
+        this.token = token;
     }
     setGender(value) {
         this.gender = value;
@@ -107,8 +115,8 @@ class ToneAnalyzeModel {
 
             //저장
 
-            const accessToken =
-                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
+            // const accessToken =
+            //     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
 
             let session =
                 this.resultList.data.result.session === "spring"
@@ -123,7 +131,6 @@ class ToneAnalyzeModel {
             let save = {
                 gender: this.gender,
                 personalColor: session, // SPRING -> 1로 바꿔야됨!!!!!
-                // TODO:
             };
 
             // 이 부분 테스트 필요
@@ -139,7 +146,7 @@ class ToneAnalyzeModel {
                     url: `https://backend.vivi-o.site/colors/personalColor`,
                     mode: "cors",
                     headers: {
-                        Authorization: `${accessToken}`,
+                        Authorization: `${this.token}`,
                     },
                     data: this.formData2, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
                 });
@@ -159,15 +166,15 @@ class ToneAnalyzeModel {
     // 히스토리의 추천 받았던 패션정보 불러오기
     getPerCol = async (personalColorId) => {
         this.resultList = null;
-        const accessToken =
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
+        // const accessToken =
+        //     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
         try {
             this.resultList = await axios({
                 method: "GET",
                 url: `https://backend.vivi-o.site/colors/personalColor/${personalColorId}`,
                 mode: "cors",
                 headers: {
-                    Authorization: `${accessToken}`,
+                    Authorization: `${this.token}`,
                     "Content-Type": "multipart/form-data",
                 },
             });
@@ -180,15 +187,15 @@ class ToneAnalyzeModel {
     };
 
     getHistory = async () => {
-        const accessToken =
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
+        // const accessToken =
+        //     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2aXZpbyIsImlhdCI6MTcxNDU4Mzg1MywiaWQiOjIsImVtYWlsIjoiank1ODQ5QG5hdmVyLmNvbSJ9.zANItOl0gwAF4ef8Yay0HKXEeZMUHeg94FsUpOaekvs";
         try {
             this.historyList = await axios({
                 method: "GET",
                 url: `https://backend.vivi-o.site/colors/personalColor`,
                 mode: "cors",
                 headers: {
-                    Authorization: `${accessToken}`,
+                    Authorization: `${this.token}`,
                 },
             });
             // console.log(this.historyList);

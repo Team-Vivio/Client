@@ -5,6 +5,8 @@ import DropBox1 from "../../img/ToneAnalyze/DropBox.png";
 import Coin1 from "../../img/ToneAnalyze/Coin.png";
 import mark_O from "../../img/ToneAnalyze/mark_O.png";
 import mark_X from "../../img/ToneAnalyze/mark_X.png";
+import lock from "../../img/ToneAnalyze/lock.png";
+import { useCookies } from "react-cookie";
 
 function Btn({ left, top, img, size, active, event }) {
     const info = {
@@ -519,8 +521,49 @@ function ToneAnalyze(props) {
         getHistory();
     }, []);
 
+    const [cookies] = useCookies(["token"]);
+    const token = cookies.token;
+    const [isUser, setUser] = useState(false);
+
+    useEffect(() => {
+        if (!cookies.token || cookies.token === "undefined") {
+            //비회원
+            setUser(false);
+        } else {
+            //회원
+            setUser(true);
+        }
+    }, [cookies]);
+
     return (
         <div className={styles.Background}>
+            {/* {비회원 모달} */}
+            {!isUser ? (
+                <div className={styles.ModalBackground}>
+                    <div className={styles.Modal}>
+                        <button
+                            className={styles.ModalClose}
+                            onClick={() => {
+                                window.location.href = "/";
+                            }}
+                        ></button>
+                        <div className={styles.ModalContent}>
+                            <img className={styles.ModalLock} src={lock} />
+                            <div className={styles.ModalMessage}>
+                                로그인 시 이용할 수 있어요!
+                            </div>
+                            <button
+                                className={styles.ModalEnter}
+                                onClick={() => {
+                                    window.location.href = "/Login";
+                                }}
+                            >
+                                로그인 하러 가기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            ) : null}
             <Modal
                 active={props.viewModel.getModalActive()}
                 msgIndex={modalIndex}

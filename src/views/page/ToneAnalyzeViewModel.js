@@ -109,6 +109,9 @@ class ToneAnalyzeViewModel {
         this.modalActive = false;
         this.modalIndex = -1;
     }
+    setToken(token) {
+        this.model.setToken(token);
+    }
     setGender(value) {
         this.model.setGender(value);
         this.GenderBtns.forEach((element) => {

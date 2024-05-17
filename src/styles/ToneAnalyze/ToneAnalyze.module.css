@@ -36,6 +36,81 @@
     background-size: cover;
 }
 
+.Btn {
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 35px;
+    border: 3px solid rgba(255, 255, 255, 0.75);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.25);
+    width: 97px;
+    height: 85px;
+    flex-shrink: 0;
+
+    color: #fff;
+
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.BtnDown {
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 35px;
+    border: 3px solid rgba(255, 255, 255, 0.75);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.25);
+    width: 97px;
+    height: 85px;
+    flex-shrink: 0;
+
+    color: #fff;
+
+    background-position: center;
+    background-repeat: no-repeat;
+
+    scale: 0.98;
+    opacity: 0.4;
+    transition: cubic-bezier(0.25, 1, 0.25, 1);
+    transition-duration: 0.3s;
+}
+.Btn:active {
+    /* transition-timing-function:cubic-bezier(0.77, 0, 0.175, 1); */
+    scale: 0.97;
+    transition: cubic-bezier(0.15, 1, 0.5, 1);
+    transition-duration: 0.2s;
+    opacity: 0.4;
+}
+.BtnDown:active {
+    scale: 0.97;
+    transition: cubic-bezier(0.15, 1, 0.5, 1);
+    transition-duration: 0.2s;
+    opacity: 0.4;
+}
+.BtnUp {
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 35px;
+    border: 3px solid rgba(255, 255, 255, 0.75);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(5px);
+    background: #ffd439;
+    width: 97px;
+    height: 85px;
+    flex-shrink: 0;
+
+    color: #fff;
+
+    background-position: center;
+    background-repeat: no-repeat;
+
+    scale: 1.05;
+    opacity: 1;
+    transition: cubic-bezier(0.15, 1, 0.5, 1);
+    transition-duration: 0.5s;
+}
+
 .Text {
     position: absolute;
 
@@ -237,7 +312,7 @@
 
 .ResultTitle {
     position: absolute;
-    width: 450px;
+    width: 460px;
     height: 126px;
     left: 62px;
     top: 483px;
@@ -636,4 +711,18 @@
     justify-content: center;
 
     color: #000000;
+}
+
+.ModalLock {
+    width: 100px;
+    height: 135px;
+}
+
+.ModalMessage {
+    margin: 30px;
+    font-size: 20px;
+
+    color: #000000;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

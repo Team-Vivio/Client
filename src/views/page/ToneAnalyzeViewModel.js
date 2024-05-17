@@ -33,37 +33,37 @@ class ToneAnalyzeViewModel {
             },
             {
                 left: "1030px",
-                top: "680px",
+                top: "660px",
                 size: "26px",
                 text: "*주의사항",
             },
             {
                 left: "786px",
-                top: "732px",
+                top: "712px",
                 size: "20px",
                 text: "1. 이 기능은 밝은 배경에서 사용된 사진을 사용해야 정확해요",
             },
             {
                 left: "786px",
-                top: "778px",
+                top: "758px",
                 size: "20px",
                 text: "2. 또한 사진에 따라서 결과가 부정확하게 나올 수도 있어요",
             },
             {
                 left: "786px",
-                top: "825px",
+                top: "805px",
                 size: "20px",
                 text: "3. 가능하면 얼굴도 밝은 곳에서 찍어야 정확한 결과를 얻을 수 있어요",
             },
             {
                 left: "786px",
-                top: "872px",
+                top: "852px",
                 size: "20px",
                 text: "4. 전신 사진이 아니라 얼굴 위주로 찍힌 사진이어야 정확한 결과를 얻을 수 있어요",
             },
             {
                 left: "786px",
-                top: "914px",
+                top: "894px",
                 size: "20px",
                 text: "5. 화장법 가이드는 참고용으로만 봐주세요!",
             },
@@ -75,7 +75,7 @@ class ToneAnalyzeViewModel {
                 img: Gender1,
                 size: "45px",
                 id: 1,
-                active: false,
+                active: 0,
             },
             {
                 left: "1289px",
@@ -83,7 +83,7 @@ class ToneAnalyzeViewModel {
                 img: Gender2,
                 size: "45px",
                 id: 2,
-                active: false,
+                active: 0,
             },
         ];
         this.ImgBoxList = [
@@ -109,15 +109,18 @@ class ToneAnalyzeViewModel {
         this.modalActive = false;
         this.modalIndex = -1;
     }
+    setToken(token) {
+        this.model.setToken(token);
+    }
     setGender(value) {
         this.model.setGender(value);
         this.GenderBtns.forEach((element) => {
             if (element.id === value) {
                 // console.log(element.id + "Actived");
-                element.active = true;
+                element.active = 1;
             } else {
                 // console.log(element.id + "Disactived");
-                element.active = false;
+                element.active = -1;
             }
         });
     }

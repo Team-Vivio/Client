@@ -70,6 +70,15 @@ class CoordiFinderViewModel {
     getCoordi = async (coordiID) => {
         await this.model.getCoordi(coordiID);
     };
+    getClosetTop = async () => {
+        return await this.model.getClosetTop();
+    };
+    getClosetBottom = async () => {
+        return await this.model.getClosetBottom();
+    };
+    getClosetOuter = async () => {
+        return await this.model.getClosetOuter();
+    };
 }
 
 export default CoordiFinderViewModel;

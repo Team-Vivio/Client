@@ -26,7 +26,8 @@ const convertURLtoFile = async (url) => {
     const ext = url.split(".").pop(); // url 구조에 맞게 수정할 것
     const filename = url.split("/").pop(); // url 구조에 맞게 수정할 것
     const metadata = { type: `image/${ext}` };
-    return new File([data], filename, metadata);
+    const file = new File([data], filename, metadata);
+    return file;
 };
 
 function ImageShow({ list, remove, fail }) {
@@ -189,35 +190,40 @@ function InputView({ viewModel }) {
     async function getColset() {
         //옷장 옷 가져오기
         const ct = await viewModel.getClosetTop();
-        ct.data.result.images.map((value) => {
+        ct.data.result.images.map(async (value) => {
+            const file = await convertURLtoFile(value.image);
             closetTop.push(top.length);
             top.push({
                 id: top.length,
                 img: value.image,
-                file: convertURLtoFile(value.image),
+                file: file,
             });
+            setTop([...top]);
         });
-        setTop([...top]);
+
         const cb = await viewModel.getClosetBottom();
-        cb.data.result.images.map((value) => {
+        cb.data.result.images.map(async (value) => {
+            const file = await convertURLtoFile(value.image);
             closetBottom.push(bottom.length);
             bottom.push({
                 id: bottom.length,
                 img: value.image,
-                file: convertURLtoFile(value.image),
+                file: file,
             });
+            setBottom([...bottom]);
         });
-        setBottom([...bottom]);
+
         const co = await viewModel.getClosetOuter();
-        co.data.result.images.map((value) => {
+        co.data.result.images.map(async (value) => {
+            const file = await convertURLtoFile(value.image);
             closetOuter.push(outer.length);
             outer.push({
                 id: outer.length,
                 img: value.image,
-                file: convertURLtoFile(value.image),
+                file: file,
             });
+            setOuter([...outer]);
         });
-        setOuter([...outer]);
     }
 
     const removeCloset = () => {

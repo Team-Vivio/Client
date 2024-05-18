@@ -344,11 +344,7 @@ function HistoryItem({ history, event }) {
     return (
         <div className={styles.HistoryList} onClick={() => event(ID)}>
             <div className={styles.Historyline}></div>
-            <img
-                src={history.image}
-                className={styles.HistoryImg}
-                alt="h_i"
-            ></img>
+            <img src={history.image} className={styles.HistoryImg} alt=""></img>
             <div className={styles.HistoryText}>{history.tone}</div>
         </div>
     );
@@ -381,7 +377,7 @@ function HistoryBar({ list, event }) {
             <div className={styles.HistoryTitle}>History</div>
             {list !== null
                 ? list.map((history, id) => (
-                      <HistoryItem history={history} key={id} event={event} /> // add onClick
+                      <HistoryItem history={history} key={id} event={event} />
                   ))
                 : null}
         </div>
@@ -526,6 +522,11 @@ function ToneAnalyze(props) {
     const [isUser, setUser] = useState(false);
 
     useEffect(() => {
+        props.viewModel.setToken(token);
+        getHistory();
+    }, []);
+
+    useEffect(() => {
         if (!cookies.token || cookies.token === "undefined") {
             //비회원
             setUser(false);
@@ -548,7 +549,11 @@ function ToneAnalyze(props) {
                             }}
                         ></button>
                         <div className={styles.ModalContent}>
-                            <img className={styles.ModalLock} src={lock} />
+                            <img
+                                className={styles.ModalLock}
+                                src={lock}
+                                alt=""
+                            />
                             <div className={styles.ModalMessage}>
                                 로그인 시 이용할 수 있어요!
                             </div>

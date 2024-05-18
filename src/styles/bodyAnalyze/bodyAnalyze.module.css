@@ -327,6 +327,10 @@ Input::-webkit-inner-spin-button {
     white-space: pre-wrap;
 }
 
+.StartBtn:active {
+    background-color: #d9d9d9;
+}
+
 .ResultBox {
     box-sizing: border-box;
 

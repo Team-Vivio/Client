@@ -151,6 +151,7 @@ class ToneAnalyzeModel {
                     data: this.formData2, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
                 });
                 // 없어도 됨
+                this.name = saveResult.data.result.name;
                 console.log("--------");
                 console.log(saveResult);
                 console.log("--------");

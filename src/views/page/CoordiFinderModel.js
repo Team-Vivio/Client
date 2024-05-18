@@ -13,6 +13,10 @@ class CoordiFinderModel {
         this.resultList = null;
         this.formData = new FormData();
         this.token = null;
+        this.name = "OO";
+    }
+    getName() {
+        return this.name;
     }
     setToken(token) {
         if (token === null || token === undefined) {
@@ -177,6 +181,7 @@ class CoordiFinderModel {
                 },
                 data: saveData,
             });
+            this.name = result.data.result.name;
             console.log(result);
         } catch (error) {
             console.log(error);
@@ -208,6 +213,7 @@ class CoordiFinderModel {
                     Authorization: `${this.token}`,
                 },
             });
+            this.name = this.resultList.data.result.name;
             console.log(this.resultList);
         } catch (error) {
             console.log(error);

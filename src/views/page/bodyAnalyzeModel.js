@@ -10,7 +10,7 @@ class BodyAnalyzeModel {
         this.height = 0; //키
         this.weight = 0; //몸무게
         this.resultList = null;
-        this.name = "이름";
+        this.name = "OO";
         this.historyList = null;
         this.uploadedImg = null;
         this.formData = new FormData();
@@ -46,9 +46,6 @@ class BodyAnalyzeModel {
     }
     getName() {
         return this.name;
-    }
-    setName(value) {
-        this.name = value;
     }
     getAllHistoryList() {
         if (this.historyList === null) {
@@ -155,6 +152,7 @@ class BodyAnalyzeModel {
                     },
                     data: save, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
                 });
+                this.name = saveResult.data.result.name;
                 console.log(saveResult);
             } catch (error) {
                 console.log(error);
@@ -185,6 +183,7 @@ class BodyAnalyzeModel {
             this.resultList = result.data.result.fashionTops.concat(
                 ...result.data.result.fashionBottoms
             );
+            this.name = result.data.result.name;
         } catch (error) {
             console.log(error);
         }

@@ -606,7 +606,7 @@ function BodyAnalyze(props) {
                     (boxState === "loading" && <LoadingBox />) ||
                     (boxState === "result" && (
                         <ResultBox
-                            name="이름"
+                            name={props.viewModel.getName()}
                             infoList={props.viewModel.getAllResultList()}
                             event={() => setModal(1)}
                         />

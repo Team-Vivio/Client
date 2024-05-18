@@ -13,6 +13,10 @@ class CoordiFinderModel {
         this.resultList = null;
         this.formData = new FormData();
         this.token = null;
+        this.name = "OO";
+    }
+    getName() {
+        return this.name;
     }
     setToken(token) {
         if (token === null || token === undefined) {
@@ -78,97 +82,45 @@ class CoordiFinderModel {
             ? null
             : this.resultList.data.result.items;
     }
+    getClosetTop = async () => {
+        const topResult = await axios({
+            method: "GET",
+            url: `https://backend.vivi-o.site/users/closet/top`,
+            mode: "cors",
+            headers: {
+                Authorization: `${this.token}`,
+            },
+        });
+        return topResult;
+    };
+    getClosetBottom = async () => {
+        const bottomResult = await axios({
+            method: "GET",
+            url: `https://backend.vivi-o.site/users/closet/bottom`,
+            mode: "cors",
+            headers: {
+                Authorization: `${this.token}`,
+            },
+        });
+        return bottomResult;
+    };
+    getClosetOuter = async () => {
+        const outerResult = await axios({
+            method: "GET",
+            url: `https://backend.vivi-o.site/users/closet/outer`,
+            mode: "cors",
+            headers: {
+                Authorization: `${this.token}`,
+            },
+        });
+        return outerResult;
+    };
     postFashion = async () => {
         try {
             this.formData = new FormData(); //초기화
             let top = [];
             let bottom = [];
             let outer = [];
-            if (this.closetActive) {
-                //상의 가져오기
-                const topResult = await axios({
-                    method: "GET",
-                    url: `https://backend.vivi-o.site/users/closet/top`,
-                    mode: "cors",
-                    headers: {
-                        Authorization: `${this.token}`,
-                    },
-                });
-                const test = async () => {
-                    console.log("테스트");
-                    const url =
-                        "https://image.msscdn.net/images/goods_img/20190910/1149329/1149329_16760172077751_big.jpg";
-                    const response = await fetch(url);
-                    const data = await response.blob();
-                    const ext = url.split(".").pop(); // url 구조에 맞게 수정할 것
-                    const filename = url.split("/").pop(); // url 구조에 맞게 수정할 것
-                    const metadata = { type: `image/${ext}` };
-                    const result = new File([data], filename, metadata);
-                    console.log(result);
-                };
-                test();
-                const imageCachedUrl = (url) => {
-                    const imgUrl = /^data:image/.test(url)
-                        ? url
-                        : url + "?" + new Date().getTime();
-                    return imgUrl;
-                };
-                //나만의 옷장 상의 파일 변환
-                topResult.data.result.images.map(async (value) => {
-                    //console.log(value.image);
-                    const url = imageCachedUrl(value.image);
-                    const response = await fetch(url);
-                    const data = await response.blob();
-                    const ext = value.image.split(".").pop(); // url 구조에 맞게 수정할 것
-                    const filename = value.image.split("/").pop(); // url 구조에 맞게 수정할 것
-                    const metadata = { type: `image/${ext}` };
-                    const closetTop = new File([data], filename, metadata);
-                    console.log(closetTop);
-                    top.push(closetTop);
-                });
-
-                //하의 가져오기
-                const bottomResult = await axios({
-                    method: "GET",
-                    url: `https://backend.vivi-o.site/users/closet/bottom`,
-                    mode: "cors",
-                    headers: {
-                        Authorization: `${this.token}`,
-                    },
-                });
-                //나만의 옷장 하의 파일 변환
-                bottomResult.data.result.images.map(async (value) => {
-                    const url = imageCachedUrl(value.image);
-                    const response = await fetch(url);
-                    const data = await response.blob();
-                    const ext = value.image.split(".").pop(); // url 구조에 맞게 수정할 것
-                    const filename = value.image.split("/").pop(); // url 구조에 맞게 수정할 것
-                    const metadata = { type: `image/${ext}` };
-                    const closetBottom = new File([data], filename, metadata);
-                    bottom.push(closetBottom);
-                });
-
-                //아우터 가져오기
-                const outerResult = await axios({
-                    method: "GET",
-                    url: `https://backend.vivi-o.site/users/closet/outer`,
-                    mode: "cors",
-                    headers: {
-                        Authorization: `${this.token}`,
-                    },
-                });
-                //나만의 옷장 아우터 파일 변환
-                outerResult.data.result.images.map(async (value) => {
-                    const url = imageCachedUrl(value.image);
-                    const response = await fetch(url);
-                    const data = await response.blob();
-                    const ext = value.image.split(".").pop(); // url 구조에 맞게 수정할 것
-                    const filename = value.image.split("/").pop(); // url 구조에 맞게 수정할 것
-                    const metadata = { type: `image/${ext}` };
-                    const closetOuter = new File([data], filename, metadata);
-                    outer.push(closetOuter);
-                });
-            }
 
             //상의 id 뺀 리스트 만들어야함
             this.topList.map((value) => {
@@ -188,7 +140,7 @@ class CoordiFinderModel {
             });
 
             //아우터
-            if (this.outerList.length !== 0 || outer.length !== 0) {
+            if (this.outerList.length !== 0) {
                 this.outerList.map((value) => {
                     outer.push(value.file);
                 });
@@ -229,6 +181,7 @@ class CoordiFinderModel {
                 },
                 data: saveData,
             });
+            this.name = result.data.result.name;
             console.log(result);
         } catch (error) {
             console.log(error);
@@ -260,6 +213,7 @@ class CoordiFinderModel {
                     Authorization: `${this.token}`,
                 },
             });
+            this.name = this.resultList.data.result.name;
             console.log(this.resultList);
         } catch (error) {
             console.log(error);

@@ -22,6 +22,9 @@ class CoordiFinderViewModel {
             },
         ];
     }
+    getName() {
+        return this.model.getName();
+    }
     setToken(token) {
         this.model.setToken(token);
     }
@@ -69,6 +72,15 @@ class CoordiFinderViewModel {
     };
     getCoordi = async (coordiID) => {
         await this.model.getCoordi(coordiID);
+    };
+    getClosetTop = async () => {
+        return await this.model.getClosetTop();
+    };
+    getClosetBottom = async () => {
+        return await this.model.getClosetBottom();
+    };
+    getClosetOuter = async () => {
+        return await this.model.getClosetOuter();
     };
 }
 

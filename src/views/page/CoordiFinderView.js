@@ -16,6 +16,20 @@ import gender1 from "../../img/CoordiFinder/gender1.png";
 import gender2 from "../../img/CoordiFinder/gender2.png";
 import lock from "../../img/CoordiFinder/lock.png";
 
+//url to File
+const convertURLtoFile = async (url) => {
+    const imgUrl = /^data:image/.test(url)
+        ? url
+        : url + "?" + new Date().getTime(); //이미지 캐시 우회
+    const response = await fetch(imgUrl);
+    const data = await response.blob();
+    const ext = url.split(".").pop(); // url 구조에 맞게 수정할 것
+    const filename = url.split("/").pop(); // url 구조에 맞게 수정할 것
+    const metadata = { type: `image/${ext}` };
+    const file = new File([data], filename, metadata);
+    return file;
+};
+
 function ImageShow({ list, remove, fail }) {
     const scrollRef = useRef(null);
     const [isDrag, setIsDrag] = useState(false);
@@ -80,13 +94,23 @@ function InputView({ viewModel }) {
     const [top, setTop] = useState([]);
     const [bottom, setBottom] = useState([]);
     const [outer, setOuter] = useState([]);
+    //옷장 이미지 ID
+    const [closetTop, setClosetTop] = useState([]);
+    const [closetBottom, setClosetBottom] = useState([]);
+    const [closetOuter, setClosetOuter] = useState([]);
 
-    //다 같이 업뎃
+    //업뎃
     useEffect(() => {
         viewModel.setTopList(top);
+    }, [top]);
+
+    useEffect(() => {
         viewModel.setBottomList(bottom);
+    }, [bottom]);
+
+    useEffect(() => {
         viewModel.setOuterList(outer);
-    }, [top, bottom, outer]);
+    }, [outer]);
 
     const setImage = (file, type) => {
         const reader = new FileReader();
@@ -94,7 +118,7 @@ function InputView({ viewModel }) {
             switch (type) {
                 case "top":
                     top.push({
-                        id: top.length,
+                        id: top.length + closetTop.length,
                         img: String(reader.result),
                         file: file,
                     });
@@ -102,7 +126,7 @@ function InputView({ viewModel }) {
                     break;
                 case "bottom":
                     bottom.push({
-                        id: bottom.length,
+                        id: bottom.length + closetBottom.length,
                         img: String(reader.result),
                         file: file,
                     });
@@ -110,7 +134,7 @@ function InputView({ viewModel }) {
                     break;
                 case "outer":
                     outer.push({
-                        id: outer.length,
+                        id: outer.length + closetOuter.length,
                         img: String(reader.result),
                         file: file,
                     });
@@ -155,12 +179,69 @@ function InputView({ viewModel }) {
         setTop(top.filter((item) => item.id !== id));
     };
 
-    const removeBotton = (id) => {
+    const removeBottom = (id) => {
         setBottom(bottom.filter((item) => item.id !== id));
     };
 
     const removeOuter = (id) => {
         setOuter(outer.filter((item) => item.id !== id));
+    };
+
+    async function getColset() {
+        //옷장 옷 가져오기
+        const ct = await viewModel.getClosetTop();
+        ct.data.result.images.map(async (value) => {
+            const file = await convertURLtoFile(value.image);
+            closetTop.push(top.length);
+            top.push({
+                id: top.length,
+                img: value.image,
+                file: file,
+            });
+            setTop([...top]);
+        });
+
+        const cb = await viewModel.getClosetBottom();
+        cb.data.result.images.map(async (value) => {
+            const file = await convertURLtoFile(value.image);
+            closetBottom.push(bottom.length);
+            bottom.push({
+                id: bottom.length,
+                img: value.image,
+                file: file,
+            });
+            setBottom([...bottom]);
+        });
+
+        const co = await viewModel.getClosetOuter();
+        co.data.result.images.map(async (value) => {
+            const file = await convertURLtoFile(value.image);
+            closetOuter.push(outer.length);
+            outer.push({
+                id: outer.length,
+                img: value.image,
+                file: file,
+            });
+            setOuter([...outer]);
+        });
+    }
+
+    const removeCloset = () => {
+        let temp = top;
+        closetTop.forEach((value) => {
+            temp = temp.filter((item) => item.id !== value);
+        });
+        setTop([...temp]);
+        temp = bottom;
+        closetBottom.forEach((value) => {
+            temp = temp.filter((item) => item.id !== value);
+        });
+        setBottom([...temp]);
+        temp = outer;
+        closetOuter.forEach((value) => {
+            temp = temp.filter((item) => item.id !== value);
+        });
+        setOuter([...temp]);
     };
 
     return (
@@ -174,6 +255,7 @@ function InputView({ viewModel }) {
                         type="checkbox"
                         onClick={(e) => {
                             viewModel.setClosetActive(e.target.checked);
+                            e.target.checked ? getColset() : removeCloset();
                         }}
                     ></input>
                     <span className="slider round"></span>
@@ -266,7 +348,7 @@ function InputView({ viewModel }) {
                     )}
                     <ImageShow
                         list={bottom}
-                        remove={removeBotton}
+                        remove={removeBottom}
                         fail={viewModel.getBottomListSize() < 2}
                     />
                 </div>
@@ -384,7 +466,7 @@ function ResultView({ viewModel, state, result, event }) {
             ) : state === "result" ? (
                 <div className={resultStyles.whiteBox}>
                     <div className={resultStyles.resultTitle}>
-                        OO님에게 추천하는 코디에요!
+                        {viewModel.getName() + "님에게 추천하는 코디에요!"}
                     </div>
                     <div className={resultStyles.resultBox}>
                         <Slider {...settings}>

@@ -105,8 +105,8 @@ function StartBtn({ left, top, onClick }) {
     return (
         <button style={pos} className={styles.StartBtn} onClick={onClick}>
             <span>시작 </span>
-            <img src={Coin1} alt="단추" className={styles.Coin}></img>
-            <span>-5</span>
+            {/* <img src={Coin1} alt="단추" className={styles.Coin}></img>
+            <span>-5</span> */}
         </button>
     );
 }

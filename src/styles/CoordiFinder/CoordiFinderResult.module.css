@@ -76,6 +76,10 @@
     white-space: pre;
 }
 
+.button:active {
+    background-color: #d9d9d9;
+}
+
 .whiteBox {
     box-sizing: border-box;
 

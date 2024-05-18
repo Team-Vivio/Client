@@ -112,6 +112,9 @@ class BodyAnalyzeViewModel {
         this.modalActive = false;
         this.modalIndex = -1;
     }
+    getName() {
+        return this.model.getName();
+    }
     setToken(token) {
         this.model.setToken(token);
     }

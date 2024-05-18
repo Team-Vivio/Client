@@ -22,6 +22,9 @@ class CoordiFinderViewModel {
             },
         ];
     }
+    getName() {
+        return this.model.getName();
+    }
     setToken(token) {
         this.model.setToken(token);
     }

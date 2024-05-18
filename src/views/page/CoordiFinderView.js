@@ -466,7 +466,7 @@ function ResultView({ viewModel, state, result, event }) {
             ) : state === "result" ? (
                 <div className={resultStyles.whiteBox}>
                     <div className={resultStyles.resultTitle}>
-                        OO님에게 추천하는 코디에요!
+                        {viewModel.getName() + "님에게 추천하는 코디에요!"}
                     </div>
                     <div className={resultStyles.resultBox}>
                         <Slider {...settings}>

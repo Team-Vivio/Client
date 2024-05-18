@@ -11,12 +11,6 @@
 }
 
 @font-face {
-    font-family: "AnekTamilRegular";
-    font-weight: 50;
-    src: url("../../fonts/AnekTamil-Regular.ttf") format("truetype");
-}
-
-@font-face {
     font-family: "AnekTamilBold";
     font-weight: 50;
     src: url("../../fonts/AnekTamil-Bold.ttf") format("truetype");
@@ -505,6 +499,10 @@
     justify-content: center;
 
     white-space: pre-wrap;
+}
+
+.StartBtn:active {
+    background-color: #d9d9d9;
 }
 
 .Coin {

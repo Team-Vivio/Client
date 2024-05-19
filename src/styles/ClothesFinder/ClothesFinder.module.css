@@ -490,7 +490,7 @@
     left: 340px;
     top: 42px;
 
-    /* background: url(../../img/ClothesFinder/background.png); */
+    border-radius: 5px;
 }
 
 .RestartBtn {
@@ -516,6 +516,51 @@
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
+    line-height: 140%;
+    /* or 28px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
+
+.SortBtnBox {
+    width: 500px;
+    height: 100px;
+
+    display: flex;
+    flex-direction: row;
+
+    margin-left: 50px;
+}
+
+.SortBtn {
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    width: 100px;
+    height: 40px;
+    /* left: 172px;
+    top: 635px; */
+    margin-top: 17px;
+    margin-left: 1px;
+    /* margin-bottom: 40px; */
+
+    background: #ffffff;
+
+    border: 1px solid #b9c4c1;
+    border-top: none;
+    border-bottom: none;
+
+    font-family: "NanumSquareRound";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
     line-height: 140%;
     /* or 28px */
     display: flex;

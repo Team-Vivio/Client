@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/ClothesFinder/ClothesFinder.module.css";
 
 import img_top from "../../img/ClothesFinder/clothes_top.png";
@@ -60,7 +60,6 @@ function DropBox({ viewModel }) {
                         src={uploadedInfo.imageUrl}
                         alt="DropBox"
                         className={styles.InfoImg}
-                        onMouseEnter={console.log(uploadedInfo.imageUrl)}
                     ></img>
                 ) : (
                     <>
@@ -193,8 +192,19 @@ function InputSetting({ viewModel }) {
     );
 }
 
-function ResultBox({ viewModel, state, result, event }) {
-    // console.log("result Img : " + viewModel.getUploadedImgLink());
+function ResultBox({ viewModel, state, result, event, select }) {
+    const [resultList, setResultList] = useState(result);
+
+    // const getNewResultList = () => {
+    //     setResultList(viewModel.getResultList());
+    // }
+
+    // useEffect(() => {
+    //     setResultList(viewModel.getResultList());
+    // }, [viewModel]);
+    // console.log("---------------");
+    // console.log(result);
+    // console.log("---------------");
     let type =
         viewModel.getType() === "top"
             ? "상의"
@@ -267,9 +277,48 @@ function ResultBox({ viewModel, state, result, event }) {
                             alt=""
                             src={viewModel.getUploadedImgLink()}
                         ></img>
-
+                        <div
+                            className={styles.SortBtnBox}
+                            // style={{ display: "inline-block" }}
+                        >
+                            <button
+                                className={styles.SortBtn}
+                                id="1"
+                                onClick={(event) => {
+                                    // setResultList(viewModel.getResultList());
+                                    select(event);
+                                }}
+                            >
+                                유사도순
+                            </button>
+                            <button
+                                className={styles.SortBtn}
+                                id="2"
+                                onClick={(event) => {
+                                    // setResultList(
+                                    //     viewModel.getResultListDesc()
+                                    // );
+                                    select(event);
+                                }}
+                            >
+                                가격 높은 순
+                            </button>
+                            <button
+                                className={styles.SortBtn}
+                                id="3"
+                                onClick={(event) => {
+                                    // setResultList(viewModel.getResultListAsc());
+                                    select(event);
+                                }}
+                            >
+                                가격 낮은 순
+                            </button>
+                        </div>
                         {/* result.map()으로 요소 나열 */}
-                        {result.result.items.map((value, id) => (
+                        {console.log("-----------")}
+                        {console.log(resultList)}
+                        {console.log("-----------")}
+                        {result.map((value, id) => (
                             <div className={styles.ResultPos} key={id}>
                                 <div className={styles.ResultLine}></div>
                                 <img
@@ -308,7 +357,7 @@ function ClothesFinder({ viewModel }) {
         await viewModel.postClothes();
         if (viewModel.getResultList() !== null) {
             setState("result"); //성공
-            setResult(viewModel.getResultList());
+            setResult(viewModel.getResultListItem());
         } else {
             setState("main");
             setModal(true);
@@ -322,6 +371,26 @@ function ClothesFinder({ viewModel }) {
             setModalType(1);
         } else {
             setModalType(2);
+        }
+    }
+    function select(e) {
+        console.log(e.target.id);
+
+        switch (e.target.id) {
+            case "1":
+                setResult(viewModel.getResultListItem());
+                // console.log(viewModel.getResultListItem());
+                break;
+            case "2":
+                setResult(viewModel.getResultListItemDesc());
+                // console.log(viewModel.getResultListItemDesc());
+                break;
+            case "3":
+                setResult(viewModel.getResultListItemAsc());
+                // console.log(viewModel.getResultListItemAsc());
+                break;
+            default:
+                break;
         }
     }
 
@@ -355,8 +424,10 @@ function ClothesFinder({ viewModel }) {
             <ResultBox
                 viewModel={viewModel}
                 state={state}
+                // 버튼 클릭시 result에 resultList, resultByPrice
                 result={result}
                 event={start}
+                select={select}
             />
         </div>
     );

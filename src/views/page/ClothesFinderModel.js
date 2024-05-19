@@ -8,8 +8,41 @@ class ClothesFinderModel {
         this.uploadedImg = null;
         this.uploadedImgLink = null;
         this.resultList = [];
+        this.resultListItem = [];
+        this.resultListItemAsc = [];
+        this.resultListItemDesc = [];
         this.formData = new FormData();
     }
+    getResultListItem() {
+        return this.resultListItem;
+    }
+    getResultListItemAsc() {
+        return this.resultListItemAsc;
+    }
+    getResultListItemDesc() {
+        return this.resultListItemDesc;
+    }
+    setResultListItemAsc() {
+        if (Array.isArray(this.resultList.result.items)) {
+            this.resultListItemAsc = this.resultList.result.items
+                .slice()
+                .sort((a, b) => a.price - b.price);
+        } else {
+            console.error("resultList is not an array:", this.resultList);
+            this.resultListItemAsc = [];
+        }
+    }
+    setResultListItemDesc() {
+        if (Array.isArray(this.resultList.result.items)) {
+            this.resultListItemDesc = this.resultList.result.items
+                .slice()
+                .sort((a, b) => b.price - a.price);
+        } else {
+            console.error("resultList is not an array:", this.resultList);
+            this.resultListItemDesc = [];
+        }
+    }
+
     getUploadedImgLink() {
         return this.uploadedImgLink;
     }
@@ -81,12 +114,21 @@ class ClothesFinderModel {
             // Verify if request is successful
             if (response && response.status === 200) {
                 this.resultList = response.data; // Assuming data contains the result
+                this.resultListItem = this.resultList.result.items;
             } else {
                 console.error("Failed to get data:", response);
             }
         } catch (error) {
             console.error("Error occurred:", error);
         }
+
+        // 가격순 정렬
+        await this.setResultListItemAsc();
+        await this.setResultListItemDesc();
+        console.log("@@@@@@@@@@@@@");
+        console.log("resultListItemAsc :" + this.resultListItemAsc);
+        console.log("resultListItemDesc :" + this.resultListItemDesc);
+        console.log("@@@@@@@@@@@@@");
     };
 }
 

@@ -35,8 +35,11 @@ class ToneAnalyzeModel {
     }
     getAllHistoryList() {
         if (this.historyList === null) {
-            // console.log("No History");
-            return null;
+            let list = [];
+            for (let i = 0; i < 7; i++) {
+                list.push({ image: "", type: "" });
+            }
+            return list;
         } else {
             let list = this.historyList.data.result.viewListResultDTOS;
             // ex)

@@ -248,7 +248,7 @@ function InputView({ viewModel }) {
         <div>
             <div className={inputStyles.titleItem}>
                 <span className={`${inputStyles.whiteBig}`}>
-                    코디해드립니다
+                    나만의 코디찾기
                 </span>
                 <label className="switch">
                     <input

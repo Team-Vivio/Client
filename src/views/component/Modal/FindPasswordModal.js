@@ -20,7 +20,7 @@ function FindPasswordModal(props) {
 		setIsFindPasssword(false);
 		if (emailCheck(email)) {
 			axios
-				.post("/users/sendTempPassword", {
+				.post("https://backend.vivi-o.site/users/sendTempPassword", {
 					email: email,
 				})
 				.then((res) => {

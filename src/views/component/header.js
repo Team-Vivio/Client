@@ -28,7 +28,7 @@ function Header() {
 		if (storedSocialToken && !cookies.token) {
 			setCookie("token", storedSocialToken, {
 				path: "/",
-				domain: "vivi-o.site",
+				domain: "www.vivi-o.site",
 			});
 			console.log("설정 후 토큰 쿠키:", cookies.token);
 		}

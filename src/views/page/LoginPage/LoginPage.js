@@ -24,6 +24,18 @@ function Home() {
 		window.location.href = "/";
 	}
 
+	// 구글 소셜 로그인 클릭 시
+	function googleLoginClick() {
+		window.location.href =
+			"http://backend.vivi-o.site/oauth2/authorization/google";
+	}
+
+	// 카카오 소셜 로그인 클릭 시
+	function kakaoLoginClick() {
+		window.location.href =
+			"https://backend.vivi-o.site/oauth2/authorization/kakao";
+	}
+
 	useEffect(() => {
 		if (showModalE === false && showModalP === false) {
 			setBlur(false);
@@ -96,13 +108,13 @@ function Home() {
 					생생한 패션 생활, ViVio에서 시작하세요
 				</div>
 				<div className={styles.margin1}>
-					<button className={styles.btnGoogle}>
+					<button onClick={googleLoginClick} className={styles.btnGoogle}>
 						<img src={google} alt="googleLogo" />
 						구글로 시작하기
 					</button>
 				</div>
 				<div className={styles.margin2}>
-					<button className={styles.btnKakao}>
+					<button onClick={kakaoLoginClick} className={styles.btnKakao}>
 						<img src={kakao} alt="kakaoLogo" />
 						카카오로 시작하기
 					</button>

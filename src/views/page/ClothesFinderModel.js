@@ -114,7 +114,12 @@ class ClothesFinderModel {
             // Verify if request is successful
             if (response && response.status === 200) {
                 this.resultList = response.data; // Assuming data contains the result
-                this.resultListItem = this.resultList.result.items;
+                this.resultListItem = this.resultList.result.items.map(
+                    (item) => ({
+                        ...item,
+                        price: item.price.toLocaleString(),
+                    })
+                );
             } else {
                 console.error("Failed to get data:", response);
             }
@@ -125,10 +130,19 @@ class ClothesFinderModel {
         // 가격순 정렬
         await this.setResultListItemAsc();
         await this.setResultListItemDesc();
-        console.log("@@@@@@@@@@@@@");
-        console.log("resultListItemAsc :" + this.resultListItemAsc);
-        console.log("resultListItemDesc :" + this.resultListItemDesc);
-        console.log("@@@@@@@@@@@@@");
+
+        this.resultListItem = this.resultList.result.items.map((item) => ({
+            ...item,
+            price: item.price.toLocaleString(),
+        }));
+        this.resultListItemAsc = this.resultListItemAsc.map((item) => ({
+            ...item,
+            price: item.price.toLocaleString(),
+        }));
+        this.resultListItemDesc = this.resultListItemDesc.map((item) => ({
+            ...item,
+            price: item.price.toLocaleString(),
+        }));
     };
 }
 

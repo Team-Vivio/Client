@@ -248,7 +248,7 @@ function InputView({ viewModel }) {
         <div>
             <div className={inputStyles.titleItem}>
                 <span className={`${inputStyles.whiteBig}`}>
-                    코디해드립니다
+                    나만의 코디찾기
                 </span>
                 <label className="switch">
                     <input
@@ -258,7 +258,7 @@ function InputView({ viewModel }) {
                             e.target.checked ? getColset() : removeCloset();
                         }}
                     ></input>
-                    <span className="slider round"></span>
+                    <span className="sliderT round"></span>
                 </label>
             </div>
             <div className={inputStyles.q1Item}>
@@ -301,7 +301,7 @@ function InputView({ viewModel }) {
             <div className={inputStyles.q2Item}>
                 <div className={`${inputStyles.whiteSmall}`}>
                     Q. 상의를 두 종류 이상 업로드해주세요
-                    {viewModel.getTopListSize() < 2 ? (
+                    {top.length < 2 ? (
                         <div className={inputStyles.redText}>
                             *사진을 두장 이상 올려주세요!
                         </div>
@@ -311,7 +311,7 @@ function InputView({ viewModel }) {
                     <ImageShow
                         list={top}
                         remove={removeTop}
-                        fail={viewModel.getTopListSize() < 2}
+                        fail={top.length < 2}
                     />
                 </div>
                 <div
@@ -339,7 +339,7 @@ function InputView({ viewModel }) {
             <div className={inputStyles.q2Item}>
                 <div className={`${inputStyles.whiteSmall} `}>
                     Q. 하의를 두 종류 이상 업로드해주세요
-                    {viewModel.getBottomListSize() < 2 ? (
+                    {bottom.length < 2 ? (
                         <div className={inputStyles.redText}>
                             *사진을 두장 이상 올려주세요!
                         </div>
@@ -349,7 +349,7 @@ function InputView({ viewModel }) {
                     <ImageShow
                         list={bottom}
                         remove={removeBottom}
-                        fail={viewModel.getBottomListSize() < 2}
+                        fail={bottom.length < 2}
                     />
                 </div>
                 <div

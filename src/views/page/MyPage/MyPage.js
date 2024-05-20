@@ -279,8 +279,9 @@ function MyPage() {
 					src={background}
 					style={{
 						position: "fixed",
-						width: window.innerWidth,
-						height: window.innerHeight,
+						width: "100%",
+						height: "100%",
+						overflow:"hidden",
 						objectFit: "cover",
 						zIndex: -1,
 					}}

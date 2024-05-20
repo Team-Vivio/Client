@@ -32,6 +32,8 @@
 }
 
 .logo {
+	width: 350px;
+	height: auto;
 	cursor: pointer;
 }
 

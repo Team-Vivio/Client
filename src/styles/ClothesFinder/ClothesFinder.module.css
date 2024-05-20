@@ -12,21 +12,6 @@
 }
 
 .background {
-    /* width: 1920px;
-    height: 975px;
-
-    font-family: "NanumSquareRound";
-    font-style: normal;
-    font-weight: 700;
-    line-height: 140%;
-    letter-spacing: 0.02em;
-    text-transform: capitalize;
-
-    background-image: url("../../img/ClothesFinder/background.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain; */
-
     position: fixed;
     overflow: auto;
     width: 100%;
@@ -246,12 +231,9 @@
 .MainBox {
     box-sizing: border-box;
 
-    overflow-y: auto;
-
     position: absolute;
     width: 610px;
     height: 717px;
-    /* left: 41px; */
     left: 1159px;
     top: 161px;
     padding-top: 42px;

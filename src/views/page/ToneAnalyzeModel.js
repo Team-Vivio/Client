@@ -182,6 +182,7 @@ class ToneAnalyzeModel {
                     "Content-Type": "multipart/form-data",
                 },
             });
+            this.name = this.resultList.data.result.name;
             this.setUploadedImg(this.resultList.data.result.image);
 
             console.log(this.resultList);

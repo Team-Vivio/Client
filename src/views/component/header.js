@@ -26,7 +26,10 @@ function Header() {
 	useEffect(() => {
 		const storedSocialToken = cookies.socialToken;
 		if (storedSocialToken && !cookies.token) {
-			setCookie("token", storedSocialToken, { path: "/", domain: "localhost" });
+			setCookie("token", storedSocialToken, {
+				path: "/",
+				domain: "vivi-o.site",
+			});
 			console.log("설정 후 토큰 쿠키:", cookies.token);
 		}
 	}, []);

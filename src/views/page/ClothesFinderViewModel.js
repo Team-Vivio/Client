@@ -5,6 +5,15 @@ class ClothesFinderViewModel {
         this.uploadedImg = this.model.getUploadedImg();
         this.uploadedImgLink = this.model.getUploadedImgLink();
     }
+    getResultListItem() {
+        return this.model.getResultListItem();
+    }
+    getResultListItemAsc() {
+        return this.model.getResultListItemAsc();
+    }
+    getResultListItemDesc() {
+        return this.model.getResultListItemDesc();
+    }
 
     getUploadedImgLink() {
         return this.model.getUploadedImgLink();
@@ -30,7 +39,7 @@ class ClothesFinderViewModel {
         this.model.setUploadedImgLink(this.uploadedImgLink);
     }
     getResultList() {
-        return this.model.resultList;
+        return this.model.getResultList();
     }
     dataCheck() {
         return (

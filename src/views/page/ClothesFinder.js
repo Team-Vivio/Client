@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/ClothesFinder/ClothesFinder.module.css";
 
 import img_top from "../../img/ClothesFinder/clothes_top.png";
@@ -60,7 +60,6 @@ function DropBox({ viewModel }) {
                         src={uploadedInfo.imageUrl}
                         alt="DropBox"
                         className={styles.InfoImg}
-                        onMouseEnter={console.log(uploadedInfo.imageUrl)}
                     ></img>
                 ) : (
                     <>
@@ -193,8 +192,19 @@ function InputSetting({ viewModel }) {
     );
 }
 
-function ResultBox({ viewModel, state, result, event }) {
-    // console.log("result Img : " + viewModel.getUploadedImgLink());
+function ResultBox({ viewModel, state, result, event, select }) {
+    const [btn1, setBtn1] = useState(true);
+    const [btn2, setBtn2] = useState(false);
+    const [btn3, setBtn3] = useState(false);
+    const [btnValue, setBtnValue] = useState(0);
+
+    useEffect(() => {
+        setBtnValue(1);
+        setBtn1(true);
+        setBtn2(false);
+        setBtn3(false);
+    }, [viewModel.model.resultList]);
+
     let type =
         viewModel.getType() === "top"
             ? "상의"
@@ -267,9 +277,68 @@ function ResultBox({ viewModel, state, result, event }) {
                             alt=""
                             src={viewModel.getUploadedImgLink()}
                         ></img>
-
+                        <div className={styles.SortBtnBox}>
+                            <button
+                                className={
+                                    !btn1
+                                        ? styles.SortBtnDown
+                                        : btn1 && btnValue === 0
+                                        ? styles.SortBtn
+                                        : styles.SortBtnUp
+                                }
+                                id="1"
+                                onClick={(event) => {
+                                    select(event);
+                                    setBtnValue(1);
+                                    setBtn1(true);
+                                    setBtn2(false);
+                                    setBtn3(false);
+                                }}
+                            >
+                                유사도순
+                            </button>
+                            <button
+                                className={
+                                    !btn2
+                                        ? styles.SortBtnDown
+                                        : btn2 && btnValue === 0
+                                        ? styles.SortBtn
+                                        : styles.SortBtnUp
+                                }
+                                id="2"
+                                onClick={(event) => {
+                                    select(event);
+                                    setBtnValue(2);
+                                    setBtn1(false);
+                                    setBtn2(true);
+                                    setBtn3(false);
+                                }}
+                            >
+                                가격 높은 순
+                            </button>
+                            <button
+                                className={
+                                    !btn3
+                                        ? styles.SortBtnDown
+                                        : btn2 && btnValue === 0
+                                        ? styles.SortBtn
+                                        : styles.SortBtnUp
+                                }
+                                id="3"
+                                onClick={(event) => {
+                                    select(event);
+                                    setBtnValue(3);
+                                    setBtn1(false);
+                                    setBtn2(false);
+                                    setBtn3(true);
+                                }}
+                            >
+                                가격 낮은 순
+                            </button>
+                        </div>
                         {/* result.map()으로 요소 나열 */}
-                        {result.result.items.map((value, id) => (
+
+                        {result.map((value, id) => (
                             <div className={styles.ResultPos} key={id}>
                                 <div className={styles.ResultLine}></div>
                                 <img
@@ -308,7 +377,7 @@ function ClothesFinder({ viewModel }) {
         await viewModel.postClothes();
         if (viewModel.getResultList() !== null) {
             setState("result"); //성공
-            setResult(viewModel.getResultList());
+            setResult(viewModel.getResultListItem());
         } else {
             setState("main");
             setModal(true);
@@ -322,6 +391,26 @@ function ClothesFinder({ viewModel }) {
             setModalType(1);
         } else {
             setModalType(2);
+        }
+    }
+    function select(e) {
+        console.log(e.target.id);
+
+        switch (e.target.id) {
+            case "1":
+                setResult(viewModel.getResultListItem());
+                // console.log(viewModel.getResultListItem());
+                break;
+            case "2":
+                setResult(viewModel.getResultListItemDesc());
+                // console.log(viewModel.getResultListItemDesc());
+                break;
+            case "3":
+                setResult(viewModel.getResultListItemAsc());
+                // console.log(viewModel.getResultListItemAsc());
+                break;
+            default:
+                break;
         }
     }
 
@@ -355,8 +444,10 @@ function ClothesFinder({ viewModel }) {
             <ResultBox
                 viewModel={viewModel}
                 state={state}
+                // 버튼 클릭시 result에 resultList, resultByPrice
                 result={result}
                 event={start}
+                select={select}
             />
         </div>
     );

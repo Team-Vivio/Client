@@ -42,18 +42,20 @@ function Header() {
 			cookies.token === "undefined"
 		) {
 			setIsuser(false);
-			console.log("사용자가 로그인되지 않음");
 		} else {
 			setIsuser(true);
-			console.log("사용자가 로그인됨");
 		}
 	}, [cookies.token]);
 
 	// 로그아웃 함수
 	function handleLogoutClick() {
+		if (cookies.socialToken) {
+			removeCookie("socialToken", { path: "/", domain: "vivi-o.site" });
+			removeCookie("token", { path: "/", domain: "www.vivi-o.site" });
+		} else {
+			removeCookie("token", { path: "/", domain: "vivi-o.site" });
+		}
 		// 쿠키에서 토큰을 제거하고 사용자 상태를 업데이트합니다.
-		removeCookie("socialToken", { path: "/", domain: "vivi-o.site" });
-		removeCookie("token", { path: "/", domain: "vivi-o.site" });
 		window.location.href = "/";
 	}
 

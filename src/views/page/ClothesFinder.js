@@ -193,18 +193,18 @@ function InputSetting({ viewModel }) {
 }
 
 function ResultBox({ viewModel, state, result, event, select }) {
-    const [resultList, setResultList] = useState(result);
+    const [btn1, setBtn1] = useState(true);
+    const [btn2, setBtn2] = useState(false);
+    const [btn3, setBtn3] = useState(false);
+    const [btnValue, setBtnValue] = useState(0);
 
-    // const getNewResultList = () => {
-    //     setResultList(viewModel.getResultList());
-    // }
+    useEffect(() => {
+        setBtnValue(1);
+        setBtn1(true);
+        setBtn2(false);
+        setBtn3(false);
+    }, [viewModel.model.resultList]);
 
-    // useEffect(() => {
-    //     setResultList(viewModel.getResultList());
-    // }, [viewModel]);
-    // console.log("---------------");
-    // console.log(result);
-    // console.log("---------------");
     let type =
         viewModel.getType() === "top"
             ? "상의"
@@ -277,47 +277,67 @@ function ResultBox({ viewModel, state, result, event, select }) {
                             alt=""
                             src={viewModel.getUploadedImgLink()}
                         ></img>
-                        <div
-                            className={styles.SortBtnBox}
-                            // style={{ display: "inline-block" }}
-                        >
+                        <div className={styles.SortBtnBox}>
                             <button
-                                className={styles.SortBtn}
+                                className={
+                                    !btn1
+                                        ? styles.SortBtnDown
+                                        : btn1 && btnValue === 0
+                                        ? styles.SortBtn
+                                        : styles.SortBtnUp
+                                }
                                 id="1"
                                 onClick={(event) => {
-                                    // setResultList(viewModel.getResultList());
                                     select(event);
+                                    setBtnValue(1);
+                                    setBtn1(true);
+                                    setBtn2(false);
+                                    setBtn3(false);
                                 }}
                             >
                                 유사도순
                             </button>
                             <button
-                                className={styles.SortBtn}
+                                className={
+                                    !btn2
+                                        ? styles.SortBtnDown
+                                        : btn2 && btnValue === 0
+                                        ? styles.SortBtn
+                                        : styles.SortBtnUp
+                                }
                                 id="2"
                                 onClick={(event) => {
-                                    // setResultList(
-                                    //     viewModel.getResultListDesc()
-                                    // );
                                     select(event);
+                                    setBtnValue(2);
+                                    setBtn1(false);
+                                    setBtn2(true);
+                                    setBtn3(false);
                                 }}
                             >
                                 가격 높은 순
                             </button>
                             <button
-                                className={styles.SortBtn}
+                                className={
+                                    !btn3
+                                        ? styles.SortBtnDown
+                                        : btn2 && btnValue === 0
+                                        ? styles.SortBtn
+                                        : styles.SortBtnUp
+                                }
                                 id="3"
                                 onClick={(event) => {
-                                    // setResultList(viewModel.getResultListAsc());
                                     select(event);
+                                    setBtnValue(3);
+                                    setBtn1(false);
+                                    setBtn2(false);
+                                    setBtn3(true);
                                 }}
                             >
                                 가격 낮은 순
                             </button>
                         </div>
                         {/* result.map()으로 요소 나열 */}
-                        {console.log("-----------")}
-                        {console.log(resultList)}
-                        {console.log("-----------")}
+
                         {result.map((value, id) => (
                             <div className={styles.ResultPos} key={id}>
                                 <div className={styles.ResultLine}></div>

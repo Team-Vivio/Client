@@ -14,7 +14,7 @@
 }
 
 /* The slider */
-.slider {
+.sliderT {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -26,7 +26,7 @@
     transition: 0.4s;
 }
 
-.slider:before {
+.sliderT:before {
     position: absolute;
     content: "";
     height: 33px;
@@ -38,7 +38,7 @@
     transition: 0.4s;
 }
 
-.slider:after {
+.sliderT:after {
     position: absolute;
     height: 28px;
     left: 53px;
@@ -60,39 +60,39 @@
     transition: 0.4s;
 }
 
-input:checked + .slider:before {
+input:checked + .sliderT:before {
     background-color: #ffffff;
 }
 
-input:checked + .slider:after {
+input:checked + .sliderT:after {
     content: "옷장 비활성화";
 }
 
-input:checked + .slider {
+input:checked + .sliderT {
     background-color: #ffd439;
 }
 
-input:focus + .slider {
+input:focus + .sliderT {
     box-shadow: 0 0 1px #2196f3;
 }
 
-input:checked + .slider:before {
+input:checked + .sliderT:before {
     -webkit-transform: translateX(132px);
     -ms-transform: translateX(132px);
     transform: translateX(132px);
 }
 
-input:checked + .slider:after {
+input:checked + .sliderT:after {
     -webkit-transform: translateX(-42px);
     -ms-transform: translateX(-42px);
     transform: translateX(-42px);
 }
 
 /* Rounded sliders */
-.slider.round {
+.sliderT.round {
     border-radius: 34px;
 }
 
-.slider.round:before {
+.sliderT.round:before {
     border-radius: 50%;
 }

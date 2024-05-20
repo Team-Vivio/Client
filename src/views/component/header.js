@@ -16,17 +16,26 @@ function Header() {
 		"token",
 		"socialToken",
 	]);
+	const [Isuser, setIsuser] = useState(false);
+
 	function handleHomeClick() {
 		window.location.href = "/";
 	}
 
-	// 토큰이 있을 시, 헤더 바꾸기
+	// 페이지가 처음 로드될 때만 토큰을 설정하도록 수정
 	useEffect(() => {
 		const storedSocialToken = cookies.socialToken;
 		if (storedSocialToken && !cookies.token) {
-			setCookie("token", storedSocialToken, { path: "/", domain: "localhost" });
+			setCookie("token", storedSocialToken, {
+				path: "/",
+				domain: "www.vivi-o.site",
+			});
 			console.log("설정 후 토큰 쿠키:", cookies.token);
 		}
+	}, []);
+
+	// 토큰 상태를 체크하여 사용자 상태 업데이트
+	useEffect(() => {
 		if (
 			!cookies.token ||
 			cookies.token === undefined ||
@@ -38,7 +47,7 @@ function Header() {
 			setIsuser(true);
 			console.log("사용자가 로그인됨");
 		}
-	}, [cookies, setCookie]);
+	}, [cookies.token]);
 
 	// 로그아웃 함수
 	function handleLogoutClick() {
@@ -72,7 +81,6 @@ function Header() {
 		window.location.href = "/CoordiFinder";
 	}
 
-	const [Isuser, setIsuser] = useState(false);
 	return (
 		<div
 			style={{

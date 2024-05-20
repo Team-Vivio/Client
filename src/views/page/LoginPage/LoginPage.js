@@ -79,7 +79,11 @@ function Home() {
 				})
 				.then((res) => {
 					if (res.data.isSuccess) {
-						setCookie("token", res.data.result.token);
+						const domain =
+							window.location.hostname === "localhost"
+								? "localhost"
+								: "vivi-o.site";
+						setCookie("token", res.data.result.token, { domain });
 						window.location.href = "/";
 					} else {
 						alert("로그인이 실패. 이메일과 비밀번호를 확인해주세요");

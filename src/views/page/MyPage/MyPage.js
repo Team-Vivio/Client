@@ -17,9 +17,11 @@ function MyPage() {
 	const formattedPhoneNumber = formatPhoneNumber(phone);
 	const [showModalP, setShowModalP] = useState(false);
 	const outsideRef = useRef();
-	const [cookies] = useCookies(["token"]);
+	const [cookies] = useCookies(["token", "socialToken"]);
 	const token = cookies.token;
 	const [blur, setBlur] = useState(false);
+
+	const [isFindSocialToken, setIsFindSocialToken] = useState(false);
 
 	// 모달 띄우고, 배경 블러
 	useEffect(() => {
@@ -69,8 +71,6 @@ function MyPage() {
 		});
 		window.location.reload();
 	};
-
-	// 아우터 이미지 등록하기
 
 	// 상의 이미지 불러오기
 	function TopImg() {
@@ -130,26 +130,31 @@ function MyPage() {
 
 	// 마이페이지 불러올 때, 토큰 값 넘겨 정보 받아오기
 	useEffect(() => {
-		axios
-			.get("https://backend.vivi-o.site/users/userInfo", {
-				headers: {
-					Authorization: token,
-				},
-			})
-			.then((res) => {
-				if (res.data.isSuccess) {
-					setName(res.data.result.name);
-					setEmail(res.data.result.email);
-					setPhone(res.data.result.phoneNumber);
-					setBirthDate(res.data.result.birthDate);
-					if (res.data.result.gender === "male") {
-						setGender("남성");
-					} else {
-						setGender("여성");
+		console.log(cookies.socialToken);
+		if (!cookies.socialToken || cookies.socialToken === "undefined") {
+			axios
+				.get("https://backend.vivi-o.site/users/userInfo", {
+					headers: {
+						Authorization: token,
+					},
+				})
+				.then((res) => {
+					if (res.data.isSuccess) {
+						setName(res.data.result.name);
+						setEmail(res.data.result.email);
+						setPhone(res.data.result.phoneNumber);
+						setBirthDate(res.data.result.birthDate);
+						if (res.data.result.gender === "male") {
+							setGender("남성");
+						} else {
+							setGender("여성");
+						}
 					}
-				}
-			});
-	});
+				});
+		} else {
+			setIsFindSocialToken(true);
+		}
+	}, [cookies.socialToken]);
 
 	// 전화번호 받아 온 값에 자동으로 하이픈 넣기
 	function formatPhoneNumber(phone) {
@@ -379,35 +384,44 @@ function MyPage() {
 						생생한 패션 생활, ViViO에서 시작하세요
 					</div>
 					<div className={styles.infoDiv}>
-						<div className={styles.nameDiv}>
-							<div className={styles.nameTitle}>이름</div>
-							<div className={styles.nameResult}>{name}</div>
-						</div>
-						<div className={styles.phoneDiv}>
-							<div className={styles.phoneTitle}>전화번호</div>
-							<div className={styles.phoneResult}>{formattedPhoneNumber}</div>
-						</div>
-						<div className={styles.birthDiv}>
-							<div className={styles.birthTitle}>생년월일</div>
-							<div className={styles.birthResult}>{birthDate}</div>
-						</div>
-						<div className={styles.genderDiv}>
-							<div className={styles.genderTitle}>성별</div>
-							<div className={styles.genderResult}>{gender}</div>
-						</div>
-						<div className={styles.emailDiv}>
-							<div className={styles.emailTitle}>이메일</div>
-							<div className={styles.emailResult}>{email}</div>
-						</div>
-						<div className={styles.passwordDiv}>
-							<div className={styles.passwordTitle}>비밀번호</div>
-							<button
-								onClick={showPasswordChangeModalHandler}
-								className={styles.passwordChangeBtn}
-							>
-								변경
-							</button>
-						</div>
+						{!isFindSocialToken && (
+							<>
+								<div className={styles.nameDiv}>
+									<div className={styles.nameTitle}>이름</div>
+									<div className={styles.nameResult}>{name}</div>
+								</div>
+								<div className={styles.phoneDiv}>
+									<div className={styles.phoneTitle}>전화번호</div>
+									<div className={styles.phoneResult}>
+										{formattedPhoneNumber}
+									</div>
+								</div>
+								<div className={styles.birthDiv}>
+									<div className={styles.birthTitle}>생년월일</div>
+									<div className={styles.birthResult}>{birthDate}</div>
+								</div>
+								<div className={styles.genderDiv}>
+									<div className={styles.genderTitle}>성별</div>
+									<div className={styles.genderResult}>{gender}</div>
+								</div>
+								<div className={styles.emailDiv}>
+									<div className={styles.emailTitle}>이메일</div>
+									<div className={styles.emailResult}>{email}</div>
+								</div>
+								<div className={styles.passwordDiv}>
+									<div className={styles.passwordTitle}>비밀번호</div>
+									<button
+										onClick={showPasswordChangeModalHandler}
+										className={styles.passwordChangeBtn}
+									>
+										변경
+									</button>
+								</div>
+							</>
+						)}
+						{isFindSocialToken && (
+							<div>소셜 로그인은 개인정보를 이용할 수 없습니다.</div>
+						)}
 					</div>
 				</div>
 			</div>

@@ -25,7 +25,6 @@ function Header() {
 		const storedSocialToken = cookies.socialToken;
 		if (storedSocialToken && !cookies.token) {
 			setCookie("token", storedSocialToken, { path: "/", domain: "localhost" });
-			console.log("설정 후 토큰 쿠키:", cookies.token);
 		}
 		if (
 			!cookies.token ||
@@ -33,10 +32,8 @@ function Header() {
 			cookies.token === "undefined"
 		) {
 			setIsuser(false);
-			console.log("사용자가 로그인되지 않음");
 		} else {
 			setIsuser(true);
-			console.log("사용자가 로그인됨");
 		}
 	}, [cookies, setCookie]);
 

@@ -258,7 +258,7 @@ function InputView({ viewModel }) {
                             e.target.checked ? getColset() : removeCloset();
                         }}
                     ></input>
-                    <span className="slider round"></span>
+                    <span className="sliderT round"></span>
                 </label>
             </div>
             <div className={inputStyles.q1Item}>

@@ -53,7 +53,7 @@ function Header() {
 	function handleLogoutClick() {
 		// 쿠키에서 토큰을 제거하고 사용자 상태를 업데이트합니다.
 		removeCookie("socialToken", { path: "/", domain: "vivi-o.site" });
-		removeCookie("token", { path: "/", domain: "www.vivi-o.site" });
+		removeCookie("token", { path: "/", domain: "vivi-o.site" });
 		window.location.href = "/";
 	}
 

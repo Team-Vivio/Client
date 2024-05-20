@@ -29,6 +29,8 @@
 
 .logo {
 	cursor: pointer;
+	width: 18vw;
+	height: auto;
 }
 
 .titleWrap {

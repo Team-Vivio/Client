@@ -288,7 +288,7 @@ function MyPage() {
 				<div
 					className={styles.scrollbar_Y}
 					style={{
-						width: 729,
+						width: "42vw",
 						height: window.innerHeight - 178,
 						paddingRight: 30,
 						overflowX: "hidden",

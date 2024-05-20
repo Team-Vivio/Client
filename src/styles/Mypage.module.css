@@ -25,7 +25,7 @@
 	overflow-y: hidden;
 	display: flex;
 	flex-direction: column;
-	width: 729px;
+	width: 820px;
 	height: 540px;
 	background: rgba(245, 245, 245, 0.5);
 	border-radius: 60px;
@@ -33,7 +33,6 @@
 }
 
 .scrollbar_Y {
-	width: 729px;
 	overflow-y: scroll;
 }
 
@@ -226,10 +225,11 @@
 	margin-top: 118px;
 	margin-right: 70px;
 	border-left: 1px solid #ffffff;
-	height: 721px;
+	height: 820px;
 }
 
 .informationDiv {
+	margin-left: 130px;
 	margin-top: 100px;
 	height: 800px;
 	width: 640px;

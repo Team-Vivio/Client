@@ -98,7 +98,7 @@ function FindEmailModal(props) {
 	async function onSubmit() {
 		let date = new Date(`${year}-${month}-${day}`);
 		axios
-			.post("/users/findEmail", {
+			.post("https://backend.vivi-o.site/users/findEmail", {
 				name: name,
 				phoneNum: phone,
 				birthDate: date,

@@ -284,8 +284,9 @@ function MyPage() {
 					src={background}
 					style={{
 						position: "fixed",
-						width: window.innerWidth,
-						height: window.innerHeight,
+						width: "100%",
+						height: "100%",
+						overflow:"hidden",
 						objectFit: "cover",
 						zIndex: -1,
 					}}
@@ -293,7 +294,7 @@ function MyPage() {
 				<div
 					className={styles.scrollbar_Y}
 					style={{
-						width: 729,
+						width: "42vw",
 						height: window.innerHeight - 178,
 						paddingRight: 30,
 						overflowX: "hidden",

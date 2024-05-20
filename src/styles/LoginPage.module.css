@@ -10,7 +10,7 @@
 }
 
 .page {
-	margin-top: 141px;
+	margin-top: 14.462vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -19,7 +19,7 @@
 
 .blurpage {
 	filter: blur(5px);
-	margin-top: 141px;
+	margin-top: 14.462vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -29,36 +29,38 @@
 
 .logo {
 	cursor: pointer;
+	width: 18vw;
+	height: auto;
 }
 
 .titleWrap {
-	margin-top: 38px;
+	margin-top: 3.897vh;
 	color: #626262;
 	font-family: "NanumSquareRoundOTF";
-	font-size: 25px;
+	font-size: 2.564vh;
 	justify-content: center;
 	font-weight: 800;
-	margin-bottom: 40px;
+	margin-bottom: 4.103vh;
 }
 
 .margin1 {
-	margin-bottom: 20px;
+	margin-bottom: 2.051vh;
 }
 
 .margin2 {
-	margin-bottom: 23px;
+	margin-bottom: 2.359vh;
 }
 
 .btnGoogle {
-	gap: 10px;
+	gap: 1.026vh;
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	border: none;
 	background-color: #ffffff;
-	width: 380px;
-	height: 50px;
+	width: 19.792vw;
+	height: 5.128vh;
 	border-radius: 20px;
 	font-family: "NanumSquareRoundOTF";
-	font-size: 15px;
+	font-size: 1.538vh;
 	font-weight: bold;
 	display: flex;
 	justify-content: center;
@@ -67,15 +69,15 @@
 }
 
 .btnKakao {
-	gap: 10px;
+	gap: 1.26vh;
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	border: none;
-	width: 380px;
+	width: 19.792vw;
 	background-color: #fee500;
-	height: 50px;
+	height: 5.128vh;
 	border-radius: 20px;
 	font-family: "NanumSquareRoundOTF";
-	font-size: 15px;
+	font-size: 1.538vh;
 	font-weight: bold;
 	display: flex;
 	justify-content: center;
@@ -90,41 +92,41 @@
 .inputWrap {
 	display: flex;
 	flex-direction: row;
-	margin-bottom: 17px;
+	margin-bottom: 1.744vh;
 }
 
 .inputTitle {
-	gap: 8px;
+	gap: 0.821vh;
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-family: "NanumSquareRoundOTF";
-	font-size: 15px;
+	font-size: 1.538vh;
 	font-weight: bold;
 }
 
 .textEP1 {
-	padding-left: 10px;
+	padding-left: 0.521vw;
 	font-weight: bold;
 	font-family: "NanumSquareRoundOTF";
-	font-size: 15px;
+	font-size: 1.538vh;
 	border: 1px solid #b2b2b2;
-	width: 370px;
-	height: 41px;
-	margin-right: 55px;
+	width: 19.271vw;
+	height: 4.205vh;
+	margin-right: 2.865vw;
 	border-radius: 20px;
 }
 
 .textEP2 {
-	padding-left: 10px;
+	padding-left: 0.521vw;
 	font-family: "NanumSquareRoundOTF";
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 1.538vh;
 	border: 1px solid #b2b2b2;
-	width: 370px;
-	height: 41px;
-	margin-right: 70px;
+	width: 19.271vw;
+	height: 4.205vh;
+	margin-right: 3.646vw;
 	border-radius: 20px;
 }
 
@@ -132,26 +134,26 @@
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	border: none;
 	border: none;
-	width: 380px;
-	height: 50px;
+	width: 19.792vw;
+	height: 5.128vh;
 	border-radius: 20px;
 	background-color: #ffd439;
-	margin-bottom: 5%;
+	margin-bottom: 5vh;
 	font-family: "NanumSquareRoundOTF";
-	font-size: 15px;
+	font-size: 1.538vh;
 	font-weight: bold;
 	cursor: pointer;
 }
 
 .bottomText1 {
-	gap: 10px;
+	gap: 0.521vw;
 	text-align: center;
 	justify-content: center;
 	display: flex;
 	font-family: "NanumSquareRoundOTF";
 	font-style: normal;
 	font-weight: 800;
-	font-size: 12px;
+	font-size: 1.231vh;
 	line-height: 160%;
 	/* or 19px */
 
@@ -159,8 +161,8 @@
 }
 
 .bottomText2 {
-	margin-top: 3px;
-	gap: 10px;
+	margin-top: 0.308vh;
+	gap: 0.521vw;
 	text-align: center;
 	justify-content: center;
 	display: flex;
@@ -168,19 +170,19 @@
 	font-family: "NanumSquareRoundOTF";
 	font-style: normal;
 	font-weight: 800;
-	font-size: 12px;
+	font-size: 1.231vh;
 	line-height: 160%;
 	/* or 19px */
 
 	color: #bbbbbb;
-	padding-right: 40px;
+	padding-right: 2.083vw;
 }
 
 .bottomfont {
 	font-family: "NanumSquareRoundOTF";
 	font-style: normal;
 	font-weight: 800;
-	font-size: 13px;
+	font-size: 1.333vh;
 	line-height: 160%;
 	cursor: default;
 	/* or 21px */

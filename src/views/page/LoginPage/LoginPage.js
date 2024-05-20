@@ -113,13 +113,13 @@ function Home() {
 				</div>
 				<div className={styles.margin1}>
 					<button onClick={googleLoginClick} className={styles.btnGoogle}>
-						<img src={google} alt="googleLogo" />
+						<img src={google} style={{width:"1.25vw", height:"auto"}} alt="googleLogo" />
 						구글로 시작하기
 					</button>
 				</div>
 				<div className={styles.margin2}>
 					<button onClick={kakaoLoginClick} className={styles.btnKakao}>
-						<img src={kakao} alt="kakaoLogo" />
+						<img src={kakao} style={{width:"1.25vw", height:"auto"}} alt="kakaoLogo" />
 						카카오로 시작하기
 					</button>
 				</div>

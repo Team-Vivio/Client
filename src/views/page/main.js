@@ -39,7 +39,7 @@ function main() {
                 backgroundImage: 'url(./img/main4.png)'
             }}>
                 <div className={styles.content}>
-                    <h2 className={styles.title}>나만의 옷장 코디네이터</h2>
+                    <h2 className={styles.title}>나만의 코디 찾기</h2>
                     <p className={styles.description}>'오늘 뭐입지?' 하면서<br/>
                     고민했던 적이 있나요?<br/>걱정마세요! VIVIO가 찾아줄 거에요</p>
                     <button onClick={handleCraft4Click}>시작하기</button>
@@ -66,7 +66,7 @@ function main() {
                 backgroundImage: 'url(./img/main2.png)'
             }}>
                 <div className={styles.content}>
-                    <h2 className={styles.title}>쿨톤 & 웜톤 분석</h2>
+                    <h2 className={styles.title}>쿨톤 & 웜톤 찾기</h2>
                     <p className={styles.description}>나는 쿨톤인가요? 웜톤인가요?<br/>VIVIO에서 찾아보세요!</p>
                     <button onClick={handleCraft2Click}>시작하기</button>
                 </div>

@@ -40,6 +40,7 @@ function FindPasswordModal(props) {
 					console.log(error);
 				});
 		} else {
+			setIsFindPasssword(true);
 			alert("올바른 이메일을 입력해주세요");
 		}
 	}

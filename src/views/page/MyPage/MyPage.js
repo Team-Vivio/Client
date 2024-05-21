@@ -7,6 +7,7 @@ import imageXBtn from "../../../img/clothXBtn.png";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import ChangePasswordModal from "../../component/Modal/ChangePasswordModal";
+import WarningModal from "../../component/Modal/WarningModal";
 
 function MyPage() {
 	const [name, setName] = useState("");
@@ -20,8 +21,8 @@ function MyPage() {
 	const [cookies] = useCookies(["token", "socialToken"]);
 	const token = cookies.token;
 	const [blur, setBlur] = useState(false);
-
 	const [isFindSocialToken, setIsFindSocialToken] = useState(false);
+	const [showModalW, setShowModalW] = useState(false);
 
 	// 모달 띄우고, 배경 블러
 	useEffect(() => {
@@ -29,6 +30,14 @@ function MyPage() {
 			setBlur(false);
 		} else setBlur(true);
 	}, [showModalP]);
+
+	// 비로그인 시, 마이페이지를 접근하려는 시도 차단
+	useEffect(() => {
+		if (!cookies.token) {
+			setShowModalW(true);
+			setBlur(true);
+		}
+	});
 
 	// 이미지
 	const [top, setTop] = useState([]);
@@ -420,7 +429,9 @@ function MyPage() {
 							</>
 						)}
 						{isFindSocialToken && (
-							<div>소셜 로그인은 개인정보를 이용할 수 없습니다.</div>
+							<div className={styles.socialLoginDiv}>
+								소셜 로그인은 개인정보를 이용할 수 없습니다
+							</div>
 						)}
 					</div>
 				</div>
@@ -431,8 +442,32 @@ function MyPage() {
 					onClick={(e) => {
 						if (e.target === outsideRef.current) setShowModalP(false);
 					}}
+					style={{
+						position: "absolute",
+						left: "0",
+						top: "0",
+						width: "100%",
+						height: "100%",
+					}}
 				>
 					<ChangePasswordModal onClose={setShowModalP} />
+				</div>
+			)}
+			{showModalW && (
+				<div
+					ref={outsideRef}
+					onClick={(e) => {
+						if (e.target === outsideRef.current) setShowModalW(false);
+					}}
+					style={{
+						position: "absolute",
+						left: "0",
+						top: "0",
+						width: "100%",
+						height: "100%",
+					}}
+				>
+					<WarningModal onClose={setShowModalW} />
 				</div>
 			)}
 		</div>

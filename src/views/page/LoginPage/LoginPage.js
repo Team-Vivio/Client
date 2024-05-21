@@ -18,6 +18,12 @@ function Home() {
 	const outsideRef = useRef();
 	// eslint-disable-next-line no-unused-vars
 	const [_, setCookie] = useCookies(["token"]);
+	// 엔터 클릭 시 로그인
+	const handleKeyDown = (event) => {
+		if (event.key === "Enter") {
+			onClickLogin();
+		}
+	};
 
 	// 메인 로고 클릭 시 메인페이지로
 	function handleMainClick() {
@@ -128,6 +134,7 @@ function Home() {
 					<div className={styles.inputTitle}>
 						<div>이메일</div>
 						<input
+							onKeyDown={handleKeyDown}
 							onChange={(e) => {
 								onChangeEmail(e);
 							}}
@@ -140,6 +147,7 @@ function Home() {
 					<div className={styles.inputTitle}>
 						비밀번호
 						<input
+							onKeyDown={handleKeyDown}
 							onChange={(e) => {
 								onChangePassword(e);
 							}}
@@ -176,6 +184,13 @@ function Home() {
 					onClick={(e) => {
 						if (e.target === outsideRef.current) setShowModalE(false);
 					}}
+					style={{
+						position: "absolute",
+						left: "0",
+						top: "0",
+						width: "100%",
+						height: "100%",
+					}}
 				>
 					<FindEmailModal onClose={setShowModalE} />
 				</div>
@@ -185,6 +200,13 @@ function Home() {
 					ref={outsideRef}
 					onClick={(e) => {
 						if (e.target === outsideRef.current) setShowModalP(false);
+					}}
+					style={{
+						position: "absolute",
+						left: "0",
+						top: "0",
+						width: "100%",
+						height: "100%",
 					}}
 				>
 					<FindPasswordModal onClose={setShowModalP} />

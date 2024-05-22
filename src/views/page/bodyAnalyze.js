@@ -392,6 +392,12 @@ function Color({ event }) {
             >
                 컬러 선택
             </button>
+            <div
+                style={{
+                    backgroundColor: color,
+                }}
+                className={styles.colorSample}
+            ></div>
             {active ? (
                 <div className={styles.ColorBackground}>
                     <div className={styles.ColorBox}>

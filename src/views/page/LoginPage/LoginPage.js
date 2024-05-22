@@ -91,7 +91,9 @@ function Home() {
 
 	// 이메일이랑 비밀번호 넘기고, 토큰 받기
 	function onClickLogin() {
-		if (!(email === "" && password === "")) {
+		if (email === "" || password === "") {
+			alert("이메일 또는 비밀번호를 입력해주세요");
+		} else {
 			axios
 				.post("https://backend.vivi-o.site/users/signin", {
 					email: email,
@@ -109,8 +111,6 @@ function Home() {
 						alert("로그인이 실패. 이메일과 비밀번호를 확인해주세요");
 					}
 				});
-		} else {
-			alert("이메일 또는 비밀번호를 입력해주세요");
 		}
 	}
 

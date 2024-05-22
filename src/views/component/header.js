@@ -49,6 +49,7 @@ function Header() {
 
 	// 로그아웃 함수
 	function handleLogoutClick() {
+		window.location.href = "/";
 		if (cookies.socialToken) {
 			removeCookie("socialToken", { path: "/", domain: "vivi-o.site" });
 			removeCookie("token", { path: "/", domain: "www.vivi-o.site" });
@@ -56,7 +57,6 @@ function Header() {
 			removeCookie("token", { path: "/", domain: "vivi-o.site" });
 		}
 		// 쿠키에서 토큰을 제거하고 사용자 상태를 업데이트합니다.
-		window.location.href = "/";
 	}
 
 	function handleGuideClick() {

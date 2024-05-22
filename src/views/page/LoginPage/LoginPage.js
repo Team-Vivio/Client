@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import HorizonLine from "./HorizontalLine";
 import styles from "../../../styles/LoginPage.module.css";
@@ -18,6 +19,19 @@ function Home() {
 	const outsideRef = useRef();
 	// eslint-disable-next-line no-unused-vars
 	const [_, setCookie] = useCookies(["token"]);
+	const location = useLocation();
+	const queryString = location.search;
+
+	// url 쿼리파라미터 확인
+	useEffect(() => {
+		if (queryString === "?error=false") {
+			alert(
+				"일반 회원가입으로 이미 존재하는 계정입니다!\n일반 로그인으로 진행해주세요."
+			);
+			window.location.href = "/Login";
+		}
+	});
+
 	// 엔터 클릭 시 로그인
 	const handleKeyDown = (event) => {
 		if (event.key === "Enter") {

@@ -60,7 +60,6 @@ class ToneAnalyzeModel {
                 }
             else list = list.slice(0, 7);
             return list;
-            //근데 이러면 최초의 7개만 보여주는거 아닌감? 나중에 수정해야징
         }
     }
     getUploadedImg() {
@@ -68,13 +67,10 @@ class ToneAnalyzeModel {
     }
     setUploadedImg(value) {
         this.uploadedImg = value;
-        // console.log("setUploadedImg func success");
-        // console.log(this.uploadedImg);
     }
     dataCheck() {
         return this.gender !== 0 && this.uploadedImg !== null;
     }
-    // state getter setter는 바뀜
     setState(value) {
         this.state = value;
     }
@@ -99,9 +95,9 @@ class ToneAnalyzeModel {
         this.formData.append("request", JSON.stringify(value));
         // 이때 image, request 모두 담아 /colors/에 Post
 
-        console.log("----1----");
-        for (const keyValue of this.formData) console.log(keyValue); // ["img", File] File은 객체
-        console.log("----1----");
+        // console.log("----1----");
+        // for (const keyValue of this.formData) console.log(keyValue); // ["img", File] File은 객체
+        // console.log("----1----");
 
         try {
             this.resultList = await axios({
@@ -140,9 +136,9 @@ class ToneAnalyzeModel {
             // this.formData2.append("image", new File([""], "filename"));
             // this.formData2.append("image", this.getUploadedImg());
             this.formData2.append("request", JSON.stringify(save));
-            console.log("----2----");
-            for (const keyValue of this.formData2) console.log(keyValue); // ["img", File] File은 객체
-            console.log("----2----");
+            // console.log("----2----");
+            // for (const keyValue of this.formData2) console.log(keyValue); // ["img", File] File은 객체
+            // console.log("----2----");
             try {
                 const saveResult = await axios({
                     method: "POST",
@@ -203,7 +199,6 @@ class ToneAnalyzeModel {
                     Authorization: `${this.token}`,
                 },
             });
-            // console.log(this.historyList);
         } catch (error) {
             console.log(error);
         }

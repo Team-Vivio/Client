@@ -262,6 +262,11 @@ function DropBox({ viewModel, imgUpload, setformData }) {
     const handleDragEnd = () => setIsActive(false);
 
     const setFileInfo = (file) => {
+        if (file === null || file === undefined) {
+            setUploadedInfo(null);
+            return;
+        }
+
         const { name, type } = file;
         const isImage = type.includes("image");
         const size = (file.size / (1024 * 1024)).toFixed(2) + "mb";

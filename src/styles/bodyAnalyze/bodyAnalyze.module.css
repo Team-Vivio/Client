@@ -134,6 +134,15 @@ Input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.colorSample {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    left: 892px;
+    top: 507px;
+    border-radius: 10px;
+}
+
 .ColorButton {
     box-sizing: border-box;
 
@@ -212,7 +221,7 @@ Input::-webkit-inner-spin-button {
     width: 403px;
     height: 253px;
     left: 542px;
-    top: 659px;
+    top: 650px;
 
     background: #ffffff;
     border: 1px solid #dbdbdb;

@@ -20,7 +20,7 @@ function FindPasswordModal(props) {
 		setIsFindPasssword(false);
 		if (emailCheck(email)) {
 			axios
-				.post("/users/sendTempPassword", {
+				.post("https://backend.vivi-o.site/users/sendTempPassword", {
 					email: email,
 				})
 				.then((res) => {
@@ -40,6 +40,7 @@ function FindPasswordModal(props) {
 					console.log(error);
 				});
 		} else {
+			setIsFindPasssword(true);
 			alert("올바른 이메일을 입력해주세요");
 		}
 	}

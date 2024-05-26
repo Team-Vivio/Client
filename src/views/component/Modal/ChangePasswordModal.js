@@ -35,7 +35,7 @@ function ChangePasswordModal(props) {
 	function onSubmit() {
 		axios
 			.post(
-				"/users/changePassword",
+				"https://backend.vivi-o.site/users/changePassword",
 				{
 					originalPassword: curPassword,
 					password: newPassword,

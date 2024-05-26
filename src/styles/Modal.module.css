@@ -4,8 +4,9 @@
 }
 
 .passwordModal {
-	margin-left: 29.5%;
-	margin-top: -29.5%;
+	transform: translate(-50%, -50%);
+	left: 50%;
+	top: 50%;
 	position: absolute;
 	display: flex;
 	width: 700px;
@@ -73,9 +74,12 @@
 }
 
 .emailModal {
-	margin-left: 29.5%;
-	margin-top: -29.5%;
+	/* margin-left: 29.5%;
+	margin-top: -29.5%; */
 	position: absolute;
+	transform: translate(-50%, -50%);
+	left: 50%;
+	top: 50%;
 	z-index: 100;
 	display: flex;
 	width: 700px;
@@ -252,10 +256,9 @@
 }
 
 .ChangePasswordModal {
-	margin-top: -37.5%;
-	margin-left: 29.5%;
-	/* margin-top: -641px;
-	margin-left: 502px; */
+	transform: translate(-50%, -50%);
+	left: 50%;
+	top: 50%;
 	position: absolute;
 	z-index: 100px;
 	display: flex;
@@ -333,4 +336,88 @@
 	font-weight: bold;
 	font-family: "NanumSquareRoundOTF";
 	color: #bbbbbb;
+}
+
+.WarningModal {
+	transform: translate(-50%, -50%);
+	left: 50%;
+	top: 50%;
+	position: absolute;
+	z-index: 100px;
+	display: flex;
+	width: 700px;
+	height: 374px;
+	padding: 15px 20px;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 20px;
+	border: 1px solid #fff;
+	background: #fff;
+	box-shadow: 0px 3px 18px 0px rgba(0, 0, 0, 0.1);
+	color: black;
+	font-family: "NanumSquareRoundOTF";
+	font-size: 15px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 130%;
+}
+
+.LockImg {
+	width: 100px;
+	height: 135px;
+}
+
+.LockMessage {
+	margin: 30px;
+	font-size: 20px;
+
+	font-family: "NanumSquareRoundOTF";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 140%;
+	/* or 28px */
+	letter-spacing: 0.02em;
+	text-transform: capitalize;
+
+	color: #000000;
+
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.LockBtn {
+	box-sizing: border-box;
+
+	cursor: pointer;
+
+	width: 277px;
+	height: 57px;
+
+	background: #ffd439;
+	border: 1px solid #c5c5c5;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 69px;
+
+	text-align: center;
+	font-family: "NanumSquareRound";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 20px;
+	line-height: 140%;
+
+	letter-spacing: 0.02em;
+	text-transform: capitalize;
+
+	color: #ffffff;
+
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.LockmodalXBtn {
+	margin-bottom: 5px;
+	cursor: pointer;
+	border: none;
+	background-color: #fff;
+	margin-left: 640px;
 }

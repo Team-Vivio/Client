@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import HorizonLine from "./HorizontalLine";
 import styles from "../../../styles/LoginPage.module.css";
@@ -18,6 +19,25 @@ function Home() {
 	const outsideRef = useRef();
 	// eslint-disable-next-line no-unused-vars
 	const [_, setCookie] = useCookies(["token"]);
+	const location = useLocation();
+	const queryString = location.search;
+
+	// url 쿼리파라미터 확인
+	useEffect(() => {
+		if (queryString === "?error=false") {
+			alert(
+				"일반 회원가입으로 이미 존재하는 계정입니다!\n일반 로그인으로 진행해주세요."
+			);
+			window.location.href = "/Login";
+		}
+	});
+
+	// 엔터 클릭 시 로그인
+	const handleKeyDown = (event) => {
+		if (event.key === "Enter") {
+			onClickLogin();
+		}
+	};
 
 	// 메인 로고 클릭 시 메인페이지로
 	function handleMainClick() {
@@ -71,7 +91,9 @@ function Home() {
 
 	// 이메일이랑 비밀번호 넘기고, 토큰 받기
 	function onClickLogin() {
-		if (!(email === "" && password === "")) {
+		if (email === "" || password === "") {
+			alert("이메일 또는 비밀번호를 입력해주세요");
+		} else {
 			axios
 				.post("https://backend.vivi-o.site/users/signin", {
 					email: email,
@@ -89,8 +111,6 @@ function Home() {
 						alert("로그인이 실패. 이메일과 비밀번호를 확인해주세요");
 					}
 				});
-		} else {
-			alert("이메일 또는 비밀번호를 입력해주세요");
 		}
 	}
 
@@ -113,13 +133,13 @@ function Home() {
 				</div>
 				<div className={styles.margin1}>
 					<button onClick={googleLoginClick} className={styles.btnGoogle}>
-						<img src={google} alt="googleLogo" />
+						<img src={google} style={{width:"1.25vw", height:"auto"}} alt="googleLogo" />
 						구글로 시작하기
 					</button>
 				</div>
 				<div className={styles.margin2}>
 					<button onClick={kakaoLoginClick} className={styles.btnKakao}>
-						<img src={kakao} alt="kakaoLogo" />
+						<img src={kakao} style={{width:"1.25vw", height:"auto"}} alt="kakaoLogo" />
 						카카오로 시작하기
 					</button>
 				</div>
@@ -128,6 +148,7 @@ function Home() {
 					<div className={styles.inputTitle}>
 						<div>이메일</div>
 						<input
+							onKeyDown={handleKeyDown}
 							onChange={(e) => {
 								onChangeEmail(e);
 							}}
@@ -140,6 +161,7 @@ function Home() {
 					<div className={styles.inputTitle}>
 						비밀번호
 						<input
+							onKeyDown={handleKeyDown}
 							onChange={(e) => {
 								onChangePassword(e);
 							}}
@@ -176,6 +198,13 @@ function Home() {
 					onClick={(e) => {
 						if (e.target === outsideRef.current) setShowModalE(false);
 					}}
+					style={{
+						position: "absolute",
+						left: "0",
+						top: "0",
+						width: "100%",
+						height: "100%",
+					}}
 				>
 					<FindEmailModal onClose={setShowModalE} />
 				</div>
@@ -185,6 +214,13 @@ function Home() {
 					ref={outsideRef}
 					onClick={(e) => {
 						if (e.target === outsideRef.current) setShowModalP(false);
+					}}
+					style={{
+						position: "absolute",
+						left: "0",
+						top: "0",
+						width: "100%",
+						height: "100%",
 					}}
 				>
 					<FindPasswordModal onClose={setShowModalP} />

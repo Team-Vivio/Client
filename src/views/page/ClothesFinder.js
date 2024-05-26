@@ -35,12 +35,16 @@ function DropBox({ viewModel }) {
         event.preventDefault();
 
         const file = event.dataTransfer.files[0];
-        setImage(file);
+        if (file !== null && file !== undefined) {
+            setImage(file);
+        }
     };
 
     const handleUpload = ({ target }) => {
         const file = target.files[0];
-        setImage(file);
+        if (file !== null && file !== undefined) {
+            setImage(file);
+        }
     };
 
     return (

@@ -271,15 +271,21 @@ function MyPage() {
 	const handleDrop = (event, type) => {
 		event.preventDefault();
 
-		const file = event.dataTransfer.files[0];
-		if (file.type.includes("image")) {
-			setImage(file, type);
+		const files = event.dataTransfer.files;
+		for (let i = 0; i < files.length; i++) {
+			const file = files[i];
+			if (file.type.includes("image")) {
+				setImage(file, type);
+			}
 		}
 	};
 	const handleUpload = ({ target }, type) => {
-		const file = target.files[0];
-		if (file.type.includes("image")) {
-			setImage(file, type);
+		const files = target.files;
+		for (let i = 0; i < files.length; i++) {
+			const file = files[i];
+			if (file.type.includes("image")) {
+				setImage(file, type);
+			}
 		}
 	};
 
@@ -324,6 +330,7 @@ function MyPage() {
 								>
 									<input
 										type="file"
+										multiple
 										className={styles.DragAndDropInput}
 										onChange={(e) => handleUpload(e, "outer")}
 									/>
@@ -347,6 +354,7 @@ function MyPage() {
 								>
 									<input
 										type="file"
+										multiple
 										className={styles.DragAndDropInput}
 										onChange={(e) => handleUpload(e, "top")}
 									/>
@@ -372,6 +380,7 @@ function MyPage() {
 								>
 									<input
 										type="file"
+										multiple
 										className={styles.DragAndDropInput}
 										onChange={(e) => handleUpload(e, "bottom")}
 									/>

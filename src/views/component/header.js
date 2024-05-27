@@ -60,8 +60,11 @@ function Header() {
 	}
 
 	function handleGuideClick() {
-		window.location.href =
-			"https://showy-track-86c.notion.site/VIVIO-9d22837b2dc740c6b18d6fef64891102?pvs=4";
+		window.open(
+			"https://showy-track-86c.notion.site/VIVIO-9d22837b2dc740c6b18d6fef64891102?pvs=4",
+			"_blank",
+			"noopener,noreferrer"
+		);
 	}
 
 	function handleLoginClick() {

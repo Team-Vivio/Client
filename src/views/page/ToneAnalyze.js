@@ -111,11 +111,31 @@ function StartBtn({ left, top, onClick }) {
     );
 }
 
-function LoadingBox({ event }) {
+function LoadingBox({ props }) {
+    const LoadingTextList = [
+        {
+            message: "패션 잡지 보는 중...",
+        },
+        {
+            message: "지식인에 물어보는 중...",
+        },
+        {
+            message: "Chat-GPT 괴롭히는 중...",
+        },
+        {
+            message: "옷 갈아입는 중...",
+        },
+    ];
+    const [LoadingText, setLoadingText] = useState(LoadingTextList[0].message);
+
+    useEffect(() => {
+        let n = Math.floor(Math.random() * 4);
+        setLoadingText(LoadingTextList[n].message);
+    }, [props.viewModel.getState()]);
     return (
         <div className={styles.ResultBox}>
             <div className={styles.Spinner} />
-            <div className={styles.LoadingText}>지식인에 물어보는 중...</div>
+            <div className={styles.LoadingText}>{LoadingText}</div>
             <div className={styles.LoadingWarning}>*주의!</div>
             <div className={styles.LoadingWarningTextPosition}>
                 <span
@@ -646,7 +666,7 @@ function ToneAnalyze(props) {
             )) ||
                 (boxState === "loading" && (
                     <>
-                        <LoadingBox event={setState} />
+                        <LoadingBox props={props} />
 
                         {props.viewModel.textList.map((value, index) => (
                             <Text

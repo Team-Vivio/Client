@@ -350,7 +350,8 @@
 
 .LoadingText {
     position: absolute;
-    width: 2735x;
+    /* width: 320px; */
+    width: max-content;
     height: 42px;
     transform: translateX(-50%);
     left: 50%;
@@ -473,6 +474,8 @@
     top: 42px;
 
     border-radius: 5px;
+
+    object-fit: contain;
 }
 
 .RestartBtn {
@@ -750,6 +753,70 @@
     color: #000000;
 }
 
+.NoResultPos {
+    margin-top: 50px;
+    margin-left: 57px;
+    margin-right: 57px;
+}
+
+.NoResultTitle {
+    /* margin-top: 30px; */
+    font-family: "NanumSquareRoundOTF";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 140%;
+    /* identical to box height, or 49px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+    text-align: center;
+
+    color: #000000;
+}
+
+.NoResultImgBox {
+    justify-content: center;
+    align-items: center;
+}
+.NoResultImg {
+    width: auto;
+    height: 135px;
+    background-image: url("../../img/ClothesFinder/NoResult.png");
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    /* 
+    width: 100%;
+    height: 100%; */
+}
+
+.NoResultTip {
+    margin: 30px;
+
+    font-family: "NanumSquareRoundOTF";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 140%;
+    /* identical to box height, or 42px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.NoResultContent {
+    font-family: "NanumSquareRoundOTF";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    /* or 28px */
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+
+    color: #000000;
+}
 .ModalBackground {
     position: absolute;
     /* width: 1920px;

@@ -123,26 +123,27 @@ class ClothesFinderModel {
             } else {
                 console.error("Failed to get data:", response);
             }
+
+            // 가격순 정렬
+            await this.setResultListItemAsc();
+            await this.setResultListItemDesc();
+
+            this.resultListItem = this.resultList.result.items.map((item) => ({
+                ...item,
+                price: item.price.toLocaleString(),
+            }));
+            this.resultListItemAsc = this.resultListItemAsc.map((item) => ({
+                ...item,
+                price: item.price.toLocaleString(),
+            }));
+            this.resultListItemDesc = this.resultListItemDesc.map((item) => ({
+                ...item,
+                price: item.price.toLocaleString(),
+            }));
         } catch (error) {
             console.error("Error occurred:", error);
+            this.resultList = [];
         }
-
-        // 가격순 정렬
-        await this.setResultListItemAsc();
-        await this.setResultListItemDesc();
-
-        this.resultListItem = this.resultList.result.items.map((item) => ({
-            ...item,
-            price: item.price.toLocaleString(),
-        }));
-        this.resultListItemAsc = this.resultListItemAsc.map((item) => ({
-            ...item,
-            price: item.price.toLocaleString(),
-        }));
-        this.resultListItemDesc = this.resultListItemDesc.map((item) => ({
-            ...item,
-            price: item.price.toLocaleString(),
-        }));
     };
 }
 

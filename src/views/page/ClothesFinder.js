@@ -202,12 +202,33 @@ function ResultBox({ viewModel, state, result, event, select }) {
     const [btn3, setBtn3] = useState(false);
     const [btnValue, setBtnValue] = useState(0);
 
+    const LoadingTextList = [
+        {
+            message: "패션 잡지 보는 중...",
+        },
+        {
+            message: "지식인에 물어보는 중...",
+        },
+        {
+            message: "Chat-GPT 괴롭히는 중...",
+        },
+        {
+            message: "옷 갈아입는 중...",
+        },
+    ];
+    const [LoadingText, setLoadingText] = useState(LoadingTextList[0].message);
+
     useEffect(() => {
         setBtnValue(1);
         setBtn1(true);
         setBtn2(false);
         setBtn3(false);
     }, [viewModel.model.resultList]);
+
+    useEffect(() => {
+        let n = Math.floor(Math.random() * 4);
+        setLoadingText(LoadingTextList[n].message);
+    }, [state]);
 
     let type =
         viewModel.getType() === "top"
@@ -229,7 +250,7 @@ function ResultBox({ viewModel, state, result, event, select }) {
                         유명인이나 연예인이 입은 옷 한번 쯤 궁금하지 않았나요?
                         ViViO에서 찾아드립니다!
                     </div>
-                    <button className={styles.StartBtn} onClick={event} onMouse>
+                    <button className={styles.StartBtn} onClick={event}>
                         시작
                     </button>
                 </div>
@@ -237,9 +258,9 @@ function ResultBox({ viewModel, state, result, event, select }) {
                 (state === "loading" && (
                     <div className={styles.ResultBox}>
                         <div className={styles.Spinner} />
-                        <div className={styles.LoadingText}>
-                            지식인에 물어보는 중...
-                        </div>
+                        <span className={styles.LoadingText}>
+                            {LoadingText}
+                        </span>
                         <div className={styles.LoadingWarning}>*주의!</div>
                         <div className={styles.LoadingWarningTextPosition}>
                             <span
@@ -365,13 +386,71 @@ function ResultBox({ viewModel, state, result, event, select }) {
                             </div>
                         ))}
                     </div>
+                )) ||
+                (state === "noResult" && (
+                    <div className={styles.ResultBox}>
+                        <span className={styles.ResultTitle}>
+                            결과가 없습니다
+                        </span>
+                        <div className={styles.ResultCategory}>
+                            <span>종류: </span>
+                            <span>{type} </span>
+                        </div>
+                        <button className={styles.RestartBtn} onClick={event}>
+                            다시 검색하기
+                        </button>
+                        <img
+                            className={styles.ResultImg}
+                            alt=""
+                            src={viewModel.getUploadedImgLink()}
+                        ></img>
+
+                        <div className={styles.NoResultPos}>
+                            <div className={styles.ResultLine}></div>
+
+                            <div className={styles.NoResultTitle}>
+                                <span>검색 결과를 </span>
+                                <span style={{ fontSize: "28px" }}>찾을</span>
+                                <span style={{ fontSize: "27px" }}> 수 </span>
+                                <span style={{ fontSize: "24px" }}>없어</span>
+                                <span style={{ fontSize: "22px" }}>요...</span>
+                            </div>
+                            <div className={styles.NoResultImgBox}>
+                                <div className={styles.NoResultImg} />
+                            </div>
+                            <div className={styles.NoResultTip}>
+                                <span>※ViViO가 드리는 </span>
+                                <span style={{ color: "#FFD439" }}>TIP</span>
+                                <span>!※</span>
+                            </div>
+                            <div className={styles.NoResultContent}>
+                                <span>
+                                    · 사진이 흐릿한 경우 검색 결과가 부정확할 수
+                                    있어요
+                                </span>
+                                <br />
+                                <span>
+                                    · 제품 이미지가 너무 크거나 작진 않나요?
+                                </span>
+                                <br />
+                                <span>
+                                    · 상의와 하의를 헷갈리진 않으셨나요?
+                                </span>
+                                <br />
+                                <span>
+                                    · 단순히 비슷한 제품을 찾지 못한 것일수도
+                                    있어요 :)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 ))}
         </div>
     );
 }
 
 function ClothesFinder({ viewModel }) {
-    const [state, setState] = useState("main"); //"main", "loading", "result"
+    const [state, setState] = useState("main"); //"main", "loading", "result", "noResult"
     const [result, setResult] = useState(viewModel.getResultList());
     const [modal, setModal] = useState(false);
     const [modalType, setModalType] = useState(0);
@@ -379,10 +458,24 @@ function ClothesFinder({ viewModel }) {
     async function postClothes() {
         setState("loading");
         await viewModel.postClothes();
-        if (viewModel.getResultList() !== null) {
+        // if (viewModel.getResultList() !== null) {
+        //     setState("result"); //성공
+        //     setResult(viewModel.getResultListItem());
+        // } else {
+        //     setState("main");
+        //     setModal(true);
+        //     setModalType(3);
+        // }
+
+        // test
+        if (viewModel.getResultList().length === 0) {
+            setState("noResult");
+            setResult([]);
+        } else if (viewModel.getResultList().length !== null) {
             setState("result"); //성공
             setResult(viewModel.getResultListItem());
         } else {
+            // 이부분 묻힐수도
             setState("main");
             setModal(true);
             setModalType(3);

@@ -154,24 +154,28 @@ function InputView({ viewModel }) {
     const handleDrop = (event, type) => {
         event.preventDefault();
 
-        const file = event.dataTransfer.files[0];
-        if (
-            file !== null &&
-            file !== undefined &&
-            file.type.includes("image")
-        ) {
-            setImage(file, type);
+        const files = event.dataTransfer.files;
+        for (let i = 0; i < files.length; i++) {
+            if (
+                files[i] !== null &&
+                files[i] !== undefined &&
+                files[i].type.includes("image")
+            ) {
+                setImage(files[i], type);
+            }
         }
     };
 
     const handleUpload = ({ target }, type) => {
-        const file = target.files[0];
-        if (
-            file !== null &&
-            file !== undefined &&
-            file.type.includes("image")
-        ) {
-            setImage(file, type);
+        const files = target.files;
+        for (let i = 0; i < files.length; i++) {
+            if (
+                files[i] !== null &&
+                files[i] !== undefined &&
+                files[i].type.includes("image")
+            ) {
+                setImage(files[i], type);
+            }
         }
     };
 
@@ -325,6 +329,7 @@ function InputView({ viewModel }) {
                     >
                         <input
                             type="file"
+                            multiple
                             style={{ display: "none" }}
                             onChange={(e) => handleUpload(e, "top")}
                         />
@@ -363,6 +368,7 @@ function InputView({ viewModel }) {
                     >
                         <input
                             type="file"
+                            multiple
                             style={{ display: "none" }}
                             onChange={(e) => handleUpload(e, "bottom")}
                         />
@@ -390,6 +396,7 @@ function InputView({ viewModel }) {
                     >
                         <input
                             type="file"
+                            multiple
                             style={{ display: "none" }}
                             onChange={(e) => handleUpload(e, "outer")}
                         />

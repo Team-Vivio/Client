@@ -413,7 +413,7 @@ function InputView({ viewModel }) {
 }
 
 //결과 뷰
-function ResultView({ viewModel, state, result, event }) {
+function ResultView({ viewModel, state, result, event, text }) {
     const settings = {
         dots: true,
         infinite: true,
@@ -423,6 +423,7 @@ function ResultView({ viewModel, state, result, event }) {
         centerMode: true,
         centerPadding: "0px",
     };
+
     return (
         <div>
             <div className={resultStyles.boxImage}></div>
@@ -458,7 +459,7 @@ function ResultView({ viewModel, state, result, event }) {
                         className={`${resultStyles.loadingContent}`}
                         style={{ marginBottom: "83px" }}
                     >
-                        지식인에 물어보는중...
+                        {text}
                     </div>
                     <div className={`${resultStyles.loadingContent}`}>
                         *주의!
@@ -637,7 +638,16 @@ function CoordiFinderView({ viewModel }) {
 
     async function postCoordi() {
         setState("loading");
+        interval = setInterval(() => {
+            console.log("interval");
+            setText(
+                viewModel.getLoadingText(
+                    Math.floor(Math.random() * viewModel.getLoadingTextLength())
+                )
+            );
+        }, 3000);
         await viewModel.postFashion();
+        clearInterval(interval);
         console.log(viewModel.getResultList());
         if (viewModel.getResultList() !== null) {
             getHistory();
@@ -680,6 +690,8 @@ function CoordiFinderView({ viewModel }) {
                 break;
         }
     }
+    const [text, setText] = useState("패션 잡지 보는중...");
+    let interval;
     return (
         <div className={inputStyles.background}>
             {/* {비회원 모달} */}
@@ -726,6 +738,7 @@ function CoordiFinderView({ viewModel }) {
                         state={state}
                         result={result}
                         event={start}
+                        text={text}
                     />
                     <HistoryView
                         viewModel={viewModel}

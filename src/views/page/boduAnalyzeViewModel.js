@@ -111,6 +111,18 @@ class BodyAnalyzeViewModel {
         ];
         this.modalActive = false;
         this.modalIndex = -1;
+        this.loadingText = [
+            "패션 잡지 보는중...",
+            "지식인에 물어보는 중...",
+            "동대문 시장 뛰어다니는중...",
+            "부평지하상가 돌아다니는 중...",
+        ];
+    }
+    getLoadingTextLength() {
+        return this.loadingText.length;
+    }
+    getLoadingText(index) {
+        return this.loadingText[index];
     }
     getName() {
         return this.model.getName();

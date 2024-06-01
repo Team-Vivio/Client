@@ -299,11 +299,11 @@ function HistoryBar({ list, event }) {
     );
 }
 
-function LoadingBox({ event }) {
+function LoadingBox({ text }) {
     return (
         <div className={styles.ResultBox}>
             <div className={styles.Spinner}></div>
-            <div className={styles.LoadingText}>패션 잡지 보는중...</div>
+            <div className={styles.LoadingText}>{text}</div>
             <div className={styles.LoadingWarning}>*주의!</div>
             <div className={styles.LoadingWarningTextPosition}>
                 <span
@@ -472,7 +472,19 @@ function BodyAnalyze(props) {
         modalClose();
         if (modalIndex === 1) {
             setBoxState("loading");
+            interval = setInterval(() => {
+                console.log("interval");
+                setText(
+                    props.viewModel.getLoadingText(
+                        Math.floor(
+                            Math.random() *
+                                props.viewModel.getLoadingTextLength()
+                        )
+                    )
+                );
+            }, 3000);
             await props.viewModel.postFashion();
+            clearInterval(interval);
             if (props.viewModel.getAllResultList() === null) {
                 setModal(2); //결과를 못받으면
                 props.viewModel.setModalActive(true);
@@ -519,6 +531,11 @@ function BodyAnalyze(props) {
             setUser(true);
         }
     }, [cookies]);
+
+    //로딩창 문구
+    const [text, setText] = useState("패션 잡지 보는중...");
+
+    let interval;
 
     return (
         <div className={styles.Background}>
@@ -609,7 +626,7 @@ function BodyAnalyze(props) {
                 {(boxState === "main" && (
                     <StartBox event={() => setModal(1)} />
                 )) ||
-                    (boxState === "loading" && <LoadingBox />) ||
+                    (boxState === "loading" && <LoadingBox text={text} />) ||
                     (boxState === "result" && (
                         <ResultBox
                             name={props.viewModel.getName()}
